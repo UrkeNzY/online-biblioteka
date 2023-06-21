@@ -1,12 +1,12 @@
 .sidebarContainer {
   background-color: #eff3f6;
   width: 280px;
-  height: 100vh;
-
+  height: calc(100vh - 72px);
   transition: 0.5s;
+  overflow-y: auto;
+  position: relative;
 }
 
-/* Nx => "not expanded" */
 .sidebarContainerNx {
   width: 85px;
 }
@@ -26,8 +26,7 @@
 }
 
 .sidebarMenu {
-  margin: 0 auto;
-  padding: 0 20px 20px 20px;
+  margin-top: 30px;
 }
 
 .sidebarItem {
@@ -35,9 +34,34 @@
   align-items: center;
   text-decoration: none;
   color: #363b59;
-  margin: 35px 0;
+  padding: 16px 22px;
+}
+
+.sidebarItem:hover {
+  background-color: #eaeaea;
+}
+
+.sidebarItem:hover p {
+  color: #4558be;
+  transition: 0.5s;
+}
+
+.sidebarItem:hover img {
+  filter: brightness(0.8);
 }
 
 .sidebarItem p {
   margin: 0 0 0 20px;
+}
+
+.sidebarFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 0;
+}
+
+.sidebarFooter .sidebarItem {
+  margin: 20px 0;
 }

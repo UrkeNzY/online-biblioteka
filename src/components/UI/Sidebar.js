@@ -44,6 +44,15 @@ const Sidebar = () => {
           </a>
         ))}
       </div>
+      <div className={classes.sidebarFooter}>
+      <hr />
+      <div className={classes.footerBottom}>
+        <a className={classes.sidebarItem} href="#">
+          <img src="images/icons/settings.svg" alt="sidebar options icon" />
+          {isExpanded && <p>Settings</p>}
+        </a>
+        </div>
+      </div>
     </div>
   );
 };

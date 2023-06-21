@@ -1,0 +1,23 @@
+header {
+  background-color: #4558be;
+  color: #ffffff;
+  padding: 36px 0px;
+  display: flex;
+  position: relative;
+}
+
+h1 {
+  margin: 0 0 0 10px;
+  font-size: 22px;
+}
+
+.logoContainer {
+  background-color: #3f51b5;
+  width: 280px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

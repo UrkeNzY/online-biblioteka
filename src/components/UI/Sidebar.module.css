@@ -24,3 +24,20 @@
 .sidebarHeader {
   padding: 30px;
 }
+
+.sidebarMenu {
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #363b59;
+  margin: 35px 0;
+}
+
+.sidebarItem p {
+  margin: 0 0 0 20px;
+}

@@ -36,6 +36,14 @@ const Sidebar = () => {
         />
       </div>
       <hr />
+      <div className={classes.sidebarMenu}>
+        {sidebarItems.map((item) => (
+          <a className={classes.sidebarItem} href="#">
+            <img src={item.icon} alt="sidebar menu item icon" />
+            {isExpanded && <p>{item.text}</p>}
+          </a>
+        ))}
+      </div>
     </div>
   );
 };

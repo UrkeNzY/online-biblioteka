@@ -47,7 +47,8 @@
 }
 
 .sidebarItem:hover img {
-  filter: brightness(0.8);
+  filter: brightness(0.6);
+  transition: 0.5s;
 }
 
 .sidebarItem p {

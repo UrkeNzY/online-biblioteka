@@ -1,0 +1,26 @@
+.sidebarContainer {
+  background-color: #eff3f6;
+  width: 280px;
+  height: 100vh;
+
+  transition: 0.5s;
+}
+
+/* Nx => "not expanded" */
+.sidebarContainerNx {
+  width: 85px;
+}
+
+.sidebarContainer img:hover {
+  cursor: pointer;
+}
+
+.sidebarContainer hr {
+  background-color: #e8e6e8;
+  opacity: 0.25;
+  margin-top: 0;
+}
+
+.sidebarHeader {
+  padding: 30px;
+}

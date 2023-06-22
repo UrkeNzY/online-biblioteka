@@ -1,14 +1,15 @@
 .sidebarContainer {
   background-color: #eff3f6;
-  width: 280px;
-  height: calc(100vh - 72px);
+  width: 17.5rem;
+  height: calc(100vh - 4.5rem);
   transition: 0.5s;
   overflow-y: auto;
-  position: relative;
+  position: fixed;
+  z-index: 2;
 }
 
 .sidebarContainerNx {
-  width: 85px;
+  width: 5.3125rem;
 }
 
 .sidebarContainer img:hover {
@@ -22,11 +23,11 @@
 }
 
 .sidebarHeader {
-  padding: 30px;
+  padding: 1.875rem;
 }
 
 .sidebarMenu {
-  margin-top: 30px;
+  margin-top: 1.875rem;
 }
 
 .sidebarItem {
@@ -34,7 +35,7 @@
   align-items: center;
   text-decoration: none;
   color: #363b59;
-  padding: 16px 22px;
+  padding: 1rem 1.375rem;
 }
 
 .sidebarItem:hover {
@@ -52,7 +53,7 @@
 }
 
 .sidebarItem p {
-  margin: 0 0 0 20px;
+  margin: 0 0 0 1.25rem;
 }
 
 .sidebarFooter {
@@ -64,5 +65,5 @@
 }
 
 .sidebarFooter .sidebarItem {
-  margin: 20px 0;
+  margin: 1.25rem 0;
 }

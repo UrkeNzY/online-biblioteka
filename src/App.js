@@ -5,7 +5,8 @@ import "./App.css";
 
 import MainHeader from "./components/UI/MainHeader";
 import Sidebar from "./components/UI/Sidebar";
-import NewUserForm from "./components/NewUserForm";
+import ContentHeader from "./components/UI/ContentHeader";
+import NewUserForm from "./components/Forms/NewUserForm";
 
 function App() {
   return (
@@ -15,10 +16,7 @@ function App() {
         <main className="mainContainer">
           <Sidebar />
           <div className="contentContainer">
-            <div className="contentHeader">
-              <h1>Dashboard</h1>
-              <hr />
-            </div>
+            <ContentHeader />
             <Routes>
               <Route path="/new-user" element={<NewUserForm />} />
             </Routes>

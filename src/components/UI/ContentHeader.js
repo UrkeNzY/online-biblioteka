@@ -8,7 +8,7 @@ const ContentHeader = () => {
   const getContentHeaderTitle = () => {
     switch (location.pathname) {
       case "/new-user":
-        return "Novi učenik";
+        return "Novi korisnik";
       default:
         return "Dashboard";
     }

@@ -4,7 +4,8 @@
   height: calc(100vh - 72px);
   transition: 0.5s;
   overflow-y: auto;
-  position: relative;
+  position: fixed;
+  z-index: 2;
 }
 
 .sidebarContainerNx {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./NewUserForm.module.css";
+import classes from "./NewUserForm.module.css";
 
 const NewUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -42,16 +42,16 @@ const NewUserForm = () => {
   };
 
   const submitFormHandler = (event) => {
-    event.preventDefault()
-    console.log(newUser)
-  }
+    event.preventDefault();
+    console.log(newUser);
+  };
 
   return (
     <div>
-      <form className={styles.form} onSubmit={submitFormHandler}>
-        <section className={styles.info}>
+      <form className={classes.form} onSubmit={submitFormHandler}>
+        <section className={classes.info}>
           <label>
-            Ime i prezime<span className={styles.required}></span>
+            Ime i prezime<span className={classes.required}></span>
           </label>
           <input
             type="text"
@@ -61,7 +61,7 @@ const NewUserForm = () => {
           />
 
           <label>
-            Tip korisnika<span className={styles.required}></span>
+            Tip korisnika<span className={classes.required}></span>
           </label>
           <select value={userType} onChange={changeUserTypeHandler} required>
             <option>Bibliotekar</option>
@@ -69,7 +69,7 @@ const NewUserForm = () => {
           </select>
 
           <label>
-            JMBG<span className={styles.required}></span>
+            JMBG<span className={classes.required}></span>
           </label>
           <input
             type="number"
@@ -79,7 +79,7 @@ const NewUserForm = () => {
           />
 
           <label>
-            E-mail<span className={styles.required}></span>
+            E-mail<span className={classes.required}></span>
           </label>
           <input
             type="email"
@@ -89,7 +89,7 @@ const NewUserForm = () => {
           />
 
           <label>
-            Korisničko ime<span className={styles.required}></span>
+            Korisničko ime<span className={classes.required}></span>
           </label>
           <input
             type="text"
@@ -99,7 +99,7 @@ const NewUserForm = () => {
           />
 
           <label>
-            Šifra<span className={styles.required}></span>
+            Šifra<span className={classes.required}></span>
           </label>
           <input
             type="password"
@@ -109,7 +109,7 @@ const NewUserForm = () => {
           />
 
           <label>
-            Ponovi šifru<span className={styles.required}></span>
+            Ponovi šifru<span className={classes.required}></span>
           </label>
           <input
             type="password"
@@ -119,16 +119,15 @@ const NewUserForm = () => {
           />
         </section>
 
-
-        <section className={styles.image}>
+        <section className={classes.image}>
           <input type="file" accept="image/*" />
         </section>
 
-        <section className={styles.buttons}>
-          <button className={styles.button} type="reset">
+        <section className={classes.buttons}>
+          <button className={classes.button} type="reset">
             Poništi
           </button>
-          <button className={styles.button} type="submit">
+          <button className={classes.button} type="submit">
             Sačuvaj
           </button>
         </section>

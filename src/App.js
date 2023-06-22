@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
 import MainHeader from "./components/UI/MainHeader";
 import Sidebar from "./components/UI/Sidebar";
@@ -15,6 +15,10 @@ function App() {
         <main className="mainContainer">
           <Sidebar />
           <div className="contentContainer">
+            <div className="contentHeader">
+              <h1>Dashboard</h1>
+              <hr />
+            </div>
             <Routes>
               <Route path="/new-user" element={<NewUserForm />} />
             </Routes>

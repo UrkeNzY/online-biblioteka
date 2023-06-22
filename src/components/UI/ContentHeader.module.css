@@ -1,12 +1,3 @@
-.mainContainer {
-  display: flex;
-}
-
-.contentContainer {
-  flex: 1;
-  margin-left: 5.3125rem;
-}
-
 .contentHeader h1 {
   font-size: 1.875rem;
   font-weight: 500;

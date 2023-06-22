@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import classes from "./NewUserForm.module.css";
+import classes from "./Forms.module.css";
+import { BsCameraFill } from "react-icons/bs";
+import InputText from "./InputText";
+import InputSelect from "./InputSelect";
+import FormButtons from "./FormButtons";
 
 const NewUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -9,6 +13,7 @@ const NewUserForm = () => {
   const [userUsername, setUserUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userCheckPassword, setUserCheckPassword] = useState("");
+  const [userImage, setUserImage] = useState(null);
 
   const changeUserNameHandler = (event) => {
     setUserName(event.target.value);
@@ -32,6 +37,11 @@ const NewUserForm = () => {
     setUserCheckPassword(event.target.value);
   };
 
+  const changeUserImageHandler = (event) => {
+    const file = event.target.files[0];
+    setUserImage(file);
+  };
+
   const newUser = {
     userName,
     userType,
@@ -44,93 +54,96 @@ const NewUserForm = () => {
   const submitFormHandler = (event) => {
     event.preventDefault();
     console.log(newUser);
+    setUserName("");
+    setUserType("");
+    setUserJMBG("");
+    setUserEmail("");
+    setUserUsername("");
+    setUserPassword("");
+    setUserCheckPassword("");
+    setUserImage(null);
   };
 
   return (
     <div>
       <form className={classes.form} onSubmit={submitFormHandler}>
         <section className={classes.info}>
-          <label>
-            Ime i prezime<span className={classes.required}></span>
-          </label>
-          <input
+          <InputText
+            labelText="Ime i prezime"
             type="text"
+            id="userName"
             value={userName}
             onChange={changeUserNameHandler}
-            required
           />
 
-          <label>
-            Tip korisnika<span className={classes.required}></span>
-          </label>
-          <select value={userType} onChange={changeUserTypeHandler} required>
-            <option>Bibliotekar</option>
-            <option>Učenik</option>
-          </select>
+          <InputSelect
+            labelText="Tip korisnika"
+            id="userType"
+            value={userType}
+            onChange={changeUserTypeHandler}
+            required
+            options={['', 'Bibliotekar', 'Učenik']}
+          />
 
-          <label>
-            JMBG<span className={classes.required}></span>
-          </label>
-          <input
+          <InputText
+            labelText="JMBG"
             type="number"
+            id="userJMBG"
             value={userJMBG}
             onChange={changeUserJMBGHandler}
-            required
           />
 
-          <label>
-            E-mail<span className={classes.required}></span>
-          </label>
-          <input
+          <InputText
+            labelText="E-mail"
             type="email"
+            id="userEmail"
             value={userEmail}
             onChange={changeUserEmailHandler}
-            required
           />
 
-          <label>
-            Korisničko ime<span className={classes.required}></span>
-          </label>
-          <input
-            type="text"
+          <InputText
+            labelText="Korisničko ime"
+            id="userUsername"
             value={userUsername}
             onChange={changeUserUsernameHandler}
-            required
           />
 
-          <label>
-            Šifra<span className={classes.required}></span>
-          </label>
-          <input
+          <InputText
+            labelText="Šifra"
             type="password"
+            id="userPassword"
             value={userPassword}
             onChange={changeUserPasswordHandler}
-            required
           />
 
-          <label>
-            Ponovi šifru<span className={classes.required}></span>
-          </label>
-          <input
+          <InputText
+            labelText="Ponovi šifru"
             type="password"
+            id="userCheckPassword"
             value={userCheckPassword}
             onChange={changeUserCheckPasswordHandler}
-            required
           />
         </section>
 
         <section className={classes.image}>
-          <input type="file" accept="image/*" />
+          <label htmlFor="fileInput" className={classes.customFileInput}>
+            <BsCameraFill className={classes.icon} />
+            {userImage ? "Promeni profilnu sliku" : "Dodaj profilnu sliku"}
+          </label>
+          <input
+            id="fileInput"
+            className={classes.fileInput}
+            type="file"
+            accept="image/*"
+            onChange={changeUserImageHandler}
+          />
+          <div className={classes.userImageHolder}>
+            {userImage && <img src={URL.createObjectURL(userImage)} />}
+          </div>
         </section>
 
-        <section className={classes.buttons}>
-          <button className={classes.button} type="reset">
-            Poništi
-          </button>
-          <button className={classes.button} type="submit">
-            Sačuvaj
-          </button>
-        </section>
+        <FormButtons />
+
       </form>
     </div>
   );

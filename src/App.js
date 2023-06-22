@@ -7,6 +7,7 @@ import MainHeader from "./components/UI/MainHeader";
 import Sidebar from "./components/UI/Sidebar";
 import ContentHeader from "./components/UI/ContentHeader";
 import NewUserForm from "./components/Forms/NewUserForm";
+import NewBookForm from "./components/Forms/NewBookForm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <ContentHeader />
             <Routes>
               <Route path="/new-user" element={<NewUserForm />} />
+              <Route path="/new-book" element={<NewBookForm />} />
             </Routes>
           </div>
         </main>

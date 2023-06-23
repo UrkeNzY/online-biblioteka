@@ -7,10 +7,22 @@ const ContentHeader = () => {
 
   const getContentHeaderTitle = () => {
     switch (location.pathname) {
+      case "/bibliotekari":
+        return "Bibliotekari";
+      case "/ucenici":
+        return "Učenici";
+      case "/evidencijaKnjiga":
+        return "Knjige";
+      case "/autori":
+        return "Autori";
+      case "/izdavanje-knjiga":
+        return "Izdavanje knjiga";
       case "/new-user":
         return "Novi korisnik";
       case "/new-book":
         return "Nova knjiga";
+      case "/settings":
+        return "Settings";
       default:
         return "Dashboard";
     }

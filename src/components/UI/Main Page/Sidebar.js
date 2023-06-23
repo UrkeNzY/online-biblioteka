@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import classes from "./Sidebar.module.css";
 
@@ -38,19 +39,19 @@ const Sidebar = () => {
       <hr />
       <div className={classes.sidebarMenu}>
         {sidebarItems.map((item) => (
-          <a className={classes.sidebarItem} href="#">
+          <Link className={classes.sidebarItem} to="/" key={Math.random()}>
             <img src={item.icon} alt="sidebar menu item icon" />
             {isExpanded && <p>{item.text}</p>}
-          </a>
+          </Link>
         ))}
       </div>
       <div className={classes.sidebarFooter}>
-      <hr />
-      <div className={classes.footerBottom}>
-        <a className={classes.sidebarItem} href="#">
-          <img src="images/icons/settings.svg" alt="sidebar options icon" />
-          {isExpanded && <p>Settings</p>}
-        </a>
+        <hr />
+        <div className={classes.footerBottom}>
+          <Link className={classes.sidebarItem} to="/">
+            <img src="images/icons/settings.svg" alt="sidebar options icon" />
+            {isExpanded && <p>Settings</p>}
+          </Link>
         </div>
       </div>
     </div>

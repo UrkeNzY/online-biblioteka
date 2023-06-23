@@ -1,0 +1,34 @@
+.cardContainer {
+  background-color: #ffffff;
+  width: 210px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 5px 7px #e2e3e3;
+  position: absolute;
+  z-index: 10;
+}
+
+.itemContainer {
+  display: flex;
+  align-items: center;
+}
+
+.itemContainer:hover a {
+  color: #5a71f0;
+}
+
+.itemContainer:hover img {
+  filter: brightness(0.6);
+}
+
+.itemContainer a {
+  font-size: 14px;
+  margin: 11px;
+  color: #374151;
+  text-decoration: none;
+}
+
+.itemContainer img {
+  height: 16px;
+  margin-right: 12px;
+}

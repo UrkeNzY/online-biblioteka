@@ -9,6 +9,10 @@ import ContentHeader from "./components/UI/Main Page/ContentHeader";
 import NewUserForm from "./components/Forms/NewUserForm";
 import NewBookForm from "./components/Forms/NewBookForm";
 import DropdownCard from "./components/UI/DropdownCard";
+import Bibliotekari from "./components/pages/Bibliotekari";
+import Ucenici from "./components/pages/Ucenici";
+import Autori from "./components/pages/Autori";
+import Knjige from "./components/pages/Knjige";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -37,6 +41,10 @@ function App() {
           <div className="contentContainer">
             <ContentHeader />
             <Routes>
+              <Route path="/bibliotekari" element={<Bibliotekari />} />
+              <Route path="/ucenici" element={<Ucenici />} />
+              <Route path="/autori" element={<Autori />} />
+              <Route path="/evidencijaKnjiga" element={<Knjige />} />
               <Route path="/new-user" element={<NewUserForm />} />
               <Route path="/new-book" element={<NewBookForm />} />
             </Routes>

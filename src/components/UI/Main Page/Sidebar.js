@@ -1,14 +1,27 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import classes from "./Sidebar.module.css";
 
 const sidebarItems = [
-  { text: "Dashboard", icon: "images/icons/dashboard.svg" },
-  { text: "Bibliotekari", icon: "images/icons/bibliotekari.svg" },
-  { text: "Učenici", icon: "images/icons/ucenici.svg" },
-  { text: "Knjige", icon: "images/icons/knjige.svg" },
-  { text: "Autori", icon: "images/icons/autori.svg" },
-  { text: "Izdavanje knjiga", icon: "images/icons/izdavanje-knjiga.svg" },
+  { text: "Dashboard", icon: "images/icons/dashboard.svg", path: "/dashboard" },
+  {
+    text: "Bibliotekari",
+    icon: "images/icons/bibliotekari.svg",
+    path: "/bibliotekari",
+  },
+  { text: "Učenici", icon: "images/icons/ucenici.svg", path: "/ucenici" },
+  {
+    text: "Knjige",
+    icon: "images/icons/knjige.svg",
+    path: "/evidencijaKnjiga",
+  },
+  { text: "Autori", icon: "images/icons/autori.svg", path: "/autori" },
+  {
+    text: "Izdavanje knjiga",
+    icon: "images/icons/izdavanje-knjiga.svg",
+    path: "/izdavanje-knjiga",
+  },
 ];
 
 const Sidebar = () => {
@@ -38,19 +51,23 @@ const Sidebar = () => {
       <hr />
       <div className={classes.sidebarMenu}>
         {sidebarItems.map((item) => (
-          <a className={classes.sidebarItem} href="#">
+          <Link
+            className={classes.sidebarItem}
+            to={item.path}
+            key={Math.random()}
+          >
             <img src={item.icon} alt="sidebar menu item icon" />
             {isExpanded && <p>{item.text}</p>}
-          </a>
+          </Link>
         ))}
       </div>
       <div className={classes.sidebarFooter}>
-      <hr />
-      <div className={classes.footerBottom}>
-        <a className={classes.sidebarItem} href="#">
-          <img src="images/icons/settings.svg" alt="sidebar options icon" />
-          {isExpanded && <p>Settings</p>}
-        </a>
+        <hr />
+        <div className={classes.footerBottom}>
+          <Link className={classes.sidebarItem} to="/settings">
+            <img src="images/icons/settings.svg" alt="sidebar options icon" />
+            {isExpanded && <p>Settings</p>}
+          </Link>
         </div>
       </div>
     </div>

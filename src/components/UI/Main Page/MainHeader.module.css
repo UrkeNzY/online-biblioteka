@@ -7,6 +7,10 @@ header {
   position: relative;
 }
 
+header img:hover {
+  cursor: pointer;
+}
+
 h1 {
   margin: 0 0 0 0.625rem;
   font-size: 1.375rem;
@@ -21,6 +25,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.logoContainer:hover {
+  cursor: pointer;
 }
 
 .userContainer {

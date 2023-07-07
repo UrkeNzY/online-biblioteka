@@ -6,21 +6,21 @@ import classes from "./Sidebar.module.css";
 const sidebarItems = [
   { text: "Dashboard", icon: "images/icons/dashboard.svg", path: "/dashboard" },
   {
-    text: "Bibliotekari",
+    text: "Librarians",
     icon: "images/icons/bibliotekari.svg",
-    path: "/bibliotekari",
+    path: "/librarians",
   },
-  { text: "Učenici", icon: "images/icons/ucenici.svg", path: "/ucenici" },
+  { text: "Students", icon: "images/icons/ucenici.svg", path: "/students" },
   {
-    text: "Knjige",
+    text: "Books",
     icon: "images/icons/knjige.svg",
-    path: "/evidencijaKnjiga",
+    path: "/book-record",
   },
-  { text: "Autori", icon: "images/icons/autori.svg", path: "/autori" },
+  { text: "Authors", icon: "images/icons/autori.svg", path: "/authors" },
   {
-    text: "Izdavanje knjiga",
+    text: "Book Issuing",
     icon: "images/icons/izdavanje-knjiga.svg",
-    path: "/izdavanje-knjiga",
+    path: "/book-issuing",
   },
 ];
 

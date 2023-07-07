@@ -1,4 +1,4 @@
-import Table from "../../components/Tables/Table";
+import Table from "../../components/UI/Tables/Table";
 
 const tableColumns = [
   { header: "Naziv knjige", field: "bookName", width: "17%" },

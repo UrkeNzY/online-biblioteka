@@ -6,7 +6,7 @@ import './styles/App.css';
 import MainHeader from "./layout/MainHeader";
 import Sidebar from "./layout/Sidebar";
 import ContentHeader from "./layout/ContentHeader";
-import DropdownCard from "./components/DropdownCards/DropdownCard";
+import DropdownCard from "./components/UI/DropdownCards/DropdownCard";
 import NewUserForm from "./pages/NewUser/components/NewUserForm";
 import NewBookForm from './pages/NewBook/components/NewBookForm';
 import Librarians from "./pages/Librarians/Librarians";

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import classes from "../../styles/DropdownCard.module.css";
+import classes from '../../../styles/DropdownCard.module.css';
 
 const DropdownCard = (props) => {
   const { items, button } = props;

@@ -1,14 +1,14 @@
 import { Fragment, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./App.css";
+import './styles/App.css';
 
-import MainHeader from "./layouts/MainHeader";
-import Sidebar from "./layouts/Sidebar";
-import ContentHeader from "./layouts/ContentHeader";
-import DropdownCard from "./components/DropdownCard";
+import MainHeader from "./layout/MainHeader";
+import Sidebar from "./layout/Sidebar";
+import ContentHeader from "./layout/ContentHeader";
+import DropdownCard from "./components/DropdownCards/DropdownCard";
 import NewUserForm from "./pages/NewUser/components/NewUserForm";
-import NewBookForm from "./pages/NewBookForm/components/components/NewBookForm";
+import NewBookForm from './pages/NewBook/components/NewBookForm';
 import Librarians from "./pages/Librarians/Librarians";
 import Students from "./pages/Students/Students";
 import Authors from "./pages/Authors/Authors";

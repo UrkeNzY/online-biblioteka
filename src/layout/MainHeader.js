@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import classes from "./MainHeader.module.css";
+import classes from '../styles/MainHeader.module.css';
 
 const infoAddItems = [
   { name: "Korisnik", image: "images/icons/korisnik.svg", path: "/new-user" },

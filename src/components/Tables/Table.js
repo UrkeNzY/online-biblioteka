@@ -1,4 +1,4 @@
-import classes from "./Table.module.css";
+import classes from "../../styles/Table.module.css";
 
 const Table = (props) => {
   const { tableColumns, tableData } = props;

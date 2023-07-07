@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-import classes from "./ContentHeader.module.css";
+import classes from "../styles/ContentHeader.module.css";
 
 const ContentHeader = () => {
   let location = useLocation();

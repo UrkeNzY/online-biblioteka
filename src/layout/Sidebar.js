@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import classes from "./Sidebar.module.css";
+import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
   { text: "Dashboard", icon: "images/icons/dashboard.svg", path: "/dashboard" },

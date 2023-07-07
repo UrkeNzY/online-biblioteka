@@ -3,16 +3,16 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
-import MainHeader from "./components/UI/Main Page/MainHeader";
-import Sidebar from "./components/UI/Main Page/Sidebar";
-import ContentHeader from "./components/UI/Main Page/ContentHeader";
-import DropdownCard from "./components/UI/DropdownCard";
-import NewUserForm from "./components/Forms/NewUserForm";
-import NewBookForm from "./components/Forms/NewBookForm";
-import Librarians from "./components/pages/Librarians";
-import Students from "./components/pages/Ucenici";
-import Authors from "./components/pages/Authors";
-import Books from "./components/pages/Knjige";
+import MainHeader from "./layouts/MainHeader";
+import Sidebar from "./layouts/Sidebar";
+import ContentHeader from "./layouts/ContentHeader";
+import DropdownCard from "./components/DropdownCard";
+import NewUserForm from "./pages/NewUser/components/NewUserForm";
+import NewBookForm from "./pages/NewBookForm/components/components/NewBookForm";
+import Librarians from "./pages/Librarians/Librarians";
+import Students from "./pages/Students/Students";
+import Authors from "./pages/Authors/Authors";
+import Books from "./pages/Books/Books";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);

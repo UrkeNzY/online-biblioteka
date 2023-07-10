@@ -1,4 +1,6 @@
+import React, { useEffect, useState } from "react";
 import Table from "../../components/UI/Tables/Table";
+import { listBooks } from "../../services/books";
 
 const tableColumns = [
   { header: "Naziv knjige", field: "bookName", width: "17%" },
@@ -11,123 +13,40 @@ const tableColumns = [
   { header: "Ukupna kolicina", field: "bookTotalAmount", width: "15%" },
 ];
 
-const tableData = [
-  {
-    id: 1,
-    name: "Geografija Crne Gore",
-    author: "Maksimovic Darinka",
-    category: "Udzbenici",
-    available: "6",
-    reserved: "5",
-    issued: "5",
-    offLimit: "2",
-    totalAmount: "11",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 2,
-    name: "Muzicka kultura I razred Gimnazije",
-    author: "Bubalo Zivkovic",
-    category: "Udzbenici",
-    available: "20",
-    reserved: "0",
-    issued: "0",
-    offLimit: "0",
-    totalAmount: "20",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 3,
-    name: "Tom Sojer",
-    author: "Mark Twain",
-    category: "Romani",
-    available: "3",
-    reserved: "2",
-    issued: "7",
-    offLimit: "1",
-    totalAmount: "10",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 4,
-    name: "Robinson Kruso",
-    author: "Daniel Defoe",
-    category: "Romani",
-    available: "0",
-    reserved: "0",
-    issued: "10",
-    offLimit: "2",
-    totalAmount: "10",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 5,
-    name: "Geografija Crne Gore",
-    author: "Maksimovic Darinka",
-    category: "Udzbenici",
-    available: "6",
-    reserved: "5",
-    issued: "5",
-    offLimit: "1",
-    totalAmount: "11",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 6,
-    name: "Muzicka kultura I razred Gimnazije",
-    author: "Bubalo Zivkovic",
-    category: "Udzbenici",
-    available: "20",
-    reserved: "0",
-    issued: "0",
-    offLimit: "0",
-    totalAmount: "20",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 7,
-    name: "Tom Sojer",
-    author: "Mark Twain",
-    category: "Romani",
-    available: "3",
-    reserved: "2",
-    issued: "7",
-    offLimit: "2",
-    totalAmount: "10",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-  {
-    id: 8,
-    name: "Robinson Kruso",
-    author: "Daniel Defoe",
-    category: "Romani",
-    available: "0",
-    reserved: "0",
-    issued: "10",
-    offLimit: "1",
-    totalAmount: "10",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/book-cover.jpg",
-    imageType: "bookCover"
-  },
-];
+const Books = () => {
+  const [tableData, setTableData] = useState([]);
 
-const Knjige = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const books = await listBooks();
+        const formattedData = books.data.map((book) => ({
+          id: book.id,
+          bookName: book.title,
+          author:
+            book.authors.length > 0
+              ? `${book.authors[0].name} ${book.authors[0].surname}`
+              : "",
+          category: book.categories.length > 0 ? book.categories[0].name : "",
+          available: book.samples - book.bSamples,
+          reserved: book.rSamples.toString(),
+          issued: book.fSamples,
+          offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,
+          totalAmount: book.samples,
+          actionButton: "images/buttons/dashboard-actions.svg",
+          image: book.photo,
+          imageType: "bookCover",
+        }));
+        setTableData(formattedData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return <Table tableColumns={tableColumns} tableData={tableData} />;
 };
 
-export default Knjige;
+export default Books;

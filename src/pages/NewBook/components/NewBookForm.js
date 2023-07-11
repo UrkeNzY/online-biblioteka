@@ -1,132 +1,174 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchcreateBookData } from "../../../services/books";
+
 import classes from "../../../styles/Forms.module.css";
+
 import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
-import FormButtons from "../../../components/Forms/FormButtons";
 
 const NewBookForm = () => {
-  const [bookName, setBookName] = useState("");
-  const [bookDescription, setBookDescription] = useState("");
-  const [bookCategory, setBookCategory] = useState("");
-  const [bookGenre, setBookGenre] = useState("");
-  const [bookAuthor, setBookAuthor] = useState("");
-  const [bookPublisher, setBookPublisher] = useState("");
-  const [bookAmount, setBookAmount] = useState("");
+  const [submittedName, setSubmittedName] = useState("");
+  const [submittedDescription, setSubmittedDescription] = useState("");
+  const [submittedCategory, setSubmittedCategory] = useState("");
+  const [submittedGenre, setSubmittedGenre] = useState("");
+  const [submittedAuthor, setSubmittedAuthor] = useState("");
+  const [submittedPublisher, setSubmittedPublisher] = useState("");
+  const [submittedAmount, setSubmittedAmount] = useState("");
+
+  const [bookCategories, setBookCategories] = useState([""]);
+  const [bookGenres, setBookGenres] = useState([""]);
+  const [bookAuthors, setBookAuthors] = useState([""]);
+  const [bookPublishers, setBookPublishers] = useState([""]);
 
   const changeBookNameHandler = (event) => {
-    setBookName(event.target.value);
+    setSubmittedName(event.target.value);
   };
   const changeBookDescriptionHandler = (event) => {
-    setBookDescription(event.target.value);
+    setSubmittedDescription(event.target.value);
   };
   const changeBookCategoryHandler = (event) => {
-    setBookCategory(event.target.value);
+    setSubmittedCategory(event.target.value);
   };
   const changeBookGenreHandler = (event) => {
-    setBookGenre(event.target.value);
+    setSubmittedGenre(event.target.value);
   };
   const changeBookAuthorHandler = (event) => {
-    setBookAuthor(event.target.value);
+    setSubmittedAuthor(event.target.value);
   };
   const changeBookPublisherHandler = (event) => {
-    setBookPublisher(event.target.value);
+    setSubmittedPublisher(event.target.value);
   };
   const changeBookAmountHandler = (event) => {
-    setBookAmount(event.target.value);
+    setSubmittedAmount(event.target.value);
   };
 
   const newBook = {
-    bookName,
-    bookDescription,
-    bookCategory,
-    bookGenre,
-    bookAuthor,
-    bookPublisher,
-    bookAmount,
+    submittedName,
+    submittedDescription,
+    submittedCategory,
+    submittedGenre,
+    submittedAuthor,
+    submittedPublisher,
+    submittedAmount,
   };
 
   const submitFormHandler = (event) => {
     event.preventDefault();
     console.log(newBook);
-    setBookName("");
-    setBookDescription("");
-    setBookCategory("");
-    setBookGenre("");
-    setBookAuthor("");
-    setBookPublisher("");
-    setBookAmount("");
+    setSubmittedName("");
+    setSubmittedDescription("");
+    setSubmittedCategory("");
+    setSubmittedGenre("");
+    setSubmittedAuthor("");
+    setSubmittedPublisher("");
+    setSubmittedAmount("");
   };
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const bookData = await fetchcreateBookData();
+
+        const categories = bookData.data.categories.map((category) => ({
+          id: category.id,
+          name: category.name,
+        }));
+
+        const genres = bookData.data.genres.map((genre) => ({
+          id: genre.id,
+          name: genre.name,
+        }));
+
+        const authors = bookData.data.authors.map((author) => ({
+          id: author.id,
+          name: author.name + " " + author.surname,
+        }));
+
+        const publishers = bookData.data.publishers.map((publisher) => ({
+          id: publisher.id,
+          name: publisher.name,
+        }));
+
+        setBookCategories((prevState) => [prevState, ...categories]);
+        setBookGenres((prevState) => [prevState, ...genres]);
+        setBookAuthors((prevState) => [prevState, ...authors]);
+        setBookPublishers((prevState) => [prevState, ...publishers]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
-    <form onSubmit={submitFormHandler} className={classes.form}>
-      <section>
-        <InputText
-          labelText="Naziv knjige"
-          type="text"
-          id="bookName"
-          value={bookName}
-          onChange={changeBookNameHandler}
-        />
+        <form onSubmit={submitFormHandler} className={classes.form}> 
+        <section>
+          <InputText
+            labelText="Naziv knjige"
+            type="text"
+            id="bookName"
+            value={submittedName}
+            onChange={changeBookNameHandler}
+          />
 
-        <label htmlFor="bookDescription">
-          Kratak sadržaj<span className={classes.required}></span>
-        </label>
-        <textarea
-          type="text"
-          id="bookDescription"
-          value={bookDescription}
-          onChange={changeBookDescriptionHandler}
-          className={classes.textarea}
-          required
-        />
+          <label htmlFor="bookDescription">
+            Kratak sadržaj<span className={classes.required}></span>
+          </label>
+          <textarea
+            type="text"
+            id="bookDescription"
+            value={submittedDescription}
+            onChange={changeBookDescriptionHandler}
+            className={classes.textarea}
+            required
+          />
 
-        <InputSelect
-          labelText="Kategorija"
-          id="bookCategory"
-          value={bookCategory}
-          onChange={changeBookCategoryHandler}
-          required
-          options={["", "Udžbenici", "Romani"]}
-        />
+          <InputSelect
+            labelText="Kategorija"
+            id="bookCategory"
+            value={submittedCategory}
+            onChange={changeBookCategoryHandler}
+            required
+            options={bookCategories}
+          />
 
-        <InputSelect
-          labelText="Žanr"
-          id="bookGenre"
-          value={bookGenre}
-          onChange={changeBookGenreHandler}
-          required
-          options={["", "Poezija", "Stručna literatura"]}
-        />
-      </section>
+          <InputSelect
+            labelText="Žanr"
+            id="bookGenre"
+            value={submittedGenre}
+            onChange={changeBookGenreHandler}
+            required
+            options={bookGenres}
+          />
+        </section>
 
-      <section>
-        <InputSelect
-          labelText="Autor"
-          id="bookAuthor"
-          value={bookAuthor}
-          onChange={changeBookAuthorHandler}
-          required
-          options={["", "Mark Twain", "Pero Peric"]}
-        />
-        <InputSelect
-          labelText="Izdavač"
-          id="bookPublisher"
-          value={bookPublisher}
-          onChange={changeBookPublisherHandler}
-          required
-          options={["", "Izdavac1"]}
-        />
-        <InputText
-          labelText="Količina"
-          type="number"
-          id="bookAmonut"
-          value={bookAmount}
-          onChange={changeBookAmountHandler}
-        />
-      </section>
-
-      <FormButtons />
-    </form>
+        <section>
+          <InputSelect
+            labelText="Autor"
+            id="bookAuthor"
+            value={submittedAuthor}
+            onChange={changeBookAuthorHandler}
+            required
+            options={bookAuthors}
+          />
+          <InputSelect
+            labelText="Izdavač"
+            id="bookPublisher"
+            value={submittedPublisher}
+            onChange={changeBookPublisherHandler}
+            required
+            options={bookPublishers}
+          />
+          <InputText
+            labelText="Količina"
+            type="number"
+            id="bookAmonut"
+            value={submittedAmount}
+            onChange={changeBookAmountHandler}
+          />
+        </section>
+        </form>
   );
 };
 

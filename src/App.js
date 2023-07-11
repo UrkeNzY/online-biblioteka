@@ -1,14 +1,17 @@
 import { Fragment, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import './styles/App.css';
+import "./styles/App.css";
 
 import MainHeader from "./layout/MainHeader";
 import Sidebar from "./layout/Sidebar";
 import ContentHeader from "./layout/ContentHeader";
 import DropdownCard from "./components/UI/DropdownCards/DropdownCard";
 import NewUserForm from "./pages/NewUser/components/NewUserForm";
-import NewBookForm from './pages/NewBook/components/NewBookForm';
+import NewBook from "./pages/NewBook/NewBook";
+import NewBookForm from "./pages/NewBook/components/NewBookForm";
+import NewBookSpecs from "./pages/NewBook/components/NewBookSpecs";
+import NewBookMedia from "./pages/NewBook/components/NewBookMedia";
 import Librarians from "./pages/Librarians/Librarians";
 import Students from "./pages/Students/Students";
 import Authors from "./pages/Authors/Authors";
@@ -46,7 +49,11 @@ function App() {
               <Route path="/authors" element={<Authors />} />
               <Route path="/book-record" element={<Books />} />
               <Route path="/new-user" element={<NewUserForm />} />
-              <Route path="/new-book" element={<NewBookForm />} />
+              <Route path="/new-book" element={<NewBook />}>
+                <Route index element={<NewBookForm />} />
+                <Route path="/new-book/specs" element={<NewBookSpecs />} />
+                <Route path="/new-book/media" element={<NewBookMedia />} />
+              </Route>
             </Routes>
             {isDropdownOpen && (
               <DropdownCard

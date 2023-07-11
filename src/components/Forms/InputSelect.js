@@ -16,8 +16,11 @@ const InputSelect = (props) => {
         required
       >
         {props.options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option
+            key={option.id ? option.id : Math.random()}
+            value={option.name}
+          >
+            {option.name}
           </option>
         ))}
       </select>

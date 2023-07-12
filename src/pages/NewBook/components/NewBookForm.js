@@ -102,73 +102,73 @@ const NewBookForm = () => {
   }, []);
 
   return (
-        <form onSubmit={submitFormHandler} className={classes.form}> 
-        <section>
-          <InputText
-            labelText="Naziv knjige"
-            type="text"
-            id="bookName"
-            value={submittedName}
-            onChange={changeBookNameHandler}
-          />
+    <form onSubmit={submitFormHandler} className={classes.form}>
+      <section>
+        <InputText
+          labelText="Naziv knjige"
+          type="text"
+          id="bookName"
+          value={submittedName}
+          onChange={changeBookNameHandler}
+        />
 
-          <label htmlFor="bookDescription">
-            Kratak sadržaj<span className={classes.required}></span>
-          </label>
-          <textarea
-            type="text"
-            id="bookDescription"
-            value={submittedDescription}
-            onChange={changeBookDescriptionHandler}
-            className={classes.textarea}
-            required
-          />
+        <label htmlFor="bookDescription">
+          Kratak sadržaj<span className={classes.required}></span>
+        </label>
+        <textarea
+          type="text"
+          id="bookDescription"
+          value={submittedDescription}
+          onChange={changeBookDescriptionHandler}
+          className={classes.textarea}
+          required
+        />
 
-          <InputSelect
-            labelText="Kategorija"
-            id="bookCategory"
-            value={submittedCategory}
-            onChange={changeBookCategoryHandler}
-            required
-            options={bookCategories}
-          />
+        <InputSelect
+          labelText="Kategorija"
+          id="bookCategory"
+          value={submittedCategory}
+          onChange={changeBookCategoryHandler}
+          required
+          options={bookCategories}
+        />
 
-          <InputSelect
-            labelText="Žanr"
-            id="bookGenre"
-            value={submittedGenre}
-            onChange={changeBookGenreHandler}
-            required
-            options={bookGenres}
-          />
-        </section>
+        <InputSelect
+          labelText="Žanr"
+          id="bookGenre"
+          value={submittedGenre}
+          onChange={changeBookGenreHandler}
+          required
+          options={bookGenres}
+        />
+      </section>
 
-        <section>
-          <InputSelect
-            labelText="Autor"
-            id="bookAuthor"
-            value={submittedAuthor}
-            onChange={changeBookAuthorHandler}
-            required
-            options={bookAuthors}
-          />
-          <InputSelect
-            labelText="Izdavač"
-            id="bookPublisher"
-            value={submittedPublisher}
-            onChange={changeBookPublisherHandler}
-            required
-            options={bookPublishers}
-          />
-          <InputText
-            labelText="Količina"
-            type="number"
-            id="bookAmonut"
-            value={submittedAmount}
-            onChange={changeBookAmountHandler}
-          />
-        </section>
-        </form>
+      <section>
+        <InputSelect
+          labelText="Autor"
+          id="bookAuthor"
+          value={submittedAuthor}
+          onChange={changeBookAuthorHandler}
+          required
+          options={bookAuthors}
+        />
+        <InputSelect
+          labelText="Izdavač"
+          id="bookPublisher"
+          value={submittedPublisher}
+          onChange={changeBookPublisherHandler}
+          required
+          options={bookPublishers}
+        />
+        <InputText
+          labelText="Količina"
+          type="number"
+          id="bookAmonut"
+          value={submittedAmount}
+          onChange={changeBookAmountHandler}
+        />
+      </section>
+    </form>
   );
 };
 

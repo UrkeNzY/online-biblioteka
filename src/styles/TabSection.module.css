@@ -17,3 +17,13 @@
   opacity: 0.25;
   margin: 0;
 }
+
+.active {
+  padding: 20px 0;
+  border-bottom: 3px solid #4558be;
+  color: #4558be;
+}
+
+a.active {
+  color: #4558be; /* Set the desired color for the active NavLink */
+}

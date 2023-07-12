@@ -4,22 +4,22 @@ import { Link } from "react-router-dom";
 import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
-  { text: "Dashboard", icon: "images/icons/dashboard.svg", path: "/dashboard" },
+  { text: "Dashboard", icon: "/images/icons/dashboard.svg", path: "/dashboard" },
   {
     text: "Librarians",
-    icon: "images/icons/bibliotekari.svg",
+    icon: "/images/icons/bibliotekari.svg",
     path: "/librarians",
   },
-  { text: "Students", icon: "images/icons/ucenici.svg", path: "/students" },
+  { text: "Students", icon: "/images/icons/ucenici.svg", path: "/students" },
   {
     text: "Books",
-    icon: "images/icons/knjige.svg",
+    icon: "/images/icons/knjige.svg",
     path: "/book-record",
   },
-  { text: "Authors", icon: "images/icons/autori.svg", path: "/authors" },
+  { text: "Authors", icon: "/images/icons/autori.svg", path: "/authors" },
   {
     text: "Book Issuing",
-    icon: "images/icons/izdavanje-knjiga.svg",
+    icon: "/images/icons/izdavanje-knjiga.svg",
     path: "/book-issuing",
   },
 ];
@@ -41,8 +41,8 @@ const Sidebar = () => {
         <img
           src={
             isExpanded
-              ? "images/buttons/sidebar-close.svg"
-              : "images/buttons/sidebar-open.svg"
+              ? "/images/buttons/sidebar-close.svg"
+              : "/images/buttons/sidebar-open.svg"
           }
           alt="close sidebar button"
           onClick={sidebarExpandHandler}
@@ -65,7 +65,7 @@ const Sidebar = () => {
         <hr />
         <div className={classes.footerBottom}>
           <Link className={classes.sidebarItem} to="/settings">
-            <img src="images/icons/settings.svg" alt="sidebar options icon" />
+            <img src="/images/icons/settings.svg" alt="sidebar options icon" />
             {isExpanded && <p>Settings</p>}
           </Link>
         </div>

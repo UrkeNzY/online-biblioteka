@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import classes from "../../../styles/TabSection.module.css";
 
@@ -6,8 +6,14 @@ const TabSection = (props) => {
   return (
     <div className={classes.tabContainer}>
       <div className={classes.linksContainer}>
-        {props.tabItems.map((tabItem) => (
-          <Link to={tabItem.path}>{tabItem.text}</Link>
+        {props.tabItems.map((tabItem, index) => (
+          <NavLink
+            key={Math.random()}
+            to={tabItem.path}
+            className={(navData) => (navData.isActive ? classes.active : "")}
+          >
+            {tabItem.text}
+          </NavLink>
         ))}
       </div>
       <hr />

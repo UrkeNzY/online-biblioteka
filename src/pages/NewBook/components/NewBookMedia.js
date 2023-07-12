@@ -1,5 +1,7 @@
+import MediaDropzone from "./MediaDropzone";
+
 const NewBookMedia = () => {
-  return <p>Media</p>;
+  return <MediaDropzone />;
 };
 
 export default NewBookMedia;

@@ -7,7 +7,7 @@ import MainHeader from "./layout/MainHeader";
 import Sidebar from "./layout/Sidebar";
 import ContentHeader from "./layout/ContentHeader";
 import DropdownCard from "./components/UI/DropdownCards/DropdownCard";
-import NewUserForm from "./pages/NewUser/components/NewUserForm";
+import NewUser from "./pages/NewUser/NewUser";
 import NewBook from "./pages/NewBook/NewBook";
 import NewBookForm from "./pages/NewBook/components/NewBookForm";
 import NewBookSpecs from "./pages/NewBook/components/NewBookSpecs";
@@ -48,9 +48,9 @@ function App() {
               <Route path="/students" element={<Students />} />
               <Route path="/authors" element={<Authors />} />
               <Route path="/book-record" element={<Books />} />
-              <Route path="/new-user" element={<NewUserForm />} />
+              <Route path="/new-user" element={<NewUser />} />
               <Route path="/new-book" element={<NewBook />}>
-                <Route index element={<NewBookForm />} />
+                <Route path="/new-book/general" element={<NewBookForm />} />
                 <Route path="/new-book/specs" element={<NewBookSpecs />} />
                 <Route path="/new-book/media" element={<NewBookMedia />} />
               </Route>

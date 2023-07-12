@@ -21,6 +21,8 @@ const ContentHeader = () => {
         return "New User";
       case "/new-book":
         return "New Book";
+      case "/new-book/general":
+        return "New Book";
       case "/new-book/specs":
         return "New Book";
       case "/new-book/media":

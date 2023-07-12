@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import classes from '../styles/MainHeader.module.css';
 
 const infoAddItems = [
-  { name: "Korisnik", image: "images/icons/korisnik.svg", path: "/new-user" },
-  { name: "Knjiga", image: "images/icons/knjige.svg", path: "/new-book" },
-  { name: "Autor", image: "images/icons/autori.svg", path: "/" },
+  { name: "Korisnik", image: "/images/icons/korisnik.svg", path: "/new-user" },
+  { name: "Knjiga", image: "/images/icons/knjige.svg", path: "/new-book/general" },
+  { name: "Autor", image: "/images/icons/autori.svg", path: "/" },
 ];
 
 const profileItems = [
-  { name: "Profile", image: "images/icons/korisnik.svg", path: "/" },
-  { name: "Logout", image: "images/icons/logout.svg", path: "/" },
+  { name: "Profile", image: "/images/icons/korisnik.svg", path: "/" },
+  { name: "Logout", image: "/images/icons/logout.svg", path: "/" },
 ];
 
 const MainHeader = (props) => {
@@ -33,20 +33,20 @@ const MainHeader = (props) => {
   return (
     <header>
       <Link to="/" className={classes.logoContainer}>
-        <img src="images/logo.svg" alt="logo" />
+        <img src="/images/logo.svg" alt="logo" />
         <h1>Online Biblioteka</h1>
       </Link>
       <div className={classes.userContainer}>
         <div className={classes.userActions}>
-          <img src="images/icons/notifications.svg" alt="notifications icon" />
+          <img src="/images/icons/notifications.svg" alt="notifications icon" />
           <img
-            src="images/icons/plus.svg"
+            src="/images/icons/plus.svg"
             alt="add icon"
             onClick={toggleInfoHandler}
           />
         </div>
         <img
-          src="images/logo.svg"
+          src="/images/logo.svg"
           alt="user profile icon"
           onClick={toggleProfileHandler}
         />

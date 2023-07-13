@@ -12,6 +12,7 @@ import NewBook from "./pages/NewBook/NewBook";
 import NewBookForm from "./pages/NewBook/components/NewBookForm";
 import NewBookSpecs from "./pages/NewBook/components/NewBookSpecs";
 import NewBookMedia from "./pages/NewBook/components/NewBookMedia";
+import NewAuthor from "./pages/NewAuthor/NewAuthor";
 import Librarians from "./pages/Librarians/Librarians";
 import Students from "./pages/Students/Students";
 import Authors from "./pages/Authors/Authors";
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/new-book/specs" element={<NewBookSpecs />} />
                 <Route path="/new-book/media" element={<NewBookMedia />} />
               </Route>
+              <Route path="/new-author" element={<NewAuthor />} />
             </Routes>
             {isDropdownOpen && (
               <DropdownCard

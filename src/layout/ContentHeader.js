@@ -27,6 +27,8 @@ const ContentHeader = () => {
         return "New Book";
       case "/new-book/media":
         return "New Book";
+      case "/new-author":
+        return "New Author";
       case "/settings":
         return "Settings";
       default:

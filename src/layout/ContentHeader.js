@@ -31,6 +31,8 @@ const ContentHeader = () => {
         return "New Author";
       case "/settings":
         return "Settings";
+      case "/profile":
+        return "Profile";
       default:
         return "Dashboard";
     }

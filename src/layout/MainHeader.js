@@ -12,7 +12,7 @@ const infoAddItems = [
 ];
 
 const profileItems = [
-  { name: "Profile", image: "/images/icons/korisnik.svg", path: "/" },
+  { name: "Profile", image: "/images/icons/korisnik.svg", path: "/profile" },
   { name: "Logout", image: "/images/icons/logout.svg", path: "/" },
 ];
 

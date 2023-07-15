@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
-  { text: "Dashboard", icon: "/images/icons/dashboard.svg", path: "/dashboard" },
+  {
+    text: "Dashboard",
+    icon: "/images/icons/dashboard.svg",
+    path: "/dashboard",
+  },
   {
     text: "Librarians",
     icon: "/images/icons/bibliotekari.svg",
@@ -51,23 +55,26 @@ const Sidebar = () => {
       <hr />
       <div className={classes.sidebarMenu}>
         {sidebarItems.map((item) => (
-          <Link
+          <NavLink
             className={classes.sidebarItem}
             to={item.path}
             key={Math.random()}
           >
             <img src={item.icon} alt="sidebar menu item icon" />
             {isExpanded && <p>{item.text}</p>}
-          </Link>
+          </NavLink>
         ))}
       </div>
       <div className={classes.sidebarFooter}>
         <hr />
         <div className={classes.footerBottom}>
-          <Link className={classes.sidebarItem} to="/settings">
+          <NavLink
+            className={classes.sidebarItem}
+            to="/settings"
+          >
             <img src="/images/icons/settings.svg" alt="sidebar options icon" />
             {isExpanded && <p>Settings</p>}
-          </Link>
+          </NavLink>
         </div>
       </div>
     </div>

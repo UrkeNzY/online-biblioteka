@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { listBooks } from "../../services/books";
 
+import classes from "../../styles/Searchbar.module.css";
+
 import Table from "../../components/UI/Tables/Table";
+import Button from "../../components/UI/Buttons/Button";
+import Searchbar from "../../components/UI/Searchbar/Searchbar";
 
 const tableColumns = [
   { header: "Naziv knjige", field: "bookName", width: "17%" },
@@ -47,7 +51,15 @@ const Books = () => {
     fetchData();
   }, []);
 
-  return <Table tableColumns={tableColumns} tableData={tableData} />;
+  return (
+    <Fragment>
+      <div className={classes.topActionsArea}>
+        <Button text="Nova knjiga" image="/images/icons/plus.svg" />
+        <Searchbar />
+      </div>
+      <Table tableColumns={tableColumns} tableData={tableData} />
+    </Fragment>
+  );
 };
 
 export default Books;

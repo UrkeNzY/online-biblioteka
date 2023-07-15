@@ -1,4 +1,10 @@
+import { Fragment } from "react";
+
+import classes from '../../styles/Searchbar.module.css';
+
 import Table from "../../components/UI/Tables/Table";
+import Button from "../../components/UI/Buttons/Button";
+import Searchbar from "../../components/UI/Searchbar/Searchbar";
 
 const tableColumns = [
   { header: "Ime i prezime", field: "name", width: "25%" },
@@ -15,7 +21,7 @@ const tableData = [
     userType: "Učenik",
     lastAccess: "Prije 10 sati",
     actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/male-pic.jpg"
+    image: "images/placeholders/male-pic.jpg",
   },
   {
     id: 2,
@@ -24,7 +30,7 @@ const tableData = [
     userType: "Učenik",
     lastAccess: "Prije 2 dana",
     actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/female-pic.jpg"
+    image: "images/placeholders/female-pic.jpg",
   },
   {
     id: 3,
@@ -33,7 +39,7 @@ const tableData = [
     userType: "Učenik",
     lastAccess: "Nikad se nije ulogovao",
     actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/female-pic.jpg"
+    image: "images/placeholders/female-pic.jpg",
   },
   {
     id: 4,
@@ -42,12 +48,20 @@ const tableData = [
     userType: "Učenik",
     lastAccess: "Prije 2 nedelje",
     actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/male-pic.jpg"
+    image: "images/placeholders/male-pic.jpg",
   },
 ];
 
 const Ucenici = () => {
-  return <Table tableColumns={tableColumns} tableData={tableData} />;
+  return (
+    <Fragment>
+      <div className={classes.topActionsArea}>
+      <Button text="Novi ucenik" image="/images/icons/plus.svg" />
+      <Searchbar />
+      </div>
+      <Table tableColumns={tableColumns} tableData={tableData} />
+    </Fragment>
+  );
 };
 
 export default Ucenici;

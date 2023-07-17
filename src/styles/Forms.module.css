@@ -2,13 +2,16 @@
   box-sizing: border-box;
 }
 
+.formContainer {
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
 .form {
   display: grid;
   column-gap: 2rem;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
-  padding: 2rem;
-  position: relative;
 }
 
 section {

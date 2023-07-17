@@ -1,26 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import classes from "./Sidebar.module.css";
+import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
-  { text: "Dashboard", icon: "images/icons/dashboard.svg", path: "/dashboard" },
   {
-    text: "Bibliotekari",
-    icon: "images/icons/bibliotekari.svg",
-    path: "/bibliotekari",
+    text: "Dashboard",
+    icon: "/images/icons/dashboard.svg",
+    path: "/dashboard",
   },
-  { text: "Učenici", icon: "images/icons/ucenici.svg", path: "/ucenici" },
   {
-    text: "Knjige",
-    icon: "images/icons/knjige.svg",
-    path: "/evidencijaKnjiga",
+    text: "Librarians",
+    icon: "/images/icons/bibliotekari.svg",
+    path: "/librarians",
   },
-  { text: "Autori", icon: "images/icons/autori.svg", path: "/autori" },
+  { text: "Students", icon: "/images/icons/ucenici.svg", path: "/students" },
   {
-    text: "Izdavanje knjiga",
-    icon: "images/icons/izdavanje-knjiga.svg",
-    path: "/izdavanje-knjiga",
+    text: "Books",
+    icon: "/images/icons/knjige.svg",
+    path: "/book-record",
+  },
+  { text: "Authors", icon: "/images/icons/autori.svg", path: "/authors" },
+  {
+    text: "Book Issuing",
+    icon: "/images/icons/izdavanje-knjiga.svg",
+    path: "/book-issuing",
   },
 ];
 
@@ -41,8 +45,8 @@ const Sidebar = () => {
         <img
           src={
             isExpanded
-              ? "images/buttons/sidebar-close.svg"
-              : "images/buttons/sidebar-open.svg"
+              ? "/images/buttons/sidebar-close.svg"
+              : "/images/buttons/sidebar-open.svg"
           }
           alt="close sidebar button"
           onClick={sidebarExpandHandler}
@@ -51,23 +55,26 @@ const Sidebar = () => {
       <hr />
       <div className={classes.sidebarMenu}>
         {sidebarItems.map((item) => (
-          <Link
+          <NavLink
             className={classes.sidebarItem}
             to={item.path}
             key={Math.random()}
           >
             <img src={item.icon} alt="sidebar menu item icon" />
             {isExpanded && <p>{item.text}</p>}
-          </Link>
+          </NavLink>
         ))}
       </div>
       <div className={classes.sidebarFooter}>
         <hr />
         <div className={classes.footerBottom}>
-          <Link className={classes.sidebarItem} to="/settings">
-            <img src="images/icons/settings.svg" alt="sidebar options icon" />
+          <NavLink
+            className={classes.sidebarItem}
+            to="/settings"
+          >
+            <img src="/images/icons/settings.svg" alt="sidebar options icon" />
             {isExpanded && <p>Settings</p>}
-          </Link>
+          </NavLink>
         </div>
       </div>
     </div>

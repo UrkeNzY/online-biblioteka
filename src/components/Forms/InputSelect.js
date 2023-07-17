@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Inputs.module.css";
+import classes from "../../styles/Inputs.module.css";
 
 const InputSelect = (props) => {
   return (
@@ -16,8 +16,11 @@ const InputSelect = (props) => {
         required
       >
         {props.options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option
+            key={option.id ? option.id : Math.random()}
+            value={option.name}
+          >
+            {option.name}
           </option>
         ))}
       </select>

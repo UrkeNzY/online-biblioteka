@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import classes from "./Forms.module.css";
 import { BsCameraFill } from "react-icons/bs";
-import InputText from "./InputText";
-import InputSelect from "./InputSelect";
-import FormButtons from "./FormButtons";
+
+import classes from "../../../styles/Forms.module.css";
+
+import InputText from "../../../components/Forms/InputText";
+import InputSelect from "../../../components/Forms/InputSelect";
 
 const NewUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -65,7 +66,6 @@ const NewUserForm = () => {
   };
 
   return (
-    <div>
       <form className={classes.form} onSubmit={submitFormHandler}>
         <section className={classes.info}>
           <InputText
@@ -82,7 +82,7 @@ const NewUserForm = () => {
             value={userType}
             onChange={changeUserTypeHandler}
             required
-            options={['', 'Bibliotekar', 'Učenik']}
+            options={["", "Bibliotekar", "Učenik"]}
           />
 
           <InputText
@@ -138,14 +138,15 @@ const NewUserForm = () => {
             onChange={changeUserImageHandler}
           />
           <div className={classes.userImageHolder}>
-            {userImage && <img src={URL.createObjectURL(userImage)} />}
+            {userImage && (
+              <img
+                src={URL.createObjectURL(userImage)}
+                alt="user profile avatar"
+              />
+            )}
           </div>
         </section>
-
-        <FormButtons />
-
       </form>
-    </div>
   );
 };
 

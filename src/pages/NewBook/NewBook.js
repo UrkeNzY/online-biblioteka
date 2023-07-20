@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 
-import classes from '../../styles/Forms.module.css';
+import classes from "../../styles/Forms.module.css";
 
 import TabSection from "../../components/UI/Tabs/TabSection";
 import FormButtons from "../../components/Forms/FormButtons";
@@ -9,9 +9,7 @@ import FormButtons from "../../components/Forms/FormButtons";
 const NewBook = () => {
   const submitFormHandler = (event) => {
     event.preventDefault();
-
-    
-  }
+  };
 
   return (
     <Fragment>
@@ -23,9 +21,9 @@ const NewBook = () => {
         ]}
       />
       <div className={classes.formContainer}>
-      <Outlet />
+        <Outlet />
       </div>
-      <FormButtons submitFormHandler={submitFormHandler}/>
+      <FormButtons submitFormHandler={submitFormHandler} />
     </Fragment>
   );
 };

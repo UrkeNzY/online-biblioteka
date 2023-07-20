@@ -31,6 +31,20 @@ const ContentHeader = () => {
         return "New Author";
       case "/settings":
         return "Settings";
+      case "/settings/policies":
+        return "Settings";
+      case "/settings/categories":
+        return "Settings";
+      case "/settings/genres":
+        return "Settings";
+      case "/settings/publishers":
+        return "Settings";
+      case "/settings/bindings":
+        return "Settings";
+      case "/settings/formats":
+        return "Settings";
+      case "/settings/writing":
+        return "Settings";
       case "/profile":
         return "Profile";
       default:

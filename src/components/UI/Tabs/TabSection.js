@@ -6,7 +6,7 @@ const TabSection = (props) => {
   return (
     <div className={classes.tabContainer}>
       <div className={classes.linksContainer}>
-        {props.tabItems.map((tabItem, index) => (
+        {props.tabItems.map((tabItem) => (
           <NavLink
             key={Math.random()}
             to={tabItem.path}

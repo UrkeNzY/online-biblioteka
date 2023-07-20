@@ -68,10 +68,7 @@ const Sidebar = () => {
       <div className={classes.sidebarFooter}>
         <hr />
         <div className={classes.footerBottom}>
-          <NavLink
-            className={classes.sidebarItem}
-            to="/settings"
-          >
+          <NavLink className={classes.sidebarItem} to="/settings/policies">
             <img src="/images/icons/settings.svg" alt="sidebar options icon" />
             {isExpanded && <p>Settings</p>}
           </NavLink>

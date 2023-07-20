@@ -18,6 +18,14 @@ import Students from "./pages/Students/Students";
 import Authors from "./pages/Authors/Authors";
 import Books from "./pages/Books/Books";
 import Profile from "./pages/Profile/Profile";
+import Settings from "./pages/Settings/Settings";
+import PoliciesTab from "./pages/Settings/components/PoliciesTab";
+import CategoriesTab from "./pages/Settings/components/CategoriesTab";
+import GenresTab from "./pages/Settings/components/GenresTab";
+import PublishersTab from "./pages/Settings/components/PublishersTab";
+import BindingsTab from "./pages/Settings/components/BindingTab";
+import FormatsTab from "./pages/Settings/components/FormatsTab";
+import WritingTab from "./pages/Settings/components/WritingTab";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -66,6 +74,21 @@ function App() {
                   />
                 }
               />
+              <Route path="/settings" element={<Settings />}>
+                <Route path="/settings/policies" element={<PoliciesTab />} />
+                <Route
+                  path="/settings/categories"
+                  element={<CategoriesTab />}
+                />
+                <Route path="/settings/genres" element={<GenresTab />} />
+                <Route
+                  path="/settings/publishers"
+                  element={<PublishersTab />}
+                />
+                <Route path="/settings/bindings" element={<BindingsTab />} />
+                <Route path="/settings/formats" element={<FormatsTab />} />
+                <Route path="/settings/writing" element={<WritingTab />} />
+              </Route>
             </Routes>
             {isDropdownOpen && (
               <DropdownCard

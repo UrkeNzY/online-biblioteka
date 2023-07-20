@@ -8,7 +8,7 @@ export const request = async (method, url, data) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "Bearer 84|ZOmLfdpBb47PPjJrda4NyCZ7KSmAew3WVxKuN0TC",
+      Authorization: "Bearer 147|eSpkA70VVsEcoAKXMdnjQvi3MFXZElnedTRFfJyD",
     },
 
     data: data ? JSON.stringify(data) : "",

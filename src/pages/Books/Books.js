@@ -27,7 +27,7 @@ const Books = () => {
         const books = await listBooks();
         const formattedData = books.data.map((book) => ({
           id: book.id,
-          bookName: book.title,
+          name: book.title,
           author:
             book.authors.length > 0
               ? `${book.authors[0].name} ${book.authors[0].surname}`

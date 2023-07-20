@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
@@ -6,6 +6,10 @@ import classes from "../../../styles/Table.module.css";
 const Table = (props) => {
   const { tableColumns, tableData } = props;
   const [filteredData, setFilteredData] = useState(tableData);
+
+  useEffect(() => {
+    setFilteredData(tableData);
+  }, [tableData]);
 
   const filterTableData = (filteredItems) => {
     setFilteredData(filteredItems);
@@ -43,6 +47,7 @@ const Table = (props) => {
                   <div className={classes.userColumnData}>
                     <img
                       className={table.imageType ? classes.bookCover : ""}
+                      S
                       src={table.image}
                       alt="user avatar"
                     />

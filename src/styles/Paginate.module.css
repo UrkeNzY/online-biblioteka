@@ -28,3 +28,27 @@
   background-color: #4558be;
   border-color: #4558be;
 }
+
+.paginationOptions {
+  display: flex;
+  align-items: center;
+}
+
+.paginationOptions p {
+  margin: 0 12px 0 0;
+}
+
+.paginationOptions select {
+  margin: 0;
+  padding: 0;
+  border: transparent;
+  outline: none;
+}
+
+.paginationOptions select:hover {
+  cursor: pointer;
+}
+
+.paginationOptions select:focus {
+  border: transparent;
+}

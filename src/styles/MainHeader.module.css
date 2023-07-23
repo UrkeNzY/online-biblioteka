@@ -4,7 +4,9 @@ header {
   padding: 2.25rem 0;
   display: flex;
   align-items: center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header img:hover {

@@ -16,14 +16,14 @@ function MediaDropzone() {
       ]);
     }
   }, []);
-  
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      'image/*': []
+      "image/*": [],
     },
     // maxSize: 1024 * 1000,
-    onDrop
-  })
+    onDrop,
+  });
 
   const removeFile = (name) => {
     setFiles((files) => files.filter((file) => file.name !== name));

@@ -89,9 +89,9 @@ const NewBookForm = () => {
           name: publisher.name,
         }));
 
-        setBookCategories((prevState) => [prevState, ...categories]);
-        setBookGenres((prevState) => [prevState, ...genres]);
-        setBookAuthors((prevState) => [prevState, ...authors]);
+        setBookCategories(categories);
+        setBookGenres(genres);
+        setBookAuthors(authors);
         setBookPublishers((prevState) => [prevState, ...publishers]);
       } catch (error) {
         console.log(error);
@@ -130,6 +130,7 @@ const NewBookForm = () => {
           value={submittedCategory}
           onChange={changeBookCategoryHandler}
           required
+          multiselect
           options={bookCategories}
         />
 
@@ -139,6 +140,7 @@ const NewBookForm = () => {
           value={submittedGenre}
           onChange={changeBookGenreHandler}
           required
+          multiselect
           options={bookGenres}
         />
       </section>
@@ -150,6 +152,7 @@ const NewBookForm = () => {
           value={submittedAuthor}
           onChange={changeBookAuthorHandler}
           required
+          multiselect
           options={bookAuthors}
         />
         <InputSelect

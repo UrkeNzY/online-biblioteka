@@ -34,3 +34,7 @@ textarea {
   max-width: 100%;
   min-width: 100%;
 }
+
+.multiSelectInputContainer {
+  margin: 8px 0 24px 0;
+}

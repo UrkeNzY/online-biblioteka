@@ -27,7 +27,8 @@ const Pagination = ({ tableItems, filterItems }) => {
 
   useEffect(() => {
     displayLoadedItems(activePage);
-  }, [activePage, itemsPerPage, displayLoadedItems]);
+    setPageCount(Math.ceil(totalItems / itemsPerPage));
+  }, [activePage, totalItems, itemsPerPage, displayLoadedItems]);
 
   const changePageHandler = ({ selected }) => {
     const newActivePage = selected;

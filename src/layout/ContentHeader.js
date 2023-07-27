@@ -47,6 +47,15 @@ const ContentHeader = () => {
         return "Settings";
       case "/profile":
         return "Profile";
+      case "/book":
+        return ".";
+      case "/book/main-details":
+        return ".";
+      case "/book/specifications":
+        return ".";
+      case "/book/issuing":
+      case "/book/multimedia":
+        return ".";
       default:
         return "Dashboard";
     }

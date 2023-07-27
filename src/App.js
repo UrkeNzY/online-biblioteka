@@ -26,6 +26,11 @@ import PublishersTab from "./pages/Settings/components/PublishersTab";
 import BindingsTab from "./pages/Settings/components/BindingTab";
 import FormatsTab from "./pages/Settings/components/FormatsTab";
 import WritingTab from "./pages/Settings/components/WritingTab";
+import BookDetails from "./pages/BookDetails/BookDetails";
+import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
+import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
+import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
+import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -88,6 +93,18 @@ function App() {
                 <Route path="/settings/bindings" element={<BindingsTab />} />
                 <Route path="/settings/formats" element={<FormatsTab />} />
                 <Route path="/settings/writing" element={<WritingTab />} />
+              </Route>
+              <Route path="/book" element={<BookDetails />}>
+                <Route
+                  path="/book/main-details"
+                  element={<BookMainDetails />}
+                />
+                <Route
+                  path="/book/specifications"
+                  element={<BookSpecDetails />}
+                />
+                <Route path="/book/issuing" element={<BookIssueDetails />} />
+                <Route path="/book/multimedia" element={<BookMediaDetails />} />
               </Route>
             </Routes>
             {isDropdownOpen && (

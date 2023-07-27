@@ -1,4 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
@@ -51,7 +53,11 @@ const Table = (props) => {
                       src={table.image}
                       alt="user avatar"
                     />
-                    <p>{table.name}</p>
+                    {table.link ? (
+                      <Link to={table.link}>{table.name}</Link>
+                    ) : (
+                      <p>{table.name}</p>
+                    )}
                   </div>
                 </td>
                 <td>{table.email || table.description || table.author}</td>

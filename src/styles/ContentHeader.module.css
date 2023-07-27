@@ -1,4 +1,5 @@
-.contentHeader h1 {
+.contentHeader h1,
+.contentHeader p {
   font-size: 1.875rem;
   font-weight: 500;
   color: #5d5c68;

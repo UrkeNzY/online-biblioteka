@@ -30,18 +30,18 @@ td {
 }
 
 td p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 td img {
-    width: 32px;
-    border-radius: 50%;
-    margin-right: 8px;
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
 }
 
 td .bookCover {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 tr:hover {
@@ -58,10 +58,15 @@ tr:last-child td {
 }
 
 .userColumnData {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .userColumnData p {
-    font-weight: 500;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: #374151;
 }

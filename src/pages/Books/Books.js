@@ -28,6 +28,7 @@ const Books = () => {
         const formattedData = books.data.map((book) => ({
           id: book.id,
           name: book.title,
+          link: "/book/main-details",
           author:
             book.authors.length > 0
               ? `${book.authors[0].name} ${book.authors[0].surname}`

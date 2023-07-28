@@ -1,0 +1,141 @@
+/* {
+    box-sizing: border-box;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  section.info {
+    width: 50%;
+  }
+  
+  section.image {
+    width: 25%;
+    margin: 0 2rem;
+  }
+  
+  section.buttons {
+      position: absolute;
+      width: 25%;
+      bottom: 0;
+      right: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+  
+  .button {
+    font-size: 1rem;
+    width: 48%;
+    padding: 0.7rem 0;
+  }
+  
+  label {
+    position: relative;
+  }
+  
+  .required::before {
+    content: "*";
+    color: red;
+    position: absolute;
+    top: 0;
+  }
+  
+  input,
+  select {
+    font-size: 1rem;
+    padding: 0.8rem 0.4rem;
+    margin: 0.5rem 0 1.4rem 0;
+    border-radius: 3px;
+    border: rgb(189, 189, 189) 1px solid;
+  } */
+  
+  .auth {
+    margin: 3rem auto;
+    width: 95%;
+    max-width: 25rem;
+    border-radius: 6px;
+    background-color: #4558be;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .auth h1 {
+    text-align: center;
+    color: white;
+  }
+  
+  .control {
+    margin-bottom: 0.5rem;
+  }
+  
+  .control label {
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .control a {
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .control input {
+    font: inherit;
+    background-color: #f1e1fc;
+    color: #38015c;
+    border-radius: 4px;
+    border: 1px solid white;
+    width: 100%;
+    text-align: left;
+    padding: 0.25rem;
+  }
+  
+  .actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .actions button {
+    cursor: pointer;
+    font: inherit;
+    color: white;
+    background-color: #9f5ccc;
+    border: 1px solid #9f5ccc;
+    border-radius: 4px;
+    padding: 0.5rem 2.5rem;
+  }
+  
+  .actions button:hover {
+    background-color: #873abb;
+    border-color: #873abb;
+  }
+  
+  .actions .toggle {
+    margin-top: 1rem;
+    background-color: transparent;
+    color: #9f5ccc;
+    border: none;
+    padding: 0.15rem 1.5rem;
+  }
+  
+  .actions .toggle:hover {
+    background-color: transparent;
+    color: #ae82cc;
+  }

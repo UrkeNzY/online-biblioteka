@@ -1,0 +1,64 @@
+.profileContainer {
+  padding: 40px 25px;
+  display: flex;
+  width: 30%;
+}
+
+.profileContainer p {
+  margin-top: 0;
+  margin-bottom: 45px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profileContainer img {
+  margin: 0;
+  padding: 0;
+}
+
+.profileImageBorder {
+  border: 2px solid #d1d5db;
+  padding: 7px;
+  margin-left: 120px;
+}
+
+.profileContainer .profileTitle {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #6b7280;
+}
+
+.profileActions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  top: 97px;
+  right: 0;
+  width: 400px;
+}
+
+.profileActions p {
+  font-size: 14px;
+}
+
+.profileButton {
+  display: flex;
+  align-items: center;
+}
+
+.profileButton:hover p {
+  color: #4558be;
+  cursor: pointer;
+}
+
+.profileButton:hover img {
+  filter: brightness(0.6);
+  cursor: pointer;
+}
+
+.profileButton p {
+  margin: 0 0 0 7px;
+  padding: 0;
+}

@@ -1,18 +1,36 @@
 import { Fragment, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./App.css";
+import "./styles/App.css";
 
-import MainHeader from "./components/UI/Main Page/MainHeader";
-import Sidebar from "./components/UI/Main Page/Sidebar";
-import ContentHeader from "./components/UI/Main Page/ContentHeader";
-import DropdownCard from "./components/UI/DropdownCard";
-import NewUserForm from "./components/Forms/NewUserForm";
-import NewBookForm from "./components/Forms/NewBookForm";
-import Bibliotekari from "./components/pages/Bibliotekari";
-import Ucenici from "./components/pages/Ucenici";
-import Autori from "./components/pages/Autori";
-import Knjige from "./components/pages/Knjige";
+import MainHeader from "./layout/MainHeader";
+import Sidebar from "./layout/Sidebar";
+import ContentHeader from "./layout/ContentHeader";
+import DropdownCard from "./components/UI/DropdownCards/DropdownCard";
+import NewUser from "./pages/NewUser/NewUser";
+import NewBook from "./pages/NewBook/NewBook";
+import NewBookForm from "./pages/NewBook/components/NewBookForm";
+import NewBookSpecs from "./pages/NewBook/components/NewBookSpecs";
+import NewBookMedia from "./pages/NewBook/components/NewBookMedia";
+import NewAuthor from "./pages/NewAuthor/NewAuthor";
+import Librarians from "./pages/Librarians/Librarians";
+import Students from "./pages/Students/Students";
+import Authors from "./pages/Authors/Authors";
+import Books from "./pages/Books/Books";
+import Profile from "./pages/Profile/Profile";
+import Settings from "./pages/Settings/Settings";
+import PoliciesTab from "./pages/Settings/components/PoliciesTab";
+import CategoriesTab from "./pages/Settings/components/CategoriesTab";
+import GenresTab from "./pages/Settings/components/GenresTab";
+import PublishersTab from "./pages/Settings/components/PublishersTab";
+import BindingsTab from "./pages/Settings/components/BindingTab";
+import FormatsTab from "./pages/Settings/components/FormatsTab";
+import WritingTab from "./pages/Settings/components/WritingTab";
+import BookDetails from "./pages/BookDetails/BookDetails";
+import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
+import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
+import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
+import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -41,12 +59,67 @@ function App() {
           <div className="contentContainer">
             <ContentHeader />
             <Routes>
-              <Route path="/bibliotekari" element={<Bibliotekari />} />
-              <Route path="/ucenici" element={<Ucenici />} />
-              <Route path="/autori" element={<Autori />} />
-              <Route path="/evidencijaKnjiga" element={<Knjige />} />
-              <Route path="/new-user" element={<NewUserForm />} />
-              <Route path="/new-book" element={<NewBookForm />} />
+              <Route path="/librarians" element={<Librarians />} />
+              <Route path="/students" element={<Students />} />
+              <Route path="/authors" element={<Authors />} />
+              <Route path="/book-record" element={<Books />} />
+              <Route path="/new-user" element={<NewUser />} />
+              <Route path="/new-book" element={<NewBook />}>
+                <Route path="/new-book/general" element={<NewBookForm />} />
+                <Route path="/new-book/specs" element={<NewBookSpecs />} />
+                <Route path="/new-book/media" element={<NewBookMedia />} />
+              </Route>
+              <Route path="/new-author" element={<NewAuthor />} />
+              <Route
+                path="/profile"
+                element={
+                  <Profile
+                    getItems={fetchDropdownItems}
+                    getButtonRef={getButtonRef}
+                  />
+                }
+              />
+              <Route path="/settings" element={<Settings />}>
+                <Route path="/settings/policies" element={<PoliciesTab />} />
+                <Route
+                  path="/settings/categories"
+                  element={<CategoriesTab />}
+                />
+                <Route path="/settings/genres" element={<GenresTab />} />
+                <Route
+                  path="/settings/publishers"
+                  element={<PublishersTab />}
+                />
+                <Route path="/settings/bindings" element={<BindingsTab />} />
+                <Route path="/settings/formats" element={<FormatsTab />} />
+                <Route path="/settings/writing" element={<WritingTab />} />
+              </Route>
+              <Route
+                path="/book/:id"
+                element={
+                  <BookDetails
+                    getItems={fetchDropdownItems}
+                    getButtonRef={getButtonRef}
+                  />
+                }
+              >
+                <Route
+                  path="/book/:id/main-details"
+                  element={<BookMainDetails />}
+                />
+                <Route
+                  path="/book/:id/specifications"
+                  element={<BookSpecDetails />}
+                />
+                <Route
+                  path="/book/:id/issuing"
+                  element={<BookIssueDetails />}
+                />
+                <Route
+                  path="/book/:id/multimedia"
+                  element={<BookMediaDetails />}
+                />
+              </Route>
             </Routes>
             {isDropdownOpen && (
               <DropdownCard

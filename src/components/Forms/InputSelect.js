@@ -1,5 +1,7 @@
 import React from "react";
-import classes from "./Inputs.module.css";
+
+import classes from "../../styles/Inputs.module.css";
+import FormMultiSelect from "./FormMultiSelect";
 
 const InputSelect = (props) => {
   return (
@@ -9,18 +11,29 @@ const InputSelect = (props) => {
         <span className={props.required ? classes.required : ""}></span>
       </label>
 
-      <select
-        id={props.id}
-        value={props.value}
-        onChange={props.onChange}
-        required
-      >
-        {props.options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      {props.multiselect ? (
+        <FormMultiSelect
+          id={props.id}
+          options={props.options}
+          onChange={props.onChange}
+        />
+      ) : (
+        <select
+          id={props.id}
+          value={props.value}
+          onChange={props.onChange}
+          required
+        >
+          {props.options.map((option) => (
+            <option
+              key={option.id ? option.id : Math.random()}
+              value={option.name}
+            >
+              {option.name}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };

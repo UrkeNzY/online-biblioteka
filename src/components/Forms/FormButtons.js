@@ -1,5 +1,6 @@
 import React from "react";
-import classes from "./Forms.module.css";
+import classes from "../../styles/Forms.module.css";
+
 import { BsCheck2 } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 

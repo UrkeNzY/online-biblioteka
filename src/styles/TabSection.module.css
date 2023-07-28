@@ -1,0 +1,29 @@
+.linksContainer {
+  padding: 20px 30px;
+}
+
+.linksContainer a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #6b7280;
+  margin-right: 70px;
+}
+
+.linksContainer a:hover {
+  color: #4558be;
+}
+
+.tabContainer hr {
+  opacity: 0.25;
+  margin: 0;
+}
+
+.active {
+  padding: 20px 0;
+  border-bottom: 3px solid #4558be;
+  color: #4558be;
+}
+
+a.active {
+  color: #4558be; /* Set the desired color for the active NavLink */
+}

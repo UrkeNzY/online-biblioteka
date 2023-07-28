@@ -1,0 +1,39 @@
+.searchbarContainer {
+  display: flex;
+  align-items: center;
+}
+
+.searchbar {
+  border: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  color: #babdc2;
+  margin: 0;
+  width: 150px;
+  margin-right: 5px;
+}
+
+.searchbar:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.clearIcon:hover {
+  cursor: pointer;
+}
+
+.clearIcon {
+  position: absolute;
+  right: 22px;
+}
+.searchbar::placeholder {
+  color: #babdc2;
+}
+
+.topActionsArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 20px;
+}

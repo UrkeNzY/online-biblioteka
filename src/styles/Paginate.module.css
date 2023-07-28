@@ -1,0 +1,54 @@
+.paginateContainer {
+  margin: 35px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationButtons {
+  width: 80%;
+  height: 40%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationButtons a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #d4d2d4;
+}
+
+.paginationButtons a:hover {
+  cursor: pointer;
+}
+
+.paginationActive a {
+  color: #ffffff;
+  background-color: #4558be;
+  border-color: #4558be;
+}
+
+.paginationOptions {
+  display: flex;
+  align-items: center;
+}
+
+.paginationOptions p {
+  margin: 0 12px 0 0;
+}
+
+.paginationOptions select {
+  margin: 0;
+  padding: 0;
+  border: transparent;
+  outline: none;
+}
+
+.paginationOptions select:hover {
+  cursor: pointer;
+}
+
+.paginationOptions select:focus {
+  border: transparent;
+}

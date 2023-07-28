@@ -94,17 +94,31 @@ function App() {
                 <Route path="/settings/formats" element={<FormatsTab />} />
                 <Route path="/settings/writing" element={<WritingTab />} />
               </Route>
-              <Route path="/book" element={<BookDetails />}>
+              <Route
+                path="/book/:id"
+                element={
+                  <BookDetails
+                    getItems={fetchDropdownItems}
+                    getButtonRef={getButtonRef}
+                  />
+                }
+              >
                 <Route
-                  path="/book/main-details"
+                  path="/book/:id/main-details"
                   element={<BookMainDetails />}
                 />
                 <Route
-                  path="/book/specifications"
+                  path="/book/:id/specifications"
                   element={<BookSpecDetails />}
                 />
-                <Route path="/book/issuing" element={<BookIssueDetails />} />
-                <Route path="/book/multimedia" element={<BookMediaDetails />} />
+                <Route
+                  path="/book/:id/issuing"
+                  element={<BookIssueDetails />}
+                />
+                <Route
+                  path="/book/:id/multimedia"
+                  element={<BookMediaDetails />}
+                />
               </Route>
             </Routes>
             {isDropdownOpen && (

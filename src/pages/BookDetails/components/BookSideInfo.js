@@ -1,13 +1,8 @@
-import { Link } from "react-router-dom";
-import classes from "../../../styles/BookDetails.module.css";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getBook } from "../../../services/books";
 
-const DUMMY_DATA = [
-  { title: "Na raspolaganju:", data: "5 primjeraka", color: "#a7f3d0" },
-  { title: "Rezervisano:", data: "2 primjerka", color: "#fde68a" },
-  { title: "Izdato:", data: "102 primjerka", color: "#bfdbfe" },
-  { title: "U prekoracenju:", data: "2 primjerka", color: "#fecaca" },
-  { title: "Ukupna kolicina: ", data: "15 primjeraka", color: "#E5E4E2" },
-];
+import classes from "../../../styles/BookDetails.module.css";
 
 const DUMMY_NEWS_DATA = [
   {
@@ -37,9 +32,53 @@ const DUMMY_NEWS_DATA = [
 ];
 
 const BookSideInfo = () => {
+  const [bookAmountData, setBookAmountData] = useState({});
+
+  const { id } = useParams();
+
+  const BOOK_AMOUNT_DATA = [
+    {
+      title: "Na raspolaganju:",
+      data: bookAmountData.available,
+      color: "#a7f3d0",
+    },
+    { title: "Rezervisano:", data: bookAmountData.reserved, color: "#fde68a" },
+    { title: "Izdato:", data: bookAmountData.issued, color: "#bfdbfe" },
+    { title: "U prekoracenju:", data: bookAmountData.late, color: "#fecaca" },
+    {
+      title: "Ukupna kolicina: ",
+      data: bookAmountData.total,
+      color: "#E5E4E2",
+    },
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const bookAmount = await getBook(id);
+        console.log(bookAmount);
+
+        const formattedData = {
+          available:
+            bookAmount.data.samples - Math.abs(bookAmount.data.bSamples),
+          reserved: Math.abs(bookAmount.data.bSamples),
+          issued: bookAmount.data.fSamples,
+          late: bookAmount.data.rSamples,
+          total: bookAmount.data.samples,
+        };
+        setBookAmountData(formattedData);
+        console.log(formattedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <div className={classes.sideInfoContainer}>
-      {DUMMY_DATA.map((bookInfo) => {
+      {BOOK_AMOUNT_DATA.map((bookInfo) => {
         return (
           <div className={classes.sideInfoBookData}>
             <p>{bookInfo.title}</p>
@@ -47,7 +86,7 @@ const BookSideInfo = () => {
               className={classes.bookAmount}
               style={{ backgroundColor: `${bookInfo.color}` }}
             >
-              {bookInfo.data}
+              {bookInfo.data} {bookInfo.data % 10 === 1 ? "komad" : "komada"}
             </p>
           </div>
         );

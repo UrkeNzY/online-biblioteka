@@ -4,11 +4,11 @@ export const request = async (method, url, data) => {
   let config = {
     method: method,
     maxBodyLength: Infinity,
-    url: `https://www.petardev.live${url}`,
+    url: `https://petardev.live${url}`,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "Bearer 147|eSpkA70VVsEcoAKXMdnjQvi3MFXZElnedTRFfJyD",
+      Authorization: "Bearer 152|Q9tyrCC0vYO31mssnuAQsQOqNGpsH5aaPJwnMaOk",
     },
 
     data: data ? JSON.stringify(data) : "",

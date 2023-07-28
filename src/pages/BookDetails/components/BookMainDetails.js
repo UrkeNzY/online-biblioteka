@@ -1,31 +1,89 @@
-import ReactShowMoreText from "react-show-more-text";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import classes from "../../../styles/BookDetails.module.css";
 
-const DUMMY_DATA = [
-  { title: "Naziv knjige", data: "Tom Sojer" },
-  { title: "Kategorija", data: "Romani" },
-  { title: "Zanr", data: "Knjige za djecu" },
-  { title: "Autor/i", data: "Mark Twain" },
-  { title: "Izdavac", data: "Delfi knjizare" },
-  { title: "Godina izdavanja", data: "30.03.2011" },
-];
-
-const DUMMY_DESC =
-  "Tom Sojer je roman koji možemo da smatramo i autobiografijom jer je utemeljen na doživljajima samog Marka Tvena. Autor ga je pisao u nekoliko navrata: prvi deo napisan je u zimu 1872. godine, drugi deo u proljeće 1875. godine, a treći na leto te iste godine. Napisan je jednostavnim stilom i uz mnogo pripovedanja i humora pa je jednako interesantan i deci i odraslima. Tven je ovim romanom hteo da odrasle čitaoce podseti na detinjstvo.Pripovedanje u romanu Tom Sojer odvija se linearno, bez paralelnih radnji. Sva dešavanja u romanu vrte se oko jednog lika, a to je Tom Sojer. On se ističe svojom inteligencijom, neobuzdanošću i humorističnom naravi.";
+import ReactShowMoreText from "react-show-more-text";
+import { getBook } from "../../../services/books";
 
 const BookMainDetails = () => {
+  const [mainBookData, setMainBookData] = useState({});
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const mainBookDetails = await getBook(id);
+
+        const parser = new DOMParser();
+        const descriptionText = parser.parseFromString(
+          mainBookDetails.data.description,
+          "text/html"
+        ).documentElement.textContent;
+
+        setMainBookData({
+          title: mainBookDetails.data.title,
+          categories: mainBookDetails.data.categories,
+          genres: mainBookDetails.data.genres,
+          authors: mainBookDetails.data.authors,
+          publisher: mainBookDetails.data.publisher.name,
+          releaseDate: mainBookDetails.data.pDate,
+          description: descriptionText,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <div className={classes.mainDetailsContainer}>
       <div>
-        {DUMMY_DATA.map((bookDetail) => {
-          return (
-            <div className={classes.detailContainer}>
-              <p className={classes.detailTitle}>{bookDetail.title}</p>
-              <p className={classes.mainDetailText}>{bookDetail.data}</p>
-            </div>
-          );
-        })}
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Naziv knjige</p>
+          <p className={classes.mainDetailText}>{mainBookData.title}</p>
+        </div>
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Kategorija</p>
+          {mainBookData.categories &&
+            mainBookData.categories.map((category, index) => (
+              <p className={classes.mainDetailText} key={category.id}>
+                {category.name}
+                {index < mainBookData.categories.length - 1 && ", "}
+              </p>
+            ))}
+        </div>
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Zanr</p>
+          {mainBookData.genres &&
+            mainBookData.genres.map((genre, index) => (
+              <p className={classes.mainDetailText} key={genre.id}>
+                {genre.name}
+                {index < mainBookData.genres.length - 1 && ", "}
+              </p>
+            ))}
+        </div>
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Autor/ri</p>
+          {mainBookData.authors &&
+            mainBookData.authors.map((author, index) => (
+              <p className={classes.mainDetailText} key={author.id}>
+                {author.name} {author.surname}
+                {index < mainBookData.authors.length - 1 && ", "}
+              </p>
+            ))}
+        </div>
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Izdavac</p>
+          <p className={classes.mainDetailText}>{mainBookData.publisher}</p>
+        </div>
+        <div className={classes.detailContainer}>
+          <p className={classes.detailTitle}>Godina izdavanja</p>
+          <p className={classes.mainDetailText}>{mainBookData.releaseDate}</p>
+        </div>
       </div>
       <div className={classes.descriptionContainer}>
         <h4>Storyline (Kratki sadrzaj)</h4>
@@ -35,7 +93,7 @@ const BookMainDetails = () => {
           less="Prikazi manje &#8593;"
           anchorClass={classes.descriptionAnchor}
         >
-          {DUMMY_DESC}
+          {mainBookData.description}
         </ReactShowMoreText>
       </div>
     </div>

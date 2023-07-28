@@ -51,6 +51,9 @@ const Table = (props) => {
                       className={table.imageType ? classes.bookCover : ""}
                       S
                       src={table.image}
+                      onError={(e) => {
+                        e.target.src = "/images/placeholders/book-cover.jpg";
+                      }}
                       alt="user avatar"
                     />
                     {table.link ? (

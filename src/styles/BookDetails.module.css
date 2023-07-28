@@ -12,6 +12,31 @@
   margin: 5px 0 0 15px;
 }
 
+.detailsHeaderActions {
+  position: absolute;
+  top: 98px;
+  right: 1%;
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  max-width: 600px;
+}
+
+.headerButton {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.headerButton p {
+  margin: 0 12px 0 8px;
+}
+
+.headerButton:hover {
+  cursor: pointer;
+  color: #4558be;
+}
+
 .detailsSection {
   display: flex;
 }

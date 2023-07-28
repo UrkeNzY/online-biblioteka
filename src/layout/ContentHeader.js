@@ -6,7 +6,17 @@ const ContentHeader = () => {
   let location = useLocation();
 
   const getContentHeaderTitle = () => {
-    switch (location.pathname) {
+    const path = location.pathname.toLowerCase();
+
+    if (path.startsWith("/book/")) {
+      return ".";
+    }
+
+    if (path.startsWith("/settings/")) {
+      return "Settings";
+    }
+
+    switch (path) {
       case "/librarians":
         return "Librarians";
       case "/students":
@@ -29,33 +39,8 @@ const ContentHeader = () => {
         return "New Book";
       case "/new-author":
         return "New Author";
-      case "/settings":
-        return "Settings";
-      case "/settings/policies":
-        return "Settings";
-      case "/settings/categories":
-        return "Settings";
-      case "/settings/genres":
-        return "Settings";
-      case "/settings/publishers":
-        return "Settings";
-      case "/settings/bindings":
-        return "Settings";
-      case "/settings/formats":
-        return "Settings";
-      case "/settings/writing":
-        return "Settings";
       case "/profile":
         return "Profile";
-      case "/book":
-        return ".";
-      case "/book/main-details":
-        return ".";
-      case "/book/specifications":
-        return ".";
-      case "/book/issuing":
-      case "/book/multimedia":
-        return ".";
       default:
         return "Dashboard";
     }

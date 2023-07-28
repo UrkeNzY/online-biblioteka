@@ -28,13 +28,13 @@ const Books = () => {
         const formattedData = books.data.map((book) => ({
           id: book.id,
           name: book.title,
-          link: "/book/main-details",
+          link: `/book/${book.id}/main-details`,
           author:
             book.authors.length > 0
               ? `${book.authors[0].name} ${book.authors[0].surname}`
               : "",
           category: book.categories.length > 0 ? book.categories[0].name : "",
-          available: book.samples - book.bSamples,
+          available: book.samples - Math.abs(book.bSamples),
           reserved: book.rSamples.toString(),
           issued: book.fSamples,
           offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,

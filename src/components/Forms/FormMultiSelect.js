@@ -10,6 +10,12 @@ const FormMultiSelect = (props) => {
     value: option,
   }));
 
+  const handleChange = (selectedOption) => {
+    setSelected(selectedOption);
+    console.log(selectedOption);
+    props.getSelectedOptions(selectedOption); // Pass the selected option(s) directly
+  };
+
   return (
     <div className={classes.multiSelectInputContainer}>
       <Select
@@ -17,7 +23,7 @@ const FormMultiSelect = (props) => {
         id={props.id}
         options={options}
         value={selected}
-        onChange={setSelected}
+        onChange={handleChange}
         isMulti
         isSearchable
         placeholder=""

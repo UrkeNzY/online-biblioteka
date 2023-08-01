@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import classes from '../../styles/Searchbar.module.css';
+import classes from "../../styles/Searchbar.module.css";
 
 import Table from "../../components/UI/Tables/Table";
 import Button from "../../components/UI/Buttons/Button";

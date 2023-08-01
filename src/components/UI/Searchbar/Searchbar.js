@@ -2,15 +2,17 @@ import { useState, Fragment } from "react";
 
 import classes from "../../../styles/Searchbar.module.css";
 
-const Searchbar = () => {
+const Searchbar = ({ updateFilteredData }) => {
   const [searchValue, setSearchValue] = useState("");
-
   const searchInputHandler = (event) => {
-    setSearchValue(event.target.value);
+    const value = event.target.value;
+    setSearchValue(value);
+    updateFilteredData(value);
   };
 
   const clearSearchHandler = () => {
     setSearchValue("");
+    updateFilteredData("");
   };
 
   return (

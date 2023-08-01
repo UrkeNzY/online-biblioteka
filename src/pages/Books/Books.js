@@ -20,6 +20,7 @@ const tableColumns = [
 
 const Books = () => {
   const [tableData, setTableData] = useState([]);
+  const [filteredTableData, setFilteredTableData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +45,7 @@ const Books = () => {
           imageType: "bookCover",
         }));
         setTableData(formattedData);
+        setFilteredTableData(formattedData);
       } catch (error) {
         console.error(error);
       }
@@ -52,13 +54,22 @@ const Books = () => {
     fetchData();
   }, []);
 
+  const updateFilteredData = (value) => {
+    const filteredData = tableData.filter(
+      (data) =>
+        data.name.toLowerCase().includes(value.toLowerCase()) ||
+        data.author.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTableData(filteredData);
+  };
+
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
         <Button text="Nova knjiga" image="/images/icons/plus.svg" />
-        <Searchbar />
+        <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={tableData} />
+      <Table tableColumns={tableColumns} tableData={filteredTableData} />
     </Fragment>
   );
 };

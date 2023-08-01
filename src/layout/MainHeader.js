@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { userLogout } from "../services/users";
+import { useContext } from "react";
+import { GlobalContext } from "../state/GlobalState";
+
 import classes from "../styles/MainHeader.module.css";
 
 const infoAddItems = [
@@ -11,13 +15,29 @@ const infoAddItems = [
   { name: "Autor", image: "/images/icons/autori.svg", path: "/new-author" },
 ];
 
-const profileItems = [
-  { name: "Profile", image: "/images/icons/korisnik.svg", path: "/profile" },
-  { name: "Logout", image: "/images/icons/logout.svg", path: "/" },
-];
-
 const MainHeader = (props) => {
   let buttonRef;
+
+  const { logout } = useContext(GlobalContext);
+
+  const logOut = async () => {
+    try {
+      await userLogout(); // Call the userLogout function to log the user out on the server
+      logout(); // Update the context to remove the user data
+    } catch (error) {
+      console.error("Error logging out:", error.message);
+    }
+  };
+
+  const profileItems = [
+    { name: "Profile", image: "/images/icons/korisnik.svg", path: "/profile" },
+    {
+      name: "Logout",
+      image: "/images/icons/logout.svg",
+      path: "",
+      onClick: logOut,
+    },
+  ];
 
   const toggleInfoHandler = (event) => {
     props.getItems(infoAddItems);

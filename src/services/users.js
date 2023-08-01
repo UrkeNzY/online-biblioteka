@@ -32,3 +32,7 @@ export const userLogout = () => {
 
   return request("post", "/api/logout", data);
 };
+
+export const createUser = (data) => {
+  return request("post", "api/users/store", data);
+};

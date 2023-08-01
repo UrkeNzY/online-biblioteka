@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import classes from '../../../styles/DropdownCard.module.css';
+import classes from "../../../styles/DropdownCard.module.css";
 
 const DropdownCard = (props) => {
   const { items, button } = props;
@@ -23,9 +23,16 @@ const DropdownCard = (props) => {
   return (
     <div className={classes.cardContainer} style={dropdownStyle}>
       {items.map((item) => (
-        <div className={classes.itemContainer} key={Math.random()}>
+        <div
+          className={classes.itemContainer}
+          onClick={item.onClick ? item.onClick : null}
+          key={Math.random()}
+        >
           <img src={item.image} alt="item icon" />
-          <Link to={item.path} onClick={closeDropdownHandler}>
+          <Link
+            to={item.path ? item.path : null}
+            onClick={closeDropdownHandler}
+          >
             {item.name}
           </Link>
         </div>

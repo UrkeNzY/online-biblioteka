@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchcreateBookData } from "../../../services/books";
+import { useCreateBookContext } from "../../../state/CreateBookContext";
 
 import classes from "../../../styles/Forms.module.css";
 
@@ -7,45 +8,57 @@ import InputSelect from "../../../components/Forms/InputSelect";
 import InputText from "../../../components/Forms/InputText";
 
 const NewBookSpecs = (props) => {
-  const [submittedScript, setSubmittedScript] = useState("");
-  const [submittedBinding, setSubmittedBinding] = useState("");
-  const [submittedFormat, setSubmittedFormat] = useState("");
-  const [submittedISBN, setSubmittedISBN] = useState("");
+  const {
+    submittedPages,
+    setSubmittedPages,
+    submittedScript,
+    setSubmittedScript,
+    submittedBinding,
+    setSubmittedBinding,
+    submittedFormat,
+    setSubmittedFormat,
+    submittedISBN,
+    setSubmittedISBN,
+    updateNewBook,
+  } = useCreateBookContext();
 
   const [bookScripts, setBookScripts] = useState([""]);
   const [bookBindings, setBookBindings] = useState([""]);
   const [bookFormats, setBookFormats] = useState([""]);
 
-  const changeBookScriptHandler = (event) => {
-    setSubmittedScript(event.target.value);
+  const changeBookPagesHandler = (event) => {
+    setSubmittedPages(event.target.value);
   };
 
-  const changeBookBindingHandler = (event) => {
-    setSubmittedBinding(event.target.value);
+  const changeBookScriptHandler = (value) => {
+    console.log(value);
+    setSubmittedScript(value);
   };
 
-  const changeBookFormatHandler = (event) => {
-    setSubmittedFormat(event.target.value);
+  const changeBookBindingHandler = (value) => {
+    console.log(value);
+    setSubmittedBinding(value);
+  };
+
+  const changeBookFormatHandler = (value) => {
+    console.log(value);
+    setSubmittedFormat(value);
   };
 
   const changeBookISBNHandler = (event) => {
     setSubmittedISBN(event.target.value);
-  }
-
-  const newBookSpecs = {
-    submittedScript,
-    submittedBinding,
-    submittedFormat,
-    submittedISBN
   };
 
-  const submitFormHandler = (event) => {
+  const updateBookData = (event) => {
     event.preventDefault();
-    console.log(newBookSpecs);
-    setSubmittedScript("");
-    setSubmittedBinding("");
-    setSubmittedFormat("");
-  }
+    updateNewBook({
+      submittedPages,
+      submittedScript,
+      submittedBinding,
+      submittedFormat,
+      submittedISBN,
+    });
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -79,16 +92,27 @@ const NewBookSpecs = (props) => {
   }, []);
 
   return (
-    <form className={classes.form} onSubmit={submitFormHandler}>
+    <form
+      className={classes.form}
+      onChange={updateBookData}
+      onSelect={updateBookData}
+    >
       <section>
-        <InputText labelText="Broj strana" type="number" id="bookPages" />
+        <InputText
+          labelText="Broj strana"
+          type="number"
+          id="bookPages"
+          value={submittedPages}
+          required
+          onChange={changeBookPagesHandler}
+        />
         <InputSelect
           labelText="Pismo"
           id="bookScript"
           value={submittedScript}
           required
           options={bookScripts}
-          onChange={changeBookScriptHandler}
+          onSelect={changeBookScriptHandler}
         />
         <InputSelect
           labelText="Povez"
@@ -96,7 +120,7 @@ const NewBookSpecs = (props) => {
           value={submittedBinding}
           required
           options={bookBindings}
-          onChange={changeBookBindingHandler}
+          onSelect={changeBookBindingHandler}
         />
         <InputSelect
           labelText="Format"
@@ -104,7 +128,7 @@ const NewBookSpecs = (props) => {
           value={submittedFormat}
           required
           options={bookFormats}
-          onChange={changeBookFormatHandler}
+          onSelect={changeBookFormatHandler}
         />
         <InputText
           labelText="International Standard Book Num"

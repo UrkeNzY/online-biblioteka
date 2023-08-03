@@ -13,10 +13,9 @@ const Profile = (props) => {
   let buttonRef;
 
   const [userData, setUserData] = useState({});
-  const { loginCount } = useContext(GlobalContext);
-
-  // Add the state variable for last login and its setter
   const [lastLogin, setLastLogin] = useState("");
+
+  const { loginCount } = useContext(GlobalContext);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -24,14 +23,14 @@ const Profile = (props) => {
         const userInformation = await userInfo();
         setUserData({
           name: `${userInformation.data.name} ${userInformation.data.surname}`,
+          id: userInformation.data.id,
           userType: userInformation.data.role,
           jmbg: userInformation.data.jmbg,
           email: userInformation.data.email,
-          username: userInformation.data.email,
+          username: userInformation.data.username,
           profilePicture: userInformation.data.photoPath,
         });
 
-        // Get lastLogin from sessionStorage and set it to the state
         const storedLastLogin = localStorage.getItem("lastLogin");
         if (storedLastLogin) {
           setLastLogin(storedLastLogin);
@@ -53,9 +52,8 @@ const Profile = (props) => {
     props.getButtonRef(buttonRef);
   };
 
-  // Calculate and format the time elapsed since the last login
   const getTimeElapsed = () => {
-    if (!lastLogin) return "";
+    if (!lastLogin) return "Nikada se nije ulogovao/la";
 
     const lastLoginDate = new Date(lastLogin);
     const currentTime = new Date();
@@ -73,7 +71,7 @@ const Profile = (props) => {
       }`;
     } else {
       const days = Math.floor(timeDiff / 86400000);
-      return `Prije ${days} dan${days > 1 ? "a" : ""} ago`;
+      return `Prije ${days} dan${days > 1 ? "a" : ""}`;
     }
   };
 

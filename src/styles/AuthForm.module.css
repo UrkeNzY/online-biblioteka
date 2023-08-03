@@ -1,65 +1,3 @@
-/* {
-    box-sizing: border-box;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 1rem;
-    position: relative;
-  }
-  
-  section {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  section.info {
-    width: 50%;
-  }
-  
-  section.image {
-    width: 25%;
-    margin: 0 2rem;
-  }
-  
-  section.buttons {
-      position: absolute;
-      width: 25%;
-      bottom: 0;
-      right: 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-  }
-  
-  .button {
-    font-size: 1rem;
-    width: 48%;
-    padding: 0.7rem 0;
-  }
-  
-  label {
-    position: relative;
-  }
-  
-  .required::before {
-    content: "*";
-    color: red;
-    position: absolute;
-    top: 0;
-  }
-  
-  input,
-  select {
-    font-size: 1rem;
-    padding: 0.8rem 0.4rem;
-    margin: 0.5rem 0 1.4rem 0;
-    border-radius: 3px;
-    border: rgb(189, 189, 189) 1px solid;
-  } */
-
 .formBackground {
   position: relative;
   display: flex;
@@ -85,6 +23,7 @@
   max-width: 50rem;
   box-shadow: 2px 2px 30px 2px rgba(0, 0, 0, 0.4);
   align-self: center;
+  height: 71.4%;
   z-index: 1;
 }
 
@@ -121,6 +60,12 @@
   text-align: center;
   color: #374151;
   margin-bottom: 25px;
+}
+
+.inputSections {
+  overflow-y: scroll;
+  height: 230px;
+  padding-right: 10px;
 }
 
 .control {
@@ -210,4 +155,30 @@
 
 .control a:hover {
   color: #3547ae;
+}
+
+.control p {
+  margin-bottom: 120px;
+}
+
+/* Styling the scrollbar track */
+.inputSections::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  margin-left: 30px;
+}
+
+.inputSections::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Track color */
+}
+
+/* Styling the scrollbar handle (thumb) */
+.inputSections::-webkit-scrollbar-thumb {
+  background-color: #4558be; /* Handle color */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* Styling the scrollbar handle on hover */
+.inputSections::-webkit-scrollbar-thumb:hover {
+  background-color: #3547ae; /* Handle color on hover */
+  cursor: pointer;
 }

@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 export const request = async (method, url, data) => {
-  const userToken = JSON.parse(localStorage.getItem("user"))?.token; // Get the user token from sessionStorage
+  const userToken = JSON.parse(localStorage.getItem("user"))?.token;
 
   const headers = {
     "Content-Type": "application/json",

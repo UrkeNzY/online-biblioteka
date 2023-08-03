@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import classes from "./SignupForm.module.css";
-import { GlobalContext } from "../../state/GlobalState";
 import { useNavigate, Link } from "react-router-dom";
+import { GlobalContext } from "../../../state/GlobalState";
+
+import classes from "../../../styles/AuthForm.module.css";
 
 export default function SignupForm() {
   const [name, setName] = useState();

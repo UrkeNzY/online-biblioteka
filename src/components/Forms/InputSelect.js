@@ -4,9 +4,6 @@ import Select from "react-select";
 import classes from "../../styles/Inputs.module.css";
 
 const InputSelect = (props) => {
-  // const [selected, setSelected] = useState([]);
-  // const [singleSelected, setSingleSelected] = useState("");
-
   const handleChange = (selectedOption) => {
     props.onSelect(
       selectedOption ? selectedOption.map((option) => option.value) : []
@@ -16,12 +13,10 @@ const InputSelect = (props) => {
   const handleSingleChange = (event) => {
     const selectedValue = event.target.value;
 
-    // Find the corresponding option object based on the selected value (name)
     const selectedOption = props.options.find(
       (option) => option.name === selectedValue
     );
 
-    // Pass the selected option's ID to the parent component
     props.onSelect(selectedOption ? selectedOption.id : null);
   };
 

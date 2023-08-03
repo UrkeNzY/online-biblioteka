@@ -34,8 +34,8 @@ import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
 import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
 import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
 import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
-import LoginForm from "./components/Login/LoginForm";
-import SignupForm from "./components/Signup/SignupForm";
+import LoginForm from "./components/Auth/Login/LoginForm";
+import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
 
 function App() {

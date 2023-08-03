@@ -66,7 +66,11 @@ const Books = () => {
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
-        <Button text="Nova knjiga" image="/images/icons/plus.svg" />
+        <Button
+          text="Nova knjiga"
+          to="/new-book/general"
+          image="/images/icons/plus.svg"
+        ></Button>
         <Searchbar updateFilteredData={updateFilteredData} />
       </div>
       <Table tableColumns={tableColumns} tableData={filteredTableData} />

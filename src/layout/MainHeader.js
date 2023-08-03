@@ -1,6 +1,7 @@
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { userLogout } from "../services/users";
-import { useContext } from "react";
+import { userLogout, userInfo } from "../services/users";
+
 import { GlobalContext } from "../state/GlobalState";
 
 import classes from "../styles/MainHeader.module.css";
@@ -18,12 +19,28 @@ const infoAddItems = [
 const MainHeader = (props) => {
   let buttonRef;
 
+  const [userAvatar, setUserAvatar] = useState(
+    "https://petardev.live/img/profile.jpg"
+  );
+
   const { logout } = useContext(GlobalContext);
+
+  useEffect(() => {
+    async function fetchUserPicture() {
+      try {
+        const userInformation = await userInfo();
+        setUserAvatar(userInformation.data.photoPath);
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    }
+    fetchUserPicture();
+  }, []);
 
   const logOut = async () => {
     try {
-      await userLogout(); // Call the userLogout function to log the user out on the server
-      logout(); // Update the context to remove the user data
+      await userLogout();
+      logout();
     } catch (error) {
       console.error("Error logging out:", error.message);
     }
@@ -70,9 +87,10 @@ const MainHeader = (props) => {
           />
         </div>
         <img
-          src="/images/logo.svg"
+          src={userAvatar}
           alt="user profile icon"
           onClick={toggleProfileHandler}
+          height="50"
         />
       </div>
     </header>

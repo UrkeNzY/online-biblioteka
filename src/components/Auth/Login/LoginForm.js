@@ -1,8 +1,8 @@
-import { React, useState, useContext } from "react";
-import classes from "./LoginForm.module.css";
-import { GlobalContext } from "../../state/GlobalState";
+import { React, useState, useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
+import { GlobalContext } from "../../../state/GlobalState";
+
+import classes from "../../../styles/AuthForm.module.css";
 
 export default function LoginForm() {
   const { signIn } = useContext(GlobalContext);

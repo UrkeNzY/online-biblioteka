@@ -39,10 +39,10 @@ const BookDetails = (props) => {
             cover: headerBookData.data.photo,
           });
         } else {
-          setBookFound(false); // Book not found, set the state to false
+          setBookFound(false);
         }
       } catch (error) {
-        setBookFound(false); // Error occurred, set the state to false
+        setBookFound(false);
         console.log("Error fetching book data:", error);
       }
     };

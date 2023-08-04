@@ -46,7 +46,7 @@ h1 {
 
 .userContainer img {
   background-color: #606fc7;
-  padding: 0.5rem;
+  padding: 0.45rem;
   border-radius: 50%;
 }
 
@@ -58,3 +58,8 @@ h1 {
 .userActions img:first-of-type {
   margin-right: 0.9375rem;
 }
+
+.userContainer .headerAvatar {
+  padding: 0.15rem;
+}
+

@@ -51,8 +51,7 @@ const InputSelect = (props) => {
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
-                border: "rgb(189, 189, 189) 1px solid",
-                borderRadius: "3px",
+                outline: state.isFocused ? '2px solid #4558be' : '',
               }),
               input: (baseStyles, state) => ({
                 ...baseStyles,

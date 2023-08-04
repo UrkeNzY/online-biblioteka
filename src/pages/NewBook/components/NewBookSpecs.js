@@ -7,12 +7,14 @@ import classes from "../../../styles/Forms.module.css";
 import InputSelect from "../../../components/Forms/InputSelect";
 import InputText from "../../../components/Forms/InputText";
 
-const NewBookSpecs = (props) => {
+const NewBookSpecs = () => {
   const {
     submittedPages,
     setSubmittedPages,
     submittedScript,
     setSubmittedScript,
+    submittedLanguage,
+    setSubmittedLanguage,
     submittedBinding,
     setSubmittedBinding,
     submittedFormat,
@@ -23,6 +25,7 @@ const NewBookSpecs = (props) => {
   } = useCreateBookContext();
 
   const [bookScripts, setBookScripts] = useState([""]);
+  const [bookLanguages, setBookLanguages] = useState([""]);
   const [bookBindings, setBookBindings] = useState([""]);
   const [bookFormats, setBookFormats] = useState([""]);
 
@@ -34,6 +37,11 @@ const NewBookSpecs = (props) => {
     console.log(value);
     setSubmittedScript(value);
   };
+
+  const changeBookLanguageHandler = (value) => {
+    console.log(value);
+    setSubmittedLanguage(value);
+  }
 
   const changeBookBindingHandler = (value) => {
     console.log(value);
@@ -54,6 +62,7 @@ const NewBookSpecs = (props) => {
     updateNewBook({
       submittedPages,
       submittedScript,
+      submittedLanguage,
       submittedBinding,
       submittedFormat,
       submittedISBN,
@@ -65,10 +74,14 @@ const NewBookSpecs = (props) => {
       try {
         const bookData = await fetchcreateBookData();
 
+        console.log(bookData)
+
         const scripts = bookData.data.scripts.map((script) => ({
           id: script.id,
           name: script.name,
         }));
+
+        const languages = bookData.data.languages.map((language) => ({id: language.id, name: language.name}))
 
         const binds = bookData.data.bookbinds.map((bind) => ({
           id: bind.id,
@@ -81,6 +94,7 @@ const NewBookSpecs = (props) => {
         }));
 
         setBookScripts((prevState) => [prevState, ...scripts]);
+        setBookLanguages((prevState) => [prevState, ...languages])
         setBookBindings((prevState) => [prevState, ...binds]);
         setBookFormats((prevState) => [prevState, ...formats]);
       } catch (error) {
@@ -115,6 +129,14 @@ const NewBookSpecs = (props) => {
           onSelect={changeBookScriptHandler}
         />
         <InputSelect
+          labelText="Jezik"
+          id="bookLanguage"
+          value={submittedLanguage}
+          required
+          options={bookLanguages}
+          onSelect={changeBookLanguageHandler}
+        />
+        <InputSelect
           labelText="Povez"
           id="bookBindings"
           value={submittedBinding}
@@ -122,6 +144,8 @@ const NewBookSpecs = (props) => {
           options={bookBindings}
           onSelect={changeBookBindingHandler}
         />
+        </section>
+        <section>
         <InputSelect
           labelText="Format"
           id="bookFormat"

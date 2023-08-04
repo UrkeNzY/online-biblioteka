@@ -13,8 +13,10 @@ export const CreateBookProvider = ({ children }) => {
   const [submittedAmount, setSubmittedAmount] = useState("");
   const [submittedPages, setSubmittedPages] = useState("");
   const [submittedScript, setSubmittedScript] = useState("");
+  const [submittedLanguage, setSubmittedLanguage] = useState("");
   const [submittedBinding, setSubmittedBinding] = useState("");
   const [submittedFormat, setSubmittedFormat] = useState("");
+  const [submittedReleaseDate, setSubmittedReleaseDate] = useState("")
   const [submittedISBN, setSubmittedISBN] = useState("");
   const [newBookData, setNewBookData] = useState({});
 
@@ -32,11 +34,11 @@ export const CreateBookProvider = ({ children }) => {
         nazivKnjiga: newBookData.submittedName,
         brStrana: newBookData.submittedPages,
         pismo: newBookData.submittedScript,
-        jezik: 1,
+        jezik: newBookData.submittedLanguage,
         povez: newBookData.submittedBinding,
         format: newBookData.submittedFormat,
         izdavac: newBookData.submittedPublisher,
-        godinaIzdavanja: 2020,
+        godinaIzdavanja: newBookData.submittedReleaseDate,
         isbn: newBookData.submittedISBN,
         knjigaKolicina: newBookData.submittedAmount,
         kratki_sadrzaj: newBookData.submittedDescription,
@@ -63,8 +65,10 @@ export const CreateBookProvider = ({ children }) => {
     setSubmittedAmount("");
     setSubmittedPages("");
     setSubmittedScript("");
+    setSubmittedLanguage("");
     setSubmittedBinding("");
     setSubmittedFormat("");
+    setSubmittedReleaseDate("");
     setSubmittedISBN("");
   };
 
@@ -89,10 +93,14 @@ export const CreateBookProvider = ({ children }) => {
         setSubmittedPages,
         submittedScript,
         setSubmittedScript,
+        submittedLanguage,
+        setSubmittedLanguage,
         submittedBinding,
         setSubmittedBinding,
         submittedFormat,
         setSubmittedFormat,
+        submittedReleaseDate,
+        setSubmittedReleaseDate,
         submittedISBN,
         setSubmittedISBN,
         updateNewBook,

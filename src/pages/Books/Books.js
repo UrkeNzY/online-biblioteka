@@ -21,10 +21,12 @@ const tableColumns = [
 const Books = () => {
   const [tableData, setTableData] = useState([]);
   const [filteredTableData, setFilteredTableData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const books = await listBooks();
         const formattedData = books.data.map((book) => ({
           id: book.id,
@@ -35,7 +37,7 @@ const Books = () => {
               ? `${book.authors[0].name} ${book.authors[0].surname}`
               : "",
           category: book.categories.length > 0 ? book.categories[0].name : "",
-          available: book.samples - Math.abs(book.bSamples),
+          available: book.samples - (Math.abs(book.bSamples) + book.fSamples),
           reserved: book.rSamples.toString(),
           issued: book.fSamples,
           offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,
@@ -46,8 +48,10 @@ const Books = () => {
         }));
         setTableData(formattedData);
         setFilteredTableData(formattedData);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
@@ -73,7 +77,7 @@ const Books = () => {
         ></Button>
         <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={filteredTableData} />
+      <Table tableColumns={tableColumns} tableData={filteredTableData} isLoading={isLoading}/>
     </Fragment>
   );
 };

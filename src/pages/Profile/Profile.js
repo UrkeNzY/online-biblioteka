@@ -4,6 +4,7 @@ import { GlobalContext } from "../../state/GlobalState";
 import { userInfo } from "../../services/users";
 
 import classes from "../../styles/Profile.module.css";
+import { Link } from "react-router-dom";
 
 const deleteItems = [
   { name: "Izbrisi profil", image: "/images/icons/trash-icon.svg", path: "/" },
@@ -85,7 +86,7 @@ const Profile = (props) => {
             <p className={classes.profileTitle}>Tip korisnika</p>
             <p>{userData.userType}</p>
             <p className={classes.profileTitle}>JMBG</p>
-            <p>{userData.jmbg}</p>
+            <p>{userData.jmbg ? userData.jmbg : <p className={classes.errorText}>Nemate JMBG. <Link to="/"> Ažurirajte nalog.</Link></p>}</p>
             <p className={classes.profileTitle}>Email</p>
             <p>{userData.email}</p>
             <p className={classes.profileTitle}>Korisnicko ime</p>

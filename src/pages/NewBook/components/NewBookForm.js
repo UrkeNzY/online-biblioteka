@@ -23,6 +23,8 @@ const NewBookForm = () => {
     setSubmittedPublisher,
     submittedAmount,
     setSubmittedAmount,
+    submittedReleaseDate,
+    setSubmittedReleaseDate,
     updateNewBook,
   } = useCreateBookContext();
 
@@ -56,6 +58,10 @@ const NewBookForm = () => {
   const changeBookAmountHandler = (event) => {
     setSubmittedAmount(event.target.value);
   };
+  const changeBookReleaseDateHandler = (event) => {
+    console.log(event.target.value);
+    setSubmittedReleaseDate(event.target.value)
+  } 
 
   const updateBookData = (event) => {
     event.preventDefault();
@@ -67,6 +73,7 @@ const NewBookForm = () => {
       submittedAuthor,
       submittedPublisher,
       submittedAmount,
+      submittedReleaseDate,
     });
   };
 
@@ -127,6 +134,7 @@ const NewBookForm = () => {
           value={submittedDescription}
           onChange={changeBookDescriptionHandler}
           className={classes.textarea}
+          rows="6" 
           required
         />
 
@@ -175,6 +183,14 @@ const NewBookForm = () => {
           id="bookAmonut"
           value={submittedAmount}
           onChange={changeBookAmountHandler}
+        />
+        <InputText
+          labelText="Godina izdavanja"
+          type="number"
+          id="bookReleaseDate"
+          value={submittedReleaseDate}
+          required
+          onChange={changeBookReleaseDateHandler}
         />
       </section>
     </form>

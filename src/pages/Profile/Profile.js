@@ -68,7 +68,7 @@ const Profile = (props) => {
     } else if (timeDiff < 86400000) {
       const hours = Math.floor(timeDiff / 3600000);
       return `Prije ${hours} sat${
-        hours > 1 && hours < 5 ? "a" : hours >= 5 ? "i" : ""
+        hours % 10 > 1 && hours % 10 < 5 ? "a" : hours % 10 >= 5 ? "i" : ""
       }`;
     } else {
       const days = Math.floor(timeDiff / 86400000);
@@ -86,7 +86,15 @@ const Profile = (props) => {
             <p className={classes.profileTitle}>Tip korisnika</p>
             <p>{userData.userType}</p>
             <p className={classes.profileTitle}>JMBG</p>
-            <p>{userData.jmbg ? userData.jmbg : <p className={classes.errorText}>Nemate JMBG. <Link to="/"> Ažurirajte nalog.</Link></p>}</p>
+            <p>
+              {userData.jmbg ? (
+                userData.jmbg
+              ) : (
+                <p className={classes.errorText}>
+                  Nemate JMBG. <Link to="/"> Ažurirajte nalog.</Link>
+                </p>
+              )}
+            </p>
             <p className={classes.profileTitle}>Email</p>
             <p>{userData.email}</p>
             <p className={classes.profileTitle}>Korisnicko ime</p>

@@ -48,15 +48,17 @@ const Table = (props) => {
                 </td>
                 <td>
                   <div className={classes.userColumnData}>
-                    <img
-                      className={table.imageType ? classes.bookCover : ""}
-                      S
-                      src={table.image}
-                      onError={(e) => {
-                        e.target.src = "/images/placeholders/book-cover.jpg";
-                      }}
-                      alt="user avatar"
-                    />
+                    {table.image && (
+                      <img
+                        className={table.imageType ? classes.bookCover : ""}
+                        S
+                        src={table.image}
+                        onError={(e) => {
+                          e.target.src = "/images/placeholders/book-cover.jpg";
+                        }}
+                        alt="user avatar"
+                      />
+                    )}
                     {table.link ? (
                       <Link to={table.link}>{table.name}</Link>
                     ) : (
@@ -72,17 +74,23 @@ const Table = (props) => {
                 {table.offLimit && <td>{table.offLimit}</td>}
                 {table.totalAmount && <td>{table.totalAmount}</td>}
                 <td>
-                  <img
-                    src="images/buttons/dashboard-actions.svg"
-                    alt="dashboard actions button"
-                  />
+                  {table.actionButton && (
+                    <img
+                      src="images/buttons/dashboard-actions.svg"
+                      alt="dashboard actions button"
+                    />
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-        {isLoading ? <LoadingSpinner /> : <Pagination tableItems={tableData} filterItems={filterTableData} />}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <Pagination tableItems={tableData} filterItems={filterTableData} />
+      )}
     </Fragment>
   );
 };

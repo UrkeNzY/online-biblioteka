@@ -165,9 +165,6 @@
   margin-bottom: 6px;
 }
 
-.bookErrorContainer img {
-}
-
 .bookErrorContainer a {
   font-weight: 500;
   color: #3b82f6;
@@ -175,5 +172,32 @@
 }
 
 .bookErrorContainer a:hover {
+  color: #4558be;
+}
+
+.issueActionsHeader {
+  width: 90%;
+  margin: 10px auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.issueActionsHeader a {
+  margin-left: 7px;
+  font-size: 14px;
+}
+
+.issueActionsHeader .actionButton {
+  padding: 14px 16px;
+  border-radius: 8px;
+}
+
+.issueActionsHeader .actionButton:hover {
+  background-color: #eff3f6;
+  cursor: pointer;
+}
+
+.issueActionsHeader .actionButton:hover,
+.issueActionsHeader .actionButton:hover a {
   color: #4558be;
 }

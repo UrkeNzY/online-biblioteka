@@ -77,7 +77,11 @@ const Books = () => {
         ></Button>
         <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={filteredTableData} isLoading={isLoading}/>
+      <Table
+        tableColumns={tableColumns}
+        tableData={filteredTableData}
+        isLoading={isLoading}
+      />
     </Fragment>
   );
 };

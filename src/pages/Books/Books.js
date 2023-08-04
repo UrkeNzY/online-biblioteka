@@ -20,10 +20,13 @@ const tableColumns = [
 
 const Books = () => {
   const [tableData, setTableData] = useState([]);
+  const [filteredTableData, setFilteredTableData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const books = await listBooks();
         const formattedData = books.data.map((book) => ({
           id: book.id,
@@ -34,7 +37,7 @@ const Books = () => {
               ? `${book.authors[0].name} ${book.authors[0].surname}`
               : "",
           category: book.categories.length > 0 ? book.categories[0].name : "",
-          available: book.samples - Math.abs(book.bSamples),
+          available: book.samples - (Math.abs(book.bSamples) + book.fSamples),
           reserved: book.rSamples.toString(),
           issued: book.fSamples,
           offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,
@@ -44,21 +47,37 @@ const Books = () => {
           imageType: "bookCover",
         }));
         setTableData(formattedData);
+        setFilteredTableData(formattedData);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  const updateFilteredData = (value) => {
+    const filteredData = tableData.filter(
+      (data) =>
+        data.name.toLowerCase().includes(value.toLowerCase()) ||
+        data.author.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTableData(filteredData);
+  };
+
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
-        <Button text="Nova knjiga" image="/images/icons/plus.svg" />
-        <Searchbar />
+        <Button
+          text="Nova knjiga"
+          to="/new-book/general"
+          image="/images/icons/plus.svg"
+        ></Button>
+        <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={tableData} />
+      <Table tableColumns={tableColumns} tableData={filteredTableData} isLoading={isLoading}/>
     </Fragment>
   );
 };

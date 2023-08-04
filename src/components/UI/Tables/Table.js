@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Table = (props) => {
-  const { tableColumns, tableData } = props;
+  const { tableColumns, tableData, isLoading } = props;
   const [filteredData, setFilteredData] = useState(tableData);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const Table = (props) => {
           </tbody>
         </table>
       </div>
-      <Pagination tableItems={tableData} filterItems={filterTableData} />
+        {isLoading ? <LoadingSpinner /> : <Pagination tableItems={tableData} filterItems={filterTableData} />}
     </Fragment>
   );
 };

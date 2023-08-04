@@ -1,5 +1,8 @@
-import { Fragment, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Fragment, useState, useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { GlobalContext } from "./state/GlobalState";
+import { GlobalProvider } from "./state/GlobalState";
+import { CreateBookProvider } from "./state/CreateBookContext";
 
 import "./styles/App.css";
 
@@ -31,6 +34,9 @@ import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
 import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
 import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
 import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
+import LoginForm from "./components/Auth/Login/LoginForm";
+import SignupForm from "./components/Auth/Signup/SignupForm";
+import Logout from "./pages/Logout/Logout";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -50,87 +56,227 @@ function App() {
     setButtonRef(ref);
   };
 
-  return (
-    <div className="App">
+  function AuthenticatedRoute({ children }) {
+    const { user } = useContext(GlobalContext);
+
+    const isAuthenticated = !!user?.token;
+
+    console.log("Checking...");
+
+    return isAuthenticated ? <>{children}</> : <Navigate to="/signin" />;
+  }
+
+  function UnauthenticatedRoute({ children }) {
+    const { user } = useContext(GlobalContext);
+
+    const isAuthenticated = !!user?.token;
+
+    console.log("Checking...");
+
+    return !isAuthenticated ? <>{children}</> : <Navigate to="/" />;
+  }
+
+  function AuthenticatedPage({ children }) {
+    return (
       <Fragment>
         <MainHeader getItems={fetchDropdownItems} getButtonRef={getButtonRef} />
         <main className="mainContainer">
           <Sidebar />
           <div className="contentContainer">
             <ContentHeader />
-            <Routes>
-              <Route path="/librarians" element={<Librarians />} />
-              <Route path="/students" element={<Students />} />
-              <Route path="/authors" element={<Authors />} />
-              <Route path="/book-record" element={<Books />} />
-              <Route path="/new-user" element={<NewUser />} />
-              <Route path="/new-book" element={<NewBook />}>
-                <Route path="/new-book/general" element={<NewBookForm />} />
-                <Route path="/new-book/specs" element={<NewBookSpecs />} />
-                <Route path="/new-book/media" element={<NewBookMedia />} />
-              </Route>
-              <Route path="/new-author" element={<NewAuthor />} />
-              <Route
-                path="/profile"
-                element={
-                  <Profile
-                    getItems={fetchDropdownItems}
-                    getButtonRef={getButtonRef}
-                  />
-                }
-              />
-              <Route path="/settings" element={<Settings />}>
-                <Route path="/settings/policies" element={<PoliciesTab />} />
-                <Route
-                  path="/settings/categories"
-                  element={<CategoriesTab />}
-                />
-                <Route path="/settings/genres" element={<GenresTab />} />
-                <Route
-                  path="/settings/publishers"
-                  element={<PublishersTab />}
-                />
-                <Route path="/settings/bindings" element={<BindingsTab />} />
-                <Route path="/settings/formats" element={<FormatsTab />} />
-                <Route path="/settings/writing" element={<WritingTab />} />
-              </Route>
-              <Route
-                path="/book/:id"
-                element={
-                  <BookDetails
-                    getItems={fetchDropdownItems}
-                    getButtonRef={getButtonRef}
-                  />
-                }
-              >
-                <Route
-                  path="/book/:id/main-details"
-                  element={<BookMainDetails />}
-                />
-                <Route
-                  path="/book/:id/specifications"
-                  element={<BookSpecDetails />}
-                />
-                <Route
-                  path="/book/:id/issuing"
-                  element={<BookIssueDetails />}
-                />
-                <Route
-                  path="/book/:id/multimedia"
-                  element={<BookMediaDetails />}
-                />
-              </Route>
-            </Routes>
-            {isDropdownOpen && (
-              <DropdownCard
-                items={dropdownItems}
-                button={buttonRef}
-                close={toggleDropdown}
-              />
-            )}
+            {children}
           </div>
         </main>
       </Fragment>
+    );
+  }
+
+  function Router() {
+    return (
+      <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+        <Route
+          path="/"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage></AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+
+        <Route
+          path="/librarians"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Librarians />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/students"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Students />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/authors"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Authors />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/book-record"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Books />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/new-user"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <NewUser />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/new-book"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <CreateBookProvider>
+                  <NewBook />
+                </CreateBookProvider>
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        >
+          <Route path="/new-book/general" element={<NewBookForm />} />
+          <Route path="/new-book/specs" element={<NewBookSpecs />} />
+          <Route path="/new-book/media" element={<NewBookMedia />} />
+        </Route>
+        <Route
+          path="/new-author"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <NewAuthor />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Profile
+                  getItems={fetchDropdownItems}
+                  getButtonRef={getButtonRef}
+                />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/logout"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Logout />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Settings />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        >
+          <Route path="/settings/policies" element={<PoliciesTab />} />
+          <Route path="/settings/categories" element={<CategoriesTab />} />
+          <Route path="/settings/genres" element={<GenresTab />} />
+          <Route path="/settings/publishers" element={<PublishersTab />} />
+          <Route path="/settings/bindings" element={<BindingsTab />} />
+          <Route path="/settings/formats" element={<FormatsTab />} />
+          <Route path="/settings/writing" element={<WritingTab />} />
+        </Route>
+        <Route
+          path="/book/:id"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <BookDetails
+                  getItems={fetchDropdownItems}
+                  getButtonRef={getButtonRef}
+                />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        >
+          <Route path="/book/:id/main-details" element={<BookMainDetails />} />
+          <Route
+            path="/book/:id/specifications"
+            element={<BookSpecDetails />}
+          />
+          <Route path="/book/:id/issuing" element={<BookIssueDetails />} />
+          <Route path="/book/:id/multimedia" element={<BookMediaDetails />} />
+        </Route>
+
+        <Route
+          exact
+          path="/signin"
+          element={
+            <UnauthenticatedRoute>
+              <LoginForm />
+            </UnauthenticatedRoute>
+          }
+        />
+        <Route
+          exact
+          path="/signup"
+          element={
+            <UnauthenticatedRoute>
+              <SignupForm />
+            </UnauthenticatedRoute>
+          }
+        />
+      </Routes>
+    );
+  }
+
+  return (
+    <div className="App">
+      <GlobalProvider>
+        <Router />
+      </GlobalProvider>
+      {isDropdownOpen && (
+        <DropdownCard
+          items={dropdownItems}
+          button={buttonRef}
+          close={toggleDropdown}
+        />
+      )}
     </div>
   );
 }

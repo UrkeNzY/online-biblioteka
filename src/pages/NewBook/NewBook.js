@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
+import { useCreateBookContext } from "../../state/CreateBookContext";
 
 import classes from "../../styles/Forms.module.css";
 
@@ -7,8 +8,14 @@ import TabSection from "../../components/UI/Tabs/TabSection";
 import FormButtons from "../../components/Forms/FormButtons";
 
 const NewBook = () => {
-  const submitFormHandler = (event) => {
-    event.preventDefault();
+  const { submitFormHandler, resetValuesHandler } = useCreateBookContext();
+
+  const createBookHandler = () => {
+    submitFormHandler();
+  };
+
+  const resetBookDataHandler = () => {
+    resetValuesHandler();
   };
 
   return (
@@ -23,7 +30,10 @@ const NewBook = () => {
       <div className={classes.formContainer}>
         <Outlet />
       </div>
-      <FormButtons submitFormHandler={submitFormHandler} />
+      <FormButtons
+        onClick={createBookHandler}
+        onClickAlt={resetBookDataHandler}
+      />
     </Fragment>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchcreateBookData } from "../../../services/books";
+import { useCreateBookContext } from "../../../state/CreateBookContext";
 
 import classes from "../../../styles/Forms.module.css";
 
@@ -7,18 +8,30 @@ import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
 
 const NewBookForm = () => {
-  const [submittedName, setSubmittedName] = useState("");
-  const [submittedDescription, setSubmittedDescription] = useState("");
-  const [submittedCategory, setSubmittedCategory] = useState("");
-  const [submittedGenre, setSubmittedGenre] = useState("");
-  const [submittedAuthor, setSubmittedAuthor] = useState("");
-  const [submittedPublisher, setSubmittedPublisher] = useState("");
-  const [submittedAmount, setSubmittedAmount] = useState("");
+  const {
+    submittedName,
+    setSubmittedName,
+    submittedDescription,
+    setSubmittedDescription,
+    submittedCategory,
+    setSubmittedCategory,
+    submittedGenre,
+    setSubmittedGenre,
+    submittedAuthor,
+    setSubmittedAuthor,
+    submittedPublisher,
+    setSubmittedPublisher,
+    submittedAmount,
+    setSubmittedAmount,
+    submittedReleaseDate,
+    setSubmittedReleaseDate,
+    updateNewBook,
+  } = useCreateBookContext();
 
-  const [bookCategories, setBookCategories] = useState([""]);
-  const [bookGenres, setBookGenres] = useState([""]);
-  const [bookAuthors, setBookAuthors] = useState([""]);
-  const [bookPublishers, setBookPublishers] = useState([""]);
+  const [bookCategories, setBookCategories] = useState([]);
+  const [bookGenres, setBookGenres] = useState([]);
+  const [bookAuthors, setBookAuthors] = useState([]);
+  const [bookPublishers, setBookPublishers] = useState([]);
 
   const changeBookNameHandler = (event) => {
     setSubmittedName(event.target.value);
@@ -26,42 +39,42 @@ const NewBookForm = () => {
   const changeBookDescriptionHandler = (event) => {
     setSubmittedDescription(event.target.value);
   };
-  const changeBookCategoryHandler = (event) => {
-    setSubmittedCategory(event.target.value);
+  const changeBookCategoryHandler = (value) => {
+    const categoryIds = value.map((option) => option.id);
+    setSubmittedCategory(categoryIds);
   };
-  const changeBookGenreHandler = (event) => {
-    setSubmittedGenre(event.target.value);
+  const changeBookGenreHandler = (value) => {
+    const genreIds = value.map((option) => option.id);
+    setSubmittedGenre(genreIds);
   };
-  const changeBookAuthorHandler = (event) => {
-    setSubmittedAuthor(event.target.value);
+  const changeBookAuthorHandler = (value) => {
+    const authorIds = value.map((option) => option.id);
+    setSubmittedAuthor(authorIds);
   };
-  const changeBookPublisherHandler = (event) => {
-    setSubmittedPublisher(event.target.value);
+
+  const changeBookPublisherHandler = (value) => {
+    setSubmittedPublisher(value);
   };
   const changeBookAmountHandler = (event) => {
     setSubmittedAmount(event.target.value);
   };
+  const changeBookReleaseDateHandler = (event) => {
+    console.log(event.target.value);
+    setSubmittedReleaseDate(event.target.value)
+  } 
 
-  const newBook = {
-    submittedName,
-    submittedDescription,
-    submittedCategory,
-    submittedGenre,
-    submittedAuthor,
-    submittedPublisher,
-    submittedAmount,
-  };
-
-  const submitFormHandler = (event) => {
+  const updateBookData = (event) => {
     event.preventDefault();
-    console.log(newBook);
-    setSubmittedName("");
-    setSubmittedDescription("");
-    setSubmittedCategory("");
-    setSubmittedGenre("");
-    setSubmittedAuthor("");
-    setSubmittedPublisher("");
-    setSubmittedAmount("");
+    updateNewBook({
+      submittedName,
+      submittedDescription,
+      submittedCategory,
+      submittedGenre,
+      submittedAuthor,
+      submittedPublisher,
+      submittedAmount,
+      submittedReleaseDate,
+    });
   };
 
   useEffect(() => {
@@ -92,7 +105,7 @@ const NewBookForm = () => {
         setBookCategories(categories);
         setBookGenres(genres);
         setBookAuthors(authors);
-        setBookPublishers((prevState) => [prevState, ...publishers]);
+        setBookPublishers(publishers);
       } catch (error) {
         console.log(error);
       }
@@ -102,7 +115,7 @@ const NewBookForm = () => {
   }, []);
 
   return (
-    <form onSubmit={submitFormHandler} className={classes.form}>
+    <form onBlur={updateBookData} className={classes.form}>
       <section>
         <InputText
           labelText="Naziv knjige"
@@ -121,6 +134,7 @@ const NewBookForm = () => {
           value={submittedDescription}
           onChange={changeBookDescriptionHandler}
           className={classes.textarea}
+          rows="6" 
           required
         />
 
@@ -128,7 +142,7 @@ const NewBookForm = () => {
           labelText="Kategorija"
           id="bookCategory"
           value={submittedCategory}
-          onChange={changeBookCategoryHandler}
+          onSelect={changeBookCategoryHandler}
           required
           multiselect
           options={bookCategories}
@@ -138,7 +152,7 @@ const NewBookForm = () => {
           labelText="Žanr"
           id="bookGenre"
           value={submittedGenre}
-          onChange={changeBookGenreHandler}
+          onSelect={changeBookGenreHandler}
           required
           multiselect
           options={bookGenres}
@@ -150,7 +164,7 @@ const NewBookForm = () => {
           labelText="Autor"
           id="bookAuthor"
           value={submittedAuthor}
-          onChange={changeBookAuthorHandler}
+          onSelect={changeBookAuthorHandler}
           required
           multiselect
           options={bookAuthors}
@@ -159,7 +173,7 @@ const NewBookForm = () => {
           labelText="Izdavač"
           id="bookPublisher"
           value={submittedPublisher}
-          onChange={changeBookPublisherHandler}
+          onSelect={changeBookPublisherHandler}
           required
           options={bookPublishers}
         />
@@ -169,6 +183,14 @@ const NewBookForm = () => {
           id="bookAmonut"
           value={submittedAmount}
           onChange={changeBookAmountHandler}
+        />
+        <InputText
+          labelText="Godina izdavanja"
+          type="number"
+          id="bookReleaseDate"
+          value={submittedReleaseDate}
+          required
+          onChange={changeBookReleaseDateHandler}
         />
       </section>
     </form>

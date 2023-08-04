@@ -19,3 +19,14 @@
 .button img {
   margin: 0 15px 0 0;
 }
+
+.button a,
+.button p {
+  margin: 0;
+  padding: 0;
+}
+
+.button a {
+  text-decoration: none;
+  color: #ffffff;
+}

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import classes from '../../styles/Searchbar.module.css';
+import classes from "../../styles/Searchbar.module.css";
 
 import Table from "../../components/UI/Tables/Table";
 import Button from "../../components/UI/Buttons/Button";
@@ -74,7 +74,11 @@ const Autori = () => {
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
-        <Button text="Novi autor" image="/images/icons/plus.svg" />
+        <Button
+          text="Novi autor"
+          to="/new-author"
+          image="/images/icons/plus.svg"
+        />
         <Searchbar />
       </div>
       <Table tableColumns={tableColumns} tableData={tableData} />

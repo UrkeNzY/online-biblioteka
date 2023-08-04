@@ -1,0 +1,185 @@
+.formBackground {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.leftBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #4558be;
+  width: 38.25%;
+  max-width: 590px;
+  height: 100%;
+}
+
+.loginForm {
+  display: flex;
+  margin: 3rem auto;
+  width: 95%;
+  max-width: 50rem;
+  box-shadow: 2px 2px 30px 2px rgba(0, 0, 0, 0.4);
+  align-self: center;
+  height: 71.4%;
+  max-height: 540px;
+  z-index: 1;
+}
+
+.sideImage {
+  background-color: #4558be;
+  width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.sideImage img {
+  width: 219px;
+  display: flex;
+  margin-top: 50%;
+}
+
+.sideImage p {
+  margin-top: 12px;
+  color: #ffffff;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.auth {
+  width: 100%;
+  max-width: 60rem;
+  background-color: #ffffff;
+  padding: 5rem 3.5rem;
+  text-align: center;
+}
+
+.auth h1 {
+  text-align: center;
+  color: #374151;
+  margin-bottom: 25px;
+}
+
+.inputSections {
+  overflow-y: scroll;
+  height: 230px;
+  padding-right: 10px;
+}
+
+.control {
+  margin-bottom: 0.5rem;
+}
+
+.control label {
+  display: block;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  text-align: left;
+}
+
+.control a {
+  display: block;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.control input {
+  font: inherit;
+  background-color: transparent;
+  color: inherit;
+  border-radius: 4px;
+  border: 1px solid rgba(1, 1, 1, 0.1);
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+}
+
+.control input:focus {
+  border-color: #4558be; /* Change the border color when focused */
+  outline: 2px solid #4558be;
+}
+
+.control input::placeholder {
+  color: rgba(1, 1, 1, 0.25);
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+}
+
+.action .toggle {
+  width: 65%;
+  padding: 12px 15px;
+  border-radius: 3px;
+  border: none;
+  margin-top: 25px;
+  background-color: #4558be;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.action .toggle:hover {
+  cursor: pointer;
+  background-color: #3547ae;
+}
+
+.control a,
+.control p {
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 13px;
+  color: #374151;
+}
+
+.control a {
+  display: inline;
+  color: #4558be;
+}
+
+.control a:hover {
+  color: #3547ae;
+}
+
+.control p {
+  margin-bottom: 120px;
+}
+
+/* Styling the scrollbar track */
+.inputSections::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  margin-left: 30px;
+}
+
+.inputSections::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Track color */
+}
+
+/* Styling the scrollbar handle (thumb) */
+.inputSections::-webkit-scrollbar-thumb {
+  background-color: #4558be; /* Handle color */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* Styling the scrollbar handle on hover */
+.inputSections::-webkit-scrollbar-thumb:hover {
+  background-color: #3547ae; /* Handle color on hover */
+  cursor: pointer;
+}

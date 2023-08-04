@@ -150,3 +150,30 @@
 .descriptionContainer h4 {
   color: #6b7280;
 }
+
+.bookErrorContainer {
+  position: absolute;
+  width: 93%;
+  margin: 0 auto;
+  top: 50%;
+  text-align: center;
+}
+
+.bookErrorContainer img,
+.bookErrorContainer h4 {
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.bookErrorContainer img {
+}
+
+.bookErrorContainer a {
+  font-weight: 500;
+  color: #3b82f6;
+  margin-left: 20px;
+}
+
+.bookErrorContainer a:hover {
+  color: #4558be;
+}

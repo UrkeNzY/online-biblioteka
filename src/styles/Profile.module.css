@@ -11,7 +11,11 @@
   font-weight: 500;
 }
 
-.profileContainer img {
+.profileContainer a {
+  color: #5167b8;
+}
+
+.profileContainer img, .profileContainer .errorText  {
   margin: 0;
   padding: 0;
 }

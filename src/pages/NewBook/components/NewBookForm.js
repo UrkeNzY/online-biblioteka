@@ -6,6 +6,7 @@ import classes from "../../../styles/Forms.module.css";
 
 import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
+import { useLocation } from "react-router-dom";
 
 const NewBookForm = () => {
   const {
@@ -25,8 +26,24 @@ const NewBookForm = () => {
     setSubmittedAmount,
     submittedReleaseDate,
     setSubmittedReleaseDate,
+    editBookData,
     updateNewBook,
+    isEditing,
   } = useCreateBookContext();
+
+  useEffect(() => {
+    if (editBookData.id && isEditing) {
+      // Make sure editBookData is not empty
+      setSubmittedName(editBookData.title || "");
+      setSubmittedDescription(editBookData.description || "");
+      setSubmittedCategory(editBookData.categories || []);
+      setSubmittedGenre(editBookData.genres || []);
+      setSubmittedAuthor(editBookData.authors || []);
+      setSubmittedPublisher(editBookData.publisher || "");
+      setSubmittedAmount(editBookData.samples || "");
+      setSubmittedReleaseDate(editBookData.releaseDate || "");
+    }
+  }, [editBookData, isEditing]);
 
   const [bookCategories, setBookCategories] = useState([]);
   const [bookGenres, setBookGenres] = useState([]);
@@ -60,8 +77,8 @@ const NewBookForm = () => {
   };
   const changeBookReleaseDateHandler = (event) => {
     console.log(event.target.value);
-    setSubmittedReleaseDate(event.target.value)
-  } 
+    setSubmittedReleaseDate(event.target.value);
+  };
 
   const updateBookData = (event) => {
     event.preventDefault();
@@ -134,7 +151,7 @@ const NewBookForm = () => {
           value={submittedDescription}
           onChange={changeBookDescriptionHandler}
           className={classes.textarea}
-          rows="6" 
+          rows="6"
           required
         />
 

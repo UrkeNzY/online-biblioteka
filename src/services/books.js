@@ -14,7 +14,7 @@ export const editBook = (bookIndex) => {
   return request("get", `/api/books/${bookIndex}/edit`);
 };
 
-export const updateBook = (updatedData, bookIndex) => {
+export const updateBook = (bookIndex, updatedData) => {
   return request("post", `/api/books/${bookIndex}/update`, updatedData);
 };
 

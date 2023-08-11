@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext } from "react";
-import { createBook } from "../services/books";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { createBook, editBook, updateBook } from "../services/books";
 
 const CreateBookContext = createContext();
 
@@ -16,9 +17,23 @@ export const CreateBookProvider = ({ children }) => {
   const [submittedLanguage, setSubmittedLanguage] = useState("");
   const [submittedBinding, setSubmittedBinding] = useState("");
   const [submittedFormat, setSubmittedFormat] = useState("");
-  const [submittedReleaseDate, setSubmittedReleaseDate] = useState("")
+  const [submittedReleaseDate, setSubmittedReleaseDate] = useState("");
   const [submittedISBN, setSubmittedISBN] = useState("");
   const [newBookData, setNewBookData] = useState({});
+  const [editBookData, setEditBookData] = useState({});
+  const [bookFound, setBookFound] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [bookId, setBookId] = useState();
+
+  const location = useLocation();
+
+  console.log(location.pathname);
+
+  useEffect(() => {
+    const isEditPath = location.pathname.endsWith("/edit");
+    setIsEditing(isEditPath);
+  }, [location.pathname, setIsEditing]);
 
   const updateNewBook = (data) => {
     setNewBookData((prevState) => ({
@@ -55,12 +70,75 @@ export const CreateBookProvider = ({ children }) => {
     resetValuesHandler();
   };
 
+  const updateFormHandler = async () => {
+    try {
+      await updateBook(bookId, {
+        nazivKnjiga: newBookData.submittedName,
+        brStrana: newBookData.submittedPages,
+        pismo: newBookData.submittedScript,
+        jezik: newBookData.submittedLanguage,
+        povez: newBookData.submittedBinding,
+        format: newBookData.submittedFormat,
+        izdavac: newBookData.submittedPublisher,
+        godinaIzdavanja: newBookData.submittedReleaseDate,
+        isbn: newBookData.submittedISBN,
+        knjigaKolicina: newBookData.submittedAmount,
+        kratki_sadrzaj: newBookData.submittedDescription,
+        deletePdfs: 0,
+        categories: newBookData.submittedCategory,
+        genres: newBookData.submittedGenre,
+        authors: newBookData.submittedAuthor,
+      });
+      console.log("updated book");
+    } catch (error) {
+      console.log(error);
+    }
+
+    resetValuesHandler();
+  };
+
+  const bookEditHandler = async (id) => {
+    try {
+      const fetchedBookData = await editBook(id);
+      if (fetchedBookData.data && fetchedBookData.data.book) {
+        const bookData = fetchedBookData.data.book;
+
+        setBookId(id);
+
+        console.log(bookData);
+
+        setEditBookData({
+          title: bookData.title,
+          photo: bookData.photo,
+          samples: bookData.samples,
+          authors: bookData.authors.map((author) => author.id),
+          categories: bookData.categories.map((category) => category.id),
+          genres: bookData.genres.map((genre) => genre.id),
+          bookbinds: bookData.bookbind.id,
+          description: bookData.description,
+          format: bookData.format.id,
+          id: bookData.id,
+          isbn: bookData.isbn,
+          language: bookData.language.id,
+          script: bookData.script.id,
+          releaseDate: bookData.pDate,
+          pages: bookData.pages,
+          publisher: bookData.publisher.id,
+        });
+      } else {
+        setBookFound(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const resetValuesHandler = () => {
     setSubmittedName("");
     setSubmittedDescription("");
-    setSubmittedCategory("");
-    setSubmittedGenre("");
-    setSubmittedAuthor("");
+    setSubmittedCategory([]);
+    setSubmittedGenre([]);
+    setSubmittedAuthor([]);
     setSubmittedPublisher("");
     setSubmittedAmount("");
     setSubmittedPages("");
@@ -106,6 +184,14 @@ export const CreateBookProvider = ({ children }) => {
         updateNewBook,
         resetValuesHandler,
         submitFormHandler,
+        editBookData,
+        isEditing,
+        setIsEditing,
+        setEditBookData,
+        bookFound,
+        setBookFound,
+        bookEditHandler,
+        updateFormHandler,
       }}
     >
       {children}

@@ -166,9 +166,9 @@ function App() {
             </AuthenticatedRoute>
           }
         >
-          <Route path="/new-book/general" element={<NewBookForm />} />
-          <Route path="/new-book/specs" element={<NewBookSpecs />} />
-          <Route path="/new-book/media" element={<NewBookMedia />} />
+          <Route path="/new-book/general/*" element={<NewBookForm />} />
+          <Route path="/new-book/specs/*" element={<NewBookSpecs />} />
+          <Route path="/new-book/media/*" element={<NewBookMedia />} />
         </Route>
         <Route
           path="/new-author"
@@ -226,10 +226,12 @@ function App() {
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
-                <BookDetails
-                  getItems={fetchDropdownItems}
-                  getButtonRef={getButtonRef}
-                />
+                <CreateBookProvider>
+                  <BookDetails
+                    getItems={fetchDropdownItems}
+                    getButtonRef={getButtonRef}
+                  />
+                </CreateBookProvider>
               </AuthenticatedPage>
             </AuthenticatedRoute>
           }

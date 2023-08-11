@@ -8,10 +8,19 @@ import TabSection from "../../components/UI/Tabs/TabSection";
 import FormButtons from "../../components/Forms/FormButtons";
 
 const NewBook = () => {
-  const { submitFormHandler, resetValuesHandler } = useCreateBookContext();
+  const {
+    submitFormHandler,
+    resetValuesHandler,
+    updateFormHandler,
+    isEditing,
+  } = useCreateBookContext();
 
   const createBookHandler = () => {
     submitFormHandler();
+  };
+
+  const editBookHandler = () => {
+    updateFormHandler();
   };
 
   const resetBookDataHandler = () => {
@@ -22,16 +31,25 @@ const NewBook = () => {
     <Fragment>
       <TabSection
         tabItems={[
-          { text: "Osnovni detalji", path: "/new-book/general" },
-          { text: "Specifikacija", path: "/new-book/specs" },
-          { text: "Multimedija", path: "/new-book/media" },
+          {
+            text: "Osnovni detalji",
+            path: `/new-book/general${isEditing ? "/edit" : ""}`,
+          },
+          {
+            text: "Specifikacija",
+            path: `/new-book/specs${isEditing ? "/edit" : ""}`,
+          },
+          {
+            text: "Multimedija",
+            path: `/new-book/media${isEditing ? "/edit" : ""}`,
+          },
         ]}
       />
       <div className={classes.formContainer}>
         <Outlet />
       </div>
       <FormButtons
-        onClick={createBookHandler}
+        onClick={!isEditing ? createBookHandler : editBookHandler}
         onClickAlt={resetBookDataHandler}
       />
     </Fragment>

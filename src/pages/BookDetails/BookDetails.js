@@ -1,5 +1,5 @@
 import { useState, Fragment, useEffect } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBook, deleteBook } from "../../services/books";
 import { useCreateBookContext } from "../../state/CreateBookContext";
@@ -12,6 +12,7 @@ import {
   faRotateRight,
   faCalendarCheck,
   faTriangleExclamation,
+  faFileEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "../../styles/BookDetails.module.css";
@@ -24,7 +25,7 @@ const BookDetails = (props) => {
 
   const [bookHeaderData, setBookHeaderData] = useState({});
 
-  const { bookEditHandler, bookFound, setBookFound, isEditing, setIsEditing } =
+  const { bookEditHandler, bookFound, setBookFound, isEditing } =
     useCreateBookContext();
 
   const { id } = useParams();
@@ -72,11 +73,6 @@ const BookDetails = (props) => {
 
   const bookActions = [
     {
-      name: "Izmijeni knjigu",
-      image: "/images/icons/edit-icon.svg",
-      onClick: editBookHandler,
-    },
-    {
       name: "Izbrisi knjigu",
       image: "/images/icons/trash-icon.svg",
       onClick: deleteBookHandler,
@@ -120,7 +116,6 @@ const BookDetails = (props) => {
         )}
         {bookFound ? (
           <div className={classes.detailsHeaderActions}>
-            <button onClick={editBookHandler}>Test</button>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faArrowTurnUp} />
               <p>Otpisi knjigu</p>
@@ -136,6 +131,10 @@ const BookDetails = (props) => {
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faCalendarCheck} />
               <p>Rezervisi knjigu</p>
+            </div>
+            <div className={classes.headerButton} onClick={editBookHandler}>
+              <FontAwesomeIcon icon={faFileEdit} />
+              <p>Izmijeni knjigu</p>
             </div>
             <div
               className={classes.headerButton}

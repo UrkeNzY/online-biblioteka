@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useCreateBookContext } from "../../state/CreateBookContext";
 
 import classes from "../../styles/Forms.module.css";
@@ -15,11 +15,28 @@ const NewBook = () => {
     isEditing,
   } = useCreateBookContext();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const createBookHandler = () => {
+    if (location.pathname === "/new-book/general") {
+      navigate("/new-book/specs");
+      return;
+    } else if (location.pathname === "/new-book/specs") {
+      navigate("/new-book/media");
+      return;
+    }
     submitFormHandler();
   };
 
   const editBookHandler = () => {
+    if (location.pathname === "/new-book/general/edit") {
+      navigate("/new-book/specs/edit");
+      return;
+    } else if (location.pathname === "/new-book/specs/edit") {
+      navigate("/new-book/media/edit");
+      return;
+    }
     updateFormHandler();
   };
 

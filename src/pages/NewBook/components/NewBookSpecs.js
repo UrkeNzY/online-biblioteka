@@ -72,7 +72,7 @@ const NewBookSpecs = () => {
   };
 
   const updateBookData = (event) => {
-    event.preventDefault();
+    event?.preventDefault();
     updateNewBook({
       submittedPages,
       submittedScript,
@@ -126,7 +126,7 @@ const NewBookSpecs = () => {
     <form
       className={classes.form}
       onChange={updateBookData}
-      onSelect={updateBookData}
+      onBlur={updateBookData}
     >
       <section>
         <InputText

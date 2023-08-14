@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createBook, editBook, updateBook } from "../services/books";
 
 const CreateBookContext = createContext();
@@ -27,8 +27,7 @@ export const CreateBookProvider = ({ children }) => {
   const [bookId, setBookId] = useState();
 
   const location = useLocation();
-
-  console.log(location.pathname);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isEditPath = location.pathname.endsWith("/edit");
@@ -68,6 +67,7 @@ export const CreateBookProvider = ({ children }) => {
     }
 
     resetValuesHandler();
+    navigate("/book-record");
   };
 
   const updateFormHandler = async () => {
@@ -95,6 +95,7 @@ export const CreateBookProvider = ({ children }) => {
     }
 
     resetValuesHandler();
+    navigate("/book-record");
   };
 
   const bookEditHandler = async (id) => {

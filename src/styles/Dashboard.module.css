@@ -1,0 +1,135 @@
+.dashboardContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 20px;
+}
+
+.rightSection {
+  width: 40%;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 35px;
+}
+
+.reservationsSection {
+  margin-bottom: 35px;
+}
+
+.sectionHeader p {
+  font-size: 19px;
+  margin: 0 0 30px 0;
+}
+
+.sectionContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionContent img,
+.activityContainer img {
+  border-radius: 50%;
+}
+
+.sectionUserInfo {
+  display: flex;
+  align-items: center;
+}
+
+.sectionUserInfo p {
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.reservationDate {
+  background-color: #e5e7eb;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.sectionActions {
+  margin-right: 16px;
+}
+
+.actionButton {
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+.reservationsContainer hr {
+  background-color: #e8e6e8;
+  opacity: 0.25;
+}
+
+.activityContainer {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 0 5px;
+  color: #374151;
+  margin: 0 0 30px 0;
+}
+
+.activityContainer img {
+  margin-right: 16px;
+}
+
+.activityHeader {
+  margin: 0;
+  color: #6b7280;
+}
+
+.activitynewsDate {
+  font-size: 16px;
+}
+
+.activityBody {
+  margin: 10px 0 8px 0;
+}
+
+.activityContainer a {
+  text-decoration: none;
+  color: #2196f3;
+}
+
+.activityContainer a:hover {
+  color: #4558be;
+}
+
+.activityFooterLink {
+  text-decoration: none;
+  color: #2196f3;
+  display: inline-block; /* Set display to inline-block */
+  margin: 16px 0 0 3px; /* Push the link to the right, centering it */
+}
+
+.activityButton {
+  width: 100%;
+  background-color: transparent;
+  font: inherit;
+  font-size: 15px;
+  color: #4b5563;
+  padding: 9px 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid gray;
+}
+
+.activityButton:hover {
+  cursor: pointer;
+  background-color: rgb(222, 222, 222);
+}
+
+.sectionFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  color: #6676d1;
+}
+
+.sectionFooter p {
+  margin: 0 0 0 6px;
+}

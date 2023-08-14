@@ -14,8 +14,10 @@
   grid-template-columns: 1fr 1fr;
 }
 
-input:focus, select:focus, textarea:focus{
-  outline: 2px solid #4558be;   
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #4558be;
   border-color: transparent;
 }
 
@@ -95,6 +97,10 @@ section.buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.button:hover {
+  cursor: pointer;
 }
 
 #ponisti {

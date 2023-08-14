@@ -6,7 +6,6 @@ import classes from "../../../styles/Forms.module.css";
 
 import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
-import { useLocation } from "react-router-dom";
 
 const NewBookForm = () => {
   const {
@@ -32,7 +31,7 @@ const NewBookForm = () => {
   } = useCreateBookContext();
 
   useEffect(() => {
-    if (editBookData.id && isEditing) {
+    if (editBookData.id) {
       // Make sure editBookData is not empty
       setSubmittedName(editBookData.title || "");
       setSubmittedDescription(editBookData.description || "");
@@ -122,7 +121,7 @@ const NewBookForm = () => {
         setBookCategories(categories);
         setBookGenres(genres);
         setBookAuthors(authors);
-        setBookPublishers(publishers);
+        setBookPublishers((prevState) => [prevState, ...publishers]);
       } catch (error) {
         console.log(error);
       }
@@ -132,7 +131,11 @@ const NewBookForm = () => {
   }, []);
 
   return (
-    <form onBlur={updateBookData} className={classes.form}>
+    <form
+      onChange={updateBookData}
+      onBlur={updateBookData}
+      className={classes.form}
+    >
       <section>
         <InputText
           labelText="Naziv knjige"

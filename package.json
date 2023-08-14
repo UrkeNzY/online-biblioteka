@@ -21,6 +21,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.7.4",
     "react-show-more-text": "^1.6.2",
+    "recharts": "^2.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

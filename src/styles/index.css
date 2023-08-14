@@ -10,3 +10,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  margin-left: 30px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Track color */
+}
+
+/* Styling the scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #64656a56; /* Handle color */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* Styling the scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #64656a87; /* Handle color on hover */
+  cursor: pointer;
+}

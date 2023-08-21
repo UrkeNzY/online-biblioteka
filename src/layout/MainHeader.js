@@ -87,11 +87,10 @@ const MainHeader = (props) => {
           />
         </div>
         <img
-         className={classes.headerAvatar}
+          className={classes.headerAvatar}
           src={userAvatar}
           alt="user profile icon"
           onClick={toggleProfileHandler}
-          height="45"
         />
       </div>
     </header>

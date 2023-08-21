@@ -1,10 +1,17 @@
-import { useState, useCallback, Fragment } from "react";
+import { useState, useEffect, useCallback, Fragment } from "react";
 import { useDropzone } from "react-dropzone";
 
 import classes from "../../../styles/MediaDropzone.module.css";
 
-function MediaDropzone() {
+function MediaDropzone({ photo }) {
   const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    // Check if the photo prop is available and set it in the files state
+    if (photo) {
+      setFiles([{ name: photo, preview: photo }]);
+    }
+  }, [photo]);
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles?.length) {
@@ -48,8 +55,6 @@ function MediaDropzone() {
               <img
                 src={file.preview}
                 alt={file.name}
-                width={300}
-                height={300}
                 onLoad={() => {
                   URL.revokeObjectURL(file.preview);
                 }}

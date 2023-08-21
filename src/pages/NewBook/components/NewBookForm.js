@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchcreateBookData } from "../../../services/books";
 import { useCreateBookContext } from "../../../state/CreateBookContext";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import classes from "../../../styles/Forms.module.css";
 
@@ -25,8 +27,23 @@ const NewBookForm = () => {
     setSubmittedAmount,
     submittedReleaseDate,
     setSubmittedReleaseDate,
+    editBookData,
     updateNewBook,
+    isEditing,
   } = useCreateBookContext();
+
+  useEffect(() => {
+    if (editBookData.id && isEditing) {
+      setSubmittedName(editBookData.title || "");
+      setSubmittedDescription(editBookData.description || "");
+      setSubmittedCategory(editBookData.categories || []);
+      setSubmittedGenre(editBookData.genres || []);
+      setSubmittedAuthor(editBookData.authors || []);
+      setSubmittedPublisher(editBookData.publisher || "");
+      setSubmittedAmount(editBookData.samples || "");
+      setSubmittedReleaseDate(editBookData.releaseDate || "");
+    }
+  }, [editBookData, isEditing]);
 
   const [bookCategories, setBookCategories] = useState([]);
   const [bookGenres, setBookGenres] = useState([]);
@@ -36,8 +53,9 @@ const NewBookForm = () => {
   const changeBookNameHandler = (event) => {
     setSubmittedName(event.target.value);
   };
-  const changeBookDescriptionHandler = (event) => {
-    setSubmittedDescription(event.target.value);
+  const changeBookDescriptionHandler = (value) => {
+    console.log(value);
+    setSubmittedDescription(value);
   };
   const changeBookCategoryHandler = (value) => {
     const categoryIds = value.map((option) => option.id);
@@ -60,8 +78,8 @@ const NewBookForm = () => {
   };
   const changeBookReleaseDateHandler = (event) => {
     console.log(event.target.value);
-    setSubmittedReleaseDate(event.target.value)
-  } 
+    setSubmittedReleaseDate(event.target.value);
+  };
 
   const updateBookData = (event) => {
     event.preventDefault();
@@ -105,7 +123,7 @@ const NewBookForm = () => {
         setBookCategories(categories);
         setBookGenres(genres);
         setBookAuthors(authors);
-        setBookPublishers(publishers);
+        setBookPublishers((prevState) => [prevState, ...publishers]);
       } catch (error) {
         console.log(error);
       }
@@ -115,7 +133,11 @@ const NewBookForm = () => {
   }, []);
 
   return (
-    <form onBlur={updateBookData} className={classes.form}>
+    <form
+      onChange={updateBookData}
+      onBlur={updateBookData}
+      className={classes.form}
+    >
       <section>
         <InputText
           labelText="Naziv knjige"
@@ -128,16 +150,37 @@ const NewBookForm = () => {
         <label htmlFor="bookDescription">
           Kratak sadržaj<span className={classes.required}></span>
         </label>
-        <textarea
-          type="text"
-          id="bookDescription"
-          value={submittedDescription}
-          onChange={changeBookDescriptionHandler}
-          className={classes.textarea}
-          rows="6" 
-          required
-        />
-
+        <div className={classes.reactQuillWrapper}>
+          <ReactQuill
+            theme="snow"
+            id="bookDescription"
+            value={submittedDescription}
+            onChange={changeBookDescriptionHandler}
+            className={classes.reactQuill}
+            modules={{
+              toolbar: {
+                container: [
+                  [{ header: [1, 2, 3, 4, 5, false] }], // Headers
+                  ["bold", "italic", "underline", "strike"], // Text styles
+                  [{ list: "ordered" }, { list: "bullet" }], // Lists
+                  ["link", "image"], // Links and images
+                ],
+                handlers: {
+                  // Define custom handlers if needed
+                },
+                // Specify your custom options here
+                options: {
+                  // You can adjust the initial row count here
+                  // Default is 1
+                  // Change this value to set the number of initial rows
+                  // 'auto' will automatically resize the editor as needed
+                  // You can also set a fixed number of rows like '6'
+                },
+              },
+            }}
+            required
+          />
+        </div>
         <InputSelect
           labelText="Kategorija"
           id="bookCategory"

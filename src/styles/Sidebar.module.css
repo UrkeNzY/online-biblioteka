@@ -12,6 +12,10 @@
   width: 5.3125rem;
 }
 
+.sidebarContainer img {
+  width: 2rem;
+}
+
 .sidebarContainer img:hover {
   cursor: pointer;
 }
@@ -24,6 +28,10 @@
 
 .sidebarHeader {
   padding: 1.875rem;
+}
+
+.sidebarHeader img {
+  width: 1.5rem;
 }
 
 .sidebarMenu {

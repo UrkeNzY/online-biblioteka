@@ -1,7 +1,8 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getBook, editBook, deleteBook } from "../../services/books";
+import { getBook, deleteBook } from "../../services/books";
+import { useCreateBookContext } from "../../state/CreateBookContext";
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +12,7 @@ import {
   faRotateRight,
   faCalendarCheck,
   faTriangleExclamation,
+  faFileEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "../../styles/BookDetails.module.css";
@@ -22,8 +24,8 @@ const BookDetails = (props) => {
   let buttonRef;
 
   const [bookHeaderData, setBookHeaderData] = useState({});
-  const [editData, setEditData] = useState({});
-  const [bookFound, setBookFound] = useState(true);
+
+  const { bookEditHandler, bookFound, setBookFound } = useCreateBookContext();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -47,27 +49,11 @@ const BookDetails = (props) => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, setBookFound]);
 
-  const bookEditHandler = async () => {
-    const editBookData = await editBook(id);
-
-    if (editBookData.data) {
-      setEditData({
-        title: editBookData.data.title,
-        photo: editBookData.data.photo,
-        authors: editBookData.data.authors,
-        categories: editBookData.data.categories,
-        genres: id,
-      });
-    } else {
-      setBookFound(false);
-    }
-    console.log(editData);
-    try {
-    } catch (error) {
-      console.log(error);
-    }
+  const editBookHandler = async () => {
+    await bookEditHandler(id);
+    navigate("/new-book/general/edit");
   };
 
   const deleteBookHandler = async () => {
@@ -81,12 +67,6 @@ const BookDetails = (props) => {
   };
 
   const bookActions = [
-    {
-      name: "Izmijeni knjigu",
-      image: "/images/icons/edit-icon.svg",
-      path: "/new-book/general",
-      onClick: bookEditHandler,
-    },
     {
       name: "Izbrisi knjigu",
       image: "/images/icons/trash-icon.svg",
@@ -146,6 +126,10 @@ const BookDetails = (props) => {
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faCalendarCheck} />
               <p>Rezervisi knjigu</p>
+            </div>
+            <div className={classes.headerButton} onClick={editBookHandler}>
+              <FontAwesomeIcon icon={faFileEdit} />
+              <p>Izmijeni knjigu</p>
             </div>
             <div
               className={classes.headerButton}

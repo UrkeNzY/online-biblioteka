@@ -56,18 +56,17 @@ const BookSideInfo = () => {
     const fetchData = async () => {
       try {
         const bookAmount = await getBook(id);
-        console.log(bookAmount);
 
         const formattedData = {
           available:
-            bookAmount.data.samples - (Math.abs(bookAmount.data.bSamples) + bookAmount.data.fSamples),
+            bookAmount.data.samples -
+            (Math.abs(bookAmount.data.bSamples) + bookAmount.data.fSamples),
           reserved: Math.abs(bookAmount.data.bSamples),
           issued: bookAmount.data.fSamples,
           late: bookAmount.data.rSamples,
           total: bookAmount.data.samples,
         };
         setBookAmountData(formattedData);
-        console.log(formattedData);
       } catch (error) {
         console.log(error);
       }

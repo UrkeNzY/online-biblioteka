@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
+import { listUsers } from "../../services/users";
 
 import classes from "../../styles/Searchbar.module.css";
 
@@ -53,6 +54,50 @@ const tableData = [
 ];
 
 const Bibliotekari = () => {
+  const [tableData, setTableData] = useState([]);
+  const [filteredTableData, setFilteredTableData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const users = await listUsers();
+        const formattedData = users.data
+          .filter((user) => user.role === "Bibliotekar")
+          .map((user) => ({
+            id: user.id,
+            userType: user.role,
+            jmbg: user.jmbg,
+            image: user.photoPath,
+            username: user.username,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            lastAccess: "Prije 10 sati",
+          }));
+
+        setTableData(formattedData);
+        setFilteredTableData(formattedData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const updateFilteredData = (value) => {
+    const filteredData = tableData.filter(
+      (data) =>
+        data.name.toLowerCase().includes(value.toLowerCase()) ||
+        data.email.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTableData(filteredData);
+  };
+
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
@@ -61,9 +106,13 @@ const Bibliotekari = () => {
           to="/new-user"
           image="/images/icons/plus.svg"
         />
-        <Searchbar />
+        <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={tableData} />
+      <Table
+        tableColumns={tableColumns}
+        tableData={filteredTableData}
+        isLoading={isLoading}
+      />
     </Fragment>
   );
 };

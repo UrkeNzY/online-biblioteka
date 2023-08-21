@@ -3,15 +3,19 @@
   align-items: center;
 }
 
+.searchbarContainer img {
+  width: 1.35rem;
+}
+
 .searchbar {
   border: transparent;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
   color: #babdc2;
   margin: 0;
-  width: 150px;
-  margin-right: 5px;
+  width: 9.375rem;
+  margin-right: 0.3125rem;
 }
 
 .searchbar:focus {
@@ -19,14 +23,16 @@
   box-shadow: none;
 }
 
+.clearIcon {
+  position: absolute;
+  right: 1.375rem;
+  height: 0.75rem;
+}
+
 .clearIcon:hover {
   cursor: pointer;
 }
 
-.clearIcon {
-  position: absolute;
-  right: 22px;
-}
 .searchbar::placeholder {
   color: #babdc2;
 }
@@ -35,5 +41,5 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 20px;
+  padding: 0.8125rem 1.25rem;
 }

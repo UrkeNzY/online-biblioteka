@@ -6,6 +6,7 @@ import { CreateBookProvider } from "./state/CreateBookContext";
 
 import "./styles/App.css";
 
+import Dashboard from "./pages/Dashboard/Dashboard";
 import MainHeader from "./layout/MainHeader";
 import Sidebar from "./layout/Sidebar";
 import ContentHeader from "./layout/ContentHeader";
@@ -34,6 +35,7 @@ import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
 import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
 import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
 import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
+import BookIssue from "./pages/BookIssue/BookIssue";
 import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
@@ -94,12 +96,14 @@ function App() {
   function Router() {
     return (
       <Routes>
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <AuthenticatedRoute>
-              <AuthenticatedPage></AuthenticatedPage>
+              <AuthenticatedPage>
+                <Dashboard />
+              </AuthenticatedPage>
             </AuthenticatedRoute>
           }
         />
@@ -166,9 +170,9 @@ function App() {
             </AuthenticatedRoute>
           }
         >
-          <Route path="/new-book/general" element={<NewBookForm />} />
-          <Route path="/new-book/specs" element={<NewBookSpecs />} />
-          <Route path="/new-book/media" element={<NewBookMedia />} />
+          <Route path="/new-book/general/*" element={<NewBookForm />} />
+          <Route path="/new-book/specs/*" element={<NewBookSpecs />} />
+          <Route path="/new-book/media/*" element={<NewBookMedia />} />
         </Route>
         <Route
           path="/new-author"
@@ -176,6 +180,16 @@ function App() {
             <AuthenticatedRoute>
               <AuthenticatedPage>
                 <NewAuthor />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/book-issuing"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <BookIssue />
               </AuthenticatedPage>
             </AuthenticatedRoute>
           }
@@ -226,10 +240,12 @@ function App() {
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
-                <BookDetails
-                  getItems={fetchDropdownItems}
-                  getButtonRef={getButtonRef}
-                />
+                <CreateBookProvider>
+                  <BookDetails
+                    getItems={fetchDropdownItems}
+                    getButtonRef={getButtonRef}
+                  />
+                </CreateBookProvider>
               </AuthenticatedPage>
             </AuthenticatedRoute>
           }
@@ -269,14 +285,14 @@ function App() {
     <div className="App">
       <GlobalProvider>
         <Router />
+        {isDropdownOpen && (
+          <DropdownCard
+            items={dropdownItems}
+            button={buttonRef}
+            close={toggleDropdown}
+          />
+        )}
       </GlobalProvider>
-      {isDropdownOpen && (
-        <DropdownCard
-          items={dropdownItems}
-          button={buttonRef}
-          close={toggleDropdown}
-        />
-      )}
     </div>
   );
 }

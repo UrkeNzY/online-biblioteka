@@ -1,15 +1,15 @@
 .tableContainer {
-  margin: 20px;
+  margin: 1.25rem;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
 }
 
 .table {
   width: 100%;
   margin: 0 auto;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .fullWidthHeader {
@@ -18,14 +18,14 @@
 
 th {
   background-color: #eff3f6;
-  padding: 16px;
+  padding: 1rem;
   text-align: left;
   font-weight: bold;
   border-bottom: 1px solid #dddddd;
 }
 
 td {
-  padding: 16px;
+  padding: 1rem;
   border-bottom: 1px solid #dddddd;
 }
 
@@ -35,9 +35,9 @@ td p {
 }
 
 td img {
-  width: 32px;
+  width: 2rem;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 td .bookCover {
@@ -49,7 +49,7 @@ tr:hover {
 }
 
 tr:last-child td {
-  border-bottom: none; /* Remove bottom border from the last row */
+  border-bottom: none;
 }
 
 .checkbox {

@@ -14,8 +14,10 @@
   grid-template-columns: 1fr 1fr;
 }
 
-input:focus, select:focus, textarea:focus{
-  outline: 2px solid #4558be;   
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #4558be;
   border-color: transparent;
 }
 
@@ -97,6 +99,10 @@ section.buttons {
   justify-content: space-between;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 #ponisti {
   background-color: rgb(255, 63, 63);
 }
@@ -120,4 +126,16 @@ section.buttons {
   height: 1.2rem;
   width: 1.2rem;
   /* background-color: black; */
+}
+
+.reactQuillWrapper {
+  max-width: 700px;
+  width: 100%;
+}
+
+.reactQuill {
+  /* Your custom styles for the React Quill editor */
+  margin: 10px 0 63px 0;
+  border-radius: 6px;
+  height: 120px;
 }

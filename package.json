@@ -17,10 +17,12 @@
     "react-icons": "^4.10.1",
     "react-multi-select-component": "^4.3.4",
     "react-paginate": "^8.2.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.4",
     "react-show-more-text": "^1.6.2",
+    "recharts": "^2.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

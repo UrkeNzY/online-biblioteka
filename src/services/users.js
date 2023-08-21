@@ -34,5 +34,9 @@ export const userLogout = () => {
 };
 
 export const createUser = (data) => {
-  return request("post", "api/users/store", data);
+  return request("post", "/api/users/store", data);
+};
+
+export const listUsers = (data) => {
+  return request("get", "/api/users", data);
 };

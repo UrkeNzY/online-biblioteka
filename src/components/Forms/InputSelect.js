@@ -1,6 +1,5 @@
 import React from "react";
 import Select from "react-select";
-
 import classes from "../../styles/Inputs.module.css";
 
 const InputSelect = (props) => {
@@ -12,11 +11,9 @@ const InputSelect = (props) => {
 
   const handleSingleChange = (event) => {
     const selectedValue = event.target.value;
-
     const selectedOption = props.options.find(
       (option) => option.name === selectedValue
     );
-
     props.onSelect(selectedOption ? selectedOption.id : null);
   };
 
@@ -29,6 +26,19 @@ const InputSelect = (props) => {
     id: option.id,
     name: option.name,
   }));
+
+  const formatSelectedValue = () => {
+    if (!props.value) return [];
+    if (props.multiselect) {
+      return props.value.map((id) => {
+        const option = props.options.find((o) => o.id === id);
+        return option ? { label: option.name, value: option } : null;
+      });
+    } else {
+      const option = props.options.find((o) => o.id === props.value);
+      return option ? { label: option.name, value: option } : null;
+    }
+  };
 
   return (
     <div className={classes.inputSection}>
@@ -43,7 +53,7 @@ const InputSelect = (props) => {
             className={classes.multiSelectInput}
             id={props.id}
             options={options}
-            value={props.value.name}
+            value={formatSelectedValue()}
             onChange={handleChange}
             isMulti
             isSearchable
@@ -51,7 +61,7 @@ const InputSelect = (props) => {
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
-                outline: state.isFocused ? '2px solid #4558be' : '',
+                outline: state.isFocused ? "2px solid #4558be" : "",
               }),
               input: (baseStyles, state) => ({
                 ...baseStyles,
@@ -81,7 +91,7 @@ const InputSelect = (props) => {
       ) : (
         <select
           id={props.id}
-          value={props.value.name}
+          value={props.value ? props.value.name : ""}
           onChange={handleSingleChange}
           required
         >

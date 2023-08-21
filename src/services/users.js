@@ -40,3 +40,7 @@ export const createUser = (data) => {
 export const listUsers = (data) => {
   return request("get", "/api/users", data);
 };
+
+export const listSingleUser = (userId) => {
+  return request("get", `/api/users/${userId}`);
+};

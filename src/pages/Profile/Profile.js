@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useContext } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { GlobalContext } from "../../state/GlobalState";
-import { userInfo } from "../../services/users";
+import { userInfo, listSingleUser } from "../../services/users";
 
 import classes from "../../styles/Profile.module.css";
-import { Link } from "react-router-dom";
 
 const deleteItems = [
   { name: "Izbrisi profil", image: "/images/icons/trash-icon.svg", path: "/" },
@@ -18,30 +18,46 @@ const Profile = (props) => {
 
   const { loginCount } = useContext(GlobalContext);
 
+  const location = useLocation();
+  const { id } = useParams();
+
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const userInformation = await userInfo();
-        setUserData({
-          name: `${userInformation.data.name} ${userInformation.data.surname}`,
-          id: userInformation.data.id,
-          userType: userInformation.data.role,
-          jmbg: userInformation.data.jmbg,
-          email: userInformation.data.email,
-          username: userInformation.data.username,
-          profilePicture: userInformation.data.photoPath,
-        });
+        if (id === "me") {
+          const userInformation = await userInfo();
+          setUserData({
+            name: `${userInformation.data.name} ${userInformation.data.surname}`,
+            id: userInformation.data.id,
+            userType: userInformation.data.role,
+            jmbg: userInformation.data.jmbg,
+            email: userInformation.data.email,
+            username: userInformation.data.username,
+            profilePicture: userInformation.data.photoPath,
+          });
 
-        const storedLastLogin = localStorage.getItem("lastLogin");
-        if (storedLastLogin) {
-          setLastLogin(storedLastLogin);
+          const storedLastLogin = localStorage.getItem("lastLogin");
+          if (storedLastLogin) {
+            setLastLogin(storedLastLogin);
+          }
+        } else {
+          const userInformation = await listSingleUser(id);
+          setUserData({
+            name: `${userInformation.data.name} ${userInformation.data.surname}`,
+            id: userInformation.data.id,
+            userType: userInformation.data.role,
+            jmbg: userInformation.data.jmbg,
+            email: userInformation.data.email,
+            username: userInformation.data.username,
+            profilePicture: userInformation.data.photoPath,
+          });
         }
       } catch (error) {
         console.error("Error fetching user data:", error.message);
       }
     }
     fetchUserData();
-  }, []);
+  }, [location.pathname, id]);
 
   const toggleDeleteProfileHandler = (event) => {
     props.getItems(deleteItems);

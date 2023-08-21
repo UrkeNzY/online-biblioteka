@@ -33,6 +33,7 @@ const Ucenici = () => {
             image: user.photoPath,
             username: user.username,
             name: user.name + " " + user.surname,
+            link: `/profile/${user.id}`,
             email: user.email,
             lastAccess: "Prije 10 sati",
             actionButton: "images/buttons/dashboard-actions.svg",

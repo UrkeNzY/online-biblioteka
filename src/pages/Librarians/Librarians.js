@@ -14,45 +14,6 @@ const tableColumns = [
   { header: "Zadnji pristup sistemu", field: "lastAccess", width: "25%" },
 ];
 
-const tableData = [
-  {
-    id: 1,
-    name: "Valentina Kascelan",
-    email: "valentina.kascelan@domain.com",
-    userType: "Bibliotekar",
-    lastAccess: "Prije 10 sati",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/female-pic.jpg",
-  },
-  {
-    id: 2,
-    name: "Tarik Zaimovic",
-    email: "tarik.zaimovic@domain.com",
-    userType: "Bibliotekar",
-    lastAccess: "Prije 2 dana",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/male-pic.jpg",
-  },
-  {
-    id: 3,
-    name: "Test Akontacijevic",
-    email: "test.akontacijevic@bild-studio.com",
-    userType: "Bibliotekar",
-    lastAccess: "Nikad se nije ulogovao",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/male-pic.jpg",
-  },
-  {
-    id: 4,
-    name: "Darko Kascelan",
-    email: "darko.kascelan@bild-studio.com",
-    userType: "Bibliotekar",
-    lastAccess: "Prije 2 nedelje",
-    actionButton: "images/buttons/dashboard-actions.svg",
-    image: "images/placeholders/male-pic.jpg",
-  },
-];
-
 const Bibliotekari = () => {
   const [tableData, setTableData] = useState([]);
   const [filteredTableData, setFilteredTableData] = useState([]);
@@ -72,6 +33,7 @@ const Bibliotekari = () => {
             image: user.photoPath,
             username: user.username,
             name: user.name + " " + user.surname,
+            link: `/profile/${user.id}`,
             email: user.email,
             lastAccess: "Prije 10 sati",
             actionButton: "images/buttons/dashboard-actions.svg",

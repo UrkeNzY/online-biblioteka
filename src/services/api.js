@@ -12,7 +12,6 @@ export const request = async (method, url, data) => {
   const userToken = JSON.parse(localStorage.getItem("user"))?.token;
 
   const headers = {
-    "Content-Type": "application/json",
     Accept: "application/json",
   };
 
@@ -22,11 +21,17 @@ export const request = async (method, url, data) => {
 
   let config = {
     method: method,
-    maxBodyLength: Infinity,
     url: `https://petardev.live${url}`,
     headers: headers,
-    data: data ? JSON.stringify(data) : "",
   };
+
+  if (data instanceof FormData) {
+    config.data = data;
+  } else if (data) {
+    // Convert other data to JSON string if needed
+    config.data = JSON.stringify(data);
+    headers["Content-Type"] = "application/json";
+  }
 
   try {
     const response = await api.request(config);

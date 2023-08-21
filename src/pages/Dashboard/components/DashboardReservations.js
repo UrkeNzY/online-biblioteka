@@ -16,11 +16,7 @@ const DashboardReservations = () => {
       <div className={classes.reservationsContainer}>
         <div className={classes.sectionContent}>
           <div className={classes.sectionUserInfo}>
-            <img
-              src="/images/placeholders/male-pic.jpg"
-              alt="user avatar"
-              width="35"
-            />
+            <img src="/images/placeholders/male-pic.jpg" alt="user avatar" />
             <p>Pero Perovic</p>
           </div>
           <p>Ep o Gilgamesu</p>
@@ -35,11 +31,7 @@ const DashboardReservations = () => {
       <div className={classes.reservationsContainer}>
         <div className={classes.sectionContent}>
           <div className={classes.sectionUserInfo}>
-            <img
-              src="/images/placeholders/male-pic.jpg"
-              alt="user avatar"
-              width="35"
-            />
+            <img src="/images/placeholders/male-pic.jpg" alt="user avatar" />
             <p>Pero Perovic</p>
           </div>
           <p>Tom Sojer</p>
@@ -54,11 +46,7 @@ const DashboardReservations = () => {
       <div className={classes.reservationsContainer}>
         <div className={classes.sectionContent}>
           <div className={classes.sectionUserInfo}>
-            <img
-              src="/images/placeholders/male-pic.jpg"
-              alt="user avatar"
-              width="35"
-            />
+            <img src="/images/placeholders/male-pic.jpg" alt="user avatar" />
             <p>Pero Perovic</p>
           </div>
           <p>Ilijada</p>
@@ -73,11 +61,7 @@ const DashboardReservations = () => {
       <div className={classes.reservationsContainer}>
         <div className={classes.sectionContent}>
           <div className={classes.sectionUserInfo}>
-            <img
-              src="/images/placeholders/male-pic.jpg"
-              alt="user avatar"
-              width="35"
-            />
+            <img src="/images/placeholders/male-pic.jpg" alt="user avatar" />
             <p>Pero Perovic</p>
           </div>
           <p>Tom Sojer</p>

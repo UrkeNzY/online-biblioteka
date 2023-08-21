@@ -55,8 +55,6 @@ function MediaDropzone({ photo }) {
               <img
                 src={file.preview}
                 alt={file.name}
-                width={300}
-                height={300}
                 onLoad={() => {
                   URL.revokeObjectURL(file.preview);
                 }}

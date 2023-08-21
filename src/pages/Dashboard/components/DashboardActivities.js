@@ -86,7 +86,7 @@ const DashboardActivities = () => {
       {DUMMY_NEWS_DATA.map((news) => {
         return (
           <div className={classes.activityContainer}>
-            <img src={news.userAvatar} alt="user avatar" width="60" />
+            <img src={news.userAvatar} alt="user avatar" />
             <div>
               <p className={classes.activityHeader}>
                 {news.header} -{" "}

@@ -127,3 +127,15 @@ section.buttons {
   width: 1.2rem;
   /* background-color: black; */
 }
+
+.reactQuillWrapper {
+  max-width: 700px;
+  width: 100%;
+}
+
+.reactQuill {
+  /* Your custom styles for the React Quill editor */
+  margin: 10px 0 63px 0;
+  border-radius: 6px;
+  height: 120px;
+}

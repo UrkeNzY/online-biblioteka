@@ -25,15 +25,10 @@ const BookDetails = (props) => {
 
   const [bookHeaderData, setBookHeaderData] = useState({});
 
-  const { bookEditHandler, bookFound, setBookFound, isEditing } =
-    useCreateBookContext();
+  const { bookEditHandler, bookFound, setBookFound } = useCreateBookContext();
 
   const { id } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("isEditing value in NewBookForm:", isEditing); // Add this line to track changes
-  }, [isEditing]);
 
   useEffect(() => {
     const fetchData = async () => {

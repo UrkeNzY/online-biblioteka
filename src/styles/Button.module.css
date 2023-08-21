@@ -1,9 +1,9 @@
 .button {
   background-color: #3f51b5;
   color: #ffffff;
-  padding: 10px 17px;
+  padding: 0.625rem 1.0625rem;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   border-color: transparent;
   border-radius: 5px;
@@ -17,7 +17,8 @@
 }
 
 .button img {
-  margin: 0 15px 0 0;
+  margin: 0 0.9375rem 0 0;
+  width: 0.7rem;
 }
 
 .button a,

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { BsCameraFill } from "react-icons/bs";
+import { createUser } from "../../../services/users";
 
 import classes from "../../../styles/Forms.module.css";
 
 import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
+import FormButtons from "../../../components/Forms/FormButtons";
 
 const NewUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -15,25 +17,32 @@ const NewUserForm = () => {
   const [userPassword, setUserPassword] = useState("");
   const [userCheckPassword, setUserCheckPassword] = useState("");
   const [userImage, setUserImage] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({});
 
   const changeUserNameHandler = (event) => {
     setUserName(event.target.value);
   };
+
   const changeUserTypeHandler = (value) => {
     setUserType(value);
   };
+
   const changeUserJMBGHandler = (event) => {
     setUserJMBG(event.target.value);
   };
+
   const changeUserEmailHandler = (event) => {
     setUserEmail(event.target.value);
   };
+
   const changeUserUsernameHandler = (event) => {
     setUserUsername(event.target.value);
   };
+
   const changeUserPasswordHandler = (event) => {
     setUserPassword(event.target.value);
   };
+
   const changeUserCheckPasswordHandler = (event) => {
     setUserCheckPassword(event.target.value);
   };
@@ -43,26 +52,54 @@ const NewUserForm = () => {
     setUserImage(file);
   };
 
-  const newUser = {
-    userName,
-    userType,
-    userJMBG,
-    userEmail,
-    userUsername,
-    userPassword,
+  const submitFormHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const userToCreate = {
+        role_id: userType,
+        name: userName,
+        surname: userName,
+        jmbg: userJMBG,
+        email: userEmail,
+        username: userUsername,
+        password: userPassword,
+        password_confirmation: userCheckPassword,
+      };
+
+      const response = await createUser(userToCreate);
+      console.log("created user", response.data);
+
+      // Reset form fields
+      setUserName("");
+      setUserType("");
+      setUserJMBG("");
+      setUserEmail("");
+      setUserUsername("");
+      setUserPassword("");
+      setUserCheckPassword("");
+      setUserImage(null);
+
+      // Clear error messages
+      setErrorMessages({});
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setErrorMessages(error.response.data.data);
+      }
+      console.log(error);
+    }
   };
 
-  const submitFormHandler = (event) => {
-    event.preventDefault();
-    console.log(newUser);
-    setUserName("");
-    setUserType("");
-    setUserJMBG("");
-    setUserEmail("");
-    setUserUsername("");
-    setUserPassword("");
-    setUserCheckPassword("");
-    setUserImage(null);
+  const renderErrorMessages = (fieldName) => {
+    if (errorMessages[fieldName]) {
+      return (
+        <div className={classes.errorMessage}>
+          {errorMessages[fieldName].map((message, index) => (
+            <p key={index}>{message}</p>
+          ))}
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -75,7 +112,6 @@ const NewUserForm = () => {
           value={userName}
           onChange={changeUserNameHandler}
         />
-
         <InputSelect
           labelText="Tip korisnika"
           id="userType"
@@ -88,7 +124,6 @@ const NewUserForm = () => {
             { id: 2, name: "Učenik" },
           ]}
         />
-
         <InputText
           labelText="JMBG"
           type="number"
@@ -96,7 +131,6 @@ const NewUserForm = () => {
           value={userJMBG}
           onChange={changeUserJMBGHandler}
         />
-
         <InputText
           labelText="E-mail"
           type="email"
@@ -104,14 +138,16 @@ const NewUserForm = () => {
           value={userEmail}
           onChange={changeUserEmailHandler}
         />
-
+        {renderErrorMessages("email")}{" "}
+        {/* Display email validation error message */}
         <InputText
           labelText="Korisničko ime"
           id="userUsername"
           value={userUsername}
           onChange={changeUserUsernameHandler}
         />
-
+        {renderErrorMessages("username")}{" "}
+        {/* Display username validation error message */}
         <InputText
           labelText="Šifra"
           type="password"
@@ -119,7 +155,6 @@ const NewUserForm = () => {
           value={userPassword}
           onChange={changeUserPasswordHandler}
         />
-
         <InputText
           labelText="Ponovi šifru"
           type="password"
@@ -149,6 +184,7 @@ const NewUserForm = () => {
             />
           )}
         </div>
+        <FormButtons />
       </section>
     </form>
   );

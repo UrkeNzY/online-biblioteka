@@ -33,7 +33,6 @@ const NewBookSpecs = () => {
 
   useEffect(() => {
     if (editBookData.id && isEditing) {
-      // Make sure editBookData is not empty
       setSubmittedPages(editBookData.pages || "");
       setSubmittedScript(editBookData.script || "");
       setSubmittedLanguage(editBookData.language || []);

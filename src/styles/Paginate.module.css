@@ -1,5 +1,5 @@
 .paginateContainer {
-  margin: 35px 0;
+  margin: 2.1875rem 0;
   display: flex;
   justify-content: center;
 }
@@ -13,8 +13,8 @@
 }
 
 .paginationButtons a {
-  padding: 10px;
-  margin: 8px;
+  padding: 0.625rem;
+  margin: 0.5rem;
   border-radius: 5px;
   border: 1px solid #d4d2d4;
 }
@@ -35,7 +35,7 @@
 }
 
 .paginationOptions p {
-  margin: 0 12px 0 0;
+  margin: 0 0.75rem 0 0;
 }
 
 .paginationOptions select {

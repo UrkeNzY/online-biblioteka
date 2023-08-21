@@ -35,6 +35,10 @@ h1 {
   cursor: pointer;
 }
 
+.logoContainer img {
+  width: 2.38rem;
+}
+
 .userContainer {
   display: flex;
   justify-content: space-between;
@@ -48,6 +52,7 @@ h1 {
   background-color: #606fc7;
   padding: 0.45rem;
   border-radius: 50%;
+  width: 2.8rem;
 }
 
 .userActions {
@@ -63,3 +68,10 @@ h1 {
   padding: 0.15rem;
 }
 
+.headerAvatar {
+  width: 2.8125rem;
+  height: 2.8125rem;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}

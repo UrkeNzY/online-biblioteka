@@ -71,10 +71,10 @@ const Bibliotekari = () => {
             jmbg: user.jmbg,
             image: user.photoPath,
             username: user.username,
-            name: user.name,
-            surname: user.surname,
+            name: user.name + " " + user.surname,
             email: user.email,
             lastAccess: "Prije 10 sati",
+            actionButton: "images/buttons/dashboard-actions.svg",
           }));
 
         setTableData(formattedData);

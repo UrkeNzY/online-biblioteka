@@ -34,6 +34,13 @@ const NewUserForm = () => {
     userUsername: [],
   });
 
+  const dropdownOptions = [
+    { id: 0, name: "" },
+    { id: 1, name: "Bibliotekar" },
+    { id: 2, name: "Učenik" },
+    { id: 3, name: "Administrator" },
+  ];
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -42,11 +49,16 @@ const NewUserForm = () => {
       try {
         if (id === "me") {
           const userInformation = await userInfo();
+
+          const selectedOption = dropdownOptions.find(
+            (option) => option.name === userInformation.data.role
+          );
+          console.log(userInformation.data.role);
           setFetchedUserData(userInformation.data); // Update the fetched data state // Use directly from userInformation.data
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
           );
-          setUserType(userInformation.data.role || ""); // Use directly from userInformation.data
+          setUserType(selectedOption || ""); // Use directly from userInformation.data
           setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
           setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
           setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
@@ -55,11 +67,15 @@ const NewUserForm = () => {
           setUserImage(null);
         } else {
           const userInformation = await listSingleUser(id);
+          const selectedOption = dropdownOptions.find(
+            (option) => option.name === userInformation.data.role
+          );
+          console.log(selectedOption.id);
           setFetchedUserData(userInformation.data); // Update the fetched data state
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
           );
-          setUserType(userInformation.data.role || ""); // Use directly from userInformation.data
+          setUserType(selectedOption || ""); // Use directly from userInformation.data
           setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
           setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
           setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
@@ -214,12 +230,7 @@ const NewUserForm = () => {
           value={userType}
           onSelect={changeUserTypeHandler}
           required
-          options={[
-            { id: 0, name: "" },
-            { id: 1, name: "Bibliotekar" },
-            { id: 2, name: "Učenik" },
-            { id: 3, name: "Administrator" },
-          ]}
+          options={dropdownOptions}
         />
         <InputText
           labelText="JMBG"

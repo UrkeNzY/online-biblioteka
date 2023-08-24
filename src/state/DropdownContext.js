@@ -8,6 +8,7 @@ export const DropdownProvider = ({ children }) => {
   const [buttonRef, setButtonRef] = useState(null);
 
   const fetchDropdownItems = (items) => {
+    console.log("fetching dropdown items" + items);
     setDropdownItems(items);
     toggleDropdown();
   };
@@ -17,6 +18,7 @@ export const DropdownProvider = ({ children }) => {
   };
 
   const getButtonRef = (ref) => {
+    console.log("getting button ref" + ref);
     setButtonRef(ref);
   };
 

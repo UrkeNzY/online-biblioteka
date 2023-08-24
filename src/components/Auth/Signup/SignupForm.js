@@ -4,6 +4,8 @@ import { GlobalContext } from "../../../state/GlobalState";
 
 import classes from "../../../styles/AuthForm.module.css";
 
+import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+
 export default function SignupForm() {
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
@@ -13,7 +15,7 @@ export default function SignupForm() {
   const [passwordConfirm, setPasswordConfirm] = useState();
   const device = "DivajsNejm2";
 
-  const { signUp } = useContext(GlobalContext);
+  const { signUp, loading } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -110,6 +112,9 @@ export default function SignupForm() {
             </div>
           </form>
         </section>
+        {loading && (
+          <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
+        )}
       </div>
     </div>
   );

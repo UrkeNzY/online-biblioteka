@@ -52,7 +52,7 @@ export const GlobalProvider = ({ children }) => {
     setLoading(true);
 
     // fetch signIn endpoint, provide data
-    fetch("https://www.petardev.live/api/login", {
+    fetch("https://tim6.petardev.live/api/login", {
       method: "POST",
       headers: {
         Authorization: "Bearer b3Rvcmlub2xhcmluZ29sb2dpamE=",
@@ -84,7 +84,7 @@ export const GlobalProvider = ({ children }) => {
     setLoading(true);
 
     // fetch signIn endpoint, provide data
-    fetch("https://www.petardev.live/api/register", {
+    fetch("https://tim6.petardev.live/api/register", {
       method: "POST",
       headers: {
         Authorization: "Bearer b3Rvcmlub2xhcmluZ29sb2dpamE=",

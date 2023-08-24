@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useCallback } from "react";
 
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -14,9 +14,9 @@ const Table = (props) => {
     setFilteredData(tableData);
   }, [tableData]);
 
-  const filterTableData = (filteredItems) => {
+  const updateFilteredData = useCallback((filteredItems) => {
     setFilteredData(filteredItems);
-  };
+  }, []);
 
   return (
     <Fragment>
@@ -51,7 +51,6 @@ const Table = (props) => {
                     {table.image && (
                       <img
                         className={table.imageType ? classes.bookCover : ""}
-                        S
                         src={table.image}
                         onError={(e) => {
                           e.target.src = "/images/placeholders/book-cover.jpg";
@@ -86,10 +85,19 @@ const Table = (props) => {
           </tbody>
         </table>
       </div>
+      {filteredData.length === 0 && !isLoading && (
+        <div className={classes.noDataContainer}>
+          <img src="/images/icons/no-data-icon.png" alt="no data icon" />
+          <p>No data.</p>
+        </div>
+      )}
       {isLoading ? (
-        <LoadingSpinner />
+        <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
       ) : (
-        <Pagination tableItems={tableData} filterItems={filterTableData} />
+        <Pagination
+          tableItems={tableData}
+          onUpdateFilteredData={updateFilteredData}
+        />
       )}
     </Fragment>
   );

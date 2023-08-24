@@ -149,7 +149,7 @@ function App() {
           }
         />
         <Route
-          path="/new-user"
+          path="/new-user/:id?"
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>

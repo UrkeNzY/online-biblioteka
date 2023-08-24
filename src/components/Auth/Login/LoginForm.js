@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../state/GlobalState";
 
 import classes from "../../../styles/AuthForm.module.css";
+import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 
 export default function LoginForm() {
-  const { signIn } = useContext(GlobalContext);
+  const { signIn, loading } = useContext(GlobalContext);
 
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
@@ -57,6 +58,9 @@ export default function LoginForm() {
               </div>
             </form>
           </section>
+          {loading && (
+            <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
+          )}
         </div>
       </div>
     </Fragment>

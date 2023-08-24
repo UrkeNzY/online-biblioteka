@@ -12,30 +12,30 @@ import {
 
 import classes from "../../../styles/Dashboard.module.css";
 
-const data = [
-  {
-    name: "Izdate",
-    uv: 4000,
-    pv: 2400,
-    Kolicina: 73,
-  },
-  {
-    name: "Rezervisane",
-    uv: 3000,
-    pv: 1398,
-    Kolicina: 44,
-  },
-  {
-    name: "U prekoracenju",
-    uv: 2000,
-    pv: 9800,
-    Kolicina: 25,
-  },
-];
-
-const DashboardStats = () => {
+const DashboardStats = ({ activeReservationsAmount }) => {
   const [hoveredBar, setHoveredBar] = useState(null);
   const [hoveredLabel, setHoveredLabel] = useState(null);
+
+  const data = [
+    {
+      name: "Izdate",
+      uv: 4000,
+      pv: 2400,
+      Kolicina: 0,
+    },
+    {
+      name: "Rezervisane",
+      uv: 3000,
+      pv: 1398,
+      Kolicina: activeReservationsAmount,
+    },
+    {
+      name: "U prekoracenju",
+      uv: 2000,
+      pv: 9800,
+      Kolicina: 0,
+    },
+  ];
 
   const navigate = useNavigate();
 

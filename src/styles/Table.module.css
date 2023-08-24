@@ -66,11 +66,24 @@ tr:last-child td {
   font-weight: 500;
 }
 
-a {
+.table a {
   text-decoration: none;
   color: #374151;
 }
 
-a:hover {
+.table a:hover {
   color: #4558be;
+}
+
+.noDataContainer {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.noDataContainer img {
+  width: 5rem;
+}
+
+.noDataContainer p {
+  margin: 0;
 }

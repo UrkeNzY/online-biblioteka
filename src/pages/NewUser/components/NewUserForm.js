@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
 import { BsCameraFill } from "react-icons/bs";
-import { createUser } from "../../../services/users";
+import {
+  createUser,
+  updateUser,
+  updateMe,
+  userInfo,
+  listSingleUser,
+} from "../../../services/users";
 
 import classes from "../../../styles/Forms.module.css";
 
@@ -17,7 +24,55 @@ const NewUserForm = () => {
   const [userPassword, setUserPassword] = useState("");
   const [userCheckPassword, setUserCheckPassword] = useState("");
   const [userImage, setUserImage] = useState(null);
-  const [errorMessages, setErrorMessages] = useState({});
+  const [fetchedUserData, setFetchedUserData] = useState({});
+  const [inputErrors, setInputErrors] = useState({
+    userName: [],
+    userEmail: [],
+    userType: [],
+    userJMBG: [],
+    userPassword: [],
+    userUsername: [],
+  });
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (id === "me") {
+          const userInformation = await userInfo();
+          setFetchedUserData(userInformation.data); // Update the fetched data state // Use directly from userInformation.data
+          setUserName(
+            userInformation.data.name + " " + userInformation.data.surname || ""
+          );
+          setUserType(userInformation.data.role || ""); // Use directly from userInformation.data
+          setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
+          setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
+          setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
+          setUserPassword("");
+          setUserCheckPassword("");
+          setUserImage(null);
+        } else {
+          const userInformation = await listSingleUser(id);
+          setFetchedUserData(userInformation.data); // Update the fetched data state
+          setUserName(
+            userInformation.data.name + " " + userInformation.data.surname || ""
+          );
+          setUserType(userInformation.data.role || ""); // Use directly from userInformation.data
+          setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
+          setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
+          setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
+          setUserPassword("");
+          setUserCheckPassword("");
+          setUserImage(null);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   const changeUserNameHandler = (event) => {
     setUserName(event.target.value);
@@ -54,22 +109,51 @@ const NewUserForm = () => {
 
   const submitFormHandler = async (event) => {
     event.preventDefault();
+
+    const [name, surname] = userName.split(" ");
+    console.log("first name: " + name + " last name: " + surname);
+
     try {
-      const userToCreate = {
-        role_id: userType,
-        name: userName,
-        surname: userName,
-        jmbg: userJMBG,
-        email: userEmail,
-        username: userUsername,
-        password: userPassword,
-        password_confirmation: userCheckPassword,
-      };
+      if (id === "me") {
+        await updateMe({
+          role_id: userType,
+          name: name,
+          surname: surname,
+          jmbg: userJMBG,
+          email: userEmail,
+          username: userUsername,
+          password: userPassword,
+          password_confirmation: userCheckPassword,
+          photoPath: "https://tim6.petardev.live/img/profile.jpg",
+        });
+      } else if (id) {
+        await updateUser(id, {
+          role_id: userType,
+          name: name,
+          surname: surname,
+          jmbg: userJMBG,
+          email: userEmail,
+          username: userUsername,
+          password: userPassword,
+          password_confirmation: userCheckPassword,
+          photoPath: "",
+        });
+      } else {
+        const userToCreate = {
+          role_id: userType,
+          name: name,
+          surname: surname,
+          jmbg: userJMBG,
+          email: userEmail,
+          username: userUsername,
+          password: userPassword,
+          password_confirmation: userCheckPassword,
+        };
 
-      const response = await createUser(userToCreate);
-      console.log("created user", response.data);
+        const response = await createUser(userToCreate);
+        console.log("created user", response.data);
+      }
 
-      // Reset form fields
       setUserName("");
       setUserType("");
       setUserJMBG("");
@@ -78,28 +162,35 @@ const NewUserForm = () => {
       setUserPassword("");
       setUserCheckPassword("");
       setUserImage(null);
-
-      // Clear error messages
-      setErrorMessages({});
     } catch (error) {
-      if (error.response && error.response.data) {
-        setErrorMessages(error.response.data.data);
-      }
-      console.log(error);
-    }
-  };
+      console.log(error); // Log the detailed error for debugging
+      if (error.response) {
+        const errorData =
+          error.response.data.errors || error.response.data.data;
 
-  const renderErrorMessages = (fieldName) => {
-    if (errorMessages[fieldName]) {
-      return (
-        <div className={classes.errorMessage}>
-          {errorMessages[fieldName].map((message, index) => (
-            <p key={index}>{message}</p>
-          ))}
-        </div>
-      );
+        setInputErrors({
+          userName: errorData.name || [],
+          userEmail: errorData.email || [],
+          userType: errorData.role_id || [],
+          userJMBG: errorData.jmbg || [],
+          userPassword: errorData.password || [],
+          userUsername: errorData.username || [],
+          // Update other input fields here
+        });
+      } else {
+        setInputErrors({
+          userName: ["An error occurred during the request"],
+          userEmail: [],
+          userType: [],
+          userJMBG: [],
+          userUsername: [],
+          // Update other input fields here
+        });
+      }
+      return;
     }
-    return null;
+    console.log(fetchedUserData);
+    navigate("/dashboard");
   };
 
   return (
@@ -112,6 +203,11 @@ const NewUserForm = () => {
           value={userName}
           onChange={changeUserNameHandler}
         />
+        {inputErrors.userName.map((errorMessage, index) => (
+          <p key={index} className={classes.errorMessage}>
+            {errorMessage}
+          </p>
+        ))}
         <InputSelect
           labelText="Tip korisnika"
           id="userType"
@@ -122,6 +218,7 @@ const NewUserForm = () => {
             { id: 0, name: "" },
             { id: 1, name: "Bibliotekar" },
             { id: 2, name: "Učenik" },
+            { id: 3, name: "Administrator" },
           ]}
         />
         <InputText
@@ -131,6 +228,11 @@ const NewUserForm = () => {
           value={userJMBG}
           onChange={changeUserJMBGHandler}
         />
+        {inputErrors.userJMBG.map((errorMessage, index) => (
+          <p className={classes.errorText} key={index}>
+            {errorMessage}
+          </p>
+        ))}
         <InputText
           labelText="E-mail"
           type="email"
@@ -138,16 +240,22 @@ const NewUserForm = () => {
           value={userEmail}
           onChange={changeUserEmailHandler}
         />
-        {renderErrorMessages("email")}{" "}
-        {/* Display email validation error message */}
+        {inputErrors.userEmail.map((errorMessage, index) => (
+          <p className={classes.errorText} key={index}>
+            {errorMessage}
+          </p>
+        ))}
         <InputText
           labelText="Korisničko ime"
           id="userUsername"
           value={userUsername}
           onChange={changeUserUsernameHandler}
         />
-        {renderErrorMessages("username")}{" "}
-        {/* Display username validation error message */}
+        {inputErrors.userUsername.map((errorMessage, index) => (
+          <p className={classes.errorText} key={index}>
+            {errorMessage}
+          </p>
+        ))}
         <InputText
           labelText="Šifra"
           type="password"
@@ -162,6 +270,11 @@ const NewUserForm = () => {
           value={userCheckPassword}
           onChange={changeUserCheckPasswordHandler}
         />
+        {inputErrors.userPassword.map((errorMessage, index) => (
+          <p className={classes.errorText} key={index}>
+            {errorMessage}
+          </p>
+        ))}
       </section>
 
       <section className={classes.image}>

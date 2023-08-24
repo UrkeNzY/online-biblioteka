@@ -162,11 +162,8 @@ const BookDetails = (props) => {
           </div>
         ) : (
           <div className={classes.bookErrorContainer}>
-            <img
-              src="/images/icons/book-not-found-emoji.svg"
-              alt="error emoji"
-            />
-            <h4>Could not find the book you're looking for.</h4>
+            <img src="/images/icons/triangle-error-icon.svg" alt="error icon" />
+            <p>Could not find the book you're looking for.</p>
             <Link to="/">Go back &#8594;</Link>
           </div>
         )}

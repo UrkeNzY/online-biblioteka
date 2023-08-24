@@ -4,8 +4,16 @@ export const registerUser = (registerData) => {
   return request("post", "/api/register", registerData);
 };
 
-export const updateUser = (updatedData) => {
+export const updateMe = (updatedData) => {
   return request("put", "/api/users/me", updatedData);
+};
+
+export const updateUser = (userId, updatedData) => {
+  return request("put", `/api/users/${userId}`, updatedData);
+};
+
+export const deleteUser = (userId) => {
+  return request("delete", `/api/users/${userId}`);
 };
 
 export const userSignIn = (signInData) => {

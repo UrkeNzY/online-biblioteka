@@ -64,6 +64,7 @@ export const CreateBookProvider = ({ children }) => {
       console.log("created book");
     } catch (error) {
       console.log(error);
+      return;
     }
 
     resetValuesHandler();

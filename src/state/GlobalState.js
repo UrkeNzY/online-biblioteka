@@ -12,6 +12,14 @@ export const GlobalProvider = ({ children }) => {
     localStorage.getItem("loginCount") ? localStorage.getItem("loginCount") : 0
   );
   const [lastLogin, setLastLogin] = useState("");
+  const [authErrors, setAuthErrors] = useState({
+    name: "",
+    surname: "",
+    username: "",
+    email: "",
+    password: "",
+    credentials: "",
+  });
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,20 +71,31 @@ export const GlobalProvider = ({ children }) => {
     })
       .then((d) => d.json())
       .then((d) => {
-        console.log(`signIn: ${JSON.stringify(d)}`);
-        const userData = { token: d.data.token, name: d.data.name };
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+        if (d.success) {
+          console.log(`signIn: ${JSON.stringify(d)}`);
+          const userData = { token: d.data.token, name: d.data.name };
+          setUser(userData);
+          localStorage.setItem("user", JSON.stringify(userData));
 
-        // Update lastLogin with the current timestamp
-        const currentTimestamp = new Date().toISOString();
-        setLastLogin(currentTimestamp);
-        localStorage.setItem("lastLogin", currentTimestamp);
+          // Update lastLogin with the current timestamp
+          const currentTimestamp = new Date().toISOString();
+          setLastLogin(currentTimestamp);
+          localStorage.setItem("lastLogin", currentTimestamp);
 
-        setLoginCount((prevState) => prevState + 1);
-        navigate("/");
+          setLoginCount((prevState) => prevState + 1);
+          navigate("/");
+        } else {
+          console.log(`signIn: ${JSON.stringify(d)}`);
+          setAuthErrors({
+            username: d.data.username || "",
+            password: d.data.password || "",
+            credentials: d.data.error || "",
+          });
+        }
       })
-      .catch((e) => setError(e))
+      .catch((e) => {
+        setError(e);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -95,11 +114,22 @@ export const GlobalProvider = ({ children }) => {
     })
       .then((d) => d.json())
       .then((d) => {
-        console.log(`signUp: ${JSON.stringify(d)}`);
-        const userData = { token: d.data.token, name: d.data.name };
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-        navigate("/");
+        if (d.success) {
+          console.log(`signUp: ${JSON.stringify(d)}`);
+          const userData = { token: d.data.token, name: d.data.name };
+          setUser(userData);
+          localStorage.setItem("user", JSON.stringify(userData));
+          navigate("/");
+        } else {
+          console.log(`signUp: ${JSON.stringify(d)}`);
+          setAuthErrors({
+            name: d.data.name || "",
+            surname: d.data.surname || "",
+            username: d.data.username || "",
+            email: d.data.email || "",
+            password: d.data.password || "",
+          });
+        }
       })
       .catch((e) => setError(e))
       .finally(() => setLoading(false));
@@ -121,6 +151,7 @@ export const GlobalProvider = ({ children }) => {
         logout,
         loginCount,
         lastLogin,
+        authErrors,
       }}
     >
       {!loadingInitial && children}

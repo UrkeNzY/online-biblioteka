@@ -15,7 +15,7 @@ export default function SignupForm() {
   const [passwordConfirm, setPasswordConfirm] = useState();
   const device = "DivajsNejm2";
 
-  const { signUp, loading } = useContext(GlobalContext);
+  const { signUp, loading, authErrors } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -56,6 +56,7 @@ export default function SignupForm() {
                     placeholder="John"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.name}</p>
                 <div className={classes.control}>
                   <label>Surname</label>
                   <input
@@ -64,6 +65,7 @@ export default function SignupForm() {
                     placeholder="Doe"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.surname}</p>
                 <div className={classes.control}>
                   <label>Username</label>
                   <input
@@ -72,6 +74,7 @@ export default function SignupForm() {
                     placeholder="JohnDoe"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.username}</p>
                 <div className={classes.control}>
                   <label>Email</label>
                   <input
@@ -80,6 +83,7 @@ export default function SignupForm() {
                     placeholder="example@gmail.com"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.email}</p>
                 <div>
                   <div className={classes.control}>
                     <label>Password</label>
@@ -98,6 +102,7 @@ export default function SignupForm() {
                     placeholder="Repeat your Password"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.password}</p>
               </div>
             </div>
             <div className={classes.action}>

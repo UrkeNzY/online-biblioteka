@@ -6,7 +6,7 @@ import classes from "../../../styles/AuthForm.module.css";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 
 export default function LoginForm() {
-  const { signIn, loading } = useContext(GlobalContext);
+  const { signIn, loading, authErrors } = useContext(GlobalContext);
 
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
@@ -38,6 +38,7 @@ export default function LoginForm() {
                   placeholder="JohnDoe"
                 />
               </div>
+              <p className={classes.authError}>{authErrors.username}</p>
               <div className={classes.control}>
                 <label>Password</label>
                 <input
@@ -46,6 +47,9 @@ export default function LoginForm() {
                   placeholder="Enter your Password"
                 />
               </div>
+              <p className={classes.authError}>
+                {authErrors.password || authErrors.credentials}
+              </p>
               <div className={classes.action}>
                 <button type="submit" className={classes.toggle}>
                   Login

@@ -163,6 +163,14 @@
   margin-bottom: 120px;
 }
 
+.authError {
+  font-size: 14px;
+  padding: 0;
+  margin: -18px 0 18px 0;
+  color: red;
+  text-align: left;
+}
+
 /* Styling the scrollbar track */
 .inputSections::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */

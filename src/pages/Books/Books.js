@@ -39,7 +39,7 @@ const Books = () => {
           category: book.categories.length > 0 ? book.categories[0].name : "",
           available: book.samples - (Math.abs(book.bSamples) + book.fSamples),
           reserved: book.rSamples.toString(),
-          issued: book.fSamples,
+          issued: book.fSamples.toString(),
           offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,
           totalAmount: book.samples,
           actionButton: "images/buttons/dashboard-actions.svg",

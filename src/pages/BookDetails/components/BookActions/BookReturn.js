@@ -77,7 +77,7 @@ const BookReturn = () => {
             link: `/profile/${issuance.student.id}`,
             name: issuance.student.name + " " + issuance.student.surname,
             image: issuance.student.photoPath,
-            borrowDate: "26.08.2023",
+            borrowDate: format(new Date(issuance.borrow_date), "dd.MM.yyyy"),
             daysBorrowed:
               daysBorrowed < 0
                 ? `izdaje se za ${Math.abs(daysBorrowed)} dan${

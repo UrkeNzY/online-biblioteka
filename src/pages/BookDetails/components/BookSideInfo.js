@@ -60,10 +60,10 @@ const BookSideInfo = () => {
         const formattedData = {
           available:
             bookAmount.data.samples -
-            (Math.abs(bookAmount.data.bSamples) + bookAmount.data.fSamples),
-          reserved: Math.abs(bookAmount.data.bSamples),
-          issued: bookAmount.data.fSamples,
-          late: bookAmount.data.rSamples,
+            (Math.abs(bookAmount.data.bSamples) + bookAmount.data.rSamples),
+          issued: Math.abs(bookAmount.data.bSamples),
+          late: bookAmount.data.fSamples,
+          reserved: bookAmount.data.rSamples,
           total: bookAmount.data.samples,
         };
         setBookAmountData(formattedData);

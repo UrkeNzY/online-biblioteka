@@ -117,15 +117,15 @@ const BookDetails = (props) => {
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faHandScissors} />
-              <p>Izdaj knjigu</p>
+              <Link to={`/book/${id}/issue`}>Izdaj knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faRotateRight} />
-              <p>Vrati knjigu</p>
+              <Link to={`/book/${id}/return`}>Vrati knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faCalendarCheck} />
-              <p>Rezervisi knjigu</p>
+              <Link to={`/book/${id}/reserve`}>Rezervisi knjigu</Link>
             </div>
             <div className={classes.headerButton} onClick={editBookHandler}>
               <FontAwesomeIcon icon={faFileEdit} />

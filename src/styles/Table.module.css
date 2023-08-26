@@ -87,3 +87,12 @@ tr:last-child td {
 .noDataContainer p {
   margin: 0;
 }
+
+.offLimit {
+  background-color: #fecaca;
+  color: #991b1b;
+  padding: 4px 6px;
+  border-radius: 10px;
+  width: 37%;
+  text-align: center;
+}

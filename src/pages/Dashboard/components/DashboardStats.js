@@ -12,7 +12,11 @@ import {
 
 import classes from "../../../styles/Dashboard.module.css";
 
-const DashboardStats = ({ activeReservationsAmount }) => {
+const DashboardStats = ({
+  activeReservationsAmount,
+  activeIssuancesAmount,
+  offLimitReservationsAmount,
+}) => {
   const [hoveredBar, setHoveredBar] = useState(null);
   const [hoveredLabel, setHoveredLabel] = useState(null);
 
@@ -21,7 +25,7 @@ const DashboardStats = ({ activeReservationsAmount }) => {
       name: "Izdate",
       uv: 4000,
       pv: 2400,
-      Kolicina: 0,
+      Kolicina: activeIssuancesAmount,
     },
     {
       name: "Rezervisane",
@@ -33,7 +37,7 @@ const DashboardStats = ({ activeReservationsAmount }) => {
       name: "U prekoracenju",
       uv: 2000,
       pv: 9800,
-      Kolicina: 0,
+      Kolicina: offLimitReservationsAmount,
     },
   ];
 

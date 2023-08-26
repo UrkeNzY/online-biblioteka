@@ -37,10 +37,10 @@ const Books = () => {
               ? `${book.authors[0].name} ${book.authors[0].surname}`
               : "",
           category: book.categories.length > 0 ? book.categories[0].name : "",
-          available: book.samples - (Math.abs(book.bSamples) + book.fSamples),
+          available: book.samples - (Math.abs(book.bSamples) + book.rSamples),
           reserved: book.rSamples.toString(),
-          issued: book.fSamples.toString(),
-          offLimit: `${Math.max(book.bSamples - book.samples, 0)}`,
+          issued: book.bSamples.toString(),
+          offLimit: book.fSamples.toString(),
           totalAmount: book.samples,
           actionButton: "images/buttons/dashboard-actions.svg",
           image: book.photo,

@@ -54,7 +54,7 @@ export const getAllReservations = () => {
   return request("get", "/api/books/reservations", data);
 };
 
-export const issueBook = (issueData, bookIndex) => {
+export const issueBook = (bookIndex, issueData) => {
   return request("post", `/api/books/${bookIndex}/izdaj`, issueData);
 };
 
@@ -70,10 +70,8 @@ export const deleteBookIssuance = (bookIndex) => {
   return request("delete", `/api/books/borrows/${bookIndex}/destroy`);
 };
 
-export const allIssuances = () => {
-  let data = JSON.stringify({});
-
-  return request("get", "/api/books/borrows", data);
+export const allIssuances = (bookId) => {
+  return request("get", "/api/books/borrows", bookId);
 };
 
 export const createBookReview = (bookIndex, reviewData) => {

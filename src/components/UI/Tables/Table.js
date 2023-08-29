@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useCallback } from "react";
 
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -7,16 +7,50 @@ import classes from "../../../styles/Table.module.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Table = (props) => {
-  const { tableColumns, tableData, isLoading } = props;
+  const {
+    tableColumns,
+    tableData,
+    isLoading,
+    selectedRows,
+    onSelectedRowsChange,
+  } = props;
   const [filteredData, setFilteredData] = useState(tableData);
+  const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
     setFilteredData(tableData);
   }, [tableData]);
 
-  const filterTableData = (filteredItems) => {
+  const updateFilteredData = useCallback((filteredItems) => {
     setFilteredData(filteredItems);
+  }, []);
+
+  const handleHeaderCheckboxClick = () => {
+    setSelectAll(!selectAll);
+    if (onSelectedRowsChange) {
+      onSelectedRowsChange(selectAll ? [] : filteredData.map((row) => row.id));
+    }
   };
+
+  const handleRowSelect = (rowId) => {
+    if (onSelectedRowsChange) {
+      if (selectedRows.includes(rowId)) {
+        onSelectedRowsChange(selectedRows.filter((id) => id !== rowId));
+      } else {
+        onSelectedRowsChange([...selectedRows, rowId]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (onSelectedRowsChange) {
+      if (selectAll) {
+        onSelectedRowsChange(filteredData.map((row) => row.id));
+      } else {
+        onSelectedRowsChange([]);
+      }
+    }
+  }, [selectAll, filteredData]);
 
   return (
     <Fragment>
@@ -32,7 +66,12 @@ const Table = (props) => {
           <thead>
             <tr>
               <th>
-                <input type="checkbox" className={classes.checkbox} />
+                <input
+                  type="checkbox"
+                  className={classes.checkbox}
+                  checked={selectAll}
+                  onChange={handleHeaderCheckboxClick}
+                />
               </th>
               {tableColumns.map((column) => (
                 <th key={column.field}>{column.header}</th>
@@ -44,14 +83,18 @@ const Table = (props) => {
             {filteredData?.slice(0, 6).map((table) => (
               <tr key={table.id}>
                 <td>
-                  <input type="checkbox" className={classes.checkbox} />
+                  <input
+                    type="checkbox"
+                    className={classes.checkbox}
+                    checked={selectedRows && selectedRows.includes(table.id)}
+                    onChange={() => handleRowSelect(table.id)}
+                  />
                 </td>
                 <td>
                   <div className={classes.userColumnData}>
                     {table.image && (
                       <img
                         className={table.imageType ? classes.bookCover : ""}
-                        S
                         src={table.image}
                         onError={(e) => {
                           e.target.src = "/images/placeholders/book-cover.jpg";
@@ -66,13 +109,26 @@ const Table = (props) => {
                     )}
                   </div>
                 </td>
-                <td>{table.email || table.description || table.author}</td>
-                <td>{table.userType || table.category}</td>
-                <td>{table.lastAccess || table.available}</td>
+                <td>
+                  {table.email ||
+                    table.description ||
+                    table.author ||
+                    table.borrowDate}
+                </td>
+                <td>
+                  {table.userType || table.category || table.daysBorrowed}
+                </td>
+                <td>
+                  {table.lastAccess || table.available || table.noOffLimit}
+                  {table.withOffLimit && (
+                    <p className={classes.offLimit}>{table.withOffLimit}</p>
+                  )}
+                </td>
                 {table.reserved && <td>{table.reserved}</td>}
                 {table.issued && <td>{table.issued}</td>}
                 {table.offLimit && <td>{table.offLimit}</td>}
                 {table.totalAmount && <td>{table.totalAmount}</td>}
+                {table.librarianName && <td>{table.librarianName}</td>}
                 <td>
                   {table.actionButton && (
                     <img
@@ -86,10 +142,19 @@ const Table = (props) => {
           </tbody>
         </table>
       </div>
+      {filteredData.length === 0 && !isLoading && (
+        <div className={classes.noDataContainer}>
+          <img src="/images/icons/no-data-icon.png" alt="no data icon" />
+          <p>No data.</p>
+        </div>
+      )}
       {isLoading ? (
-        <LoadingSpinner />
+        <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
       ) : (
-        <Pagination tableItems={tableData} filterItems={filterTableData} />
+        <Pagination
+          tableItems={tableData}
+          onUpdateFilteredData={updateFilteredData}
+        />
       )}
     </Fragment>
   );

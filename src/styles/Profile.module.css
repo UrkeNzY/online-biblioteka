@@ -13,6 +13,7 @@
 
 .profileContainer a {
   color: #5167b8;
+  text-decoration: none;
 }
 
 .profileContainer img,
@@ -48,6 +49,11 @@
   font-size: 0.875rem;
 }
 
+.profileActions a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .profileButton {
   display: flex;
   align-items: center;
@@ -74,4 +80,33 @@
 .profileButton p {
   margin: 0 0 0 0.4375rem;
   padding: 0;
+}
+
+.profileErrorContainer {
+  position: absolute;
+  width: 90%;
+  margin: 0 auto;
+  top: 50%;
+  text-align: center;
+}
+
+.profileErrorContainer img,
+.profileErrorContainer p {
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.profileErrorContainer p {
+  font-size: 15px;
+}
+
+.profileErrorContainer a {
+  font-weight: 500;
+  color: #3b82f6;
+  margin-left: 15px;
+  font-size: 15px;
+}
+
+.profileErrorContainer a:hover {
+  color: #4558be;
 }

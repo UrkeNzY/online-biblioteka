@@ -22,6 +22,12 @@
   max-width: 700px;
 }
 
+.detailsHeaderActions a {
+  text-decoration: none;
+  color: inherit;
+  margin: 0 12px 0 8px;
+}
+
 .headerButton {
   display: flex;
   align-items: center;
@@ -153,22 +159,29 @@
 
 .bookErrorContainer {
   position: absolute;
-  width: 93%;
+  width: 90%;
   margin: 0 auto;
   top: 50%;
   text-align: center;
 }
 
 .bookErrorContainer img,
-.bookErrorContainer h4 {
+.bookErrorContainer p {
   margin: 0;
   margin-bottom: 6px;
+}
+
+.bookErrorContainer p {
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .bookErrorContainer a {
   font-weight: 500;
   color: #3b82f6;
-  margin-left: 20px;
+  margin-left: 15px;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 .bookErrorContainer a:hover {
@@ -200,4 +213,85 @@
 .issueActionsHeader .actionButton:hover,
 .issueActionsHeader .actionButton:hover a {
   color: #4558be;
+}
+
+.errorText {
+  font-size: 14px;
+  padding: 0;
+  margin: -10px 0 16px 0;
+  color: red;
+}
+
+.reserveFormContainer,
+.issueFormContainer {
+  padding: 6px 30px;
+  width: 60%;
+}
+
+.reserveFormContainer p,
+.issueFormContainer p .bookReturnContainer p {
+  margin-bottom: 0;
+}
+
+.reserveFormContainer form,
+.issueFormContainer form {
+  margin-top: 30px;
+}
+
+.reserveFormHeader,
+.issueFormHeader {
+  font-size: 20px;
+}
+
+.customInput {
+  position: relative;
+}
+
+.customInput input {
+  padding-right: 30px;
+  padding-left: 10px; /* Create space for the calendar icon */
+  width: 100%;
+}
+
+.customInput .calendarIcon {
+  position: absolute;
+  top: 40%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.reserveButtonsContainer,
+.issueButtonsContainer,
+.returnButtonsContainer {
+  position: fixed;
+  width: 90%;
+  right: 330px;
+  top: 100%;
+}
+
+.issueDatePickers {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.disabledInput {
+  background-color: #f0f0f0;
+  color: #b0b0b0;
+}
+
+.issueDurationText {
+  font-size: 14px;
+  margin: -16px 0 0 0;
+}
+
+.bookReturnContainer {
+  padding: 6px 10px;
+}
+
+.bookReturnHeader {
+  font-size: 20px;
+  margin-bottom: 30px;
+  margin-left: 20px;
 }

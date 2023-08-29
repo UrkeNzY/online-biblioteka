@@ -24,6 +24,7 @@ const NewBookSpecs = () => {
     updateNewBook,
     editBookData,
     isEditing,
+    bookErrors,
   } = useCreateBookContext();
 
   const [bookScripts, setBookScripts] = useState([""]);
@@ -136,6 +137,7 @@ const NewBookSpecs = () => {
           required
           onChange={changeBookPagesHandler}
         />
+        <p className={classes.errorText}>{bookErrors.pages}</p>
         <InputSelect
           labelText="Pismo"
           id="bookScript"
@@ -144,6 +146,7 @@ const NewBookSpecs = () => {
           options={bookScripts}
           onSelect={changeBookScriptHandler}
         />
+        <p className={classes.errorText}>{bookErrors.scripts}</p>
         <InputSelect
           labelText="Jezik"
           id="bookLanguage"
@@ -152,6 +155,7 @@ const NewBookSpecs = () => {
           options={bookLanguages}
           onSelect={changeBookLanguageHandler}
         />
+        <p className={classes.errorText}>{bookErrors.languages}</p>
         <InputSelect
           labelText="Povez"
           id="bookBindings"
@@ -160,6 +164,7 @@ const NewBookSpecs = () => {
           options={bookBindings}
           onSelect={changeBookBindingHandler}
         />
+        <p className={classes.errorText}>{bookErrors.bookbinds}</p>
       </section>
       <section>
         <InputSelect
@@ -170,6 +175,7 @@ const NewBookSpecs = () => {
           options={bookFormats}
           onSelect={changeBookFormatHandler}
         />
+        <p className={classes.errorText}>{bookErrors.formats}</p>
         <InputText
           labelText="International Standard Book Num"
           type="text"
@@ -178,6 +184,7 @@ const NewBookSpecs = () => {
           required
           onChange={changeBookISBNHandler}
         />
+        <p className={classes.errorText}>{bookErrors.isbn}</p>
       </section>
     </form>
   );

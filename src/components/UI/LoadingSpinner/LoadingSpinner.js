@@ -1,14 +1,10 @@
 import classes from "../../../styles/LoadingSpinner.module.css";
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ loadingSpinner }) => {
   return (
     <div className={classes.backgroundDim}>
       <div className={classes.spinnerContainer}>
-        <img
-          src="/images/icons/loading-spinner.gif"
-          alt="Loading spinner"
-          width="150"
-        />
+        <img src={loadingSpinner} alt="Loading spinner" width="150" />
         <h4>Please wait...</h4>
       </div>
     </div>

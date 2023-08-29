@@ -88,6 +88,7 @@ section.buttons {
 .button {
   font-size: 1rem;
   width: 48%;
+  min-width: 130px;
   padding: 0.7rem 1.3rem;
   color: white;
   border: none;
@@ -128,6 +129,17 @@ section.buttons {
   /* background-color: black; */
 }
 
+.errorText {
+  font-size: 14px;
+  padding: 0;
+  margin: -10px 0 16px 0;
+  color: red;
+}
+
+.errorText:first-of-type {
+  margin-top: -14px;
+}
+
 .reactQuillWrapper {
   max-width: 700px;
   width: 100%;
@@ -138,4 +150,7 @@ section.buttons {
   margin: 10px 0 63px 0;
   border-radius: 6px;
   height: 120px;
+}
+
+@media (max-width: 1205px) {
 }

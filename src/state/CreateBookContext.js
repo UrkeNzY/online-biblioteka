@@ -23,8 +23,22 @@ export const CreateBookProvider = ({ children }) => {
   const [editBookData, setEditBookData] = useState({});
   const [bookFound, setBookFound] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-
   const [bookId, setBookId] = useState();
+  const [bookErrors, setBookErrors] = useState({
+    authors: "",
+    bookbinds: "",
+    categories: "",
+    formats: "",
+    genres: "",
+    isbn: "",
+    languages: "",
+    pages: "",
+    publishDate: "",
+    publishers: "",
+    samples: "",
+    scripts: "",
+    title: "",
+  });
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -63,7 +77,26 @@ export const CreateBookProvider = ({ children }) => {
       });
       console.log("created book");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.errors);
+      const errorData = error.response.data.errors;
+
+      setBookErrors({
+        authors: errorData.authors || "",
+        bookbinds: errorData.bookbind_id || "",
+        categories: errorData.categories || "",
+        formats: errorData.format_id || "",
+        genres: errorData.genres || "",
+        isbn: errorData.isbn || "",
+        languages: errorData.language_id || "",
+        pages: errorData.pageNum || "",
+        publishDate: errorData.publishDate || "",
+        publishers: errorData.publisher_id || "",
+        samples: errorData.samples || "",
+        scripts: errorData.script_id || "",
+        title: errorData.title || "",
+      });
+      navigate("/new-book/general");
+      return;
     }
 
     resetValuesHandler();
@@ -91,7 +124,26 @@ export const CreateBookProvider = ({ children }) => {
       });
       console.log("updated book");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.errors);
+      const errorData = error.response.data.errors;
+
+      setBookErrors({
+        authors: errorData.authors || "",
+        bookbinds: errorData.bookbind_id || "",
+        categories: errorData.categories || "",
+        formats: errorData.format_id || "",
+        genres: errorData.genres || "",
+        isbn: errorData.isbn || "",
+        languages: errorData.language_id || "",
+        pages: errorData.pageNum || "",
+        publishDate: errorData.publishDate || "",
+        publishers: errorData.publisher_id || "",
+        samples: errorData.samples || "",
+        scripts: errorData.script_id || "",
+        title: errorData.title || "",
+      });
+      navigate("/new-book/general/edit");
+      return;
     }
 
     resetValuesHandler();
@@ -193,6 +245,7 @@ export const CreateBookProvider = ({ children }) => {
         setBookFound,
         bookEditHandler,
         updateFormHandler,
+        bookErrors,
       }}
     >
       {children}

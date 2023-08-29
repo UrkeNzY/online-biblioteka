@@ -30,6 +30,7 @@ const NewBookForm = () => {
     editBookData,
     updateNewBook,
     isEditing,
+    bookErrors,
   } = useCreateBookContext();
 
   useEffect(() => {
@@ -146,7 +147,7 @@ const NewBookForm = () => {
           value={submittedName}
           onChange={changeBookNameHandler}
         />
-
+        <p className={classes.errorText}>{bookErrors.title}</p>
         <label htmlFor="bookDescription">
           Kratak sadržaj<span className={classes.required}></span>
         </label>
@@ -190,7 +191,7 @@ const NewBookForm = () => {
           multiselect
           options={bookCategories}
         />
-
+        <p className={classes.errorText}>{bookErrors.categories}</p>
         <InputSelect
           labelText="Žanr"
           id="bookGenre"
@@ -200,8 +201,8 @@ const NewBookForm = () => {
           multiselect
           options={bookGenres}
         />
+        <p className={classes.errorText}>{bookErrors.genres}</p>
       </section>
-
       <section>
         <InputSelect
           labelText="Autor"
@@ -212,6 +213,7 @@ const NewBookForm = () => {
           multiselect
           options={bookAuthors}
         />
+        <p className={classes.errorText}>{bookErrors.authors}</p>
         <InputSelect
           labelText="Izdavač"
           id="bookPublisher"
@@ -220,6 +222,7 @@ const NewBookForm = () => {
           required
           options={bookPublishers}
         />
+        <p className={classes.errorText}>{bookErrors.publishers}</p>
         <InputText
           labelText="Količina"
           type="number"
@@ -227,6 +230,7 @@ const NewBookForm = () => {
           value={submittedAmount}
           onChange={changeBookAmountHandler}
         />
+        <p className={classes.errorText}>{bookErrors.samples}</p>
         <InputText
           labelText="Godina izdavanja"
           type="number"
@@ -235,6 +239,7 @@ const NewBookForm = () => {
           required
           onChange={changeBookReleaseDateHandler}
         />
+        <p className={classes.errorText}>{bookErrors.publishDate}</p>
       </section>
     </form>
   );

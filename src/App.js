@@ -35,7 +35,11 @@ import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
 import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
 import BookIssueDetails from "./pages/BookDetails/components/BookIssueDetails";
 import BookMediaDetails from "./pages/BookDetails/components/BookMediaDetails";
-import BookIssue from "./pages/BookIssue/BookIssue";
+import BookReserve from "./pages/BookDetails/components/BookActions/BookReserve";
+import BookIssue from "./pages/BookDetails/components/BookActions/BookIssue";
+import BookReturn from "./pages/BookDetails/components/BookActions/BookReturn";
+import BookIssuances from "./pages/BookIssuances/BookIssuances";
+import BookWriteOff from "./pages/BookDetails/components/BookActions/BookWriteOff";
 import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
@@ -149,7 +153,7 @@ function App() {
           }
         />
         <Route
-          path="/new-user"
+          path="/new-user/:id?"
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
@@ -189,13 +193,13 @@ function App() {
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
-                <BookIssue />
+                <BookIssuances />
               </AuthenticatedPage>
             </AuthenticatedRoute>
           }
         />
         <Route
-          path="/profile"
+          path="/profile/:id"
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
@@ -257,6 +261,10 @@ function App() {
           />
           <Route path="/book/:id/issuing" element={<BookIssueDetails />} />
           <Route path="/book/:id/multimedia" element={<BookMediaDetails />} />
+          <Route path="/book/:id/reserve" element={<BookReserve />} />
+          <Route path="/book/:id/issue" element={<BookIssue />} />
+          <Route path="/book/:id/return" element={<BookReturn />} />
+          <Route path="/book/:id/writeOff" element={<BookWriteOff />} />
         </Route>
 
         <Route

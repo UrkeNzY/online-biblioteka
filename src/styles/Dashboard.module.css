@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-.sectionUserInfo p {
+.sectionUserInfo a {
   font-weight: 500;
   margin-left: 0.5rem;
 }
@@ -64,6 +64,11 @@
 .reservationsContainer hr {
   background-color: #e8e6e8;
   opacity: 0.25;
+}
+
+.reservationsContainer a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .activityContainer {
@@ -137,4 +142,10 @@
 
 .sectionFooter p {
   margin: 0 0 0 0.37rem;
+}
+
+@media (max-width: 850px) {
+  .dashboardContainer {
+    display: block;
+  }
 }

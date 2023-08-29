@@ -47,7 +47,11 @@ const MainHeader = (props) => {
   };
 
   const profileItems = [
-    { name: "Profile", image: "/images/icons/korisnik.svg", path: "/profile" },
+    {
+      name: "Profile",
+      image: "/images/icons/korisnik.svg",
+      path: "/profile/me",
+    },
     {
       name: "Logout",
       image: "/images/icons/logout.svg",

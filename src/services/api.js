@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://petardev.live/api",
+  baseURL: "https://tim6.petardev.live/api",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -15,20 +15,21 @@ export const request = async (method, url, data) => {
     Accept: "application/json",
   };
 
+  console.log(userToken);
+
   if (userToken) {
     headers["Authorization"] = `Bearer ${userToken}`;
   }
 
   let config = {
     method: method,
-    url: `https://petardev.live${url}`,
+    url: `https://tim6.petardev.live${url}`,
     headers: headers,
   };
 
   if (data instanceof FormData) {
     config.data = data;
   } else if (data) {
-    // Convert other data to JSON string if needed
     config.data = JSON.stringify(data);
     headers["Content-Type"] = "application/json";
   }
@@ -38,7 +39,7 @@ export const request = async (method, url, data) => {
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error("An error occurred during the request");
+    throw error;
   }
 };
 

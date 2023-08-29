@@ -113,19 +113,19 @@ const BookDetails = (props) => {
           <div className={classes.detailsHeaderActions}>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faArrowTurnUp} />
-              <p>Otpisi knjigu</p>
+              <Link to={`/book/${id}/writeOff`}>Otpisi knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faHandScissors} />
-              <p>Izdaj knjigu</p>
+              <Link to={`/book/${id}/issue`}>Izdaj knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faRotateRight} />
-              <p>Vrati knjigu</p>
+              <Link to={`/book/${id}/return`}>Vrati knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faCalendarCheck} />
-              <p>Rezervisi knjigu</p>
+              <Link to={`/book/${id}/reserve`}>Rezervisi knjigu</Link>
             </div>
             <div className={classes.headerButton} onClick={editBookHandler}>
               <FontAwesomeIcon icon={faFileEdit} />
@@ -162,11 +162,8 @@ const BookDetails = (props) => {
           </div>
         ) : (
           <div className={classes.bookErrorContainer}>
-            <img
-              src="/images/icons/book-not-found-emoji.svg"
-              alt="error emoji"
-            />
-            <h4>Could not find the book you're looking for.</h4>
+            <img src="/images/icons/triangle-error-icon.svg" alt="error icon" />
+            <p>Could not find the book you're looking for.</p>
             <Link to="/">Go back &#8594;</Link>
           </div>
         )}

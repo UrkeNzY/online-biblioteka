@@ -28,13 +28,18 @@ const FormButtons = (props) => {
         {location.pathname === "/new-book/media" ||
         location.pathname === "/new-book/media/edit" ||
         location.pathname === "/new-user" ||
-        location.pathname === "/new-author"
+        location.pathname === "/new-author" ||
+        location.pathname.endsWith("/reserve")
           ? "Sačuvaj"
+          : location.pathname.endsWith("/return")
+          ? "Vrati"
           : "Dalje"}
         {location.pathname === "/new-book/media" ||
         location.pathname === "/new-book/media/edit" ||
         location.pathname === "/new-user" ||
-        location.pathname === "/new-author" ? (
+        location.pathname === "/new-author" ||
+        location.pathname.endsWith("/reserve") ||
+        location.pathname.endsWith("/return") ? (
           <BsCheck2 className={classes.buttonIcon} />
         ) : (
           <AiOutlineArrowRight className={classes.buttonIcon} />

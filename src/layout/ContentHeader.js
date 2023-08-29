@@ -16,6 +16,14 @@ const ContentHeader = () => {
       return "Settings";
     }
 
+    if (path.startsWith("/profile/")) {
+      return "Profile";
+    }
+
+    if (path.startsWith("/new-user")) {
+      return "New User";
+    }
+
     switch (path) {
       case "/librarians":
         return "Librarians";
@@ -27,8 +35,6 @@ const ContentHeader = () => {
         return "Authors";
       case "/book-issuing":
         return "Book Issuing";
-      case "/new-user":
-        return "New User";
       case "/new-book":
         return "New Book";
       case "/new-book/general":
@@ -39,8 +45,6 @@ const ContentHeader = () => {
         return "New Book";
       case "/new-author":
         return "New Author";
-      case "/profile":
-        return "Profile";
       default:
         return "Dashboard";
     }

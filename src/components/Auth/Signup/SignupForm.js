@@ -4,6 +4,8 @@ import { GlobalContext } from "../../../state/GlobalState";
 
 import classes from "../../../styles/AuthForm.module.css";
 
+import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+
 export default function SignupForm() {
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
@@ -13,7 +15,7 @@ export default function SignupForm() {
   const [passwordConfirm, setPasswordConfirm] = useState();
   const device = "DivajsNejm2";
 
-  const { signUp } = useContext(GlobalContext);
+  const { signUp, loading, authErrors } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -54,6 +56,7 @@ export default function SignupForm() {
                     placeholder="John"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.name}</p>
                 <div className={classes.control}>
                   <label>Surname</label>
                   <input
@@ -62,6 +65,7 @@ export default function SignupForm() {
                     placeholder="Doe"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.surname}</p>
                 <div className={classes.control}>
                   <label>Username</label>
                   <input
@@ -70,6 +74,7 @@ export default function SignupForm() {
                     placeholder="JohnDoe"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.username}</p>
                 <div className={classes.control}>
                   <label>Email</label>
                   <input
@@ -78,6 +83,7 @@ export default function SignupForm() {
                     placeholder="example@gmail.com"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.email}</p>
                 <div>
                   <div className={classes.control}>
                     <label>Password</label>
@@ -96,6 +102,7 @@ export default function SignupForm() {
                     placeholder="Repeat your Password"
                   />
                 </div>
+                <p className={classes.authError}>{authErrors.password}</p>
               </div>
             </div>
             <div className={classes.action}>
@@ -110,6 +117,9 @@ export default function SignupForm() {
             </div>
           </form>
         </section>
+        {loading && (
+          <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
+        )}
       </div>
     </div>
   );

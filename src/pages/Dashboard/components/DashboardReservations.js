@@ -18,10 +18,8 @@ const DashboardReservations = ({ setActiveReservationsAmount }) => {
       try {
         const reservationData = await getAllReservations();
 
-        // Extracting data from the reservationData
         const activeReservations = reservationData.data.active;
 
-        // Extracting specific information from active reservations
         const activeReservationsInfo = activeReservations.map((reservation) => {
           const userInfo = reservation.student;
           const bookInfo = reservation.knjiga;

@@ -11,8 +11,8 @@ const Logout = () => {
 
   const logOut = async () => {
     try {
-      await userLogout(); // Call the userLogout function to log the user out on the server
-      logout(); // Update the context to remove the user data
+      await userLogout();
+      logout();
     } catch (error) {
       console.error("Error logging out:", error.message);
     }

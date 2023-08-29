@@ -54,14 +54,14 @@ const NewUserForm = () => {
             (option) => option.name === userInformation.data.role
           );
           console.log(userInformation.data.role);
-          setFetchedUserData(userInformation.data); // Update the fetched data state // Use directly from userInformation.data
+          setFetchedUserData(userInformation.data);
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
           );
-          setUserType(selectedOption || ""); // Use directly from userInformation.data
-          setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
-          setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
-          setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
+          setUserType(selectedOption || "");
+          setUserJMBG(userInformation.data.jmbg || "");
+          setUserEmail(userInformation.data.email || "");
+          setUserUsername(userInformation.data.username || "");
           setUserPassword("");
           setUserCheckPassword("");
           setUserImage(null);
@@ -71,14 +71,14 @@ const NewUserForm = () => {
             (option) => option.name === userInformation.data.role
           );
           console.log(selectedOption.id);
-          setFetchedUserData(userInformation.data); // Update the fetched data state
+          setFetchedUserData(userInformation.data);
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
           );
-          setUserType(selectedOption || ""); // Use directly from userInformation.data
-          setUserJMBG(userInformation.data.jmbg || ""); // Use directly from userInformation.data
-          setUserEmail(userInformation.data.email || ""); // Use directly from userInformation.data
-          setUserUsername(userInformation.data.username || ""); // Use directly from userInformation.data
+          setUserType(selectedOption || "");
+          setUserJMBG(userInformation.data.jmbg || "");
+          setUserEmail(userInformation.data.email || "");
+          setUserUsername(userInformation.data.username || "");
           setUserPassword("");
           setUserCheckPassword("");
           setUserImage(null);
@@ -179,7 +179,7 @@ const NewUserForm = () => {
       setUserCheckPassword("");
       setUserImage(null);
     } catch (error) {
-      console.log(error); // Log the detailed error for debugging
+      console.log(error);
       if (error.response) {
         const errorData =
           error.response.data.errors || error.response.data.data;
@@ -191,7 +191,6 @@ const NewUserForm = () => {
           userJMBG: errorData.jmbg || [],
           userPassword: errorData.password || [],
           userUsername: errorData.username || [],
-          // Update other input fields here
         });
       } else {
         setInputErrors({
@@ -200,7 +199,6 @@ const NewUserForm = () => {
           userType: [],
           userJMBG: [],
           userUsername: [],
-          // Update other input fields here
         });
       }
       return;

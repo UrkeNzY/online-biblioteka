@@ -7,7 +7,6 @@ function MediaDropzone({ photo }) {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    // Check if the photo prop is available and set it in the files state
     if (photo) {
       setFiles([{ name: photo, preview: photo }]);
     }

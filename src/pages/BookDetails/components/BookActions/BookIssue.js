@@ -60,7 +60,7 @@ const BookIssue = () => {
 
   const formatDate = (date) => {
     console.log(format(date, "MM/dd/yyyy"));
-    return format(date, "MM/dd/yyyy"); // Format the date as "08.08.2023"
+    return format(date, "MM/dd/yyyy");
   };
 
   const createIssueHandler = async () => {

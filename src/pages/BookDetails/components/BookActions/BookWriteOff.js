@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { allIssuances, returnBook } from "../../../../services/books";
+import { allIssuances, writeBookOff } from "../../../../services/books";
 import format from "date-fns/format";
-import differenceInDays from "date-fns/differenceInDays";
+import differenceInDays from "date-fns/differenceInDays"; // Import the function for calculating days difference
 
 import classes from "../../../../styles/BookDetails.module.css";
 
@@ -45,7 +45,7 @@ const formatDuration = (days) => {
   }
 };
 
-const BookReturn = () => {
+const BookWriteOff = () => {
   const [issuances, setIssuances] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [isLoading, setIsLoading] = useState();
@@ -62,7 +62,7 @@ const BookReturn = () => {
       try {
         setIsLoading(true);
         const response = await allIssuances({ book_id: id });
-        const issuanceData = response.data.izdate;
+        const issuanceData = response.data.prekoracene;
 
         const currentDate = new Date();
 
@@ -104,9 +104,9 @@ const BookReturn = () => {
     fetchIssuances();
   }, []);
 
-  const returnBookHandler = async () => {
+  const writeOffHandler = async () => {
     try {
-      await returnBook({ toReturn: selectedRows });
+      await writeBookOff({ toWriteoff: selectedRows });
     } catch (error) {
       console.log(error);
       return;
@@ -117,7 +117,7 @@ const BookReturn = () => {
   return (
     <div className={classes.bookReturnContainer}>
       <div className={classes.bookReturnHeader}>
-        <p>Vrati knjigu</p>
+        <p>Otpiši knjigu</p>
       </div>
       <Table
         tableData={issuances}
@@ -127,10 +127,10 @@ const BookReturn = () => {
         isLoading={isLoading}
       />
       <div className={classes.returnButtonsContainer}>
-        <FormButtons onClick={returnBookHandler} />
+        <FormButtons onClick={writeOffHandler} />
       </div>
     </div>
   );
 };
 
-export default BookReturn;
+export default BookWriteOff;

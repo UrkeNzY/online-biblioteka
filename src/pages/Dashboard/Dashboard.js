@@ -10,19 +10,16 @@ import DashboardStats from "./components/DashboardStats";
 
 const Dashboard = () => {
   const [activeReservationsAmount, setActiveReservationsAmount] = useState(0);
-  const [activeIssuancesAmount, setActiveIssuancesAmount] = useState(0); // Set to 0 by default
+  const [activeIssuancesAmount, setActiveIssuancesAmount] = useState(0);
   const [offLimitReservationsAmount, setOffLimitReservationsAmount] =
     useState(0);
-
-  let activeCount = 0;
-  let offLimitCount = 0;
 
   useEffect(() => {
     const fetchIssuances = async () => {
       try {
         const response = await allIssuances();
         const issuanceData = response.data.izdate;
-        const currentDate = new Date(); // Get the current date and time
+        const currentDate = new Date();
 
         let activeCount = 0;
         let offLimitCount = 0;

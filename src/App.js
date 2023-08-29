@@ -39,6 +39,7 @@ import BookReserve from "./pages/BookDetails/components/BookActions/BookReserve"
 import BookIssue from "./pages/BookDetails/components/BookActions/BookIssue";
 import BookReturn from "./pages/BookDetails/components/BookActions/BookReturn";
 import BookIssuances from "./pages/BookIssuances/BookIssuances";
+import BookWriteOff from "./pages/BookDetails/components/BookActions/BookWriteOff";
 import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
@@ -263,6 +264,7 @@ function App() {
           <Route path="/book/:id/reserve" element={<BookReserve />} />
           <Route path="/book/:id/issue" element={<BookIssue />} />
           <Route path="/book/:id/return" element={<BookReturn />} />
+          <Route path="/book/:id/writeOff" element={<BookWriteOff />} />
         </Route>
 
         <Route

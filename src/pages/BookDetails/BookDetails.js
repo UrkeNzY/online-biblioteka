@@ -113,7 +113,7 @@ const BookDetails = (props) => {
           <div className={classes.detailsHeaderActions}>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faArrowTurnUp} />
-              <p>Otpisi knjigu</p>
+              <Link to={`/book/${id}/writeOff`}>Otpisi knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faHandScissors} />

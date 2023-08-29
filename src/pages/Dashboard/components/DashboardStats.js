@@ -69,10 +69,10 @@ const DashboardStats = ({
                     textAnchor="middle"
                     fill={
                       hoveredLabel === props.payload.value ? "#3f51b5" : "#666"
-                    } // Change color on hover
+                    }
                     transform="rotate(0)"
                     style={{
-                      cursor: "pointer", // Change cursor on hover
+                      cursor: "pointer",
                     }}
                   >
                     {props.payload.value}

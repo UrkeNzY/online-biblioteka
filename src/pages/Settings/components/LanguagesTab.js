@@ -4,27 +4,27 @@ import { fetchcreateBookData } from "../../../services/books";
 import Table from "../../../components/UI/Tables/Table";
 
 const tableColumns = [
-  { header: "Naziv zanra", field: "categoryName", width: "100%" },
+  { header: "Naziv jezika", field: "categoryName", width: "100%" },
 ];
 
-const GenresTab = () => {
-  const [bookGenres, setBookGenres] = useState([]);
+const WritingTab = () => {
+  const [bookLanguages, setBookLanguages] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
   const isDisabled = true;
 
   useEffect(() => {
-    const fetchGenres = async () => {
+    const fetchLanguages = async () => {
       try {
         setIsLoading(true);
         const bookData = await fetchcreateBookData();
 
-        const genres = bookData.data.genres.map((genre) => ({
-          id: genre.id,
-          name: genre.name,
+        const languages = bookData.data.languages.map((language) => ({
+          id: language.id,
+          name: language.name,
         }));
 
-        setBookGenres(genres);
+        setBookLanguages(languages);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -32,13 +32,13 @@ const GenresTab = () => {
       }
     };
 
-    fetchGenres();
+    fetchLanguages();
   }, []);
 
   return (
     <Table
       tableColumns={tableColumns}
-      tableData={bookGenres}
+      tableData={bookLanguages}
       isLoading={isLoading}
       isDisabled={isDisabled}
       loadingSpinner="/images/icons/settings-loading-spinner.gif"
@@ -46,4 +46,4 @@ const GenresTab = () => {
   );
 };
 
-export default GenresTab;
+export default WritingTab;

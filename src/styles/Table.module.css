@@ -93,6 +93,24 @@ tr:last-child td {
   color: #991b1b;
   padding: 4px 6px;
   border-radius: 10px;
-  width: 37%;
   text-align: center;
+  display: inline-block;
+}
+
+.statusContainer {
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  text-align: center;
+  padding: 3px 6px;
+  border-radius: 10px;
+  font-size: 12px;
+  width: 90px;
+}
+
+.statusContainer.Rezervisana {
+  background-color: #fde68a;
+}
+
+.statusContainer.Zatvorena {
+  background-color: #e5e4e2;
 }

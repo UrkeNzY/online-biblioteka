@@ -1,0 +1,35 @@
+.policyContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 54%;
+  font-size: 14px;
+  padding: 8px 25px;
+}
+
+.policyTitle {
+  font-size: 20px;
+  margin-top: 14px;
+}
+
+.policyDescription {
+  line-height: 20px;
+}
+
+.policyInput {
+  display: flex;
+  align-items: center;
+}
+.policyInput input {
+  margin: 0 0 40px 85px;
+}
+
+.policyInput p {
+  margin: 0 0 40px 10px;
+}
+
+.policySection hr {
+  background-color: #e8e6e8;
+  opacity: 0.25;
+  margin: 0;
+}

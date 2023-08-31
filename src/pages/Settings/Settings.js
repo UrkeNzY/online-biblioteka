@@ -15,6 +15,7 @@ const Settings = () => {
           { text: "Povez", path: "/settings/bindings" },
           { text: "Format", path: "/settings/formats" },
           { text: "Pismo", path: "/settings/writing" },
+          { text: "Jezik", path: "/settings/languages" },
         ]}
       />
       <Outlet />

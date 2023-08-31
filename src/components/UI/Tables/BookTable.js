@@ -1,20 +1,18 @@
-import { Fragment, useEffect, useState, useCallback } from "react";
-
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
+
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-const Table = (props) => {
+const BookTable = (props) => {
   const {
     tableColumns,
     tableData,
     isLoading,
     selectedRows,
     onSelectedRowsChange,
-    loadingSpinner,
-    isDisabled,
   } = props;
   const [filteredData, setFilteredData] = useState(tableData);
   const [selectAll, setSelectAll] = useState(false);
@@ -59,9 +57,9 @@ const Table = (props) => {
       <div className={classes.tableContainer}>
         <table className={classes.table}>
           <colgroup>
-            <col key={Math.random()} style={{ width: "5%" }} />
+            <col key="colCheckbox" style={{ width: "5%" }} />
             {tableColumns.map((column) => (
-              <col key={Math.random()} style={{ width: column.width }} />
+              <col key={column.field} style={{ width: column.width }} />
             ))}
             <col key="colLast" style={{ width: "15%" }} />
           </colgroup>
@@ -73,7 +71,6 @@ const Table = (props) => {
                   className={classes.checkbox}
                   checked={selectAll}
                   onChange={handleHeaderCheckboxClick}
-                  disabled={isDisabled}
                 />
               </th>
               {tableColumns.map((column) => (
@@ -91,7 +88,6 @@ const Table = (props) => {
                     className={classes.checkbox}
                     checked={selectedRows && selectedRows.includes(table.id)}
                     onChange={() => handleRowSelect(table.id)}
-                    disabled={isDisabled}
                   />
                 </td>
                 <td>
@@ -112,33 +108,53 @@ const Table = (props) => {
                       <p>{table.name}</p>
                     )}
                   </div>
+                  {table.reservationDate || ""}
                 </td>
+                <td>{table.borrowDate || table.reservationDue}</td>
                 <td>
-                  {table.email ||
-                    table.description ||
-                    table.author ||
-                    table.borrowDate}
-                </td>
-                <td>
-                  {table.userType || table.category || table.daysBorrowed}
-                </td>
-                <td>
-                  {table.lastAccess || table.available || table.noOffLimit}
-                  {table.withOffLimit && (
-                    <p className={classes.offLimit}>{table.withOffLimit}</p>
+                  {table.userName || table.returnDate || (
+                    <p className={table.withOffLimit ? classes.offLimit : ""}>
+                      {table.daysBorrowed}
+                    </p>
                   )}
                 </td>
-                {table.reserved && <td>{table.reserved}</td>}
-                {table.issued && <td>{table.issued}</td>}
-                {table.offLimit && <td>{table.offLimit}</td>}
-                {table.totalAmount && <td>{table.totalAmount}</td>}
-                {table.librarianName && <td>{table.librarianName}</td>}
+
+                {table.type !== "prekoracene" && (
+                  <td>
+                    {table.status ? (
+                      <p
+                        className={`${classes.statusContainer} ${
+                          classes[table.status]
+                        }`}
+                      >
+                        {table.status}
+                      </p>
+                    ) : table.borrowDate && table.type !== "izdate" ? (
+                      <p className={table.withOffLimit ? classes.offLimit : ""}>
+                        {table.daysBorrowed}
+                      </p>
+                    ) : table.issueLibrarianName ? (
+                      table.issueLibrarianName
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                )}
+
                 <td>
-                  {table.actionButton && (
-                    <img
-                      src="images/buttons/dashboard-actions.svg"
-                      alt="dashboard actions button"
-                    />
+                  {table.type === "prekoracene" && table.withOffLimit}
+                  {!table.issueLibrarianName && table.noOffLimit ? (
+                    <p className={classes.offLimit}>{table.noOffLimit}</p>
+                  ) : !table.issueLibrarianName &&
+                    table.withOffLimit &&
+                    table.type === "prekoracene" ? (
+                    <p className={classes.offLimit}>{table.withOffLimit}</p>
+                  ) : (
+                    table.issueLibrarianName &&
+                    table.type !== "izdate" &&
+                    table.type !== "prekoracene" && (
+                      <>{table.issueLibrarianName}</>
+                    )
                   )}
                 </td>
               </tr>
@@ -153,13 +169,7 @@ const Table = (props) => {
         </div>
       )}
       {isLoading ? (
-        <LoadingSpinner
-          loadingSpinner={
-            loadingSpinner
-              ? loadingSpinner
-              : "/images/icons/loading-spinner.gif"
-          }
-        />
+        <LoadingSpinner loadingSpinner="/images/icons/loading-spinner.gif" />
       ) : (
         <Pagination
           tableItems={tableData}
@@ -170,4 +180,4 @@ const Table = (props) => {
   );
 };
 
-export default Table;
+export default BookTable;

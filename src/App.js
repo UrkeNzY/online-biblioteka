@@ -30,6 +30,7 @@ import PublishersTab from "./pages/Settings/components/PublishersTab";
 import BindingsTab from "./pages/Settings/components/BindingTab";
 import FormatsTab from "./pages/Settings/components/FormatsTab";
 import WritingTab from "./pages/Settings/components/WritingTab";
+import LanguagesTab from "./pages/Settings/components/LanguagesTab";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import BookMainDetails from "./pages/BookDetails/components/BookMainDetails";
 import BookSpecDetails from "./pages/BookDetails/components/BookSpecDetails";
@@ -238,6 +239,7 @@ function App() {
           <Route path="/settings/bindings" element={<BindingsTab />} />
           <Route path="/settings/formats" element={<FormatsTab />} />
           <Route path="/settings/writing" element={<WritingTab />} />
+          <Route path="/settings/languages" element={<LanguagesTab />} />
         </Route>
         <Route
           path="/book/:id"

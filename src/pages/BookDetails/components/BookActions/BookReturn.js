@@ -89,7 +89,6 @@ const BookReturn = () => {
               `${daysBorrowed - 20} dan${daysBorrowed % 10 === 1 ? "" : "a"}`,
             librarianName:
               issuance.bibliotekar0.name + " " + issuance.bibliotekar0.surname,
-            status: issuance.status,
           };
         });
 

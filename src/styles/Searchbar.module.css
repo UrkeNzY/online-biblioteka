@@ -16,11 +16,20 @@
   margin: 0;
   width: 9.375rem;
   margin-right: 0.3125rem;
+  transition: .5s;
+  border-bottom: transparent solid .1rem;
+}
+
+.searchbar:hover {
+  border-bottom: #f0f0f0 solid .1rem;
+  width: 14rem;
 }
 
 .searchbar:focus {
   outline: none;
   box-shadow: none;
+  border-bottom: #f0f0f0 solid .1rem;
+  width: 14rem;
 }
 
 .clearIcon {

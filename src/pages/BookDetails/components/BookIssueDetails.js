@@ -77,7 +77,7 @@ const BookIssueDetails = () => {
         </div>
         <div className={classes.actionButton}>
           <FontAwesomeIcon icon={faTriangleExclamation} />
-          <Link to="/">Knjige u prekoracenju</Link>
+          <Link to="/">Knjige u prekoračenju</Link>
         </div>
         <div className={classes.actionButton}>
           <FontAwesomeIcon icon={faCalendarCheck} />

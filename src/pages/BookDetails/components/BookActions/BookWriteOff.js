@@ -10,14 +10,14 @@ import Table from "../../../../components/UI/Tables/Table";
 import FormButtons from "../../../../components/Forms/FormButtons";
 
 const tableColumns = [
-  { header: "Izdato uceniku", field: "issuedTo", width: "20%" },
+  { header: "Izdato učeniku", field: "issuedTo", width: "20%" },
   { header: "Datum izdavanja", field: "issueDate", width: "17%" },
   {
-    header: "Trenutno zadrzavanje knjige",
+    header: "Trenutno zadržavanje knjige",
     field: "issueDuration",
     width: "23%",
   },
-  { header: "Prekoracenje u danima", field: "issueOffLimit", width: "20%" },
+  { header: "Prekoračenje u danima", field: "issueOffLimit", width: "20%" },
   { header: "Knjigu izdao", field: "reservedBy", width: "20%" },
 ];
 
@@ -83,7 +83,7 @@ const BookWriteOff = () => {
                     Math.abs(daysBorrowed) > 1 ? "a" : ""
                   }`
                 : formatDuration(daysBorrowed),
-            noOffLimit: daysBorrowed < 20 && "Nema prekoracenja",
+            noOffLimit: daysBorrowed < 20 && "Nema prekoračenja",
             withOffLimit:
               daysBorrowed > 20 &&
               `${daysBorrowed - 20} dan${daysBorrowed % 10 === 1 ? "" : "a"}`,

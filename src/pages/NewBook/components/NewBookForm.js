@@ -146,6 +146,7 @@ const NewBookForm = () => {
           id="bookName"
           value={submittedName}
           onChange={changeBookNameHandler}
+          required
         />
         <p className={classes.errorText}>{bookErrors.title}</p>
         <label htmlFor="bookDescription">

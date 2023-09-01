@@ -89,8 +89,8 @@ const BookMainDetails = () => {
         <h4>Storyline (Kratki sadrzaj)</h4>
         <ReactShowMoreText
           lines={5}
-          more="Prikazi vise &#8595;"
-          less="Prikazi manje &#8593;"
+          more="Prikaži više &#8595;"
+          less="Prikaži manje &#8593;"
           anchorClass={classes.descriptionAnchor}
         >
           {mainBookData.description}

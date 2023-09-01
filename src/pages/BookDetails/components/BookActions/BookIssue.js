@@ -98,7 +98,7 @@ const BookIssue = () => {
       <p className={classes.issueFormHeader}>Izdaj knjigu</p>
       <form>
         <InputSelect
-          labelText="Izaberi ucenika koji zaduzuje knjigu"
+          labelText="Izaberi učenika koji zadužuje knjigu"
           id="reserveUsers"
           value={submittedUserId}
           options={users}
@@ -120,14 +120,14 @@ const BookIssue = () => {
             <p className={classes.errorText}>{issueErrors.date}</p>
           </div>
           <div>
-            <p>Datum vracanja</p>
+            <p>Datum vraćanja</p>
             <ReactDatePicker
               selected={returnDate}
               dateFormat="dd.MM.yyyy"
               customInput={<CustomInput />}
               disabled
             />
-            <p className={classes.issueDurationText}>Rok vracanja: 20 dana</p>
+            <p className={classes.issueDurationText}>Rok vraćanja: 20 dana</p>
           </div>
         </div>
       </form>

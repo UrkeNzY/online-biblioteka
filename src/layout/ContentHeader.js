@@ -13,38 +13,38 @@ const ContentHeader = () => {
     }
 
     if (path.startsWith("/settings/")) {
-      return "Settings";
+      return "Podešavanja";
     }
 
     if (path.startsWith("/profile/")) {
-      return "Profile";
+      return "Profil";
     }
 
     if (path.startsWith("/new-user")) {
-      return "New User";
+      return "Novi korisnik";
     }
 
     switch (path) {
       case "/librarians":
-        return "Librarians";
+        return "Bibliotekari";
       case "/students":
-        return "Students";
+        return "Učenici";
       case "/book-record":
-        return "Books";
+        return "Knjige";
       case "/authors":
-        return "Authors";
+        return "Autori";
       case "/book-issuing":
-        return "Book Issuing";
+        return "Izdavanje knjiga";
       case "/new-book":
-        return "New Book";
+        return "Nova knjiga";
       case "/new-book/general":
-        return "New Book";
+        return "Nova knjiga";
       case "/new-book/specs":
-        return "New Book";
+        return "Nova knjiga";
       case "/new-book/media":
-        return "New Book";
+        return "Nova knjiga";
       case "/new-author":
-        return "New Author";
+        return "Novi autor";
       default:
         return "Dashboard";
     }

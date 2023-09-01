@@ -154,7 +154,7 @@ const DashboardActivities = () => {
           </div>
         );
       })}
-      <button className={classes.activityButton}>Show</button>
+      <button className={classes.activityButton}>Prikaži</button>
     </div>
   );
 };

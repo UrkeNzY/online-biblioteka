@@ -126,7 +126,10 @@ const BookReturn = () => {
         isLoading={isLoading}
       />
       <div className={classes.returnButtonsContainer}>
-        <FormButtons onClick={returnBookHandler} />
+        <FormButtons
+          onClick={returnBookHandler}
+          disabled={selectedRows.length === 0}
+        />
       </div>
     </div>
   );

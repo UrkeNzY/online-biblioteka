@@ -127,7 +127,10 @@ const BookWriteOff = () => {
         isLoading={isLoading}
       />
       <div className={classes.returnButtonsContainer}>
-        <FormButtons onClick={writeOffHandler} />
+        <FormButtons
+          onClick={writeOffHandler}
+          disabled={selectedRows.length === 0}
+        />
       </div>
     </div>
   );

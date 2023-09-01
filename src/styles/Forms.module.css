@@ -120,6 +120,14 @@ section.buttons {
   background-color: rgb(46, 143, 46);
 }
 
+#sacuvaj.disabled {
+  background-color: rgba(59, 173, 59, 0.3);
+}
+
+#sacuvaj.disabled:hover {
+  cursor: default;
+}
+
 .buttonIcon {
   margin: 0;
   padding: 0;

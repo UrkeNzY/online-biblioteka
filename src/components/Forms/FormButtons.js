@@ -21,9 +21,12 @@ const FormButtons = (props) => {
         <RxCross1 className={classes.buttonIcon} />
       </button>
       <button
-        className={classes.button}
+        className={`${classes.button} ${
+          props.disabled ? classes.disabled : ""
+        }`}
         id={classes.sacuvaj}
         onClick={props.onClick}
+        disabled={props.disabled}
       >
         {location.pathname === "/new-book/media" ||
         location.pathname === "/new-book/media/edit" ||

@@ -50,7 +50,7 @@ export const deleteBookReservation = (reservationIndex) => {
 };
 
 export const getAllReservations = () => {
-  let data = JSON.stringify({});
+  let data = JSON.stringify({ book_id: 9 });
   return request("get", "/api/books/reservations", data);
 };
 
@@ -71,7 +71,9 @@ export const deleteBookIssuance = (bookIndex) => {
 };
 
 export const allIssuances = (bookId) => {
-  return request("get", "/api/books/borrows", bookId);
+  let data = JSON.stringify(bookId);
+  console.log(data);
+  return request("get", "/api/books/borrows", data);
 };
 
 export const createBookReview = (bookIndex, reviewData) => {

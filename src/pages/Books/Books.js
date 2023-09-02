@@ -14,8 +14,8 @@ const tableColumns = [
   { header: "Na raspolaganju", field: "availableBooks", width: "10%" },
   { header: "Rezervisano", field: "reservedBooks", width: "8%" },
   { header: "Izdato", field: "issuedBooks", width: "5%" },
-  { header: "U prekoracenju", field: "offLimitBooks", width: "10%" },
-  { header: "Ukupna kolicina", field: "bookTotalAmount", width: "15%" },
+  { header: "U prekoračenju", field: "offLimitBooks", width: "10%" },
+  { header: "Ukupna količina", field: "bookTotalAmount", width: "15%" },
 ];
 
 const Books = () => {

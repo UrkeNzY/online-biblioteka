@@ -6,48 +6,10 @@ import {
   faXmark,
   faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
-import { getAllReservations } from "../../../services/books";
 
 import classes from "../../../styles/Dashboard.module.css";
 
-const DashboardReservations = ({ setActiveReservationsAmount }) => {
-  const [activeReservations, setActiveReservations] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const reservationData = await getAllReservations();
-
-        const activeReservations = reservationData.data.active;
-
-        const activeReservationsInfo = activeReservations.map((reservation) => {
-          const userInfo = reservation.student;
-          const bookInfo = reservation.knjiga;
-          return {
-            userId: userInfo.id,
-            userName: userInfo.name + " " + userInfo.surname,
-            userProfilePic: userInfo.photoPath,
-            bookId: bookInfo.id,
-            bookName: bookInfo.title,
-            actionDate: reservation.action_date,
-          };
-        });
-
-        setActiveReservations(activeReservationsInfo);
-
-        const activeReservationAmount = activeReservationsInfo.length;
-        setActiveReservationsAmount(activeReservationAmount);
-
-        // Now you have the extracted reservation information
-        console.log("Active Reservations:", activeReservationsInfo);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, [setActiveReservationsAmount]);
-
+const DashboardReservations = ({ activeReservations }) => {
   function formatDate(dateString) {
     const dateObject = new Date(dateString);
     const day = dateObject.getDate().toString().padStart(2, "0");
@@ -95,7 +57,7 @@ const DashboardReservations = ({ setActiveReservationsAmount }) => {
 
       <div className={classes.sectionFooter}>
         <FontAwesomeIcon icon={faCalendarDays} />
-        <p>Prikazi sve</p>
+        <p>Prikaži sve</p>
       </div>
     </div>
   );

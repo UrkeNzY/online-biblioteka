@@ -50,8 +50,8 @@ const Pagination = ({ tableItems, onUpdateFilteredData }) => {
       {pageCount > 0 && (
         <Fragment>
           <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
+            previousLabel={<span className={classes.customLabel}>Previous</span>}
+            nextLabel={<span className={classes.customLabel}>Next</span>}
             pageCount={pageCount}
             onPageChange={changePageHandler}
             forcePage={activePage}

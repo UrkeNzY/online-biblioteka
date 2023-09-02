@@ -1,9 +1,16 @@
+.contentHeader {
+  position: sticky;
+  top: 4.5rem;
+  background-color: white;
+  z-index: 1;
+}
+
 .contentHeader h1,
 .contentHeader p {
   font-size: 1.875rem;
   font-weight: 500;
   color: #5d5c68;
-  padding: 1.63rem 1rem;
+  padding: 1.64rem 1rem;
 }
 
 .contentHeader hr {

@@ -4,7 +4,7 @@ import { fetchcreateBookData } from "../../../services/books";
 import Table from "../../../components/UI/Tables/Table";
 
 const tableColumns = [
-  { header: "Naziv zanra", field: "categoryName", width: "100%" },
+  { header: "Naziv žanra", field: "categoryName", width: "100%" },
 ];
 
 const GenresTab = () => {

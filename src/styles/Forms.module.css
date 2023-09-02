@@ -9,9 +9,11 @@
 }
 
 .form {
+  width: 80%;
   display: grid;
   column-gap: 2rem;
   grid-template-columns: 1fr 1fr;
+  /* background-color: blue; */
 }
 
 input:focus,
@@ -76,20 +78,23 @@ section.image {
 }
 
 section.buttons {
-  position: absolute;
-  width: 25%;
+  position: fixed;
+  width: 15%;
   bottom: 2rem;
-  right: 1rem;
+  right: 2rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  /* background-color: yellow; */
+  align-items: flex-end;
 }
 
 .button {
   font-size: 1rem;
-  width: 48%;
+  width: 100%;
   min-width: 130px;
-  padding: 0.7rem 1.3rem;
+  padding: .7rem 1.3rem;
+  margin: .5rem 0;
   color: white;
   border: none;
   text-transform: uppercase;
@@ -118,6 +123,14 @@ section.buttons {
 
 #sacuvaj:hover {
   background-color: rgb(46, 143, 46);
+}
+
+#sacuvaj.disabled {
+  background-color: rgba(59, 173, 59, 0.3);
+}
+
+#sacuvaj.disabled:hover {
+  cursor: default;
 }
 
 .buttonIcon {

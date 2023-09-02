@@ -16,7 +16,7 @@ import FormButtons from "../../../../components/Forms/FormButtons";
 
 const BookIssue = () => {
   const [users, setUsers] = useState([]);
-  const [submittedUserId, setSubmittedUserId] = useState("");
+  const [submittedUserId, setSubmittedUserId] = useState(null);
   const [submittedDate, setSubmittedDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(addDays(new Date(), 20));
   const [issueErrors, setIssueErrors] = useState({ user: "", date: "" });
@@ -98,7 +98,7 @@ const BookIssue = () => {
       <p className={classes.issueFormHeader}>Izdaj knjigu</p>
       <form>
         <InputSelect
-          labelText="Izaberi ucenika koji zaduzuje knjigu"
+          labelText="Izaberi učenika koji zadužuje knjigu"
           id="reserveUsers"
           value={submittedUserId}
           options={users}
@@ -116,18 +116,19 @@ const BookIssue = () => {
               onChange={dateChangeHandler}
               dateFormat="dd.MM.yyyy"
               customInput={<CustomInput />}
+              disabled
             />
             <p className={classes.errorText}>{issueErrors.date}</p>
           </div>
           <div>
-            <p>Datum vracanja</p>
+            <p>Datum vraćanja</p>
             <ReactDatePicker
               selected={returnDate}
               dateFormat="dd.MM.yyyy"
               customInput={<CustomInput />}
               disabled
             />
-            <p className={classes.issueDurationText}>Rok vracanja: 20 dana</p>
+            <p className={classes.issueDurationText}>Rok vraćanja: 20 dana</p>
           </div>
         </div>
       </form>
@@ -135,6 +136,8 @@ const BookIssue = () => {
         <FormButtons
           onClickAlt={resetReservationHandler}
           onClick={createIssueHandler}
+          label="Izdaj"
+          disabled={submittedUserId === null}
         />
       </div>
     </div>

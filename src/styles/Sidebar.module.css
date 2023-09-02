@@ -44,14 +44,27 @@
   text-decoration: none;
   color: #363b59;
   padding: 1rem 1.375rem;
+  white-space: nowrap;
+  transition: .5s;
+}
+
+.sidebarItem p {
+  width: 100%;
+  overflow: hidden;
 }
 
 .sidebarItem:hover {
   background-color: #eaeaea;
+  transition: .5s;
 }
 
 .sidebarItem:hover p {
   color: #4558be;
+  transition: 0.5s;
+}
+
+.sidebarItem img {
+  filter: brightness(1);
   transition: 0.5s;
 }
 
@@ -74,4 +87,12 @@
 
 .sidebarFooter .sidebarItem {
   margin: 1.25rem 0;
+}
+
+.activeItem {
+  background-color: #eaeaea;
+}
+
+.activeItem img {
+  filter: brightness(0.6);
 }

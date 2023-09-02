@@ -14,6 +14,7 @@ import classes from "../../../styles/Forms.module.css";
 import InputText from "../../../components/Forms/InputText";
 import InputSelect from "../../../components/Forms/InputSelect";
 import FormButtons from "../../../components/Forms/FormButtons";
+import LoadingSpinner from "../../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const NewUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -33,6 +34,8 @@ const NewUserForm = () => {
     userPassword: [],
     userUsername: [],
   });
+  const [isFormEmpty, setIsFormEmpty] = useState(true);
+  const [isLoading, setIsLoading] = useState();
 
   const dropdownOptions = [
     { id: 0, name: "" },
@@ -124,6 +127,7 @@ const NewUserForm = () => {
   };
 
   const submitFormHandler = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
 
     const [name, surname] = userName.split(" ");
@@ -178,6 +182,8 @@ const NewUserForm = () => {
       setUserPassword("");
       setUserCheckPassword("");
       setUserImage(null);
+
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -192,6 +198,7 @@ const NewUserForm = () => {
           userPassword: errorData.password || [],
           userUsername: errorData.username || [],
         });
+        setIsLoading(false);
       } else {
         setInputErrors({
           userName: ["An error occurred during the request"],
@@ -200,12 +207,36 @@ const NewUserForm = () => {
           userJMBG: [],
           userUsername: [],
         });
+        setIsLoading(false);
       }
       return;
     }
     console.log(fetchedUserData);
-    navigate("/dashboard");
+    navigate(userType === 1 ? "/librarians" : "/students");
   };
+
+  useEffect(() => {
+    const hasValue =
+      userName.trim() !== "" ||
+      userType !== "" ||
+      userJMBG.trim() !== "" ||
+      userEmail.trim() !== "" ||
+      userUsername.trim() !== "" ||
+      userPassword.trim() !== "" ||
+      userCheckPassword.trim() !== "" ||
+      userImage !== null;
+
+    setIsFormEmpty(!hasValue);
+  }, [
+    userName,
+    userType,
+    userJMBG,
+    userEmail,
+    userUsername,
+    userPassword,
+    userCheckPassword,
+    userImage,
+  ]);
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
@@ -306,7 +337,10 @@ const NewUserForm = () => {
             />
           )}
         </div>
-        <FormButtons />
+        {isLoading && (
+          <LoadingSpinner loadingSpinner="/images/icons/form-submit-loading-spinner.gif" />
+        )}
+        <FormButtons label="Sačuvaj" disabled={isFormEmpty} />
       </section>
     </form>
   );

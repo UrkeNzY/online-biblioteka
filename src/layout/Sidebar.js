@@ -1,38 +1,43 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
   {
-    text: "Dashboard",
+    text: "Kontrolna tabla",
     icon: "/images/icons/dashboard.svg",
     path: "/dashboard",
   },
   {
-    text: "Librarians",
+    text: "Bibliotekari",
     icon: "/images/icons/bibliotekari.svg",
     path: "/librarians",
   },
-  { text: "Students", icon: "/images/icons/ucenici.svg", path: "/students" },
+  { text: "Učenici", icon: "/images/icons/ucenici.svg", path: "/students" },
   {
-    text: "Books",
+    text: "Knjige",
     icon: "/images/icons/knjige.svg",
     path: "/book-record",
   },
-  { text: "Authors", icon: "/images/icons/autori.svg", path: "/authors" },
+  { text: "Autori", icon: "/images/icons/autori.svg", path: "/authors" },
   {
-    text: "Book Issuing",
+    text: "Izdavanje knjiga",
     icon: "/images/icons/izdavanje-knjiga.svg",
     path: "/book-issuing",
   },
 ];
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const location = useLocation();
 
   const sidebarExpandHandler = () => {
     setIsExpanded((prevState) => !prevState);
+  };
+
+  const closeSidebar = () => {
+    setIsExpanded(false);
   };
 
   return (
@@ -56,9 +61,13 @@ const Sidebar = () => {
       <div className={classes.sidebarMenu}>
         {sidebarItems.map((item) => (
           <NavLink
-            className={classes.sidebarItem}
+            className={`${classes.sidebarItem} ${
+              location.pathname === item.path ? classes.activeItem : ""
+            }`}
             to={item.path}
             key={Math.random()}
+            onClick={closeSidebar}
+            // activeClassName={classes.activeItem}
           >
             <img src={item.icon} alt="sidebar menu item icon" />
             {isExpanded && <p>{item.text}</p>}
@@ -68,9 +77,17 @@ const Sidebar = () => {
       <div className={classes.sidebarFooter}>
         <hr />
         <div className={classes.footerBottom}>
-          <NavLink className={classes.sidebarItem} to="/settings/policies">
+          <NavLink
+            className={`${classes.sidebarItem} ${
+              location.pathname === "/settings/policies"
+                ? classes.activeItem
+                : ""
+            }`}
+            to="/settings/policies"
+            onClick={closeSidebar}
+          >
             <img src="/images/icons/settings.svg" alt="sidebar options icon" />
-            {isExpanded && <p>Settings</p>}
+            {isExpanded && <p>Podešavanja</p>}
           </NavLink>
         </div>
       </div>

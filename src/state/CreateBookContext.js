@@ -23,6 +23,8 @@ export const CreateBookProvider = ({ children }) => {
   const [editBookData, setEditBookData] = useState({});
   const [bookFound, setBookFound] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [bookId, setBookId] = useState();
   const [bookErrors, setBookErrors] = useState({
     authors: "",
@@ -58,6 +60,7 @@ export const CreateBookProvider = ({ children }) => {
 
   const submitFormHandler = async () => {
     try {
+      setIsLoading(true);
       await createBook({
         nazivKnjiga: newBookData.submittedName,
         brStrana: newBookData.submittedPages,
@@ -76,6 +79,7 @@ export const CreateBookProvider = ({ children }) => {
         authors: newBookData.submittedAuthor,
       });
       console.log("created book");
+      setIsLoading(false);
     } catch (error) {
       console.log(error.response.data.errors);
       const errorData = error.response.data.errors;
@@ -96,6 +100,7 @@ export const CreateBookProvider = ({ children }) => {
         title: errorData.title || "",
       });
       navigate("/new-book/general");
+      setIsLoading(false);
       return;
     }
 
@@ -105,6 +110,7 @@ export const CreateBookProvider = ({ children }) => {
 
   const updateFormHandler = async () => {
     try {
+      setIsLoading(true);
       await updateBook(bookId, {
         nazivKnjiga: newBookData.submittedName,
         brStrana: newBookData.submittedPages,
@@ -123,6 +129,7 @@ export const CreateBookProvider = ({ children }) => {
         authors: newBookData.submittedAuthor,
       });
       console.log("updated book");
+      setIsLoading(false);
     } catch (error) {
       console.log(error.response.data.errors);
       const errorData = error.response.data.errors;
@@ -143,6 +150,7 @@ export const CreateBookProvider = ({ children }) => {
         title: errorData.title || "",
       });
       navigate("/new-book/general/edit");
+      setIsLoading(false);
       return;
     }
 
@@ -240,6 +248,9 @@ export const CreateBookProvider = ({ children }) => {
         editBookData,
         isEditing,
         setIsEditing,
+        isLoading,
+        hasError,
+        setHasError,
         setEditBookData,
         bookFound,
         setBookFound,

@@ -34,7 +34,7 @@ const DashboardStats = ({
       Kolicina: activeReservationsAmount,
     },
     {
-      name: "U prekoracenju",
+      name: "U prekoračenju",
       uv: 2000,
       pv: 9800,
       Kolicina: offLimitReservationsAmount,

@@ -6,23 +6,26 @@ import classes from "../../styles/Forms.module.css";
 
 import TabSection from "../../components/UI/Tabs/TabSection";
 import FormButtons from "../../components/Forms/FormButtons";
+import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const NewBook = () => {
   const {
     submitFormHandler,
     resetValuesHandler,
     updateFormHandler,
+    isLoading,
     isEditing,
+    hasError,
   } = useCreateBookContext();
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const createBookHandler = () => {
-    if (location.pathname === "/new-book/general") {
+    if (location.pathname === "/new-book/general" && !hasError) {
       navigate("/new-book/specs");
       return;
-    } else if (location.pathname === "/new-book/specs") {
+    } else if (location.pathname === "/new-book/specs" && !hasError) {
       navigate("/new-book/media");
       return;
     }
@@ -30,10 +33,10 @@ const NewBook = () => {
   };
 
   const editBookHandler = () => {
-    if (location.pathname === "/new-book/general/edit") {
+    if (location.pathname === "/new-book/general/edit" && !hasError) {
       navigate("/new-book/specs/edit");
       return;
-    } else if (location.pathname === "/new-book/specs/edit") {
+    } else if (location.pathname === "/new-book/specs/edit" && !hasError) {
       navigate("/new-book/media/edit");
       return;
     }
@@ -68,7 +71,17 @@ const NewBook = () => {
       <FormButtons
         onClick={!isEditing ? createBookHandler : editBookHandler}
         onClickAlt={resetBookDataHandler}
+        label={
+          location.pathname === "/new-book/media" ||
+          location.pathname === "/new-book/media/edit"
+            ? "Sačuvaj"
+            : "Dalje"
+        }
+        disabled={hasError}
       />
+      {isLoading && (
+        <LoadingSpinner loadingSpinner="/images/icons/form-submit-loading-spinner.gif" />
+      )}
     </Fragment>
   );
 };

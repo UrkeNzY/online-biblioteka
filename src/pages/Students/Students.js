@@ -64,7 +64,7 @@ const Ucenici = () => {
     <Fragment>
       <div className={classes.topActionsArea}>
         <Button
-          text="Novi ucenik"
+          text="Novi učenik"
           to="/new-user"
           image="/images/icons/plus.svg"
         />

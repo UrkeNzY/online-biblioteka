@@ -1,9 +1,10 @@
 .detailsHeader {
-  position: absolute;
+  position: fixed;
   top: 80px;
   padding: 0 26px;
   display: flex;
   align-items: flex-start;
+  z-index: 1;
 }
 
 .detailsHeader h1 {
@@ -13,13 +14,14 @@
 }
 
 .detailsHeaderActions {
-  position: absolute;
+  position: fixed;
   top: 98px;
   right: 1%;
   display: flex;
   justify-content: space-around;
   width: 60%;
   max-width: 700px;
+  z-index: 1;
 }
 
 .detailsHeaderActions a {
@@ -105,6 +107,12 @@
 .sideInfoNews a {
   text-decoration: none;
   color: #2196f3;
+}
+
+.noNewsMessage {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .mainDetailsContainer,
@@ -195,9 +203,12 @@
   justify-content: space-between;
 }
 
-.issueActionsHeader p {
+.issueActionsHeader a {
   margin-left: 7px;
+  padding: 2px 0;
   font-size: 14px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .issueActionsHeader .actionButton {
@@ -214,6 +225,11 @@
 
 .issueActionsHeader .actionButton:hover,
 .issueActionsHeader .actionButton:hover p {
+  color: #4558be;
+}
+
+.activeItem {
+  background-color: #eff3f6;
   color: #4558be;
 }
 

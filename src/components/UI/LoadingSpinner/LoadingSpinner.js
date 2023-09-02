@@ -5,7 +5,7 @@ const LoadingSpinner = ({ loadingSpinner }) => {
     <div className={classes.backgroundDim}>
       <div className={classes.spinnerContainer}>
         <img src={loadingSpinner} alt="Loading spinner" width="150" />
-        <h4>Please wait...</h4>
+        <h4>Molimo sačekajte...</h4>
       </div>
     </div>
   );

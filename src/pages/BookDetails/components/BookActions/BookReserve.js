@@ -15,7 +15,7 @@ import FormButtons from "../../../../components/Forms/FormButtons";
 
 const BookReserve = () => {
   const [users, setUsers] = useState([]);
-  const [submittedUserId, setSubmittedUserId] = useState("");
+  const [submittedUserId, setSubmittedUserId] = useState(null);
   const [submittedDate, setSubmittedDate] = useState(new Date());
   const [reserveErrors, setReserveErrors] = useState({ user: "", date: "" });
 
@@ -94,7 +94,7 @@ const BookReserve = () => {
       <p className={classes.reserveFormHeader}>Rezerviši knjigu</p>
       <form>
         <InputSelect
-          labelText="Izaberi ucenika za koga se knjiga rezervise"
+          labelText="Izaberi učenika za koga se knjiga rezerviše"
           id="reserveUsers"
           value={submittedUserId}
           options={users}
@@ -117,6 +117,8 @@ const BookReserve = () => {
         <FormButtons
           onClickAlt={resetReservationHandler}
           onClick={createReservationHandler}
+          label="Rezerviši"
+          disabled={submittedUserId === null}
         />
       </div>
     </div>

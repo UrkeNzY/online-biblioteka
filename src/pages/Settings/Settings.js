@@ -10,8 +10,8 @@ const Settings = () => {
         tabItems={[
           { text: "Polisa", path: "/settings/policies" },
           { text: "Kategorije", path: "/settings/categories" },
-          { text: "Zanrovi", path: "/settings/genres" },
-          { text: "Izdavac", path: "/settings/publishers" },
+          { text: "Žanrovi", path: "/settings/genres" },
+          { text: "Izdavač", path: "/settings/publishers" },
           { text: "Povez", path: "/settings/bindings" },
           { text: "Format", path: "/settings/formats" },
           { text: "Pismo", path: "/settings/writing" },

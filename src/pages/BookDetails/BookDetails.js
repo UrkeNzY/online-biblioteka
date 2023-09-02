@@ -59,7 +59,7 @@ const BookDetails = (props) => {
   const deleteBookHandler = async () => {
     try {
       await deleteBook(id);
-      navigate("/");
+      navigate("/book-record");
       console.log("delete success");
     } catch (error) {
       console.log("Error deleting book:", error.message);
@@ -68,7 +68,7 @@ const BookDetails = (props) => {
 
   const bookActions = [
     {
-      name: "Izbrisi knjigu",
+      name: "Izbriši knjigu",
       image: "/images/icons/trash-icon.svg",
       onClick: deleteBookHandler,
     },
@@ -113,7 +113,7 @@ const BookDetails = (props) => {
           <div className={classes.detailsHeaderActions}>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faArrowTurnUp} />
-              <Link to={`/book/${id}/writeOff`}>Otpisi knjigu</Link>
+              <Link to={`/book/${id}/writeOff`}>Otpiši knjigu</Link>
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faHandScissors} />
@@ -125,7 +125,7 @@ const BookDetails = (props) => {
             </div>
             <div className={classes.headerButton}>
               <FontAwesomeIcon icon={faCalendarCheck} />
-              <Link to={`/book/${id}/reserve`}>Rezervisi knjigu</Link>
+              <Link to={`/book/${id}/reserve`}>Rezerviši knjigu</Link>
             </div>
             <div className={classes.headerButton} onClick={editBookHandler}>
               <FontAwesomeIcon icon={faFileEdit} />

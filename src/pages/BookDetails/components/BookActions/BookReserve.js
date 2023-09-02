@@ -94,7 +94,7 @@ const BookReserve = () => {
       <p className={classes.reserveFormHeader}>Rezerviši knjigu</p>
       <form>
         <InputSelect
-          labelText="Izaberi ucenika za koga se knjiga rezervise"
+          labelText="Izaberi učenika za koga se knjiga rezerviše"
           id="reserveUsers"
           value={submittedUserId}
           options={users}

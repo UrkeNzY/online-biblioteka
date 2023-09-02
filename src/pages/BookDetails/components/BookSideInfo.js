@@ -44,9 +44,9 @@ const BookSideInfo = () => {
     },
     { title: "Rezervisano:", data: bookAmountData.reserved, color: "#fde68a" },
     { title: "Izdato:", data: bookAmountData.issued, color: "#bfdbfe" },
-    { title: "U prekoracenju:", data: bookAmountData.late, color: "#fecaca" },
+    { title: "U prekoračenju:", data: bookAmountData.late, color: "#fecaca" },
     {
-      title: "Ukupna kolicina: ",
+      title: "Ukupna količina: ",
       data: bookAmountData.total,
       color: "#E5E4E2",
     },

@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllReservations, allIssuances } from "../../../services/books";
 import format from "date-fns/format";
-import {
-  differenceInHours,
-  differenceInDays,
-  differenceInWeeks,
-  differenceInMinutes,
-} from "date-fns";
+import moment from "moment/moment";
 
 import classes from "../../../styles/Dashboard.module.css";
 
@@ -22,32 +17,46 @@ const DashboardActivities = () => {
         const activeReservations = reservationData.data.active;
         const activeIssuals = issuanceData.data.izdate;
 
-        const currentDate = new Date();
+        const currentDate = moment();
 
         const activities = [];
 
+        // Combine both reservations and issuances into a single array
         activeReservations.forEach((reservation) => {
           const userInfo = reservation.student;
           const bookInfo = reservation.knjiga;
-          const actionDate = new Date(reservation.action_date);
+          const actionDate = moment(reservation.action_date).subtract(
+            -2,
+            "hours"
+          );
 
-          const minutesSince = differenceInMinutes(currentDate, actionDate);
-          const hoursSince = differenceInHours(currentDate, actionDate);
-          const daysSince = differenceInDays(currentDate, actionDate);
-          const weeksSince = differenceInWeeks(currentDate, actionDate);
+          const duration = moment.duration(currentDate.diff(actionDate));
 
           let timeSinceString = "";
-          if (minutesSince >= 1) {
-            timeSinceString = `${minutesSince} minut${
-              minutesSince > 1 ? "a" : ""
+
+          if (duration.asSeconds() < 60) {
+            timeSinceString = `${Math.floor(duration.asSeconds())} sekund${
+              Math.floor(duration.asMinutes()) > 1 ? "e" : "e"
             }`;
-          } else if (hoursSince >= 1) {
-            timeSinceString = `${hoursSince} sat${hoursSince > 1 ? "i" : ""}`;
-          } else if (daysSince >= 1) {
-            timeSinceString = `${daysSince} dan${daysSince > 1 ? "a" : ""}`;
-          } else if (weeksSince >= 1) {
-            timeSinceString = `${weeksSince} nedjelj${
-              weeksSince === 1 ? "a" : "e"
+          } else if (duration.asMinutes() < 60) {
+            // Less than 1 hour
+            timeSinceString = `${Math.floor(duration.asMinutes())} minut${
+              Math.floor(duration.asMinutes()) > 1 ? "a" : ""
+            }`;
+          } else if (duration.asHours() < 24) {
+            // Less than 1 day
+            timeSinceString = `${Math.floor(duration.asHours())} sat${
+              Math.floor(duration.asHours()) > 1 ? "i" : ""
+            }`;
+          } else if (duration.asDays() >= 1) {
+            // 1 day or more
+            timeSinceString = `${Math.floor(duration.asDays())} dan${
+              Math.floor(duration.asDays()) > 1 ? "a" : ""
+            }`;
+          } else if (duration.asWeeks() >= 1) {
+            // 1 week or more
+            timeSinceString = `${Math.floor(duration.asWeeks())} nedjelj${
+              Math.floor(duration.asWeeks()) === 1 ? "a" : "e"
             }`;
           }
 
@@ -61,6 +70,7 @@ const DashboardActivities = () => {
             header: "REZERVISANJE KNJIGE",
             date: format(new Date(reservation.action_date), "dd.MM.yyyy"),
             timeSince: timeSinceString,
+            action_date: reservation.action_date, // Add action_date for sorting
           };
           activities.push(reservationActivity);
         });
@@ -70,25 +80,35 @@ const DashboardActivities = () => {
           const bookInfo = issual.knjiga;
           const librarianInfo = issual.bibliotekar0;
 
-          const actionDate = new Date(issual.action_date);
+          const actionDate = moment(issual.action_date).subtract(-2, "hours");
 
-          const minutesSince = differenceInMinutes(currentDate, actionDate);
-          const hoursSince = differenceInHours(currentDate, actionDate);
-          const daysSince = differenceInDays(currentDate, actionDate);
-          const weeksSince = differenceInWeeks(currentDate, actionDate);
+          const duration = moment.duration(currentDate.diff(actionDate));
 
           let timeSinceString = "";
-          if (minutesSince >= 1) {
-            timeSinceString = `${minutesSince} minut${
-              minutesSince > 1 ? "a" : ""
+
+          if (duration.asSeconds() < 60) {
+            timeSinceString = `${Math.floor(duration.asSeconds())} sekund${
+              Math.floor(duration.asMinutes()) > 1 ? "e" : "e"
             }`;
-          } else if (hoursSince >= 1) {
-            timeSinceString = `${hoursSince} sat${hoursSince > 1 ? "i" : ""}`;
-          } else if (daysSince >= 1) {
-            timeSinceString = `${daysSince} dan${daysSince > 1 ? "a" : ""}`;
-          } else if (weeksSince >= 1) {
-            timeSinceString = `${weeksSince} nedjelj${
-              weeksSince === 1 ? "a" : "e"
+          } else if (duration.asMinutes() < 60) {
+            // Less than 1 hour
+            timeSinceString = `${Math.floor(duration.asMinutes())} minut${
+              Math.floor(duration.asMinutes()) > 1 ? "a" : ""
+            }`;
+          } else if (duration.asHours() < 24) {
+            // Less than 1 day
+            timeSinceString = `${Math.floor(duration.asHours())} sat${
+              Math.floor(duration.asHours()) > 1 ? "i" : ""
+            }`;
+          } else if (duration.asDays() >= 1) {
+            // 1 day or more
+            timeSinceString = `${Math.floor(duration.asDays())} dan${
+              Math.floor(duration.asDays()) > 1 ? "a" : ""
+            }`;
+          } else if (duration.asWeeks() >= 1) {
+            // 1 week or more
+            timeSinceString = `${Math.floor(duration.asWeeks())} nedjelj${
+              Math.floor(duration.asWeeks()) === 1 ? "a" : "e"
             }`;
           }
 
@@ -103,13 +123,16 @@ const DashboardActivities = () => {
             date: format(new Date(issual.action_date), "dd.MM.yyyy"),
             timeSince: timeSinceString,
             subject: librarianInfo.name + " " + librarianInfo.surname,
+            action_date: issual.action_date, // Add action_date for sorting
           };
           activities.push(issualActivity);
         });
 
+        // Sort the combined activities by date in descending order
         activities.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          (a, b) => new Date(b.action_date) - new Date(a.action_date)
         );
+
         setActivityInfo(activities);
       } catch (error) {
         console.log(error);
@@ -118,6 +141,7 @@ const DashboardActivities = () => {
 
     fetchActivities();
   }, []);
+
   return (
     <div>
       <div className={classes.activitiesSection}>
@@ -125,9 +149,9 @@ const DashboardActivities = () => {
           <p>AKTIVNOSTI</p>
         </div>
       </div>
-      {activityInfo.map((activity) => {
+      {activityInfo.slice(0, 7).map((activity) => {
         return (
-          <div className={classes.activityContainer}>
+          <div className={classes.activityContainer} key={activity.action_date}>
             <img src={activity.userAvatar} alt="user avatar" />
             <div>
               <p className={classes.activityHeader}>
@@ -154,7 +178,7 @@ const DashboardActivities = () => {
           </div>
         );
       })}
-      <button className={classes.activityButton}>Show</button>
+      <button className={classes.activityButton}>Prikaži</button>
     </div>
   );
 };

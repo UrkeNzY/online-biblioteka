@@ -59,7 +59,6 @@ function MediaDropzone({ photo }) {
                 }}
               />
               <div className={classes.fileInfo}>
-                <p>{file.name}</p>
                 <img
                   src="/images/icons/trash-icon.svg"
                   onClick={() => removeFile(file.name)}

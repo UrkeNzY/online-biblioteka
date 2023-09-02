@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allIssuances, getAllReservations } from "../../../services/books";
 import {
@@ -202,39 +202,49 @@ const BookIssueDetails = () => {
     <Fragment>
       <div className={classes.issueActionsHeader}>
         <div
-          className={classes.actionButton}
+          className={`${classes.actionButton} ${
+            issueType === "izdate" ? classes.activeItem : ""
+          }`}
           onClick={() => changeIssueTypeHandler("izdate", "issue")}
         >
           <FontAwesomeIcon icon={faBookOpenReader} />
-          <p>Izdate knjige</p>
+          <NavLink>Izdate knjige</NavLink>
         </div>
         <div
-          className={classes.actionButton}
+          className={`${classes.actionButton} ${
+            issueType === "vracene" ? classes.activeItem : ""
+          }`}
           onClick={() => changeIssueTypeHandler("vracene", "issue")}
         >
           <FontAwesomeIcon icon={faBookOpen} />
-          <p>Vracene knjige</p>
+          <NavLink>Vraćene knjige</NavLink>
         </div>
         <div
-          className={classes.actionButton}
+          className={`${classes.actionButton} ${
+            issueType === "prekoracene" ? classes.activeItem : ""
+          }`}
           onClick={() => changeIssueTypeHandler("prekoracene", "issue")}
         >
           <FontAwesomeIcon icon={faTriangleExclamation} />
-          <p>Knjige u prekoracenju</p>
+          <NavLink>Knjige u prekoračenju</NavLink>
         </div>
         <div
-          className={classes.actionButton}
+          className={`${classes.actionButton} ${
+            issueType === "active" ? classes.activeItem : ""
+          }`}
           onClick={() => changeIssueTypeHandler("active", "reservation")}
         >
           <FontAwesomeIcon icon={faCalendarCheck} />
-          <p>Aktivne rezervacije</p>
+          <NavLink>Aktivne rezervacije</NavLink>
         </div>
         <div
-          className={classes.actionButton}
+          className={`${classes.actionButton} ${
+            issueType === "archive" ? classes.activeItem : ""
+          }`}
           onClick={() => changeIssueTypeHandler("archive", "reservation")}
         >
           <FontAwesomeIcon icon={faCalendarDays} />
-          <p to="/">Arhivirane rezervacije</p>
+          <NavLink>Arhivirane rezervacije</NavLink>
         </div>
       </div>
       <BookTable

@@ -52,3 +52,9 @@
 .paginationOptions select:focus {
   border: transparent;
 }
+
+.customLabel {
+  display: inline-block;
+  width: 5rem;
+  text-align: center;
+}

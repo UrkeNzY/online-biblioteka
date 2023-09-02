@@ -24,6 +24,7 @@ const NewBookSpecs = () => {
     updateNewBook,
     editBookData,
     isEditing,
+    setHasError,
     bookErrors,
   } = useCreateBookContext();
 
@@ -121,6 +122,33 @@ const NewBookSpecs = () => {
 
     fetchCategories();
   }, []);
+
+  const validateForm = () => {
+    if (
+      submittedPages === "" ||
+      submittedScript === "" ||
+      submittedLanguage.length === 0 ||
+      submittedBinding.length === 0 ||
+      submittedFormat === "" ||
+      submittedISBN.trim() === ""
+    ) {
+      setHasError(true); // Set hasError to true if any field is empty
+    } else {
+      setHasError(false); // Set hasError to false if all fields have values
+    }
+  };
+
+  // Use useEffect to call the validation function whenever the input fields change
+  useEffect(() => {
+    validateForm();
+  }, [
+    submittedPages,
+    submittedScript,
+    submittedLanguage,
+    submittedBinding,
+    submittedFormat,
+    submittedISBN,
+  ]);
 
   return (
     <form

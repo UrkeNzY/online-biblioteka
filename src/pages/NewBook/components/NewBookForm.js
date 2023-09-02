@@ -30,6 +30,7 @@ const NewBookForm = () => {
     editBookData,
     updateNewBook,
     isEditing,
+    setHasError,
     bookErrors,
   } = useCreateBookContext();
 
@@ -133,6 +134,37 @@ const NewBookForm = () => {
     fetchCategories();
   }, []);
 
+  const validateForm = () => {
+    if (
+      submittedName === "" ||
+      submittedDescription === "" ||
+      submittedCategory.length === 0 ||
+      submittedGenre.length === 0 ||
+      submittedAuthor.length === 0 ||
+      submittedPublisher === "" ||
+      submittedAmount === "" ||
+      submittedReleaseDate.trim() === ""
+    ) {
+      setHasError(true); // Set hasError to true if any field is empty
+    } else {
+      setHasError(false); // Set hasError to false if all fields have values
+    }
+  };
+
+  // Use useEffect to call the validation function whenever the input fields change
+  useEffect(() => {
+    validateForm();
+  }, [
+    submittedName,
+    submittedDescription,
+    submittedCategory,
+    submittedGenre,
+    submittedAuthor,
+    submittedPublisher,
+    submittedAmount,
+    submittedReleaseDate,
+  ]);
+
   return (
     <form
       onChange={updateBookData}
@@ -146,6 +178,7 @@ const NewBookForm = () => {
           id="bookName"
           value={submittedName}
           onChange={changeBookNameHandler}
+          required
         />
         <p className={classes.errorText}>{bookErrors.title}</p>
         <label htmlFor="bookDescription">

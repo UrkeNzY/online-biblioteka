@@ -1,10 +1,10 @@
 .cardContainer {
   background-color: #ffffff;
   width: 13.125rem;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
   box-shadow: 0px 0.3125rem 0.4375rem #e2e3e3;
-  position: absolute;
+  position: fixed;
   z-index: 101;
 }
 

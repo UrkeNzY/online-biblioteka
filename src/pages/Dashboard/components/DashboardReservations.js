@@ -95,7 +95,7 @@ const DashboardReservations = ({ setActiveReservationsAmount }) => {
 
       <div className={classes.sectionFooter}>
         <FontAwesomeIcon icon={faCalendarDays} />
-        <p>Prikazi sve</p>
+        <p>Prikaži sve</p>
       </div>
     </div>
   );

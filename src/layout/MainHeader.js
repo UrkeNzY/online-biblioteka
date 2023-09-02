@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { userLogout, userInfo } from "../services/users";
 
@@ -61,13 +61,32 @@ const MainHeader = (props) => {
   ];
 
   const toggleInfoHandler = (event) => {
+    event.stopPropagation();
     props.getItems(infoAddItems);
     setButtonRefHandler(event);
+    document.addEventListener("click", closeInfoOptionsOnClick);
   };
 
   const toggleProfileHandler = (event) => {
+    event.stopPropagation();
     props.getItems(profileItems);
     setButtonRefHandler(event);
+    document.addEventListener("click", closeProfileOptionsOnClick);
+  };
+
+  const closeInfoOptionsOnClick = (event) => {
+    // Check if the click occurred inside the info options area
+    if (!event.target.closest(".info-options")) {
+      props.getItems([]); // Close the info options
+      document.removeEventListener("click", closeInfoOptionsOnClick);
+    }
+  };
+  const closeProfileOptionsOnClick = (event) => {
+    // Check if the click occurred inside the profile options area
+    if (!event.target.closest(".profile-options")) {
+      props.getItems([]); // Close the profile options
+      document.removeEventListener("click", closeProfileOptionsOnClick);
+    }
   };
 
   const setButtonRefHandler = (event) => {

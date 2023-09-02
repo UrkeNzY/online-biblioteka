@@ -24,7 +24,7 @@ const PoliciesTab = () => {
       <hr />
       <div className={classes.policyContainer}>
         <div>
-          <p className={classes.policyTitle}>Rok vracanja</p>
+          <p className={classes.policyTitle}>Rok vraćanja</p>
           <p className={classes.policyDescription}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
             eligendi nihil, vel necessitatibus saepe laboriosam! Perspiciatis

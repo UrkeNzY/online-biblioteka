@@ -16,7 +16,7 @@ import FormButtons from "../../../../components/Forms/FormButtons";
 
 const BookIssue = () => {
   const [users, setUsers] = useState([]);
-  const [submittedUserId, setSubmittedUserId] = useState("");
+  const [submittedUserId, setSubmittedUserId] = useState(null);
   const [submittedDate, setSubmittedDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(addDays(new Date(), 20));
   const [issueErrors, setIssueErrors] = useState({ user: "", date: "" });
@@ -136,6 +136,8 @@ const BookIssue = () => {
         <FormButtons
           onClickAlt={resetReservationHandler}
           onClick={createIssueHandler}
+          label="Izdaj"
+          disabled={submittedUserId === null}
         />
       </div>
     </div>

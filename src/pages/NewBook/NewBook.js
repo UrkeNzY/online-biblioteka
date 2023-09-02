@@ -71,6 +71,12 @@ const NewBook = () => {
       <FormButtons
         onClick={!isEditing ? createBookHandler : editBookHandler}
         onClickAlt={resetBookDataHandler}
+        label={
+          location.pathname === "/new-book/media" ||
+          location.pathname === "/new-book/media/edit"
+            ? "Sačuvaj"
+            : "Dalje"
+        }
         disabled={hasError}
       />
       {isLoading && (

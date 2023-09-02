@@ -129,6 +129,7 @@ const BookWriteOff = () => {
       <div className={classes.returnButtonsContainer}>
         <FormButtons
           onClick={writeOffHandler}
+          label="Otpiši"
           disabled={selectedRows.length === 0}
         />
       </div>

@@ -340,7 +340,7 @@ const NewUserForm = () => {
         {isLoading && (
           <LoadingSpinner loadingSpinner="/images/icons/form-submit-loading-spinner.gif" />
         )}
-        <FormButtons disabled={isFormEmpty} />
+        <FormButtons label="Sačuvaj" disabled={isFormEmpty} />
       </section>
     </form>
   );

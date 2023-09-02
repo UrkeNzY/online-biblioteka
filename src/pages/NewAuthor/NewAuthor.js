@@ -21,7 +21,7 @@ const NewAuthor = () => {
           </section>
         </form>
       </div>
-      <FormButtons />
+      <FormButtons label="Sačuvaj" />
     </Fragment>
   );
 };

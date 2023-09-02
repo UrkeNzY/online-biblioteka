@@ -128,6 +128,7 @@ const BookReturn = () => {
       <div className={classes.returnButtonsContainer}>
         <FormButtons
           onClick={returnBookHandler}
+          label="Vrati"
           disabled={selectedRows.length === 0}
         />
       </div>

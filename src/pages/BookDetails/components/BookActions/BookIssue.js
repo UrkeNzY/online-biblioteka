@@ -116,6 +116,7 @@ const BookIssue = () => {
               onChange={dateChangeHandler}
               dateFormat="dd.MM.yyyy"
               customInput={<CustomInput />}
+              disabled
             />
             <p className={classes.errorText}>{issueErrors.date}</p>
           </div>

@@ -43,6 +43,8 @@
   top: 6.0625rem;
   right: 0;
   width: 25rem;
+  z-index: 1;
+  position: fixed;
 }
 
 .profileActions p {

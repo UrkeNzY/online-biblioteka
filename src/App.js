@@ -8,6 +8,7 @@ import "./styles/App.css";
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import MainHeader from "./layout/MainHeader";
+import Notifications from "./pages/Notifications/Notifications";
 import Sidebar from "./layout/Sidebar";
 import ContentHeader from "./layout/ContentHeader";
 import DropdownCard from "./components/UI/DropdownCards/DropdownCard";
@@ -112,7 +113,6 @@ function App() {
             </AuthenticatedRoute>
           }
         />
-
         <Route
           path="/librarians"
           element={
@@ -195,6 +195,16 @@ function App() {
             <AuthenticatedRoute>
               <AuthenticatedPage>
                 <BookIssuances />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <Notifications />
               </AuthenticatedPage>
             </AuthenticatedRoute>
           }

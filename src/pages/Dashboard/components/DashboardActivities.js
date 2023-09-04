@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import classes from "../../../styles/Dashboard.module.css";
 
 const DashboardActivities = ({ activityInfo }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className={classes.activitiesSection}>
@@ -40,7 +42,12 @@ const DashboardActivities = ({ activityInfo }) => {
           </div>
         );
       })}
-      <button className={classes.activityButton}>Prikaži</button>
+      <button
+        className={classes.activityButton}
+        onClick={() => navigate("/notifications")}
+      >
+        Prikaži
+      </button>
     </div>
   );
 };

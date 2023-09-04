@@ -1,0 +1,66 @@
+.notificationsContainer {
+  justify-content: space-between;
+  padding: 1.5625rem 1.25rem;
+}
+
+.activityContainer {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  padding: 0 0.3125rem;
+  color: #374151;
+  margin: 0 0 1.875rem 0;
+}
+
+.activityContainer img {
+  margin-right: 1rem;
+  width: 3.75rem;
+  border-radius: 50%;
+}
+
+.activityHeader {
+  margin: 0;
+  color: #6b7280;
+}
+
+.activitynewsDate {
+  font-size: 1rem;
+}
+
+.activityBody {
+  margin: 0.625rem 0 0.5rem 0;
+}
+
+.activityContainer a {
+  text-decoration: none;
+  color: #2196f3;
+}
+
+.activityContainer a:hover {
+  color: #4558be;
+}
+
+.activityFooterLink {
+  text-decoration: none;
+  color: #2196f3;
+  display: inline-block;
+  margin: 1rem 0 0 0.1875rem;
+}
+
+.activityButton {
+  width: 50%;
+  background-color: transparent;
+  font: inherit;
+  font-size: 0.9375rem;
+  color: #4b5563;
+  padding: 0.5625rem 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid gray;
+}
+
+.activityButton:hover {
+  cursor: pointer;
+  background-color: rgb(222, 222, 222);
+}

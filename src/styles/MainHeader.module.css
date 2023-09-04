@@ -68,6 +68,17 @@ h1 {
   padding: 0.15rem;
 }
 
+.notificationAmount {
+  position: absolute;
+  z-index: 1;
+  top: -17px;
+  right: 201px;
+  background-color: rgb(224, 61, 61);
+  padding: 2.2px 6.4px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
 .headerAvatar {
   width: 2.8125rem;
   height: 2.8125rem;

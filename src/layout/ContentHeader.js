@@ -45,6 +45,8 @@ const ContentHeader = () => {
         return "Nova knjiga";
       case "/new-author":
         return "Novi autor";
+      case "/notifications":
+        return "Notifikacije";
       default:
         return "Kontrolna tabla";
     }

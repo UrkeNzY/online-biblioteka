@@ -13,6 +13,7 @@ const BookSideInfo = () => {
   const [bookAmountData, setBookAmountData] = useState({});
   const [activityInfo, setActivityInfo] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
+  const [isLoading, setIsLoading] = useState();
 
   const { id } = useParams();
 
@@ -35,41 +36,29 @@ const BookSideInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const bookAmount = await getBook(id);
+        setIsLoading(true);
+        const [bookIdResponse, reservationResponse, issuanceResponse] =
+          await Promise.all([
+            getBook(id),
+            getAllReservations(),
+            allIssuances(),
+          ]);
 
         const formattedData = {
           available:
-            bookAmount.data.samples -
-            (Math.abs(bookAmount.data.bSamples) + bookAmount.data.rSamples),
-          issued: Math.abs(bookAmount.data.bSamples),
-          late: bookAmount.data.fSamples,
-          reserved: bookAmount.data.rSamples,
-          total: bookAmount.data.samples,
+            bookIdResponse.data.samples -
+            (Math.abs(bookIdResponse.data.bSamples) +
+              bookIdResponse.data.rSamples),
+          issued: Math.abs(bookIdResponse.data.bSamples),
+          late: bookIdResponse.data.fSamples,
+          reserved: bookIdResponse.data.rSamples,
+          total: bookIdResponse.data.samples,
         };
-        setBookAmountData(formattedData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [reservationResponse, issuanceResponse] = await Promise.all([
-          getAllReservations(),
-          allIssuances(),
-        ]);
 
         const reservationData = reservationResponse.data.active;
         const issuanceData = issuanceResponse.data.izdate;
 
         const currentDate = moment();
-
-        let activeReservations = 0;
-        let offLimitReservations = 0;
 
         const activities = [];
 
@@ -93,7 +82,12 @@ const BookSideInfo = () => {
             }`;
           } else if (duration.asHours() < 24) {
             timeSinceString = `${Math.floor(duration.asHours())} sat${
-              Math.floor(duration.asHours()) > 1 ? "i" : ""
+              Math.floor(duration.asHours()) % 10 > 1 &&
+              Math.floor(duration.asHours()) % 10 < 4
+                ? "a"
+                : Math.floor(duration.asHours()) >= 5
+                ? "i"
+                : ""
             }`;
           } else if (duration.asDays() >= 1) {
             timeSinceString = `${Math.floor(duration.asDays())} dan${
@@ -117,11 +111,6 @@ const BookSideInfo = () => {
           };
 
           activities.push(reservationActivity);
-
-          activeReservations++;
-          if (duration.asDays() > 20) {
-            offLimitReservations++;
-          }
         });
 
         // Process issuances
@@ -141,11 +130,19 @@ const BookSideInfo = () => {
             }`;
           } else if (duration.asMinutes() < 60) {
             timeSinceString = `${Math.floor(duration.asMinutes())} minut${
-              Math.floor(duration.asMinutes()) > 1 ? "a" : ""
+              Math.floor(duration.asMinutes()) > 1 ||
+              duration.asMinutes % 10 === 0
+                ? "a"
+                : ""
             }`;
           } else if (duration.asHours() < 24) {
             timeSinceString = `${Math.floor(duration.asHours())} sat${
-              Math.floor(duration.asHours()) > 1 ? "i" : ""
+              Math.floor(duration.asHours()) % 10 > 1 &&
+              Math.floor(duration.asHours()) % 10 < 4
+                ? "a"
+                : Math.floor(duration.asHours()) >= 5
+                ? "i"
+                : ""
             }`;
           } else if (duration.asDays() >= 1) {
             timeSinceString = `${Math.floor(duration.asDays())} dan${
@@ -176,19 +173,21 @@ const BookSideInfo = () => {
           (a, b) => new Date(b.action_date) - new Date(a.action_date)
         );
 
+        setBookAmountData(formattedData);
         setActivityInfo(activities);
+        setIsLoading(false);
         console.log(activities.map((activity) => activity.bookId));
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
-
     fetchData();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setFilteredActivities(
-      activityInfo.filter((activity) => activity.bookId == id).slice(0, 3)
+      activityInfo.filter((activity) => activity.bookId === +id).slice(0, 3)
     );
   }, [id, activityInfo]);
 
@@ -202,7 +201,16 @@ const BookSideInfo = () => {
               className={classes.bookAmount}
               style={{ backgroundColor: `${bookInfo.color}` }}
             >
-              {bookInfo.data} {bookInfo.data % 10 === 1 ? "komad" : "komada"}
+              {isLoading ? (
+                <img
+                  src="/images/icons/data-loading-spinner.gif"
+                  alt="loading spinner"
+                  width="15"
+                />
+              ) : (
+                bookInfo.data
+              )}{" "}
+              {bookInfo.data % 10 === 1 ? "komad" : "komada"}
             </p>
           </div>
         );
@@ -229,9 +237,18 @@ const BookSideInfo = () => {
           </div>
         );
       })}
-      {filteredActivities.length === 0 && (
+      {filteredActivities.length === 0 && !isLoading && (
         <div className={classes.noNewsMessage}>
           <p>Nema aktivnosti za ovu knjigu.</p>
+        </div>
+      )}
+      {isLoading && (
+        <div className={classes.dataLoadingSpinner}>
+          <img
+            src="/images/icons/data-loading-spinner.gif"
+            alt="loading spinner"
+            width="70"
+          />
         </div>
       )}
     </div>

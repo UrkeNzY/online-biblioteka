@@ -28,6 +28,7 @@ const DashboardActivities = ({ activityInfo }) => {
                 {activity.action}{" "}
                 <span style={{ fontWeight: "500" }}>{activity.book}</span> {""}
                 <span>
+                  {activity.object ? "učeniku " : ""}
                   <Link to="/">{activity?.object}</Link>
                 </span>{" "}
                 dana <span style={{ fontWeight: "500" }}>{activity.date}</span>.

@@ -150,6 +150,7 @@ const BookIssueDetails = () => {
               format(new Date(issuance.return_date), "dd.MM.yyyy"),
             status: fetchType === "reservation" ? issuance.status : null,
             type: issueType,
+            bookId: issuance.knjiga.id,
           };
         });
 
@@ -247,7 +248,7 @@ const BookIssueDetails = () => {
       </div>
       <BookTable
         tableColumns={tableColumns}
-        tableData={issuances}
+        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
         isLoading={isLoading}
       />
     </Fragment>

@@ -90,6 +90,7 @@ const BookWriteOff = () => {
             librarianName:
               issuance.bibliotekar0.name + " " + issuance.bibliotekar0.surname,
             status: issuance.status,
+            bookId: issuance.knjiga.id,
           };
         });
 
@@ -120,7 +121,7 @@ const BookWriteOff = () => {
         <p>Otpiši knjigu</p>
       </div>
       <Table
-        tableData={issuances}
+        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
         tableColumns={tableColumns}
         selectedRows={selectedRows}
         onSelectedRowsChange={handleSelectedRowsChange}

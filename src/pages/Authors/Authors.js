@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { listAuthors } from "../../services/authors";
 
 import classes from "../../styles/Searchbar.module.css";
 
@@ -7,70 +8,47 @@ import Button from "../../components/UI/Buttons/Button";
 import Searchbar from "../../components/UI/Searchbar/Searchbar";
 
 const tableColumns = [
-  { header: "Naziv autora", field: "authorName", width: "15%" },
-  { header: "Opis", field: "description", width: "85%" },
-];
-
-const tableData = [
-  {
-    id: 1,
-    name: "Mark Twain",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 2,
-    name: "Danijel Defoe",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 3,
-    name: "Desanka Maksimovic",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 4,
-    name: "Bubalo Zivkovic",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 5,
-    name: "Ivo Andric",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 6,
-    name: "Mark Twain",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 7,
-    name: "Danka Maksimovic",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
-  {
-    id: 8,
-    name: "Bubalo Zivkovic",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
-    image: "images/placeholders/author-image.avif",
-  },
+  { header: "Naziv autora", field: "authorName", width: "20%" },
+  { header: "Opis", field: "description", width: "80%" },
 ];
 
 const Autori = () => {
+  const [tableData, setTableData] = useState([]);
+  const [filteredTableData, setFilteredTableData] = useState([]);
+  const [isLoading, setIsLoading] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const authors = await listAuthors();
+
+        const authorData = authors.data.map((author) => ({
+          id: author.id,
+          name: author.name + " " + author.surname,
+          description:
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
+          image: "images/placeholders/author-image.png",
+          link: `/author-profile/${author.id}`,
+        }));
+        setTableData(authorData);
+        setFilteredTableData(authorData);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const updateFilteredData = (value) => {
+    const filteredData = tableData.filter((data) =>
+      data.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTableData(filteredData);
+  };
+
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
@@ -79,9 +57,13 @@ const Autori = () => {
           to="/new-author"
           image="/images/icons/plus.svg"
         />
-        <Searchbar />
+        <Searchbar updateFilteredData={updateFilteredData} />
       </div>
-      <Table tableColumns={tableColumns} tableData={tableData} />
+      <Table
+        tableColumns={tableColumns}
+        tableData={filteredTableData}
+        isLoading={isLoading}
+      />
     </Fragment>
   );
 };

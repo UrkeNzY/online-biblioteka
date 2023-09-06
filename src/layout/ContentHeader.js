@@ -24,6 +24,10 @@ const ContentHeader = () => {
       return "Novi korisnik";
     }
 
+    if (path.startsWith("/author-profile")) {
+      return "Profil autora";
+    }
+
     switch (path) {
       case "/librarians":
         return "Bibliotekari";

@@ -79,6 +79,7 @@ const Profile = (props) => {
       console.log(error);
     }
   };
+
   const deleteItems = [
     {
       name: "Izbrisi profil",

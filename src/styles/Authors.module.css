@@ -1,0 +1,65 @@
+.authorsProfileContainer {
+  font-size: 15px;
+  padding: 42px 25px;
+  width: 45%;
+  font-weight: 400;
+}
+
+.infoContainer {
+  margin-bottom: 40px;
+}
+
+.infoContainer p {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 6px;
+  line-height: 20px;
+}
+
+.infoTitle {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.authorProfileActions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  top: 5.9rem;
+  right: 0;
+  width: 15.4rem;
+  z-index: 1;
+  position: fixed;
+}
+
+.authorProfileActions p {
+  font-size: 0.875rem;
+}
+
+.authorProfileActions a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.authorProfileButton {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5.5px;
+  margin: 0 0 0 0.4375rem;
+  padding: 0;
+}
+
+.authorProfileButton:hover {
+  color: #4558be;
+  cursor: pointer;
+}
+
+.authorProfileButton img {
+  margin-right: 6px;
+}
+
+.authorProfileButton:hover img {
+  filter: brightness(0.6);
+  cursor: pointer;
+}

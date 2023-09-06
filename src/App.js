@@ -45,6 +45,7 @@ import BookWriteOff from "./pages/BookDetails/components/BookActions/BookWriteOf
 import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
+import AuthorsProfile from "./pages/AuthorsProfile/AuthorsProfile";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -180,7 +181,7 @@ function App() {
           <Route path="/new-book/media/*" element={<NewBookMedia />} />
         </Route>
         <Route
-          path="/new-author"
+          path="/new-author/:id?"
           element={
             <AuthenticatedRoute>
               <AuthenticatedPage>
@@ -215,6 +216,19 @@ function App() {
             <AuthenticatedRoute>
               <AuthenticatedPage>
                 <Profile
+                  getItems={fetchDropdownItems}
+                  getButtonRef={getButtonRef}
+                />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/author-profile/:id"
+          element={
+            <AuthenticatedRoute>
+              <AuthenticatedPage>
+                <AuthorsProfile
                   getItems={fetchDropdownItems}
                   getButtonRef={getButtonRef}
                 />

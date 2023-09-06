@@ -149,7 +149,7 @@ const Table = (props) => {
       {filteredData.length === 0 && !isLoading && (
         <div className={classes.noDataContainer}>
           <img src="/images/icons/no-data-icon.png" alt="no data icon" />
-          <p>No data.</p>
+          <p>Nema podataka.</p>
         </div>
       )}
       {isLoading ? (

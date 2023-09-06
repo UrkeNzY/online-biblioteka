@@ -126,11 +126,9 @@ const BookIssueDetails = () => {
                 ? format(new Date(issuance.return_date), "dd.MM.yyyy")
                 : "",
             daysBorrowed:
-              fetchType === "issue" && daysBorrowed >= 0
+              fetchType === "issue" && daysBorrowed > 0
                 ? formatDuration(daysBorrowed)
-                : `izdaje se za ${Math.abs(daysBorrowed)} dan${
-                    Math.abs(daysBorrowed) !== 1 ? "a" : ""
-                  }`,
+                : "manje od 1 dan",
             noOffLimit:
               fetchType === "issue" && daysBorrowed < 20 && "Nema prekoracenja",
             withOffLimit:
@@ -152,6 +150,7 @@ const BookIssueDetails = () => {
               format(new Date(issuance.return_date), "dd.MM.yyyy"),
             status: fetchType === "reservation" ? issuance.status : null,
             type: issueType,
+            bookId: issuance.knjiga.id,
           };
         });
 
@@ -249,7 +248,7 @@ const BookIssueDetails = () => {
       </div>
       <BookTable
         tableColumns={tableColumns}
-        tableData={issuances}
+        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
         isLoading={isLoading}
       />
     </Fragment>

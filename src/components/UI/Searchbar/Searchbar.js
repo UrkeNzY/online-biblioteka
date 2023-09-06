@@ -24,7 +24,7 @@ const Searchbar = ({ updateFilteredData }) => {
           type="text"
           onChange={searchInputHandler}
           value={searchValue}
-          placeholder="Search..."
+          placeholder="Pretraži..."
         />
         {searchValue ? (
           <img

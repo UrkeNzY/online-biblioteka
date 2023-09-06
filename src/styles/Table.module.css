@@ -69,6 +69,7 @@ tr:last-child td {
 .table a {
   text-decoration: none;
   color: #374151;
+  font-weight: 500;
 }
 
 .table a:hover {
@@ -113,4 +114,13 @@ tr:last-child td {
 
 .statusContainer.Zatvorena {
   background-color: #e5e4e2;
+}
+
+.issuanceBookInfo {
+  display: flex;
+  align-items: center;
+}
+
+.issuanceBookInfo img {
+  border-radius: 0;
 }

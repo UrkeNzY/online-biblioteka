@@ -24,6 +24,10 @@ const ContentHeader = () => {
       return "Novi korisnik";
     }
 
+    if (path.startsWith("/author-profile")) {
+      return "Profil autora";
+    }
+
     switch (path) {
       case "/librarians":
         return "Bibliotekari";
@@ -45,6 +49,8 @@ const ContentHeader = () => {
         return "Nova knjiga";
       case "/new-author":
         return "Novi autor";
+      case "/notifications":
+        return "Notifikacije";
       default:
         return "Kontrolna tabla";
     }

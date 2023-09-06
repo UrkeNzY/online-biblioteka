@@ -1,0 +1,48 @@
+.bookIssuancesContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.issueActionsHeader {
+  margin: 20px 0 0 30px;
+}
+
+.issueActionsHeader a {
+  margin-left: 12px;
+  padding: 2px 0;
+  font-size: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.issueActionsHeader .actionButton {
+  margin-bottom: 6px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.issueActionsHeader .actionButton:hover {
+  background-color: #eff3f6;
+  cursor: pointer;
+}
+
+.issueActionsHeader .actionButton:hover,
+.issueActionsHeader .actionButton:hover p {
+  color: #4558be;
+}
+
+.activeItem {
+  background-color: #eff3f6;
+  color: #4558be;
+}
+
+.issuancesSearchbar {
+  margin: 12px 0 15px 272px;
+}
+
+.issuancesTable {
+  width: 82%;
+}

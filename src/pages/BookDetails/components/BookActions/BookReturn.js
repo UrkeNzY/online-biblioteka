@@ -89,6 +89,7 @@ const BookReturn = () => {
               `${daysBorrowed - 20} dan${daysBorrowed % 10 === 1 ? "" : "a"}`,
             librarianName:
               issuance.bibliotekar0.name + " " + issuance.bibliotekar0.surname,
+            bookId: issuance.knjiga.id,
           };
         });
 
@@ -119,7 +120,7 @@ const BookReturn = () => {
         <p>Vrati knjigu</p>
       </div>
       <Table
-        tableData={issuances}
+        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
         tableColumns={tableColumns}
         selectedRows={selectedRows}
         onSelectedRowsChange={handleSelectedRowsChange}

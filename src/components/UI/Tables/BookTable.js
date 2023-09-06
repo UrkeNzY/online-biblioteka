@@ -79,93 +79,114 @@ const BookTable = (props) => {
               <th colSpan={4}></th>
             </tr>
           </thead>
-          <tbody>
-            {filteredData?.slice(0, 6).map((table) => (
-              <tr key={table.id}>
-                <td>
-                  <input
-                    type="checkbox"
-                    className={classes.checkbox}
-                    checked={selectedRows && selectedRows.includes(table.id)}
-                    onChange={() => handleRowSelect(table.id)}
-                  />
-                </td>
-                <td>
-                  <div className={classes.userColumnData}>
-                    {table.image && (
-                      <img
-                        className={table.imageType ? classes.bookCover : ""}
-                        src={table.image}
-                        onError={(e) => {
-                          e.target.src = "/images/placeholders/book-cover.jpg";
-                        }}
-                        alt="user avatar"
-                      />
-                    )}
-                    {table.link ? (
-                      <Link to={table.link}>{table.name}</Link>
-                    ) : (
-                      <p>{table.name}</p>
-                    )}
-                  </div>
-                  {table.reservationDate || ""}
-                </td>
-                <td>{table.borrowDate || table.reservationDue}</td>
-                <td>
-                  {table.userName || table.returnDate || (
-                    <p className={table.withOffLimit ? classes.offLimit : ""}>
-                      {table.daysBorrowed}
-                    </p>
-                  )}
-                </td>
-
-                {table.type !== "prekoracene" && (
+          {!isLoading && (
+            <tbody>
+              {filteredData?.slice(0, 6).map((table) => (
+                <tr key={table.id}>
                   <td>
-                    {table.status ? (
-                      <p
-                        className={`${classes.statusContainer} ${
-                          classes[table.status]
-                        }`}
-                      >
-                        {table.status}
-                      </p>
-                    ) : table.borrowDate && table.type !== "izdate" ? (
+                    <input
+                      type="checkbox"
+                      className={classes.checkbox}
+                      checked={selectedRows && selectedRows.includes(table.id)}
+                      onChange={() => handleRowSelect(table.id)}
+                    />
+                  </td>
+                  <td>
+                    <div className={classes.userColumnData}>
+                      {table.bookName ? (
+                        <div className={classes.issuanceBookInfo}>
+                          <img src={table.bookCover} alt="book cover" />
+                          <Link to={`/book/${table.bookId}/main-details`}>
+                            {table.bookName}
+                          </Link>
+                        </div>
+                      ) : table.link && !table.bookName ? (
+                        <Link to={table.link}>{table.name}</Link>
+                      ) : !table.bookName ? (
+                        <p>{table.name}</p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+
+                    {table.reservationDate && !table.bookCover
+                      ? table.reservationDate
+                      : ""}
+                  </td>
+                  {table.reservationDate && table.bookCover ? (
+                    <td>{table.reservationDate}</td>
+                  ) : (
+                    ""
+                  )}
+                  {!table.bookName && table.link && table.issuancesPage ? (
+                    <td>
+                      <Link to={table.link}>{table.name}</Link>
+                    </td>
+                  ) : table.name && table.issuancesPage ? (
+                    <td>
+                      <p>{table.name}</p>
+                    </td>
+                  ) : (
+                    ""
+                  )}
+                  <td>{table.borrowDate || table.reservationDue}</td>
+                  <td>
+                    {table.userName || table.returnDate || (
                       <p className={table.withOffLimit ? classes.offLimit : ""}>
                         {table.daysBorrowed}
                       </p>
-                    ) : table.issueLibrarianName ? (
-                      table.issueLibrarianName
-                    ) : (
-                      ""
                     )}
                   </td>
-                )}
-
-                <td>
-                  {table.type === "prekoracene" && table.withOffLimit}
-                  {!table.issueLibrarianName && table.noOffLimit ? (
-                    <p className={classes.offLimit}>{table.noOffLimit}</p>
-                  ) : !table.issueLibrarianName &&
-                    table.withOffLimit &&
-                    table.type === "prekoracene" ? (
-                    <p className={classes.offLimit}>{table.withOffLimit}</p>
-                  ) : (
-                    table.issueLibrarianName &&
-                    table.type !== "izdate" &&
-                    table.type !== "prekoracene" && (
-                      <>{table.issueLibrarianName}</>
-                    )
+                  {table.type !== "prekoracene" && (
+                    <td>
+                      {table.status ? (
+                        <p
+                          className={`${classes.statusContainer} ${
+                            classes[table.status]
+                          }`}
+                        >
+                          {table.status}
+                        </p>
+                      ) : table.borrowDate && table.type !== "izdate" ? (
+                        <p
+                          className={table.withOffLimit ? classes.offLimit : ""}
+                        >
+                          {table.daysBorrowed}
+                        </p>
+                      ) : table.issueLibrarianName ? (
+                        table.issueLibrarianName
+                      ) : (
+                        ""
+                      )}
+                    </td>
                   )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+
+                  <td>
+                    {table.type === "prekoracene" && table.withOffLimit}
+                    {!table.issueLibrarianName && table.noOffLimit ? (
+                      <p className={classes.offLimit}>{table.noOffLimit}</p>
+                    ) : !table.issueLibrarianName &&
+                      table.withOffLimit &&
+                      table.type === "prekoracene" ? (
+                      <p className={classes.offLimit}>{table.withOffLimit}</p>
+                    ) : (
+                      table.issueLibrarianName &&
+                      table.type !== "izdate" &&
+                      table.type !== "prekoracene" && (
+                        <>{table.issueLibrarianName}</>
+                      )
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
       {filteredData.length === 0 && !isLoading && (
         <div className={classes.noDataContainer}>
           <img src="/images/icons/no-data-icon.png" alt="no data icon" />
-          <p>No data.</p>
+          <p>Nema podataka.</p>
         </div>
       )}
       {isLoading ? (

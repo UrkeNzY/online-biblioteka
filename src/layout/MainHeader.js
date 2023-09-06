@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLogout, userInfo } from "../services/users";
 
 import { GlobalContext } from "../state/GlobalState";
@@ -23,6 +23,7 @@ const MainHeader = (props) => {
     "https://petardev.live/img/profile.jpg"
   );
 
+  const navigate = useNavigate();
   const { logout } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -59,6 +60,10 @@ const MainHeader = (props) => {
       onClick: logOut,
     },
   ];
+
+  const toggleNotificationsHandler = () => {
+    navigate("/notifications");
+  };
 
   const toggleInfoHandler = (event) => {
     event.stopPropagation();
@@ -102,7 +107,14 @@ const MainHeader = (props) => {
       </Link>
       <div className={classes.userContainer}>
         <div className={classes.userActions}>
-          <img src="/images/icons/notifications.svg" alt="notifications icon" />
+          <div>
+            <img
+              src="/images/icons/notifications.svg"
+              alt="notifications icon"
+              onClick={toggleNotificationsHandler}
+            />
+            <p className={classes.notificationAmount}>2</p>
+          </div>
           <img
             src="/images/icons/plus.svg"
             alt="add icon"

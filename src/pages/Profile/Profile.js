@@ -79,6 +79,7 @@ const Profile = (props) => {
       console.log(error);
     }
   };
+
   const deleteItems = [
     {
       name: "Izbrisi profil",
@@ -99,7 +100,7 @@ const Profile = (props) => {
       return "Upravo sada";
     } else if (timeDiff < 3600000) {
       const minutes = Math.floor(timeDiff / 60000);
-      return `Prije ${minutes} minut${minutes > 1 ? "a" : ""}`;
+      return `Prije ${minutes} minut${minutes % 10 > 1 ? "a" : ""}`;
     } else if (timeDiff < 86400000) {
       const hours = Math.floor(timeDiff / 3600000);
       return `Prije ${hours} sat${
@@ -107,7 +108,7 @@ const Profile = (props) => {
       }`;
     } else {
       const days = Math.floor(timeDiff / 86400000);
-      return `Prije ${days} dan${days > 1 ? "a" : ""}`;
+      return `Prije ${days} dan${days % 10 > 1 ? "a" : ""}`;
     }
   };
 

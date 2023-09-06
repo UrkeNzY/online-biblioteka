@@ -1,22 +1,15 @@
 import { useState, useEffect } from "react";
-import { allIssuances, getAllReservations } from "../../services/books";
+import { Link } from "react-router-dom";
+import { getAllReservations, allIssuances } from "../../services/books";
 import moment from "moment";
 
-import classes from "../../styles/Dashboard.module.css";
-
-import DashboardActivities from "./components/DashboardActivities";
-import DashboardReservations from "./components/DashboardReservations";
-import DashboardStats from "./components/DashboardStats";
+import classes from "../../styles/Notifications.module.css";
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
-const Dashboard = () => {
-  const [activeReservationsAmount, setActiveReservationsAmount] = useState(0);
-  const [activeIssuancesAmount, setActiveIssuancesAmount] = useState(0);
-  const [offLimitReservationsAmount, setOffLimitReservationsAmount] =
-    useState(0);
+const Notifications = () => {
   const [activityInfo, setActivityInfo] = useState([]);
-  const [activeReservations, setActiveReservations] = useState([]);
   const [isLoading, setIsLoading] = useState();
+  const [amountToShow, setAmountToShow] = useState(7);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +46,7 @@ const Dashboard = () => {
 
             if (seconds === 1) {
               pluralSuffix = "sekunda";
-            } else if (seconds >= 2 && seconds <= 4) {
+            } else if (seconds % 10 >= 2 && seconds % 10 <= 4) {
               pluralSuffix = "sekunde";
             } else {
               pluralSuffix = "sekundi";
@@ -117,12 +110,7 @@ const Dashboard = () => {
 
           if (duration.asSeconds() < 60) {
             timeSinceString = `${Math.floor(duration.asSeconds())} sekund${
-              Math.floor(duration.asMinutes()) % 10 === 1
-                ? ""
-                : Math.floor(duration.asMinutes()) >= 2 &&
-                  Math.floor(duration.asMinutes()) <= 4
-                ? "e"
-                : "i"
+              Math.floor(duration.asMinutes()) > 1 ? "e" : ""
             }`;
           } else if (duration.asMinutes() < 60) {
             timeSinceString = `${Math.floor(duration.asMinutes())} minut${
@@ -183,12 +171,7 @@ const Dashboard = () => {
           };
         });
 
-        setActiveReservations(activeReservationsInfo);
-
         setActivityInfo(activities);
-        setActiveReservationsAmount(activeReservations);
-        setOffLimitReservationsAmount(offLimitReservations);
-        setActiveIssuancesAmount(issuanceData.length);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -199,22 +182,61 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const changeNotificationAmount = () => {
+    if (amountToShow < activityInfo.length) {
+      setAmountToShow((prevState) => prevState + 5);
+    } else {
+      setAmountToShow(7);
+    }
+  };
+
   return (
-    <div className={classes.dashboardContainer}>
-      <DashboardActivities activityInfo={activityInfo} />
-      <div className={classes.rightSection}>
-        <DashboardReservations activeReservations={activeReservations} />
-        <DashboardStats
-          activeReservationsAmount={activeReservationsAmount}
-          activeIssuancesAmount={activeIssuancesAmount}
-          offLimitReservationsAmount={offLimitReservationsAmount}
-        />
-      </div>
+    <div className={classes.notificationsContainer}>
+      {activityInfo.slice(0, amountToShow).map((activity) => {
+        return (
+          <div className={classes.activityContainer} key={activity.action_date}>
+            <img src={activity.userAvatar} alt="user avatar" />
+            <div>
+              <p className={classes.activityHeader}>
+                {activity.header} -{" "}
+                <span className={classes.activityDate}>
+                  prije {activity.timeSince}
+                </span>
+              </p>
+              <p className={classes.activityBody}>
+                <span>
+                  <Link to="/">{activity.subject} </Link>
+                </span>
+                {activity.action}{" "}
+                <span style={{ fontWeight: "500" }}>{activity.book}</span> {""}
+                <span>
+                  {activity.object ? "učeniku " : ""}
+                  <Link to="/">{activity?.object}</Link>
+                </span>{" "}
+                dana <span style={{ fontWeight: "500" }}>{activity.date}</span>.
+              </p>
+            </div>
+            <Link to="/" className={classes.activityFooterLink}>
+              pogledaj detaljnije &gt;&gt;
+            </Link>
+          </div>
+        );
+      })}
+
+      {!isLoading && (
+        <button
+          className={classes.activityButton}
+          onClick={changeNotificationAmount}
+        >
+          {amountToShow < activityInfo.length ? "Prikaži još" : "Prikaži manje"}
+        </button>
+      )}
+
       {isLoading && (
-        <LoadingSpinner loadingSpinner="/images/icons/dashboard-loading-spinner.gif" />
+        <LoadingSpinner loadingSpinner="/images/icons/data-loading-spinner.gif" />
       )}
     </div>
   );
 };
 
-export default Dashboard;
+export default Notifications;

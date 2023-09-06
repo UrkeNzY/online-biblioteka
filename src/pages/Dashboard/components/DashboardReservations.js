@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
@@ -10,6 +9,11 @@ import {
 import classes from "../../../styles/Dashboard.module.css";
 
 const DashboardReservations = ({ activeReservations }) => {
+  const filteredReservations = activeReservations.slice(
+    activeReservations.length - 4,
+    activeReservations.length
+  );
+
   function formatDate(dateString) {
     const dateObject = new Date(dateString);
     const day = dateObject.getDate().toString().padStart(2, "0");
@@ -23,7 +27,7 @@ const DashboardReservations = ({ activeReservations }) => {
       <div className={classes.sectionHeader}>
         <p>REZERVACIJE KNJIGA</p>
       </div>
-      {activeReservations?.map((reservation) => {
+      {filteredReservations?.map((reservation) => {
         return (
           <div className={classes.reservationsContainer}>
             <div className={classes.sectionContent}>

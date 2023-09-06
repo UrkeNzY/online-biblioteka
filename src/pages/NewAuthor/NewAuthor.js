@@ -81,12 +81,12 @@ const NewAuthor = () => {
   };
 
   useEffect(() => {
-    const hasValue = authorName !== "";
+    const hasValue = authorName !== "" && authorSurname !== "";
 
     console.log(authorName);
 
     setIsFormEmpty(!hasValue);
-  }, [authorName]);
+  }, [authorName, authorSurname]);
 
   return (
     <Fragment>

@@ -53,7 +53,7 @@ const Dashboard = () => {
 
             if (seconds === 1) {
               pluralSuffix = "sekunda";
-            } else if (seconds % 10 >= 2 && seconds % 10 <= 4) {
+            } else if (seconds >= 2 && seconds <= 4) {
               pluralSuffix = "sekunde";
             } else {
               pluralSuffix = "sekundi";
@@ -117,7 +117,12 @@ const Dashboard = () => {
 
           if (duration.asSeconds() < 60) {
             timeSinceString = `${Math.floor(duration.asSeconds())} sekund${
-              Math.floor(duration.asMinutes()) > 1 ? "e" : ""
+              Math.floor(duration.asMinutes()) % 10 === 1
+                ? ""
+                : Math.floor(duration.asMinutes()) >= 2 &&
+                  Math.floor(duration.asMinutes()) <= 4
+                ? "e"
+                : "i"
             }`;
           } else if (duration.asMinutes() < 60) {
             timeSinceString = `${Math.floor(duration.asMinutes())} minut${

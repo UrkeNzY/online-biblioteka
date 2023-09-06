@@ -114,3 +114,12 @@ tr:last-child td {
 .statusContainer.Zatvorena {
   background-color: #e5e4e2;
 }
+
+.issuanceBookInfo {
+  display: flex;
+  align-items: center;
+}
+
+.issuanceBookInfo img {
+  border-radius: 0;
+}

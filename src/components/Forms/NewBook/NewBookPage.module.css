@@ -13,5 +13,5 @@
 }
 
 .links:hover {
-    color: blue;
+    color: var(--light-blue-highlight-hover);
 }

@@ -16,17 +16,20 @@
   padding: 0.625rem;
   margin: 0.5rem;
   border-radius: 5px;
-  border: 1px solid #d4d2d4;
+  border: 1px solid var(--secondary-200);
+  color: var(--main-text);
+  transition: .5s;
 }
 
 .paginationButtons a:hover {
   cursor: pointer;
+  border-color: var(--main-blue-color);
 }
 
 .paginationActive a {
-  color: #ffffff;
-  background-color: #4558be;
-  border-color: #4558be;
+  color: var(--page-background);
+  background-color: var(--main-blue-color);
+  border-color: var(--main-blue-color);
 }
 
 .paginationOptions {
@@ -36,6 +39,7 @@
 
 .paginationOptions p {
   margin: 0 0.75rem 0 0;
+  color: var(--main-text);
 }
 
 .paginationOptions select {
@@ -43,6 +47,8 @@
   padding: 0;
   border: transparent;
   outline: none;
+  background-color: var(--page-background);
+  color: var(--main-text);
 }
 
 .paginationOptions select:hover {
@@ -57,4 +63,5 @@
   display: inline-block;
   width: 5rem;
   text-align: center;
+  color: var(--main-text);
 }

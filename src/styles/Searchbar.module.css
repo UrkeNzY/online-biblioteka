@@ -8,11 +8,13 @@
 }
 
 .searchbar {
-  border: transparent;
+  /* border: transparent; */
+  border: none;
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
-  color: #babdc2;
+  color: var(--secondary-300);
+  background-color: transparent;
   margin: 0;
   width: 9.375rem;
   margin-right: 0.3125rem;
@@ -21,14 +23,16 @@
 }
 
 .searchbar:hover {
-  border-bottom: #f0f0f0 solid .1rem;
+  border: none;
+  border-bottom: var(--hr) solid .1rem;
   width: 14rem;
 }
 
 .searchbar:focus {
   outline: none;
   box-shadow: none;
-  border-bottom: #f0f0f0 solid .1rem;
+  border: none;
+  border-bottom: var(--secondary-300) solid .1rem;
   width: 14rem;
 }
 
@@ -43,7 +47,7 @@
 }
 
 .searchbar::placeholder {
-  color: #babdc2;
+  color: var(--secondary-200);
 }
 
 .topActionsArea {

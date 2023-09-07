@@ -5,12 +5,13 @@
 .linksContainer a {
   font-size: 0.875rem;
   text-decoration: none;
-  color: #6b7280;
+  color: var(--secondary-300);
   margin-right: 4.375rem;
+  transition: .2s;
 }
 
 .linksContainer a:hover {
-  color: #4558be;
+  color: var(--light-blue-highlight-hover);
 }
 
 .tabContainer hr {
@@ -20,10 +21,10 @@
 
 .active {
   padding: 1.25rem 0;
-  border-bottom: 3px solid #4558be;
-  color: #4558be;
+  border-bottom: 3px solid var(--light-blue-highlight-hover);
+  color: var(--light-blue-highlight-hover);
 }
 
 a.active {
-  color: #4558be;
+  color: var(--light-blue-highlight-hover);
 }

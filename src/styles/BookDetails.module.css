@@ -42,7 +42,7 @@
 
 .headerButton:hover {
   cursor: pointer;
-  color: #4558be;
+  color: var(--main-blue-color);
 }
 
 .detailsSection {
@@ -56,12 +56,12 @@
 .sideInfoContainer {
   width: 400px;
   padding: 10px 0;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--secondary-200);
   border-top-style: none;
   border-right-style: none;
   height: 100vh;
   font-size: 14px;
-  color: #6b7280;
+  color: var(--main-text);
 }
 
 .sideInfoBookData {
@@ -75,7 +75,7 @@
   padding: 6px 12px;
   border-radius: 16px;
   margin: 0 auto;
-  color: rgba(1, 1, 1, 0.4);
+  color: #646464;
   font-weight: 500;
 }
 
@@ -86,14 +86,14 @@
 
 .sideInfoNews {
   padding: 0 25px;
-  color: #374151;
+  color: var(--main-text);
   line-height: 20px;
   margin-bottom: 40px;
 }
 
 .newsHeader {
   margin: 0;
-  color: #6b7280;
+  color: var(--main-text);
 }
 
 .newsDate {
@@ -106,7 +106,7 @@
 
 .sideInfoNews a {
   text-decoration: none;
-  color: #2196f3;
+  color: var(--light-blue-highlight);
 }
 
 .noNewsMessage {
@@ -153,7 +153,7 @@
 }
 
 .descriptionAnchor {
-  color: #3b82f6;
+  color: var(--light-blue-highlight);
 }
 
 .descriptionAnchor:hover {
@@ -162,7 +162,7 @@
 
 .detailContainer .detailTitle,
 .descriptionContainer h4 {
-  color: #6b7280;
+  color: var(--secondary-300);
 }
 
 .bookErrorContainer {
@@ -186,14 +186,14 @@
 
 .bookErrorContainer a {
   font-weight: 500;
-  color: #3b82f6;
+  color: var(--light-blue-highlight);
   margin-left: 15px;
   font-size: 15px;
   text-decoration: none;
 }
 
 .bookErrorContainer a:hover {
-  color: #4558be;
+  color: var(--light-blue-highlight-hover);
 }
 
 .issueActionsHeader {
@@ -219,25 +219,25 @@
 }
 
 .issueActionsHeader .actionButton:hover {
-  background-color: #eff3f6;
+  background-color: var(--secondary);
   cursor: pointer;
 }
 
 .issueActionsHeader .actionButton:hover,
 .issueActionsHeader .actionButton:hover p {
-  color: #4558be;
+  color: var(--light-blue-highlight);
 }
 
 .activeItem {
-  background-color: #eff3f6;
-  color: #4558be;
+  background-color: var(--secondary);
+  color: var(--light-blue-highlight);
 }
 
 .errorText {
   font-size: 14px;
   padding: 0;
   margin: -10px 0 16px 0;
-  color: red;
+  color: var(--required-color);
 }
 
 .reserveFormContainer,
@@ -267,7 +267,7 @@
 
 .customInput input {
   padding-right: 30px;
-  padding-left: 10px; /* Create space for the calendar icon */
+  padding-left: 10px;
   width: 100%;
 }
 
@@ -295,8 +295,8 @@
 }
 
 .disabledInput {
-  background-color: #f0f0f0;
-  color: #b0b0b0;
+  background-color: var(--secondary-300);
+  color: var(--secondary);
 }
 
 .issueDurationText {

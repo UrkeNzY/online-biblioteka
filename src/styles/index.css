@@ -1,9 +1,72 @@
+:root {
+  --page-background: #ffffff;
+  --highlight: #e5e7eb;
+  --hr: #e8e6e8;
+  --main-text: #374151;
+  --light-blue-highlight: #2196f3;
+  --light-blue-highlight-hover: #4558be;
+  --dark-blue-highlight: #6676d1;
+  --secondary: #eff3f6;
+  --main-blue-color: #4558be;
+  
+  --secondary-200: #D7DADD;
+  --main-text-bold: black;
+  
+  --shadow: rgba(1, 1, 1, 0.1);
+  --secondary-300: #5f6162;
+
+  --main-blue-color-2: #3c4ead;
+
+  --shadow-200: rgba(1, 1, 1, 0.3);
+  --required-color: red;
+
+  --main-blue-color-1: #5869c5;
+
+  --header: #4558be;
+  --header-txt: white;
+
+  --light-red: #fecaca;
+  --dark-red: #991b1b;
+  --main-purple-color: #9f5ccc;
+  --scrollbar-track-color: #f1f1f1;
+  --scrollbar-color: #64656a56;
+  --scrollbar-hover-color: #64656a87;
+
+}
+
+[data-theme='dark'] {
+
+  --page-background: #252525;
+  --highlight: #616161;
+  --hr: #8b8b8b;
+  --main-text: #eaeaea;
+  --light-blue-highlight: #61a5dd;
+  --light-blue-highlight-hover: #4558be;
+  --dark-blue-highlight: #6676d1;
+  --secondary: #4d4d4d;
+
+  --secondary-200: #939393;
+  --main-text-bold: white;
+
+  --shadow: rgba(234, 234, 234, 0.1);
+  --secondary-300: #9e9e9e;
+
+  --main-blue-color-2: #5869c5;
+
+  --header: #4d4d4d;
+  --header-txt: #4558be;
+
+  --main-blue-color-1: #374698;
+
+}
+
 body {
   margin: 0;
   font-family: "Rubik", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #374151;
+  color: var(--main-text);
+  background-color: var(--page-background);
 }
 
 code {
@@ -17,17 +80,17 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Track color */
+  background-color: var(--scrollbar-track-color); /* Track color */
 }
 
 /* Styling the scrollbar handle (thumb) */
 ::-webkit-scrollbar-thumb {
-  background-color: #64656a56; /* Handle color */
+  background-color: var(--scrollbar-color); /* Handle color */
   border-radius: 5px; /* Rounded corners for the handle */
 }
 
 /* Styling the scrollbar handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #64656a87; /* Handle color on hover */
+  background-color: var(--scrollbar-hover-color); /* Handle color on hover */
   cursor: pointer;
 }

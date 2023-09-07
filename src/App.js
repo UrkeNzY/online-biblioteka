@@ -44,6 +44,7 @@ import BookWriteOff from "./pages/BookDetails/components/BookActions/BookWriteOf
 import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
+import DarkMode from "./DarkMode/DarkMode";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -294,6 +295,7 @@ function App() {
   return (
     <div className="App">
       <GlobalProvider>
+        {/* <DarkMode /> */}
         <Router />
         {isDropdownOpen && (
           <DropdownCard

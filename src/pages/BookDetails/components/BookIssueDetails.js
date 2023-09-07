@@ -26,7 +26,7 @@ const BookIssueDetails = () => {
     { header: "Izdato uceniku", field: "issuedTo", width: "25%" },
     { header: "Datum izdavanja", field: "issueDate", width: "25%" },
     {
-      header: "Trenutno zadrzavanje knjige",
+      header: "Trenutno zadržavanje knjige",
       field: "issueDuration",
       width: "30%",
     },
@@ -38,7 +38,7 @@ const BookIssueDetails = () => {
     { header: "Datum izdavanja", field: "issueDate", width: "20%" },
     { header: "Datum vracanja", field: "returnDate", width: "20%" },
     {
-      header: "Zadrzavanje knjige",
+      header: "Zadržavanje knjige",
       field: "issueDuration",
       width: "20%",
     },
@@ -49,7 +49,7 @@ const BookIssueDetails = () => {
     { header: "Izdato uceniku", field: "issuedTo", width: "25%" },
     { header: "Datum izdavanja", field: "issueDate", width: "25%" },
     {
-      header: "Trenutno zadrzavanje knjige",
+      header: "Trenutno zadržavanje knjige",
       field: "issueDuration",
       width: "25%",
     },

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { userLogout, userInfo } from "../services/users";
+import DarkMode from "../DarkMode/DarkMode";
 
 import { GlobalContext } from "../state/GlobalState";
 
@@ -101,6 +102,7 @@ const MainHeader = (props) => {
         <h1>Online Biblioteka</h1>
       </Link>
       <div className={classes.userContainer}>
+          <DarkMode/>
         <div className={classes.userActions}>
           <img src="/images/icons/notifications.svg" alt="notifications icon" />
           <img

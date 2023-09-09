@@ -25,18 +25,18 @@
 }
 
 .issueActionsHeader .actionButton:hover {
-  background-color: #eff3f6;
+  background-color: var(--secondary-200);
   cursor: pointer;
 }
 
 .issueActionsHeader .actionButton:hover,
 .issueActionsHeader .actionButton:hover p {
-  color: #4558be;
+  color: var(--light-blue-highlight);
 }
 
 .activeItem {
-  background-color: #eff3f6;
-  color: #4558be;
+  background-color: var(--secondary);
+  color: var(--light-blue-highlight);
 }
 
 .issuancesSearchbar {

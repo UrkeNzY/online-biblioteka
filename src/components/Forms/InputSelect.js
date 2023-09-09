@@ -61,7 +61,7 @@ const InputSelect = (props) => {
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
-                outline: state.isFocused ? "2px solid #4558be" : "",
+                outline: state.isFocused ? "2px solid var(--main-blue-color)" : "",
               }),
               input: (baseStyles, state) => ({
                 ...baseStyles,
@@ -69,7 +69,7 @@ const InputSelect = (props) => {
               }),
               multiValue: (baseStyles, state) => ({
                 ...baseStyles,
-                backgroundColor: "#4558be",
+                backgroundColor: "var(--main-blue-color)",
                 color: "white",
                 borderRadius: "3px",
               }),

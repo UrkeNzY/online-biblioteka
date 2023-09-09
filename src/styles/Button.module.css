@@ -1,6 +1,6 @@
 .button {
-  background-color: #3f51b5;
-  color: #ffffff;
+  background-color: var(--main-blue-color);
+  /* color: var(--page-background); */
   padding: 0.625rem 1.0625rem;
   font-family: inherit;
   font-size: 0.875rem;
@@ -14,7 +14,7 @@
 
 .button:hover {
   cursor: pointer;
-  background-color: #5364c6;
+  background-color: var(--main-blue-color-2);
 }
 
 .button img {
@@ -30,5 +30,5 @@
 
 .button a {
   text-decoration: none;
-  color: #ffffff;
+  color: white;
 }

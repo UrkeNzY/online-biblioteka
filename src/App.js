@@ -46,6 +46,7 @@ import LoginForm from "./components/Auth/Login/LoginForm";
 import SignupForm from "./components/Auth/Signup/SignupForm";
 import Logout from "./pages/Logout/Logout";
 import AuthorsProfile from "./pages/AuthorsProfile/AuthorsProfile";
+import UserMainPage from "./pages/UserMainPage/UserMainPage";
 
 function App() {
   const [dropdownItems, setDropdownItems] = useState([]);
@@ -65,14 +66,22 @@ function App() {
     setButtonRef(ref);
   };
 
-  function AuthenticatedRoute({ children }) {
-    const { user } = useContext(GlobalContext);
+  function AuthenticatedRoute({ children, allowedRoles }) {
+    const { user, userRole } = useContext(GlobalContext);
 
     const isAuthenticated = !!user?.token;
 
-    console.log("Checking...");
+    const hasPermission = allowedRoles?.includes(userRole);
 
-    return isAuthenticated ? <>{children}</> : <Navigate to="/signin" />;
+    return isAuthenticated && hasPermission ? (
+      <>{children}</>
+    ) : !hasPermission && userRole === "Bibliotekar" ? (
+      <Navigate to="/dashboard" />
+    ) : !hasPermission && userRole === "Učenik" ? (
+      <Navigate to="/main-page" />
+    ) : (
+      <Navigate to="/signin" />
+    );
   }
 
   function UnauthenticatedRoute({ children }) {
@@ -107,7 +116,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <Dashboard />
               </AuthenticatedPage>
@@ -115,9 +124,19 @@ function App() {
           }
         />
         <Route
+          path="/main-page"
+          element={
+            <AuthenticatedRoute allowedRoles={["Učenik", "Administrator"]}>
+              <AuthenticatedPage>
+                <UserMainPage />
+              </AuthenticatedPage>
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
           path="/librarians"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <Librarians />
               </AuthenticatedPage>
@@ -127,7 +146,7 @@ function App() {
         <Route
           path="/students"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <Students />
               </AuthenticatedPage>
@@ -137,7 +156,7 @@ function App() {
         <Route
           path="/authors"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <Authors />
               </AuthenticatedPage>
@@ -147,7 +166,7 @@ function App() {
         <Route
           path="/book-record"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <Books />
               </AuthenticatedPage>
@@ -157,7 +176,7 @@ function App() {
         <Route
           path="/new-user/:id?"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <NewUser />
               </AuthenticatedPage>
@@ -167,7 +186,7 @@ function App() {
         <Route
           path="/new-book"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <CreateBookProvider>
                   <NewBook />
@@ -183,7 +202,7 @@ function App() {
         <Route
           path="/new-author/:id?"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <NewAuthor />
               </AuthenticatedPage>
@@ -193,7 +212,7 @@ function App() {
         <Route
           path="/book-issuing"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <BookIssuances />
               </AuthenticatedPage>
@@ -203,7 +222,7 @@ function App() {
         <Route
           path="/notifications"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <Notifications />
               </AuthenticatedPage>
@@ -213,7 +232,9 @@ function App() {
         <Route
           path="/profile/:id"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute
+              allowedRoles={["Učenik", "Bibliotekar", "Administrator"]}
+            >
               <AuthenticatedPage>
                 <Profile
                   getItems={fetchDropdownItems}
@@ -226,7 +247,7 @@ function App() {
         <Route
           path="/author-profile/:id"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <AuthorsProfile
                   getItems={fetchDropdownItems}
@@ -249,7 +270,7 @@ function App() {
         <Route
           path="/settings"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Administrator"]}>
               <AuthenticatedPage>
                 <Settings />
               </AuthenticatedPage>
@@ -268,7 +289,7 @@ function App() {
         <Route
           path="/book/:id"
           element={
-            <AuthenticatedRoute>
+            <AuthenticatedRoute allowedRoles={["Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <CreateBookProvider>
                   <BookDetails

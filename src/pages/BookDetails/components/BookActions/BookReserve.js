@@ -104,14 +104,16 @@ const BookReserve = () => {
           }}
         />
         <p className={classes.errorText}>{reserveErrors.user}</p>
-        <p>Datum rezevisanja</p>
-        <ReactDatePicker
-          selected={submittedDate}
-          onChange={dateChangeHandler}
-          dateFormat="dd.MM.yyyy"
-          customInput={<CustomInput />}
-          disabled
-        />
+        <div className={classes.datePicker}>
+          <p>Datum rezevisanja</p>
+          <ReactDatePicker
+            selected={submittedDate}
+            onChange={dateChangeHandler}
+            dateFormat="dd.MM.yyyy"
+            customInput={<CustomInput />}
+            disabled
+          />
+        </div>
       </form>
       <div className={classes.reserveButtonsContainer}>
         <FormButtons

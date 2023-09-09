@@ -1,8 +1,11 @@
+
+
 .mainContainer {
   display: flex;
 }
 
 .contentContainer {
+  background-color: var(--page-background);
   flex: 1;
   margin-left: 5.3125rem;
 }

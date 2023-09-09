@@ -2,7 +2,7 @@
   margin: 1.25rem;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.3125rem var(--shadow);
 }
 
 .table {
@@ -17,16 +17,18 @@
 }
 
 th {
-  background-color: #eff3f6;
+  background-color: var(--secondary);
+  color: var(--main-text);
   padding: 1rem;
   text-align: left;
   font-weight: bold;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--secondary-200);
 }
 
 td {
   padding: 1rem;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--hr);
+  color: var(--main-text);
 }
 
 td p {
@@ -44,8 +46,13 @@ td .bookCover {
   border-radius: 0;
 }
 
+tr {
+  background-color: var(--page-background);
+  transition: 0.2s;
+}
+
 tr:hover {
-  background-color: #e0e0e0;
+  background-color: var(--secondary);
 }
 
 tr:last-child td {
@@ -68,12 +75,12 @@ tr:last-child td {
 
 .table a {
   text-decoration: none;
-  color: #374151;
+  color: var(--main-text);
   font-weight: 500;
 }
 
 .table a:hover {
-  color: #4558be;
+  color: var(--light-blue-highlight);
 }
 
 .noDataContainer {
@@ -90,16 +97,17 @@ tr:last-child td {
 }
 
 .offLimit {
-  background-color: #fecaca;
-  color: #991b1b;
+  background-color: var(--light-red);
+  color: var(--dark-red);
   padding: 4px 6px;
   border-radius: 10px;
   text-align: center;
   display: inline-block;
 }
+/* !! */
 
 .statusContainer {
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--shadow-color);
   font-weight: bold;
   text-align: center;
   padding: 3px 6px;
@@ -109,11 +117,11 @@ tr:last-child td {
 }
 
 .statusContainer.Rezervisana {
-  background-color: #fde68a;
+  background-color: var(--light-yellow);
 }
 
 .statusContainer.Zatvorena {
-  background-color: #e5e4e2;
+  background-color: var(--light-yellow-2);
 }
 
 .issuanceBookInfo {

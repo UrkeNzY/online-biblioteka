@@ -8,7 +8,7 @@
   align-items: center;
   font-size: 0.875rem;
   padding: 0 0.3125rem;
-  color: #374151;
+  color: var(--main-text);
   margin: 0 0 1.875rem 0;
 }
 
@@ -20,7 +20,7 @@
 
 .activityHeader {
   margin: 0;
-  color: #6b7280;
+  color: var(--main-text);
 }
 
 .activitynewsDate {
@@ -33,11 +33,11 @@
 
 .activityContainer a {
   text-decoration: none;
-  color: #2196f3;
+  color: var(--light-blue-highlight);
 }
 
 .activityContainer a:hover {
-  color: #4558be;
+  color: var(--light-blue-highlight-hover);
 }
 
 .activityFooterLink {
@@ -52,15 +52,15 @@
   background-color: transparent;
   font: inherit;
   font-size: 0.9375rem;
-  color: #4b5563;
+  color: var(--main-text);
   padding: 0.5625rem 1rem;
   margin-top: 1rem;
   border-radius: 4px;
   outline: none;
-  border: 1px solid gray;
+  border: 1px solid var(--hr);
 }
 
 .activityButton:hover {
   cursor: pointer;
-  background-color: rgb(222, 222, 222);
+  background-color: var(--secondary);
 }

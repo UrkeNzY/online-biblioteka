@@ -1,7 +1,7 @@
 .backgroundDim {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(1, 1, 1, 0.3);
+  background-color: var(--shadow-200);
   position: fixed; /* Fixed position to cover the entire viewport */
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@
 .spinnerContainer {
   width: 25%;
   text-align: center;
-  background-color: white; /* Assuming a white background for the spinner */
+  background-color: var(--page-background); /* Assuming a white background for the spinner */
   padding: 20px;
   border-radius: 10px;
 }

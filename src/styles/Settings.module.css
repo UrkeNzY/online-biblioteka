@@ -29,7 +29,7 @@
 }
 
 .policySection hr {
-  background-color: #e8e6e8;
+  background-color: var(--hr);
   opacity: 0.25;
   margin: 0;
 }

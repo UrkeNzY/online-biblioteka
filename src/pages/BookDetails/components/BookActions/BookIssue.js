@@ -110,24 +110,28 @@ const BookIssue = () => {
         <p className={classes.errorText}>{issueErrors.user}</p>
         <div className={classes.issueDatePickers}>
           <div>
-            <p>Datum izdavanja</p>
-            <ReactDatePicker
-              selected={submittedDate}
-              onChange={dateChangeHandler}
-              dateFormat="dd.MM.yyyy"
-              customInput={<CustomInput />}
-              disabled
-            />
+            <div className={classes.datePicker}>
+              <p>Datum izdavanja</p>
+              <ReactDatePicker
+                selected={submittedDate}
+                onChange={dateChangeHandler}
+                dateFormat="dd.MM.yyyy"
+                customInput={<CustomInput />}
+                disabled
+              />
+            </div>
             <p className={classes.errorText}>{issueErrors.date}</p>
           </div>
           <div>
-            <p>Datum vraćanja</p>
-            <ReactDatePicker
-              selected={returnDate}
-              dateFormat="dd.MM.yyyy"
-              customInput={<CustomInput />}
-              disabled
-            />
+            <div className={classes.datePicker}>
+              <p>Datum vraćanja</p>
+              <ReactDatePicker
+                selected={returnDate}
+                dateFormat="dd.MM.yyyy"
+                customInput={<CustomInput />}
+                disabled
+              />
+            </div>
             <p className={classes.issueDurationText}>Rok vraćanja: 20 dana</p>
           </div>
         </div>

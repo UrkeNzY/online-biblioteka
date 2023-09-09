@@ -10,7 +10,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #4558be;
+  background-color: var(--main-blue-color);
   width: 38.25%;
   max-width: 590px;
   height: 100%;
@@ -21,7 +21,7 @@
   margin: 3rem auto;
   width: 95%;
   max-width: 50rem;
-  box-shadow: 2px 2px 30px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 30px 2px var(--shadow);
   align-self: center;
   height: 71.4%;
   max-height: 540px;
@@ -29,7 +29,7 @@
 }
 
 .sideImage {
-  background-color: #4558be;
+  background-color: var(--main-blue-color);
   width: 40%;
   display: flex;
   align-items: center;
@@ -52,14 +52,14 @@
 .auth {
   width: 100%;
   max-width: 60rem;
-  background-color: #ffffff;
+  background-color: var(--page-background);
   padding: 5rem 3.5rem;
   text-align: center;
 }
 
 .auth h1 {
   text-align: center;
-  color: #374151;
+  color: var(--secondary-300);
   margin-bottom: 25px;
 }
 
@@ -75,7 +75,7 @@
 
 .control label {
   display: block;
-  color: #374151;
+  color: var(--secondary-300);
   font-weight: 500;
   margin-bottom: 0.2rem;
   text-align: left;
@@ -83,7 +83,7 @@
 
 .control a {
   display: block;
-  color: white;
+  color: var(--page-background);
   font-weight: bold;
   margin-bottom: 0.5rem;
   text-decoration: none;
@@ -94,19 +94,19 @@
   background-color: transparent;
   color: inherit;
   border-radius: 4px;
-  border: 1px solid rgba(1, 1, 1, 0.1);
+  border: 1px solid var(--shadow);
   width: 100%;
   text-align: left;
   padding: 0.75rem 0.5rem;
 }
 
 .control input:focus {
-  border-color: #4558be; /* Change the border color when focused */
-  outline: 2px solid #4558be;
+  border-color: var(--main-blue-color);
+  outline: 2px solid var(--main-blue-color);
 }
 
 .control input::placeholder {
-  color: rgba(1, 1, 1, 0.25);
+  color: var(--secondary-200);
 }
 
 .actions {
@@ -119,9 +119,9 @@
 .actions button {
   cursor: pointer;
   font: inherit;
-  color: white;
-  background-color: #9f5ccc;
-  border: 1px solid #9f5ccc;
+  color: var(--page-background);
+  background-color: var(--main-purple-color);
+  border: 1px solid var(--main-purple-color);
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
 }
@@ -132,14 +132,14 @@
   border-radius: 3px;
   border: none;
   margin-top: 25px;
-  background-color: #4558be;
-  color: #ffffff;
+  background-color: var(--main-blue-color);
+  color: var(--page-background);
   font-size: 14px;
 }
 
 .action .toggle:hover {
   cursor: pointer;
-  background-color: #3547ae;
+  background-color: var(--main-blue-color-2);
 }
 
 .control a,
@@ -147,16 +147,16 @@
   margin-top: 12px;
   font-weight: 500;
   font-size: 13px;
-  color: #374151;
+  color: var(--secondary-300);
 }
 
 .control a {
   display: inline;
-  color: #4558be;
+  color: var(--main-blue-color);
 }
 
 .control a:hover {
-  color: #3547ae;
+  color: var(--main-blue-color-2);
 }
 
 .control p {
@@ -167,28 +167,25 @@
   font-size: 14px;
   padding: 0;
   margin: -18px 0 18px 0;
-  color: red;
+  color: var(--required-color);
   text-align: left;
 }
 
-/* Styling the scrollbar track */
 .inputSections::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px;
   margin-left: 30px;
 }
 
 .inputSections::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Track color */
+  background-color: var(--scrollbar-track-color);
 }
 
-/* Styling the scrollbar handle (thumb) */
 .inputSections::-webkit-scrollbar-thumb {
-  background-color: #4558be; /* Handle color */
-  border-radius: 5px; /* Rounded corners for the handle */
+  background-color: var(--main-blue-color);
+  border-radius: 5px;
 }
 
-/* Styling the scrollbar handle on hover */
 .inputSections::-webkit-scrollbar-thumb:hover {
-  background-color: #3547ae; /* Handle color on hover */
+  background-color: var(--main-blue-color-2);
   cursor: pointer;
 }

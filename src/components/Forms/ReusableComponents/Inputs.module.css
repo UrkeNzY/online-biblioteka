@@ -13,7 +13,7 @@ label {
 
 .required::before {
   content: "*";
-  color: red;
+  color: var(--required-color);
   position: absolute;
   top: 0;
 }
@@ -25,7 +25,7 @@ textarea {
   padding: 0.8rem 0.4rem;
   margin: 0.5rem 0 1.4rem 0;
   border-radius: 3px;
-  border: rgb(189, 189, 189) 1px solid;
+  border: var(--secondary-200) 1px solid;
 }
 
 .textarea {
@@ -36,7 +36,7 @@ textarea {
 }
 
 .errorMessage {
-  color: red;
+  color: var(--required-color);
   font-size: 12px;
   margin-top: 4px;
 }

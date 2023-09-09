@@ -1,8 +1,9 @@
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment, useEffect, useContext } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBook, deleteBook } from "../../services/books";
 import { useCreateBookContext } from "../../state/CreateBookContext";
+import { GlobalContext } from "../../state/GlobalState";
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +27,7 @@ const BookDetails = (props) => {
   const [bookHeaderData, setBookHeaderData] = useState({});
 
   const { bookEditHandler, bookFound, setBookFound } = useCreateBookContext();
+  const { userRole } = useContext(GlobalContext);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -127,20 +129,24 @@ const BookDetails = (props) => {
               <FontAwesomeIcon icon={faCalendarCheck} />
               <Link to={`/book/${id}/reserve`}>Rezerviši knjigu</Link>
             </div>
-            <div className={classes.headerButton} onClick={editBookHandler}>
-              <FontAwesomeIcon icon={faFileEdit} />
-              <p>Izmijeni knjigu</p>
-            </div>
-            <div
-              className={classes.headerButton}
-              onClick={toggleBookActionsHandler}
-            >
-              <img
-                src="/images/buttons/dashboard-actions.svg"
-                alt="More options icon"
-                width="35"
-              />
-            </div>
+            {userRole === "Administrator" && (
+              <Fragment>
+                <div className={classes.headerButton} onClick={editBookHandler}>
+                  <FontAwesomeIcon icon={faFileEdit} />
+                  <p>Izmijeni knjigu</p>
+                </div>
+                <div
+                  className={classes.headerButton}
+                  onClick={toggleBookActionsHandler}
+                >
+                  <img
+                    src="/images/buttons/dashboard-actions.svg"
+                    alt="More options icon"
+                    width="35"
+                  />
+                </div>
+              </Fragment>
+            )}
           </div>
         ) : (
           ""

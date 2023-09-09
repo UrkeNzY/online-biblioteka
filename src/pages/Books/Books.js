@@ -1,5 +1,6 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, useContext, Fragment } from "react";
 import { listBooks } from "../../services/books";
+import { GlobalContext } from "../../state/GlobalState";
 
 import classes from "../../styles/Searchbar.module.css";
 
@@ -22,6 +23,8 @@ const Books = () => {
   const [tableData, setTableData] = useState([]);
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { userRole } = useContext(GlobalContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,11 +73,13 @@ const Books = () => {
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
-        <Button
-          text="Nova knjiga"
-          to="/new-book/general"
-          image="/images/icons/plus.svg"
-        ></Button>
+        {userRole === "Administrator" && (
+          <Button
+            text="Nova knjiga"
+            to="/new-book/general"
+            image="/images/icons/plus.svg"
+          ></Button>
+        )}
         <Searchbar updateFilteredData={updateFilteredData} />
       </div>
       <Table

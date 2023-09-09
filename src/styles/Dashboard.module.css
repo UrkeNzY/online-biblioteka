@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 1.5625rem 1.25rem;
+  background-color: var(--page-background);
 }
 
 .rightSection {
@@ -19,6 +20,7 @@
 .sectionHeader p {
   font-size: 1.1875rem;
   margin: 0 0 1.875rem 0;
+  color: var(--main-text);
 }
 
 .sectionContent {
@@ -35,6 +37,7 @@
 .sectionUserInfo {
   display: flex;
   align-items: center;
+  width: 12rem;
 }
 
 .sectionUserInfo a {
@@ -43,9 +46,12 @@
 }
 
 .reservationDate {
-  background-color: #e5e7eb;
+  background-color: var(--highlight);
+  color: var(--main-text);
   padding: 0.1875rem 0.625rem;
   border-radius: 8px;
+  width: 7rem;
+  text-align: center;
 }
 
 .sectionActions {
@@ -62,13 +68,14 @@
 }
 
 .reservationsContainer hr {
-  background-color: #e8e6e8;
+  background-color: var(--hr);
   opacity: 0.25;
 }
 
 .reservationsContainer a {
   text-decoration: none;
-  color: inherit;
+  color: var(--main-text);
+  width: 8rem;
 }
 
 .activityContainer {
@@ -76,7 +83,7 @@
   align-items: center;
   font-size: 0.875rem;
   padding: 0 0.3125rem;
-  color: #374151;
+  color: var(--main-text);
   margin: 0 0 1.875rem 0;
 }
 
@@ -87,7 +94,7 @@
 
 .activityHeader {
   margin: 0;
-  color: #6b7280;
+  color: var(--main-text);
 }
 
 .activitynewsDate {
@@ -100,16 +107,16 @@
 
 .activityContainer a {
   text-decoration: none;
-  color: #2196f3;
+  color: var(--light-blue-highlight);
 }
 
 .activityContainer a:hover {
-  color: #4558be;
+  color: var(--light-blue-highlight-hover);
 }
 
 .activityFooterLink {
   text-decoration: none;
-  color: #2196f3;
+  color: var(--light-blue-highlight);
   display: inline-block;
   margin: 1rem 0 0 0.1875rem;
 }
@@ -119,17 +126,17 @@
   background-color: transparent;
   font: inherit;
   font-size: 0.9375rem;
-  color: #4b5563;
+  color: var(--main-text);
   padding: 0.5625rem 1rem;
   margin-top: 1rem;
   border-radius: 4px;
   outline: none;
-  border: 1px solid gray;
+  border: 1px solid var(--hr); 
 }
 
 .activityButton:hover {
   cursor: pointer;
-  background-color: rgb(222, 222, 222);
+  background-color: var(--secondary);
 }
 
 .sectionFooter {
@@ -137,7 +144,7 @@
   align-items: center;
   justify-content: flex-end;
   text-align: right;
-  color: #6676d1;
+  color: var(--light-blue-highlight);
 }
 
 .sectionFooter p {

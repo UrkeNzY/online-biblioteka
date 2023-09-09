@@ -1,9 +1,9 @@
 .cardContainer {
-  background-color: #ffffff;
+  background-color: var(--page-background);
   width: 13.125rem;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
-  box-shadow: 0px 0.3125rem 0.4375rem #e2e3e3;
+  box-shadow: 0px 0.3125rem 0.4375rem var(--shadow);
   position: fixed;
   z-index: 101;
 }
@@ -14,7 +14,7 @@
 }
 
 .itemContainer:hover a {
-  color: #5a71f0;
+  color: var(--dark-blue-highlight);
 }
 
 .itemContainer:hover img {
@@ -24,7 +24,7 @@
 .itemContainer a {
   font-size: 0.875rem;
   margin: 0.6875rem;
-  color: #374151;
+  color: var(--main-text);
   text-decoration: none;
 }
 

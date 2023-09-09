@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allIssuances, getAllReservations } from "../../../services/books";
+import { formatDuration } from "../../../components/Helpers/FormatTime";
 import {
   faBookOpenReader,
   faBookOpen,
@@ -26,7 +27,7 @@ const BookIssueDetails = () => {
     { header: "Izdato uceniku", field: "issuedTo", width: "25%" },
     { header: "Datum izdavanja", field: "issueDate", width: "25%" },
     {
-      header: "Trenutno zadrzavanje knjige",
+      header: "Trenutno zadržavanje knjige",
       field: "issueDuration",
       width: "30%",
     },
@@ -38,7 +39,7 @@ const BookIssueDetails = () => {
     { header: "Datum izdavanja", field: "issueDate", width: "20%" },
     { header: "Datum vracanja", field: "returnDate", width: "20%" },
     {
-      header: "Zadrzavanje knjige",
+      header: "Zadržavanje knjige",
       field: "issueDuration",
       width: "20%",
     },
@@ -49,7 +50,7 @@ const BookIssueDetails = () => {
     { header: "Izdato uceniku", field: "issuedTo", width: "25%" },
     { header: "Datum izdavanja", field: "issueDate", width: "25%" },
     {
-      header: "Trenutno zadrzavanje knjige",
+      header: "Trenutno zadržavanje knjige",
       field: "issueDuration",
       width: "25%",
     },
@@ -71,30 +72,6 @@ const BookIssueDetails = () => {
 
   const { id } = useParams();
 
-  const formatDuration = (days) => {
-    if (days >= 365) {
-      const years = Math.floor(days / 365);
-      const remainingDays = days % 365;
-      return `${years} godin${
-        years === 1 ? "a" : years === (2 || 3 || 4) ? "e" : "a"
-      } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-    } else if (days >= 30) {
-      const months = Math.floor(days / 30);
-      const remainingDays = days % 30;
-      return `${months} mesec${
-        months === 1 ? "" : months === (2 || 3 || 4) ? "a" : "i"
-      } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-    } else if (days >= 7) {
-      const weeks = Math.floor(days / 7);
-      const remainingDays = days % 7;
-      return `${weeks} nedelj${weeks === 1 ? "a" : "e"} i ${remainingDays} dan${
-        remainingDays === 1 ? "" : "a"
-      }`;
-    } else {
-      return `${days} dan${days === 1 ? "" : "a"}`;
-    }
-  };
-
   useEffect(() => {
     const fetchIssueDetails = async () => {
       try {
@@ -102,7 +79,7 @@ const BookIssueDetails = () => {
         let response;
 
         if (fetchType === "issue") {
-          response = await allIssuances({ book_id: id });
+          response = await allIssuances({ book_id: +id });
         } else if (fetchType === "reservation") {
           response = await getAllReservations({ book_id: id });
         }

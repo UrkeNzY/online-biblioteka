@@ -90,9 +90,7 @@ const NewBookFormSpecifications = () => {
           value={bookISBN}
           onChange={changeBookISBNHandler}
         />
-
       </section>
-
 
       <FormButtons />
     </form>

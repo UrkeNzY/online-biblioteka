@@ -145,13 +145,12 @@ const NewBookForm = () => {
       submittedAmount === "" ||
       submittedReleaseDate.trim() === ""
     ) {
-      setHasError(true); // Set hasError to true if any field is empty
+      setHasError(true);
     } else {
-      setHasError(false); // Set hasError to false if all fields have values
+      setHasError(false);
     }
   };
 
-  // Use useEffect to call the validation function whenever the input fields change
   useEffect(() => {
     validateForm();
   }, [
@@ -199,17 +198,9 @@ const NewBookForm = () => {
                   [{ list: "ordered" }, { list: "bullet" }], // Lists
                   ["link", "image"], // Links and images
                 ],
-                handlers: {
-                  // Define custom handlers if needed
-                },
-                // Specify your custom options here
-                options: {
-                  // You can adjust the initial row count here
-                  // Default is 1
-                  // Change this value to set the number of initial rows
-                  // 'auto' will automatically resize the editor as needed
-                  // You can also set a fixed number of rows like '6'
-                },
+                handlers: {},
+
+                options: {},
               },
             }}
             required

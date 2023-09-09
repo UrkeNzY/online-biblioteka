@@ -13,14 +13,21 @@
   display: grid;
   column-gap: 2rem;
   grid-template-columns: 1fr 1fr;
-  /* background-color: blue; */
+}
+
+input, select, textarea {
+  outline: none;
+  border: 2px solid var(--hr);
 }
 
 input:focus,
 select:focus,
-textarea:focus {
-  outline: 2px solid #4558be;
-  border-color: transparent;
+textarea:focus,
+input:hover,
+select:hover,
+textarea:hover {
+  border: 2px solid var(--main-blue-color);
+  transition: .5s;
 }
 
 section {
@@ -42,13 +49,13 @@ section.image {
 }
 
 .userImageHolder {
-  border: #eff3f6 solid 10px;
+  border: var(--secondary) solid 10px;
   height: 20rem;
   max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: #c2c2c2 0px 0px 5px inset;
+  box-shadow: var(--shadow-200) 0px 0px 5px inset;
 }
 
 .userImageHolder img {
@@ -67,9 +74,8 @@ section.image {
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  background-color: #eff3f6;
-  color: #333;
-  /* border-radius: 5px; */
+  background-color: var(--secondary);
+  color: var(--main-text);
   cursor: pointer;
 }
 
@@ -85,7 +91,6 @@ section.buttons {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* background-color: yellow; */
   align-items: flex-end;
 }
 
@@ -111,6 +116,7 @@ section.buttons {
 
 #ponisti {
   background-color: rgb(255, 63, 63);
+  transition: .2s;
 }
 
 #ponisti:hover {
@@ -119,6 +125,7 @@ section.buttons {
 
 #sacuvaj {
   background-color: rgb(59, 173, 59);
+  transition: .5s;
 }
 
 #sacuvaj:hover {
@@ -139,14 +146,13 @@ section.buttons {
   margin-left: 5px;
   height: 1.2rem;
   width: 1.2rem;
-  /* background-color: black; */
 }
 
 .errorText {
   font-size: 14px;
   padding: 0;
   margin: -10px 0 16px 0;
-  color: red;
+  color: var(--required-color);
 }
 
 .errorText:first-of-type {
@@ -159,7 +165,6 @@ section.buttons {
 }
 
 .reactQuill {
-  /* Your custom styles for the React Quill editor */
   margin: 10px 0 63px 0;
   border-radius: 6px;
   height: 120px;

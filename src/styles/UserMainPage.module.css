@@ -1,0 +1,85 @@
+.userMainPageContainer {
+  padding: 25px 50px;
+}
+
+.mainPageActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.bookCategoriesContainer {
+  display: flex;
+  max-width: 30%;
+  overflow-x: scroll;
+}
+
+.bookCategory {
+  background-color: #4558be;
+  padding: 4px 7px;
+  border-radius: 6px;
+  margin-right: 30px;
+}
+
+.bookCategories p {
+  margin: 0;
+  padding: 0;
+}
+
+.bookItemsGrid {
+  flex-grow: 1; /* Grow to take up all available space */
+  display: grid;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 40px;
+}
+
+.bookItemContainer {
+  width: 215px;
+  background-color: var(--page-background);
+  box-shadow: 0px 0.3125rem 0.4375rem var(--shadow);
+}
+
+.bookItemContainer img {
+  width: 100%;
+}
+
+.bookItemBody {
+  padding: 10px;
+}
+
+.bookItemBody button {
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.bookItemGenre {
+  display: flex;
+  align-items: center;
+}
+
+.bookItemGenre img {
+  width: 16px;
+  color: var(--secondary-300);
+}
+
+.bookItemGenre p {
+  font-size: 13px;
+  color: var(--secondary-300);
+  margin: 0 0 0 3px;
+}
+
+.bookItemName {
+  color: var(--main-text);
+  margin: 16px 0 0 0;
+}
+
+.bookItemAuthor {
+  font-size: 13px;
+  color: var(--secondary-300);
+  margin: 2px 0 0 0;
+}

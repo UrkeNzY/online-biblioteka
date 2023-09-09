@@ -14,7 +14,7 @@ const Profile = (props) => {
   const [lastLogin, setLastLogin] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const { loginCount } = useContext(GlobalContext);
+  const { userRole, loginCount } = useContext(GlobalContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -126,21 +126,29 @@ const Profile = (props) => {
               <p>
                 {userData.jmbg ? (
                   userData.jmbg
-                ) : (
+                ) : id === "me" ? (
                   <p className={classes.errorText}>
                     Nemate JMBG.{" "}
                     <Link to={`/new-user/${id}`}> Ažurirajte nalog.</Link>
                   </p>
+                ) : (
+                  "JMBG nedostupan."
                 )}
               </p>
               <p className={classes.profileTitle}>Email</p>
               <p>{userData.email}</p>
               <p className={classes.profileTitle}>Korisnicko ime</p>
               <p>{userData.username}</p>
-              <p className={classes.profileTitle}>Broj logovanja</p>
-              <p>{loginCount}</p>
-              <p className={classes.profileTitle}>Poslednji put logovan/a</p>
-              <p>{getTimeElapsed()}</p>
+              {id === "me" && (
+                <Fragment>
+                  <p className={classes.profileTitle}>Broj logovanja</p>
+                  <p>{loginCount}</p>
+                  <p className={classes.profileTitle}>
+                    Poslednji put logovan/a
+                  </p>
+                  <p>{getTimeElapsed()}</p>
+                </Fragment>
+              )}
             </section>
             <section>
               <div className={classes.profileImageBorder}>
@@ -165,27 +173,29 @@ const Profile = (props) => {
           <LoadingSpinner loadingSpinner="/images/icons/profile-loading-spinner.gif" />
         )}
       </div>
-      <div className={classes.profileActions}>
-        <div className={classes.profileButton}>
-          <img src="/images/icons/reset-icon.svg" alt="reset icon" />
-          <p>Resetuj sifru</p>
+      {(userRole === "Administrator" || id === "me") && (
+        <div className={classes.profileActions}>
+          <div className={classes.profileButton}>
+            <img src="/images/icons/reset-icon.svg" alt="reset icon" />
+            <p>Resetuj šifru</p>
+          </div>
+          <Link to={`/new-user/${id}`} className={classes.profileButton}>
+            <img src="/images/icons/edit-icon.svg" alt="edit icon" />
+            <p>Izmjeni podatke</p>
+          </Link>
+          <div
+            className={classes.profileButton}
+            onClick={toggleDeleteProfileHandler}
+          >
+            <img
+              src="/images/buttons/dashboard-actions.svg"
+              alt="more actions button"
+              width="40"
+              height="40"
+            />
+          </div>
         </div>
-        <Link to={`/new-user/${id}`} className={classes.profileButton}>
-          <img src="/images/icons/edit-icon.svg" alt="edit icon" />
-          <p>Izmjeni podatke</p>
-        </Link>
-        <div
-          className={classes.profileButton}
-          onClick={toggleDeleteProfileHandler}
-        >
-          <img
-            src="/images/buttons/dashboard-actions.svg"
-            alt="more actions button"
-            width="40"
-            height="40"
-          />
-        </div>
-      </div>
+      )}
     </Fragment>
   );
 };

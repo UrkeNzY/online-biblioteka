@@ -1,5 +1,5 @@
 .outerBorder {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--highlight);
   border-radius: 4px;
   padding: 1.25rem;
   max-width: 80%;
@@ -7,7 +7,7 @@
 }
 
 .dropzoneContainer {
-  border: 1px dashed #e5e7eb;
+  border: 1px dashed var(--highlight);
   border-radius: 4px;
   margin: 0 auto;
   padding: 2.5rem;
@@ -19,7 +19,7 @@
 }
 
 .dropzoneContainer p {
-  color: #a5a3af;
+  color: var(--secondary-300);
   font-size: 0.875rem;
   margin: 0.1875rem auto 0 auto;
 }
@@ -41,7 +41,7 @@
 }
 
 .imagePreview {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--highlight);
   border-radius: 4px;
   padding: 0.3125rem;
   margin: auto;

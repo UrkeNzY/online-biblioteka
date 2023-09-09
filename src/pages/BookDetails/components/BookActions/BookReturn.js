@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { allIssuances, returnBook } from "../../../../services/books";
 import format from "date-fns/format";
 import differenceInDays from "date-fns/differenceInDays";
+import { formatDuration } from "../../../../components/Helpers/FormatTime";
 
 import classes from "../../../../styles/BookDetails.module.css";
 
@@ -20,30 +21,6 @@ const tableColumns = [
   { header: "Prekoračenje u danima", field: "issueOffLimit", width: "20%" },
   { header: "Knjigu izdao", field: "reservedBy", width: "20%" },
 ];
-
-const formatDuration = (days) => {
-  if (days >= 365) {
-    const years = Math.floor(days / 365);
-    const remainingDays = days % 365;
-    return `${years} godin${
-      years === 1 ? "a" : years === (2 || 3 || 4) ? "e" : "a"
-    } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-  } else if (days >= 30) {
-    const months = Math.floor(days / 30);
-    const remainingDays = days % 30;
-    return `${months} mesec${
-      months === 1 ? "" : months === (2 || 3 || 4) ? "a" : "i"
-    } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-  } else if (days >= 7) {
-    const weeks = Math.floor(days / 7);
-    const remainingDays = days % 7;
-    return `${weeks} nedelj${weeks === 1 ? "a" : "e"} i ${remainingDays} dan${
-      remainingDays === 1 ? "" : "a"
-    }`;
-  } else {
-    return `${days} dan${days === 1 ? "" : "a"}`;
-  }
-};
 
 const BookReturn = () => {
   const [issuances, setIssuances] = useState([]);
@@ -114,13 +91,17 @@ const BookReturn = () => {
     navigate(`/dashboard`);
   };
 
+  const filteredIssuances = issuances.filter(
+    (issuance) => issuance.bookId === +id
+  );
+
   return (
     <div className={classes.bookReturnContainer}>
       <div className={classes.bookReturnHeader}>
         <p>Vrati knjigu</p>
       </div>
       <Table
-        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
+        tableData={filteredIssuances}
         tableColumns={tableColumns}
         selectedRows={selectedRows}
         onSelectedRowsChange={handleSelectedRowsChange}

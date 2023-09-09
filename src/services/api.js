@@ -27,9 +27,7 @@ export const request = async (method, url, data) => {
     headers: headers,
   };
 
-  if (data instanceof FormData) {
-    config.data = data;
-  } else if (data) {
+  if (data) {
     config.data = JSON.stringify(data);
     headers["Content-Type"] = "application/json";
   }

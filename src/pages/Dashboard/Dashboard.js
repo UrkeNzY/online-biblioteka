@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { allIssuances, getAllReservations } from "../../services/books";
+import { formatTime } from "../../components/Helpers/FormatTime";
 import moment from "moment";
 
 import classes from "../../styles/Dashboard.module.css";
@@ -37,51 +38,12 @@ const Dashboard = () => {
 
         const activities = [];
 
-        // Process reservations
         reservationData.forEach((reservation) => {
           const userInfo = reservation.student;
           const bookInfo = reservation.knjiga;
           const actionDate = moment(reservation.action_date).add(2, "hours");
 
-          const duration = moment.duration(currentDate.diff(actionDate));
-
-          let timeSinceString = "";
-
-          if (duration.asSeconds() < 60) {
-            const seconds = Math.floor(duration.asSeconds());
-            let pluralSuffix;
-
-            if (seconds === 1) {
-              pluralSuffix = "sekunda";
-            } else if (seconds >= 2 && seconds <= 4) {
-              pluralSuffix = "sekunde";
-            } else {
-              pluralSuffix = "sekundi";
-            }
-
-            timeSinceString = `${seconds} ${pluralSuffix}`;
-          } else if (duration.asMinutes() < 60) {
-            timeSinceString = `${Math.floor(duration.asMinutes())} minut${
-              Math.floor(duration.asMinutes()) % 10 > 1 ? "a" : ""
-            }`;
-          } else if (duration.asHours() < 24) {
-            timeSinceString = `${Math.floor(duration.asHours())} sat${
-              Math.floor(duration.asHours()) % 10 > 1 &&
-              Math.floor(duration.asHours()) % 10 < 4
-                ? "a"
-                : Math.floor(duration.asHours()) >= 5
-                ? "i"
-                : ""
-            }`;
-          } else if (duration.asDays() >= 1) {
-            timeSinceString = `${Math.floor(duration.asDays())} dan${
-              Math.floor(duration.asDays()) % 10 > 1 ? "a" : ""
-            }`;
-          } else if (duration.asWeeks() >= 1) {
-            timeSinceString = `${Math.floor(duration.asWeeks())} nedjelj${
-              Math.floor(duration.asWeeks()) % 10 === 1 ? "a" : "e"
-            }`;
-          }
+          let timeSinceString = formatTime(actionDate);
 
           const reservationActivity = {
             userId: userInfo.id,
@@ -93,62 +55,26 @@ const Dashboard = () => {
             header: "REZERVISANJE KNJIGE",
             date: moment(reservation.action_date).format("DD.MM.YYYY"),
             timeSince: timeSinceString,
-            action_date: reservation.action_date, // Add action_date for sorting
+            action_date: reservation.action_date,
           };
           activities.push(reservationActivity);
 
           activeReservations++;
+
+          const duration = moment.duration(currentDate.diff(actionDate));
 
           if (Math.floor(duration.asDays()) > 20) {
             offLimitReservations++;
           }
         });
 
-        // Process issuances
         issuanceData.forEach((issuance) => {
           const userInfo = issuance.student;
           const bookInfo = issuance.knjiga;
           const librarianInfo = issuance.bibliotekar0;
           const actionDate = moment(issuance.action_date).add(2, "hours");
 
-          const duration = moment.duration(currentDate.diff(actionDate));
-
-          let timeSinceString = "";
-
-          if (duration.asSeconds() < 60) {
-            timeSinceString = `${Math.floor(duration.asSeconds())} sekund${
-              Math.floor(duration.asMinutes()) % 10 === 1
-                ? ""
-                : Math.floor(duration.asMinutes()) >= 2 &&
-                  Math.floor(duration.asMinutes()) <= 4
-                ? "e"
-                : "i"
-            }`;
-          } else if (duration.asMinutes() < 60) {
-            timeSinceString = `${Math.floor(duration.asMinutes())} minut${
-              Math.floor(duration.asMinutes()) > 1 ||
-              duration.asMinutes % 10 === 0
-                ? "a"
-                : ""
-            }`;
-          } else if (duration.asHours() < 24) {
-            timeSinceString = `${Math.floor(duration.asHours())} sat${
-              Math.floor(duration.asHours()) % 10 > 1 &&
-              Math.floor(duration.asHours()) % 10 < 4
-                ? "a"
-                : Math.floor(duration.asHours()) >= 5
-                ? "i"
-                : ""
-            }`;
-          } else if (duration.asDays() >= 1) {
-            timeSinceString = `${Math.floor(duration.asDays())} dan${
-              Math.floor(duration.asDays()) > 1 ? "a" : ""
-            }`;
-          } else if (duration.asWeeks() >= 1) {
-            timeSinceString = `${Math.floor(duration.asWeeks())} nedjelj${
-              Math.floor(duration.asWeeks()) === 1 ? "a" : "e"
-            }`;
-          }
+          let timeSinceString = formatTime(actionDate);
 
           const issualActivity = {
             userId: userInfo.id,
@@ -161,11 +87,10 @@ const Dashboard = () => {
             date: moment(issuance.action_date).format("DD.MM.YYYY"),
             timeSince: timeSinceString,
             subject: librarianInfo.name + " " + librarianInfo.surname,
-            action_date: issuance.action_date, // Add action_date for sorting
+            action_date: issuance.action_date,
           };
           activities.push(issualActivity);
         });
-        // Sort the combined activities by date in descending order
         activities.sort(
           (a, b) => new Date(b.action_date) - new Date(a.action_date)
         );

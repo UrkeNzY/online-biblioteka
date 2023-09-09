@@ -1,6 +1,7 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout, userInfo } from "../services/users";
+import DarkMode from "../DarkMode/DarkMode";
 
 import { GlobalContext } from "../state/GlobalState";
 
@@ -24,7 +25,7 @@ const MainHeader = (props) => {
   );
 
   const navigate = useNavigate();
-  const { logout } = useContext(GlobalContext);
+  const { userRole, logout } = useContext(GlobalContext);
 
   useEffect(() => {
     async function fetchUserPicture() {
@@ -106,20 +107,26 @@ const MainHeader = (props) => {
         <h1>Online Biblioteka</h1>
       </Link>
       <div className={classes.userContainer}>
+        <DarkMode />
         <div className={classes.userActions}>
-          <div>
+          {(userRole === "Administrator" || userRole === "Bibliotekar") && (
+            <div>
+              <img
+                src="/images/icons/notifications.svg"
+                alt="notifications icon"
+                onClick={toggleNotificationsHandler}
+              />
+              {/* <p className={classes.notificationAmount}>2</p> */}
+            </div>
+          )}
+
+          {userRole === "Administrator" && (
             <img
-              src="/images/icons/notifications.svg"
-              alt="notifications icon"
-              onClick={toggleNotificationsHandler}
+              src="/images/icons/plus.svg"
+              alt="add icon"
+              onClick={toggleInfoHandler}
             />
-            <p className={classes.notificationAmount}>2</p>
-          </div>
-          <img
-            src="/images/icons/plus.svg"
-            alt="add icon"
-            onClick={toggleInfoHandler}
-          />
+          )}
         </div>
         <img
           className={classes.headerAvatar}

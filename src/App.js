@@ -112,7 +112,7 @@ function App() {
   function Router() {
     return (
       <Routes>
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Navigate to="/main-page" />} />
         <Route
           path="/dashboard"
           element={
@@ -126,7 +126,7 @@ function App() {
         <Route
           path="/main-page"
           element={
-            <AuthenticatedRoute allowedRoles={["Učenik", "Administrator"]}>
+            <AuthenticatedRoute allowedRoles={["Učenik", "Bibliotekar", "Administrator"]}>
               <AuthenticatedPage>
                 <UserMainPage />
               </AuthenticatedPage>

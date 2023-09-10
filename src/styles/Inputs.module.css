@@ -29,7 +29,6 @@ textarea {
   border-radius: 3px;
   /* border: var(--secondary-200) 1px solid; */
   background-color: transparent;
-  color: var(--main-text);
 }
 
 .textarea {
@@ -41,4 +40,5 @@ textarea {
 
 .multiSelectInputContainer {
   margin: 0.5rem 0 1.5rem 0;
+  background-color: var(--page-background);
 }

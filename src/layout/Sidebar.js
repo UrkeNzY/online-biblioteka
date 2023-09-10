@@ -7,6 +7,12 @@ import classes from "../styles/Sidebar.module.css";
 
 const sidebarItems = [
   {
+    text: "Glavna stranica",
+    icon: "/images/icons/book-sidebar-icon.svg",
+    path: "/main-page",
+    requiredRoles: ["Učenik", "Bibliotekar", "Administrator"],
+  },
+  {
     text: "Kontrolna tabla",
     icon: "/images/icons/dashboard.svg",
     path: "/dashboard",
@@ -41,12 +47,6 @@ const sidebarItems = [
     icon: "/images/icons/izdavanje-knjiga.svg",
     path: "/book-issuing",
     requiredRoles: ["Bibliotekar", "Administrator"],
-  },
-  {
-    text: "Glavna stranica",
-    icon: "/images/icons/dashboard.svg",
-    path: "/dashboard",
-    requiredRoles: ["Učenik"],
   },
 ];
 

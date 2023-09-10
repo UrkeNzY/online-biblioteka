@@ -62,6 +62,7 @@ const InputSelect = (props) => {
               control: (baseStyles, state) => ({
                 ...baseStyles,
                 outline: state.isFocused ? "2px solid var(--main-blue-color)" : "",
+                backgroundColor: "var(--page-background)"
               }),
               input: (baseStyles, state) => ({
                 ...baseStyles,
@@ -83,6 +84,16 @@ const InputSelect = (props) => {
                 ":hover": {
                   backgroundColor: data.color,
                   color: "white",
+                },
+              }),
+              menu: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: "var(--page-background)", // Set your desired dropdown menu background color here
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                ":hover": {
+                  color: "var(--secondary-300)", // Set your desired hover text color here
                 },
               }),
             }}

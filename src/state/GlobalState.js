@@ -23,23 +23,20 @@ export const GlobalProvider = ({ children }) => {
     credentials: "",
   });
 
-  const [refreshPage, setRefreshPage] = useState(false); // Step 1: Add a state variable
+  const [refreshPage, setRefreshPage] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Reset the error state if we change page
   useEffect(() => {
     if (error) setError(undefined);
   }, [location.pathname, error]);
 
-  // On First initialization
   useEffect(() => {
     const userData = localStorage.getItem("user");
     const currentUser = JSON.parse(userData);
 
     if (currentUser) {
-      // Call userInfo function to get user role
       const fetchUserRole = async () => {
         try {
           const response = await userInfo(currentUser.token);
@@ -74,12 +71,11 @@ export const GlobalProvider = ({ children }) => {
       setLastLogin(storedLastLogin);
     }
 
-    // Step 2: Check if the refresh flag is set and refresh the page
     if (refreshPage) {
       window.location.reload();
-      setRefreshPage(false); // Reset the flag
+      setRefreshPage(false);
     }
-  }, [refreshPage]); // Add 'refreshPage' as a dependency
+  }, [refreshPage]);
 
   useEffect(() => {
     localStorage.setItem("loginCount", loginCount.toString());
@@ -88,7 +84,6 @@ export const GlobalProvider = ({ children }) => {
   const signIn = async (userData) => {
     setLoading(true);
 
-    // fetch signIn endpoint, provide data
     fetch("https://tim6.petardev.live/api/login", {
       method: "POST",
       headers: {
@@ -106,19 +101,17 @@ export const GlobalProvider = ({ children }) => {
           const userData = {
             token: d.data.token,
             name: d.data.name,
-            role: d.data.role, // Store the role here
+            role: d.data.role,
           };
           setUser(userData);
-          setUserRole(d.data.role); // Update the userRole state immediately
           localStorage.setItem("user", JSON.stringify(userData));
 
-          // Update lastLogin with the current timestamp
           const currentTimestamp = new Date().toISOString();
           setLastLogin(currentTimestamp);
           localStorage.setItem("lastLogin", currentTimestamp);
 
           setLoginCount((prevState) => prevState + 1);
-          setRefreshPage(true); // Step 1: Set the flag to refresh the page
+          setRefreshPage(true);
           navigate("/");
         } else {
           console.log(`signIn: ${JSON.stringify(d)}`);
@@ -138,7 +131,6 @@ export const GlobalProvider = ({ children }) => {
   function signUp(userData) {
     setLoading(true);
 
-    // fetch signUp endpoint, provide data
     fetch("https://tim6.petardev.live/api/register", {
       method: "POST",
       headers: {
@@ -155,7 +147,7 @@ export const GlobalProvider = ({ children }) => {
           const userData = {
             token: d.data.token,
             name: d.data.name,
-            role: d.data.role, // Store the role here
+            role: d.data.role,
           };
           setUser(userData);
           localStorage.setItem("user", JSON.stringify(userData));

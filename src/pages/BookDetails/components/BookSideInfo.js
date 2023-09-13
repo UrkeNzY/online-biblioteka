@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { formatTime } from "../../../components/Helpers/FormatTime";
+import { formatTime } from "../../../utils/FormatTime";
 import {
   getBook,
   getAllReservations,

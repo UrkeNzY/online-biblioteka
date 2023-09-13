@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { allIssuances, getAllReservations } from "../../services/books";
-import { formatTime } from "../../components/Helpers/FormatTime";
+import { formatTime } from "../../utils/FormatTime";
 import moment from "moment";
 
 import classes from "../../styles/Dashboard.module.css";

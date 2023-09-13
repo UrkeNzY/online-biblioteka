@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { allIssuances, returnBook } from "../../../../services/books";
 import format from "date-fns/format";
 import differenceInDays from "date-fns/differenceInDays";
-import { formatDuration } from "../../../../components/Helpers/FormatTime";
+import { formatDuration } from "../../../../utils/FormatTime";
 
 import classes from "../../../../styles/BookDetails.module.css";
 

@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allIssuances, getAllReservations } from "../../../services/books";
-import { formatDuration } from "../../../components/Helpers/FormatTime";
+import { formatDuration } from "../../../utils/FormatTime";
 import {
   faBookOpenReader,
   faBookOpen,

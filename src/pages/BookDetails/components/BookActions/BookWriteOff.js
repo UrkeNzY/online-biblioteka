@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { allIssuances, writeBookOff } from "../../../../services/books";
+import { formatDuration } from "../../../../utils/FormatTime";
 import format from "date-fns/format";
-import differenceInDays from "date-fns/differenceInDays"; // Import the function for calculating days difference
+import differenceInDays from "date-fns/differenceInDays";
 
 import classes from "../../../../styles/BookDetails.module.css";
 
@@ -21,38 +22,10 @@ const tableColumns = [
   { header: "Knjigu izdao", field: "reservedBy", width: "20%" },
 ];
 
-const formatDuration = (days) => {
-  if (days >= 365) {
-    const years = Math.floor(days / 365);
-    const remainingDays = days % 365;
-    return `${years} godin${
-      years === 1 ? "a" : years === (2 || 3 || 4) ? "e" : "a"
-    } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-  } else if (days >= 30) {
-    const months = Math.floor(days / 30);
-    const remainingDays = days % 30;
-    return `${months} mesec${
-      months === 1 ? "" : months === (2 || 3 || 4) ? "a" : "i"
-    } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-  } else if (days >= 7) {
-    const weeks = Math.floor(days / 7);
-    const remainingDays = days % 7;
-    return `${weeks} nedelj${weeks === 1 ? "a" : "e"} i ${remainingDays} dan${
-      remainingDays === 1 ? "" : "a"
-    }`;
-  } else {
-    return `${days} dan${days === 1 ? "" : "a"}`;
-  }
-};
-
 const BookWriteOff = () => {
   const [issuances, setIssuances] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [isLoading, setIsLoading] = useState();
-
-  const handleSelectedRowsChange = (newSelectedRows) => {
-    setSelectedRows(newSelectedRows);
-  };
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -94,7 +67,9 @@ const BookWriteOff = () => {
           };
         });
 
-        setIssuances(processedIssuances);
+        setIssuances(
+          processedIssuances.filter((issuance) => issuance.bookId === +id)
+        );
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -103,7 +78,11 @@ const BookWriteOff = () => {
     };
 
     fetchIssuances();
-  }, []);
+  }, [id]);
+
+  const handleSelectedRowsChange = (newSelectedRows) => {
+    setSelectedRows(newSelectedRows);
+  };
 
   const writeOffHandler = async () => {
     try {
@@ -121,7 +100,7 @@ const BookWriteOff = () => {
         <p>Otpiši knjigu</p>
       </div>
       <Table
-        tableData={issuances.filter((issuance) => issuance.bookId === +id)}
+        tableData={issuances}
         tableColumns={tableColumns}
         selectedRows={selectedRows}
         onSelectedRowsChange={handleSelectedRowsChange}

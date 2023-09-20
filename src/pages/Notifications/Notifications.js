@@ -5,6 +5,7 @@ import moment from "moment";
 import { formatTime } from "../../utils/FormatTime";
 
 import classes from "../../styles/Notifications.module.css";
+
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const Notifications = () => {

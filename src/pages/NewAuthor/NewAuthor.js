@@ -1,14 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editAuthor, showAuthor, storeAuthor } from "../../services/authors";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 import classes from "../../styles/Forms.module.css";
 
 import InputText from "../../components/Forms/InputText";
 import FormButtons from "../../components/Forms/FormButtons";
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const NewAuthor = () => {
   const [authorName, setAuthorName] = useState("");
@@ -31,8 +31,6 @@ const NewAuthor = () => {
         if (id) {
           const authorDataResponse = await showAuthor(id);
           const { name, surname, bio } = authorDataResponse.data;
-
-          console.log(authorDataResponse.data);
 
           setAuthorName(name || "");
           setAuthorSurname(surname || "");
@@ -83,8 +81,6 @@ const NewAuthor = () => {
   useEffect(() => {
     const hasValue = authorName !== "" && authorSurname !== "";
 
-    console.log(authorName);
-
     setIsFormEmpty(!hasValue);
   }, [authorName, authorSurname]);
 
@@ -102,6 +98,9 @@ const NewAuthor = () => {
                 setAuthorName(event.target.value);
               }}
             />
+            {inputErrors.authorName && (
+              <p className={classes.errorText}>{inputErrors.authorName}</p>
+            )}
             <InputText
               labelText="Prezime"
               type="text"
@@ -111,9 +110,6 @@ const NewAuthor = () => {
                 setAuthorSurname(event.target.value);
               }}
             />
-            {inputErrors.authorName && (
-              <p className={classes.errorText}>{inputErrors.authorName}</p>
-            )}
             {inputErrors.authorSurname && (
               <p className={classes.errorText}>{inputErrors.authorSurname}</p>
             )}
@@ -129,22 +125,14 @@ const NewAuthor = () => {
               modules={{
                 toolbar: {
                   container: [
-                    [{ header: [1, 2, 3, 4, 5, false] }], // Headers
-                    ["bold", "italic", "underline", "strike"], // Text styles
-                    [{ list: "ordered" }, { list: "bullet" }], // Lists
-                    ["link", "image"], // Links and images
+                    [{ header: [1, 2, 3, 4, 5, false] }],
+                    ["bold", "italic", "underline", "strike"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    ["link", "image"],
                   ],
-                  handlers: {
-                    // Define custom handlers if needed
-                  },
-                  // Specify your custom options here
-                  options: {
-                    // You can adjust the initial row count here
-                    // Default is 1
-                    // Change this value to set the number of initial rows
-                    // 'auto' will automatically resize the editor as needed
-                    // You can also set a fixed number of rows like '6'
-                  },
+                  handlers: {},
+
+                  options: {},
                 },
               }}
               required

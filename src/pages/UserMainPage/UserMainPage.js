@@ -1,5 +1,5 @@
-import React from "react";
 import classes from "../../styles/UserMainPage.module.css";
+
 import Button from "../../components/UI/Buttons/Button";
 import Searchbar from "../../components/UI/Searchbar/Searchbar";
 

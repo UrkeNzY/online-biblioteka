@@ -1,8 +1,10 @@
 import { Fragment, useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allIssuances, getAllReservations } from "../../../services/books";
+import format from "date-fns/format";
+import differenceInDays from "date-fns/differenceInDays";
 import { formatDuration } from "../../../utils/FormatTime";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookOpenReader,
   faBookOpen,
@@ -10,8 +12,6 @@ import {
   faCalendarCheck,
   faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
-import format from "date-fns/format";
-import differenceInDays from "date-fns/differenceInDays";
 
 import classes from "../../../styles/BookDetails.module.css";
 
@@ -71,6 +71,8 @@ const BookIssueDetails = () => {
   const [tableColumns, setTableColumns] = useState(izdateTableColumns);
 
   const { id } = useParams();
+
+  let selectedTableColumns;
 
   useEffect(() => {
     const fetchIssueDetails = async () => {
@@ -145,8 +147,6 @@ const BookIssueDetails = () => {
   const changeIssueTypeHandler = (type, fetchType) => {
     setIssueType(type);
     setFetchType(fetchType);
-
-    let selectedTableColumns;
 
     switch (type) {
       case "izdate":

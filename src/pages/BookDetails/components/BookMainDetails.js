@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getBook } from "../../../services/books";
 
 import classes from "../../../styles/BookDetails.module.css";
 
 import ReactShowMoreText from "react-show-more-text";
-import { getBook } from "../../../services/books";
 
 const BookMainDetails = () => {
   const [mainBookData, setMainBookData] = useState({});
@@ -42,48 +42,45 @@ const BookMainDetails = () => {
   return (
     <div className={classes.mainDetailsContainer}>
       <div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Naziv knjige</p>
-          <p className={classes.mainDetailText}>{mainBookData.title}</p>
-        </div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Kategorija</p>
-          {mainBookData.categories &&
+        <DetailItem title="Naziv knjige" text={mainBookData.title} />
+        <DetailItem
+          title="Kategorija"
+          text={
+            mainBookData.categories &&
             mainBookData.categories.map((category, index) => (
-              <p className={classes.mainDetailText} key={category.id}>
+              <>
                 {category.name}
                 {index < mainBookData.categories.length - 1 && ", "}
-              </p>
-            ))}
-        </div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Zanr</p>
-          {mainBookData.genres &&
+              </>
+            ))
+          }
+        />
+        <DetailItem
+          title="Žanr"
+          text={
+            mainBookData.genres &&
             mainBookData.genres.map((genre, index) => (
-              <p className={classes.mainDetailText} key={genre.id}>
+              <>
                 {genre.name}
                 {index < mainBookData.genres.length - 1 && ", "}
-              </p>
-            ))}
-        </div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Autor/ri</p>
-          {mainBookData.authors &&
+              </>
+            ))
+          }
+        />
+        <DetailItem
+          title="Autor/ri"
+          text={
+            mainBookData.authors &&
             mainBookData.authors.map((author, index) => (
-              <p className={classes.mainDetailText} key={author.id}>
+              <>
                 {author.name} {author.surname}
                 {index < mainBookData.authors.length - 1 && ", "}
-              </p>
-            ))}
-        </div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Izdavac</p>
-          <p className={classes.mainDetailText}>{mainBookData.publisher}</p>
-        </div>
-        <div className={classes.detailContainer}>
-          <p className={classes.detailTitle}>Godina izdavanja</p>
-          <p className={classes.mainDetailText}>{mainBookData.releaseDate}</p>
-        </div>
+              </>
+            ))
+          }
+        />
+        <DetailItem title="Izdavač" text={mainBookData.publisher} />
+        <DetailItem title="Godina izdavanja" text={mainBookData.releaseDate} />
       </div>
       <div className={classes.descriptionContainer}>
         <h4>Storyline (Kratki sadrzaj)</h4>
@@ -99,5 +96,12 @@ const BookMainDetails = () => {
     </div>
   );
 };
+
+const DetailItem = ({ title, text }) => (
+  <div className={classes.detailContainer}>
+    <p className={classes.detailTitle}>{title}</p>
+    <p className={classes.mainDetailText}>{text}</p>
+  </div>
+);
 
 export default BookMainDetails;

@@ -188,7 +188,7 @@ function App() {
         <Route
           path="/new-book"
           element={
-            <AuthenticatedRoute allowedRoles={["Administrator"]}>
+            <AuthenticatedRoute allowedRoles={["Administrator", "Bibliotekar"]}>
               <AuthenticatedPage>
                 <CreateBookProvider>
                   <NewBook />

@@ -19,6 +19,8 @@ const Dashboard = () => {
   const [activeReservations, setActiveReservations] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
+  const maxBorrowDuration = 20;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,7 +65,7 @@ const Dashboard = () => {
 
           const duration = moment.duration(currentDate.diff(actionDate));
 
-          if (Math.floor(duration.asDays()) > 20) {
+          if (Math.floor(duration.asDays()) > maxBorrowDuration) {
             offLimitReservations++;
           }
         });

@@ -1,7 +1,10 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allIssuances, getAllReservations } from "../../services/books";
+import { formatDuration } from "../../utils/FormatTime";
+import format from "date-fns/format";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import differenceInDays from "date-fns/differenceInDays";
 import {
   faBookOpenReader,
   faBookOpen,
@@ -9,10 +12,9 @@ import {
   faCalendarCheck,
   faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
-import format from "date-fns/format";
-import differenceInDays from "date-fns/differenceInDays";
 
 import classes from "../../styles/BookIssuances.module.css";
+
 import BookTable from "../../components/UI/Tables/BookTable";
 import Searchbar from "../../components/UI/Searchbar/Searchbar";
 
@@ -75,30 +77,6 @@ const BookIssuances = () => {
   const [tableColumns, setTableColumns] = useState(izdateTableColumns);
 
   const { id } = useParams();
-
-  const formatDuration = (days) => {
-    if (days >= 365) {
-      const years = Math.floor(days / 365);
-      const remainingDays = days % 365;
-      return `${years} godin${
-        years === 1 ? "a" : years === (2 || 3 || 4) ? "e" : "a"
-      } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-    } else if (days >= 30) {
-      const months = Math.floor(days / 30);
-      const remainingDays = days % 30;
-      return `${months} mesec${
-        months === 1 ? "" : months === (2 || 3 || 4) ? "a" : "i"
-      } i ${remainingDays} dan${remainingDays === 1 ? "" : "a"}`;
-    } else if (days >= 7) {
-      const weeks = Math.floor(days / 7);
-      const remainingDays = days % 7;
-      return `${weeks} nedelj${weeks === 1 ? "a" : "e"} i ${remainingDays} dan${
-        remainingDays === 1 ? "" : "a"
-      }`;
-    } else {
-      return `${days} dan${days === 1 ? "" : "a"}`;
-    }
-  };
 
   useEffect(() => {
     const fetchIssueDetails = async () => {

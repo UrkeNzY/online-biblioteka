@@ -111,7 +111,6 @@ const BookSideInfo = () => {
         setBookAmountData(formattedData);
         setActivityInfo(activities);
         setIsLoading(false);
-        console.log(activities.map((activity) => activity.bookId));
       } catch (error) {
         console.error(error);
         setIsLoading(false);

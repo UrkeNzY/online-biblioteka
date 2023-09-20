@@ -4,9 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBook, deleteBook } from "../../services/books";
 import { useCreateBookContext } from "../../state/CreateBookContext";
 import { GlobalContext } from "../../state/GlobalState";
-
 import { useNavigate } from "react-router-dom";
-
 import {
   faArrowTurnUp,
   faHandScissors,
@@ -22,15 +20,14 @@ import TabSection from "../../components/UI/Tabs/TabSection";
 import BookSideInfo from "./components/BookSideInfo";
 
 const BookDetails = (props) => {
-  let buttonRef;
-
   const [bookHeaderData, setBookHeaderData] = useState({});
-
   const { bookEditHandler, bookFound, setBookFound } = useCreateBookContext();
   const { userRole } = useContext(GlobalContext);
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  let buttonRef;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +59,6 @@ const BookDetails = (props) => {
     try {
       await deleteBook(id);
       navigate("/book-record");
-      console.log("delete success");
     } catch (error) {
       console.log("Error deleting book:", error.message);
     }
@@ -129,7 +125,7 @@ const BookDetails = (props) => {
               <FontAwesomeIcon icon={faCalendarCheck} />
               <Link to={`/book/${id}/reserve`}>Rezerviši knjigu</Link>
             </div>
-            {userRole === "Administrator" && (
+            {(userRole === "Administrator" || userRole === "Bibliotekar") && (
               <Fragment>
                 <div className={classes.headerButton} onClick={editBookHandler}>
                   <FontAwesomeIcon icon={faFileEdit} />

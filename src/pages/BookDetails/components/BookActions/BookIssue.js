@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { listUsers } from "../../../../services/users";
 import { issueBook } from "../../../../services/books";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import format from "date-fns/format";
 import { addDays } from "date-fns";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "../../../../styles/BookDetails.module.css";
 
 import InputSelect from "../../../../components/Forms/InputSelect";
 import FormButtons from "../../../../components/Forms/FormButtons";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const BookIssue = () => {
   const [users, setUsers] = useState([]);
@@ -85,7 +85,6 @@ const BookIssue = () => {
   const dateChangeHandler = (date) => {
     setSubmittedDate(date);
     setReturnDate(addDays(date, 20));
-    console.log(submittedDate);
   };
 
   const resetReservationHandler = () => {
@@ -104,7 +103,6 @@ const BookIssue = () => {
           options={users}
           onSelect={(value) => {
             setSubmittedUserId(value);
-            console.log(value);
           }}
         />
         <p className={classes.errorText}>{issueErrors.user}</p>

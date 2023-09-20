@@ -5,20 +5,23 @@ import { createBook, editBook, updateBook } from "../services/books";
 const CreateBookContext = createContext();
 
 export const CreateBookProvider = ({ children }) => {
-  const [submittedName, setSubmittedName] = useState("");
-  const [submittedDescription, setSubmittedDescription] = useState("");
-  const [submittedCategory, setSubmittedCategory] = useState([]);
-  const [submittedGenre, setSubmittedGenre] = useState([]);
-  const [submittedAuthor, setSubmittedAuthor] = useState([]);
-  const [submittedPublisher, setSubmittedPublisher] = useState("");
-  const [submittedAmount, setSubmittedAmount] = useState("");
-  const [submittedPages, setSubmittedPages] = useState("");
-  const [submittedScript, setSubmittedScript] = useState("");
-  const [submittedLanguage, setSubmittedLanguage] = useState("");
-  const [submittedBinding, setSubmittedBinding] = useState("");
-  const [submittedFormat, setSubmittedFormat] = useState("");
-  const [submittedReleaseDate, setSubmittedReleaseDate] = useState("");
-  const [submittedISBN, setSubmittedISBN] = useState("");
+  const [formData, setFormData] = useState({
+    submittedName: "",
+    submittedDescription: "",
+    submittedCategory: [],
+    submittedGenre: [],
+    submittedAuthor: [],
+    submittedPublisher: "",
+    submittedAmount: "",
+    submittedPages: "",
+    submittedScript: "",
+    submittedLanguage: "",
+    submittedBinding: "",
+    submittedFormat: "",
+    submittedReleaseDate: "",
+    submittedISBN: "",
+  });
+
   const [newBookData, setNewBookData] = useState({});
   const [editBookData, setEditBookData] = useState({});
   const [bookFound, setBookFound] = useState(true);
@@ -62,21 +65,21 @@ export const CreateBookProvider = ({ children }) => {
     try {
       setIsLoading(true);
       await createBook({
-        nazivKnjiga: newBookData.submittedName,
-        brStrana: newBookData.submittedPages,
-        pismo: newBookData.submittedScript,
-        jezik: newBookData.submittedLanguage,
-        povez: newBookData.submittedBinding,
-        format: newBookData.submittedFormat,
-        izdavac: newBookData.submittedPublisher,
-        godinaIzdavanja: newBookData.submittedReleaseDate,
-        isbn: newBookData.submittedISBN,
-        knjigaKolicina: newBookData.submittedAmount,
-        kratki_sadrzaj: newBookData.submittedDescription,
+        nazivKnjiga: formData.submittedName,
+        brStrana: formData.submittedPages,
+        pismo: formData.submittedScript,
+        jezik: formData.submittedLanguage,
+        povez: formData.submittedBinding,
+        format: formData.submittedFormat,
+        izdavac: formData.submittedPublisher,
+        godinaIzdavanja: formData.submittedReleaseDate,
+        isbn: formData.submittedISBN,
+        knjigaKolicina: formData.submittedAmount,
+        kratki_sadrzaj: formData.submittedDescription,
         deletePdfs: 0,
-        categories: newBookData.submittedCategory,
-        genres: newBookData.submittedGenre,
-        authors: newBookData.submittedAuthor,
+        categories: formData.submittedCategory,
+        genres: formData.submittedGenre,
+        authors: formData.submittedAuthor,
       });
       console.log("created book");
       setIsLoading(false);
@@ -112,21 +115,21 @@ export const CreateBookProvider = ({ children }) => {
     try {
       setIsLoading(true);
       await updateBook(bookId, {
-        nazivKnjiga: newBookData.submittedName,
-        brStrana: newBookData.submittedPages,
-        pismo: newBookData.submittedScript,
-        jezik: newBookData.submittedLanguage,
-        povez: newBookData.submittedBinding,
-        format: newBookData.submittedFormat,
-        izdavac: newBookData.submittedPublisher,
-        godinaIzdavanja: newBookData.submittedReleaseDate,
-        isbn: newBookData.submittedISBN,
-        knjigaKolicina: newBookData.submittedAmount,
-        kratki_sadrzaj: newBookData.submittedDescription,
+        nazivKnjiga: formData.submittedName,
+        brStrana: formData.submittedPages,
+        pismo: formData.submittedScript,
+        jezik: formData.submittedLanguage,
+        povez: formData.submittedBinding,
+        format: formData.submittedFormat,
+        izdavac: formData.submittedPublisher,
+        godinaIzdavanja: formData.submittedReleaseDate,
+        isbn: formData.submittedISBN,
+        knjigaKolicina: formData.submittedAmount,
+        kratki_sadrzaj: formData.submittedDescription,
         deletePdfs: 0,
-        categories: newBookData.submittedCategory,
-        genres: newBookData.submittedGenre,
-        authors: newBookData.submittedAuthor,
+        categories: formData.submittedCategory,
+        genres: formData.submittedGenre,
+        authors: formData.submittedAuthor,
       });
       console.log("updated book");
       setIsLoading(false);
@@ -195,53 +198,29 @@ export const CreateBookProvider = ({ children }) => {
   };
 
   const resetValuesHandler = () => {
-    setSubmittedName("");
-    setSubmittedDescription("");
-    setSubmittedCategory([]);
-    setSubmittedGenre([]);
-    setSubmittedAuthor([]);
-    setSubmittedPublisher("");
-    setSubmittedAmount("");
-    setSubmittedPages("");
-    setSubmittedScript("");
-    setSubmittedLanguage("");
-    setSubmittedBinding("");
-    setSubmittedFormat("");
-    setSubmittedReleaseDate("");
-    setSubmittedISBN("");
+    setFormData({
+      submittedName: "",
+      submittedDescription: "",
+      submittedCategory: [],
+      submittedGenre: [],
+      submittedAuthor: [],
+      submittedPublisher: "",
+      submittedAmount: "",
+      submittedPages: "",
+      submittedScript: "",
+      submittedLanguage: "",
+      submittedBinding: "",
+      submittedFormat: "",
+      submittedReleaseDate: "",
+      submittedISBN: "",
+    });
   };
 
   return (
     <CreateBookContext.Provider
       value={{
-        submittedName,
-        setSubmittedName,
-        submittedDescription,
-        setSubmittedDescription,
-        submittedCategory,
-        setSubmittedCategory,
-        submittedGenre,
-        setSubmittedGenre,
-        submittedAuthor,
-        setSubmittedAuthor,
-        submittedPublisher,
-        setSubmittedPublisher,
-        submittedAmount,
-        setSubmittedAmount,
-        submittedPages,
-        setSubmittedPages,
-        submittedScript,
-        setSubmittedScript,
-        submittedLanguage,
-        setSubmittedLanguage,
-        submittedBinding,
-        setSubmittedBinding,
-        submittedFormat,
-        setSubmittedFormat,
-        submittedReleaseDate,
-        setSubmittedReleaseDate,
-        submittedISBN,
-        setSubmittedISBN,
+        formData,
+        setFormData,
         updateNewBook,
         resetValuesHandler,
         submitFormHandler,

@@ -1,15 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { GlobalContext } from "../../state/GlobalState";
 import { userInfo, listSingleUser, deleteUser } from "../../services/users";
+import { GlobalContext } from "../../state/GlobalState";
 
 import classes from "../../styles/Profile.module.css";
+
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const Profile = (props) => {
-  let buttonRef;
-
   const [userData, setUserData] = useState({});
   const [lastLogin, setLastLogin] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +17,8 @@ const Profile = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
+
+  let buttonRef;
 
   useEffect(() => {
     async function fetchUserData() {

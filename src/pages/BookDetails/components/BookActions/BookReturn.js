@@ -27,10 +27,6 @@ const BookReturn = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
-  const handleSelectedRowsChange = (newSelectedRows) => {
-    setSelectedRows(newSelectedRows);
-  };
-
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -70,7 +66,9 @@ const BookReturn = () => {
           };
         });
 
-        setIssuances(processedIssuances);
+        setIssuances(
+          processedIssuances.filter((issuance) => issuance.bookId === +id)
+        );
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -79,7 +77,11 @@ const BookReturn = () => {
     };
 
     fetchIssuances();
-  }, []);
+  }, [id]);
+
+  const handleSelectedRowsChange = (newSelectedRows) => {
+    setSelectedRows(newSelectedRows);
+  };
 
   const returnBookHandler = async () => {
     try {
@@ -91,17 +93,13 @@ const BookReturn = () => {
     navigate(`/dashboard`);
   };
 
-  const filteredIssuances = issuances.filter(
-    (issuance) => issuance.bookId === +id
-  );
-
   return (
     <div className={classes.bookReturnContainer}>
       <div className={classes.bookReturnHeader}>
         <p>Vrati knjigu</p>
       </div>
       <Table
-        tableData={filteredIssuances}
+        tableData={issuances}
         tableColumns={tableColumns}
         selectedRows={selectedRows}
         onSelectedRowsChange={handleSelectedRowsChange}

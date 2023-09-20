@@ -9,23 +9,13 @@ import InputText from "../../../components/Forms/InputText";
 
 const NewBookSpecs = () => {
   const {
-    submittedPages,
-    setSubmittedPages,
-    submittedScript,
-    setSubmittedScript,
-    submittedLanguage,
-    setSubmittedLanguage,
-    submittedBinding,
-    setSubmittedBinding,
-    submittedFormat,
-    setSubmittedFormat,
-    submittedISBN,
-    setSubmittedISBN,
     updateNewBook,
     editBookData,
     isEditing,
     setHasError,
     bookErrors,
+    formData,
+    setFormData,
   } = useCreateBookContext();
 
   const [bookScripts, setBookScripts] = useState([""]);
@@ -35,53 +25,33 @@ const NewBookSpecs = () => {
 
   useEffect(() => {
     if (editBookData.id && isEditing) {
-      setSubmittedPages(editBookData.pages || "");
-      setSubmittedScript(editBookData.script || "");
-      setSubmittedLanguage(editBookData.language || []);
-      setSubmittedBinding(editBookData.bookbinds || []);
-      setSubmittedFormat(editBookData.format || "");
-      setSubmittedISBN(editBookData.isbn || "");
+      setFormData((prevData) => ({
+        ...prevData,
+        submittedPages: editBookData.pages || "",
+        submittedScript: editBookData.script || "",
+        submittedLanguage: editBookData.language || "",
+        submittedBinding: editBookData.bookbinds || "",
+        submittedFormat: editBookData.format || "",
+        submittedISBN: editBookData.isbn || "",
+      }));
     }
   }, [editBookData, isEditing]);
 
-  const changeBookPagesHandler = (event) => {
-    setSubmittedPages(event.target.value);
+  const handleInputChange = (name, value) => {
+    let updatedValue = value;
+
+    if (Array.isArray(value)) {
+      updatedValue = value.map((option) => option.id);
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: updatedValue,
+    }));
   };
 
-  const changeBookScriptHandler = (value) => {
-    console.log(value);
-    setSubmittedScript(value);
-  };
-
-  const changeBookLanguageHandler = (value) => {
-    console.log(value);
-    setSubmittedLanguage(value);
-  };
-
-  const changeBookBindingHandler = (value) => {
-    console.log(value);
-    setSubmittedBinding(value);
-  };
-
-  const changeBookFormatHandler = (value) => {
-    console.log(value);
-    setSubmittedFormat(value);
-  };
-
-  const changeBookISBNHandler = (event) => {
-    setSubmittedISBN(event.target.value);
-  };
-
-  const updateBookData = (event) => {
-    event?.preventDefault();
-    updateNewBook({
-      submittedPages,
-      submittedScript,
-      submittedLanguage,
-      submittedBinding,
-      submittedFormat,
-      submittedISBN,
-    });
+  const updateBookData = () => {
+    updateNewBook(formData);
   };
 
   useEffect(() => {
@@ -125,29 +95,28 @@ const NewBookSpecs = () => {
 
   const validateForm = () => {
     if (
-      submittedPages === "" ||
-      submittedScript === "" ||
-      submittedLanguage.length === 0 ||
-      submittedBinding.length === 0 ||
-      submittedFormat === "" ||
-      submittedISBN.trim() === ""
+      formData.submittedPages === "" ||
+      formData.submittedScript === "" ||
+      formData.submittedLanguage === "" ||
+      formData.submittedBinding === "" ||
+      formData.submittedFormat === "" ||
+      formData.submittedISBN.trim() === ""
     ) {
-      setHasError(true); // Set hasError to true if any field is empty
+      setHasError(true);
     } else {
-      setHasError(false); // Set hasError to false if all fields have values
+      setHasError(false);
     }
   };
 
-  // Use useEffect to call the validation function whenever the input fields change
   useEffect(() => {
     validateForm();
   }, [
-    submittedPages,
-    submittedScript,
-    submittedLanguage,
-    submittedBinding,
-    submittedFormat,
-    submittedISBN,
+    formData.submittedPages,
+    formData.submittedScript,
+    formData.submittedLanguage,
+    formData.submittedBinding,
+    formData.submittedFormat,
+    formData.submittedISBN,
   ]);
 
   return (
@@ -161,36 +130,38 @@ const NewBookSpecs = () => {
           labelText="Broj strana"
           type="number"
           id="bookPages"
-          value={submittedPages}
+          value={formData.submittedPages}
           required
-          onChange={changeBookPagesHandler}
+          onChange={(event) =>
+            handleInputChange("submittedPages", event.target.value)
+          }
         />
         <p className={classes.errorText}>{bookErrors.pages}</p>
         <InputSelect
           labelText="Pismo"
           id="bookScript"
-          value={submittedScript}
+          value={formData.submittedScript}
           required
           options={bookScripts}
-          onSelect={changeBookScriptHandler}
+          onSelect={(value) => handleInputChange("submittedScript", value)}
         />
         <p className={classes.errorText}>{bookErrors.scripts}</p>
         <InputSelect
           labelText="Jezik"
           id="bookLanguage"
-          value={submittedLanguage}
+          value={formData.submittedLanguage}
           required
           options={bookLanguages}
-          onSelect={changeBookLanguageHandler}
+          onSelect={(value) => handleInputChange("submittedLanguage", value)}
         />
         <p className={classes.errorText}>{bookErrors.languages}</p>
         <InputSelect
           labelText="Povez"
           id="bookBindings"
-          value={submittedBinding}
+          value={formData.submittedBinding}
           required
           options={bookBindings}
-          onSelect={changeBookBindingHandler}
+          onSelect={(value) => handleInputChange("submittedBinding", value)}
         />
         <p className={classes.errorText}>{bookErrors.bookbinds}</p>
       </section>
@@ -198,19 +169,21 @@ const NewBookSpecs = () => {
         <InputSelect
           labelText="Format"
           id="bookFormat"
-          value={submittedFormat}
+          value={formData.submittedFormat}
           required
           options={bookFormats}
-          onSelect={changeBookFormatHandler}
+          onSelect={(value) => handleInputChange("submittedFormat", value)}
         />
         <p className={classes.errorText}>{bookErrors.formats}</p>
         <InputText
           labelText="International Standard Book Num"
           type="text"
-          value={submittedISBN}
+          value={formData.submittedISBN}
           id="ISBN"
           required
-          onChange={changeBookISBNHandler}
+          onChange={(event) =>
+            handleInputChange("submittedISBN", event.target.value)
+          }
         />
         <p className={classes.errorText}>{bookErrors.isbn}</p>
       </section>

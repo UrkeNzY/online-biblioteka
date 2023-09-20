@@ -73,7 +73,7 @@ const Books = () => {
   return (
     <Fragment>
       <div className={classes.topActionsArea}>
-        {userRole === "Administrator" && (
+        {(userRole === "Administrator" || userRole === "Bibliotekar") && (
           <Button
             text="Nova knjiga"
             to="/new-book/general"

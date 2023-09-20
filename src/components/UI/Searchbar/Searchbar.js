@@ -4,6 +4,7 @@ import classes from "../../../styles/Searchbar.module.css";
 
 const Searchbar = ({ updateFilteredData }) => {
   const [searchValue, setSearchValue] = useState("");
+
   const searchInputHandler = (event) => {
     const value = event.target.value;
     setSearchValue(value);

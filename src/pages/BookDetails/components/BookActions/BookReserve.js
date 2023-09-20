@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { listUsers } from "../../../../services/users";
 import { reserveBook } from "../../../../services/books";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import format from "date-fns/format";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import format from "date-fns/format";
 
 import classes from "../../../../styles/BookDetails.module.css";
 
 import InputSelect from "../../../../components/Forms/InputSelect";
 import FormButtons from "../../../../components/Forms/FormButtons";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const BookReserve = () => {
   const [users, setUsers] = useState([]);
@@ -57,7 +57,6 @@ const BookReserve = () => {
   }, []);
 
   const formatDate = (date) => {
-    console.log(format(date, "MM/dd/yyyy"));
     return format(date, "MM/dd/yyyy");
   };
 
@@ -81,7 +80,6 @@ const BookReserve = () => {
 
   const dateChangeHandler = (date) => {
     setSubmittedDate(date);
-    console.log(submittedDate);
   };
 
   const resetReservationHandler = () => {
@@ -100,7 +98,6 @@ const BookReserve = () => {
           options={users}
           onSelect={(value) => {
             setSubmittedUserId(value);
-            console.log(value);
           }}
         />
         <p className={classes.errorText}>{reserveErrors.user}</p>

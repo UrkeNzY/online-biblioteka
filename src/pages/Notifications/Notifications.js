@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllReservations, allIssuances } from "../../services/books";
 import moment from "moment";
-import { formatTime } from "../../components/Helpers/FormatTime";
+import { formatTime } from "../../utils/FormatTime";
 
 import classes from "../../styles/Notifications.module.css";
+
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const Notifications = () => {

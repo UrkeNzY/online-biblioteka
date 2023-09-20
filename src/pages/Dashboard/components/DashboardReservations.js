@@ -17,7 +17,7 @@ const DashboardReservations = ({ activeReservations }) => {
   function formatDate(dateString) {
     const dateObject = new Date(dateString);
     const day = dateObject.getDate().toString().padStart(2, "0");
-    const month = (dateObject.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-based
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
     const year = dateObject.getFullYear().toString();
     return `${day}.${month}.${year}`;
   }
@@ -29,7 +29,7 @@ const DashboardReservations = ({ activeReservations }) => {
       </div>
       {filteredReservations?.map((reservation) => {
         return (
-          <div className={classes.reservationsContainer}>
+          <div key={Math.random()} className={classes.reservationsContainer}>
             <div className={classes.sectionContent}>
               <div className={classes.sectionUserInfo}>
                 <img src={reservation.userProfilePic} alt="user avatar" />

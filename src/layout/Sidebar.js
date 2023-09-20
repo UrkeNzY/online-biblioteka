@@ -52,9 +52,9 @@ const sidebarItems = [
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const location = useLocation();
-
   const { userRole } = useContext(GlobalContext);
+
+  const location = useLocation();
 
   const sidebarExpandHandler = () => {
     setIsExpanded((prevState) => !prevState);

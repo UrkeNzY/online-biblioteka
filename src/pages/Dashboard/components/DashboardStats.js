@@ -92,7 +92,9 @@ const DashboardStats = ({
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={hoveredBar === index ? "#3f51b5" : "var(--main-blue-color)"}
+                  fill={
+                    hoveredBar === index ? "#3f51b5" : "var(--main-blue-color)"
+                  }
                 />
               ))}
             </Bar>

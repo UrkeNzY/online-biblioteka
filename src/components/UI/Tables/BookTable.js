@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
 
+import Pagination from "./Pagination";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const BookTable = (props) => {

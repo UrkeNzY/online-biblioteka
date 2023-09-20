@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { allIssuances, getAllReservations } from "../../services/books";
-import { formatTime } from "../../components/Helpers/FormatTime";
+import { formatTime } from "../../utils/FormatTime";
 import moment from "moment";
 
 import classes from "../../styles/Dashboard.module.css";
@@ -18,6 +18,8 @@ const Dashboard = () => {
   const [activityInfo, setActivityInfo] = useState([]);
   const [activeReservations, setActiveReservations] = useState([]);
   const [isLoading, setIsLoading] = useState();
+
+  const maxBorrowDuration = 20;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +65,7 @@ const Dashboard = () => {
 
           const duration = moment.duration(currentDate.diff(actionDate));
 
-          if (Math.floor(duration.asDays()) > 20) {
+          if (Math.floor(duration.asDays()) > maxBorrowDuration) {
             offLimitReservations++;
           }
         });

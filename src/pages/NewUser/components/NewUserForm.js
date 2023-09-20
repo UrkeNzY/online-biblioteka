@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { BsCameraFill } from "react-icons/bs";
@@ -56,7 +57,6 @@ const NewUserForm = () => {
           const selectedOption = dropdownOptions.find(
             (option) => option.name === userInformation.data.role
           );
-          console.log(userInformation.data.role);
           setFetchedUserData(userInformation.data);
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
@@ -73,7 +73,6 @@ const NewUserForm = () => {
           const selectedOption = dropdownOptions.find(
             (option) => option.name === userInformation.data.role
           );
-          console.log(selectedOption.id);
           setFetchedUserData(userInformation.data);
           setUserName(
             userInformation.data.name + " " + userInformation.data.surname || ""
@@ -131,7 +130,6 @@ const NewUserForm = () => {
     event.preventDefault();
 
     const [name, surname] = userName.split(" ");
-    console.log("first name: " + name + " last name: " + surname);
 
     try {
       if (id === "me") {

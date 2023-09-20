@@ -9,7 +9,6 @@ import Searchbar from "../../components/UI/Searchbar/Searchbar";
 
 const tableColumns = [
   { header: "Naziv autora", field: "authorName", width: "20%" },
-  { header: "Opis", field: "description", width: "80%" },
 ];
 
 const Autori = () => {
@@ -26,8 +25,6 @@ const Autori = () => {
         const authorData = authors.data.map((author) => ({
           id: author.id,
           name: author.name + " " + author.surname,
-          description:
-            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, perferendis repudiandae ratione at porro, enim labore illo animi tempora quas neque.",
           image: "images/placeholders/author-image.png",
           link: `/author-profile/${author.id}`,
         }));

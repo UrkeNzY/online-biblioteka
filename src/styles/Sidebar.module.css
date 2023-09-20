@@ -45,7 +45,7 @@
   color: var(--main-text);
   padding: 1rem 1.375rem;
   white-space: nowrap;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .sidebarItem p {
@@ -55,7 +55,7 @@
 
 .sidebarItem:hover {
   /* background-color: var(--secondary-200); */
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .sidebarItem:hover p {
@@ -72,14 +72,14 @@
   filter: brightness(0.1);
 }
 
-[data-theme='dark'] .sidebarItem img {
- filter: brightness(1);
- transition: .3s;
+[data-theme="dark"] .sidebarItem img {
+  filter: brightness(1);
+  transition: 0.3s;
 }
 
-[data-theme='dark'] .sidebarItem:hover img {
+[data-theme="dark"] .sidebarItem:hover img {
   filter: brightness(10);
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .sidebarItem p {
@@ -106,7 +106,6 @@
   filter: brightness(0);
 }
 
-
-[data-theme='dark'] .activeItem img {
+[data-theme="dark"] .activeItem img {
   filter: brightness(10);
- }
+}

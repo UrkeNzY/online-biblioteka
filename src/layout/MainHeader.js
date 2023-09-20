@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout, userInfo } from "../services/users";
-import DarkMode from "../DarkMode/DarkMode";
-
 import { GlobalContext } from "../state/GlobalState";
 
 import classes from "../styles/MainHeader.module.css";
+
+import DarkMode from "../DarkMode/DarkMode";
 
 const infoAddItems = [
   { name: "Korisnik", image: "/images/icons/korisnik.svg", path: "/new-user" },
@@ -18,14 +18,13 @@ const infoAddItems = [
 ];
 
 const MainHeader = (props) => {
-  let buttonRef;
-
   const [userAvatar, setUserAvatar] = useState(
     "https://petardev.live/img/profile.jpg"
   );
+  const { userRole, logout } = useContext(GlobalContext);
 
   const navigate = useNavigate();
-  const { userRole, logout } = useContext(GlobalContext);
+  let buttonRef;
 
   useEffect(() => {
     async function fetchUserPicture() {
@@ -68,7 +67,17 @@ const MainHeader = (props) => {
 
   const toggleInfoHandler = (event) => {
     event.stopPropagation();
-    props.getItems(infoAddItems);
+    props.getItems(
+      userRole === "Administrator"
+        ? infoAddItems
+        : [
+            {
+              name: "Knjiga",
+              image: "/images/icons/knjige.svg",
+              path: "/new-book/general",
+            },
+          ]
+    );
     setButtonRefHandler(event);
     document.addEventListener("click", closeInfoOptionsOnClick);
   };
@@ -81,16 +90,14 @@ const MainHeader = (props) => {
   };
 
   const closeInfoOptionsOnClick = (event) => {
-    // Check if the click occurred inside the info options area
     if (!event.target.closest(".info-options")) {
-      props.getItems([]); // Close the info options
+      props.getItems([]);
       document.removeEventListener("click", closeInfoOptionsOnClick);
     }
   };
   const closeProfileOptionsOnClick = (event) => {
-    // Check if the click occurred inside the profile options area
     if (!event.target.closest(".profile-options")) {
-      props.getItems([]); // Close the profile options
+      props.getItems([]);
       document.removeEventListener("click", closeProfileOptionsOnClick);
     }
   };
@@ -120,7 +127,7 @@ const MainHeader = (props) => {
             </div>
           )}
 
-          {userRole === "Administrator" && (
+          {(userRole === "Administrator" || userRole === "Bibliotekar") && (
             <img
               src="/images/icons/plus.svg"
               alt="add icon"

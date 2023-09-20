@@ -126,7 +126,9 @@ function App() {
         <Route
           path="/main-page"
           element={
-            <AuthenticatedRoute allowedRoles={["Učenik", "Bibliotekar", "Administrator"]}>
+            <AuthenticatedRoute
+              allowedRoles={["Učenik", "Bibliotekar", "Administrator"]}
+            >
               <AuthenticatedPage>
                 <UserMainPage />
               </AuthenticatedPage>
@@ -186,7 +188,7 @@ function App() {
         <Route
           path="/new-book"
           element={
-            <AuthenticatedRoute allowedRoles={["Administrator"]}>
+            <AuthenticatedRoute allowedRoles={["Administrator", "Bibliotekar"]}>
               <AuthenticatedPage>
                 <CreateBookProvider>
                   <NewBook />

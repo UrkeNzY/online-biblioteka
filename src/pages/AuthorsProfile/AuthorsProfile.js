@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { deleteAuthor, showAuthor } from "../../services/authors";
 
 import classes from "../../styles/Authors.module.css";
+
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 const AuthorsProfile = (props) => {
@@ -35,7 +36,7 @@ const AuthorsProfile = (props) => {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   const deleteAuthorHandler = async () => {
     try {

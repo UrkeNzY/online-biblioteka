@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState, useCallback } from "react";
-
 import { Link } from "react-router-dom";
-import Pagination from "./Pagination";
 
 import classes from "../../../styles/Table.module.css";
+
+import Pagination from "./Pagination";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Table = (props) => {
@@ -16,6 +16,7 @@ const Table = (props) => {
     loadingSpinner,
     isDisabled,
   } = props;
+
   const [filteredData, setFilteredData] = useState(tableData);
   const [selectAll, setSelectAll] = useState(false);
 

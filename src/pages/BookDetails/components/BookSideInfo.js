@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { formatTime } from "../../../components/Helpers/FormatTime";
+import { formatTime } from "../../../utils/FormatTime";
 import {
   getBook,
   getAllReservations,
@@ -111,7 +111,6 @@ const BookSideInfo = () => {
         setBookAmountData(formattedData);
         setActivityInfo(activities);
         setIsLoading(false);
-        console.log(activities.map((activity) => activity.bookId));
       } catch (error) {
         console.error(error);
         setIsLoading(false);

@@ -11,39 +11,28 @@ import InputSelect from "../../../components/Forms/InputSelect";
 
 const NewBookForm = () => {
   const {
-    submittedName,
-    setSubmittedName,
-    submittedDescription,
-    setSubmittedDescription,
-    submittedCategory,
-    setSubmittedCategory,
-    submittedGenre,
-    setSubmittedGenre,
-    submittedAuthor,
-    setSubmittedAuthor,
-    submittedPublisher,
-    setSubmittedPublisher,
-    submittedAmount,
-    setSubmittedAmount,
-    submittedReleaseDate,
-    setSubmittedReleaseDate,
     editBookData,
     updateNewBook,
     isEditing,
     setHasError,
     bookErrors,
+    formData,
+    setFormData,
   } = useCreateBookContext();
 
   useEffect(() => {
     if (editBookData.id && isEditing) {
-      setSubmittedName(editBookData.title || "");
-      setSubmittedDescription(editBookData.description || "");
-      setSubmittedCategory(editBookData.categories || []);
-      setSubmittedGenre(editBookData.genres || []);
-      setSubmittedAuthor(editBookData.authors || []);
-      setSubmittedPublisher(editBookData.publisher || "");
-      setSubmittedAmount(editBookData.samples || "");
-      setSubmittedReleaseDate(editBookData.releaseDate || "");
+      setFormData((prevData) => ({
+        ...prevData,
+        submittedName: editBookData.title || "",
+        submittedDescription: editBookData.description || "",
+        submittedCategory: editBookData.categories || [],
+        submittedGenre: editBookData.genres || [],
+        submittedAuthor: editBookData.authors || [],
+        submittedPublisher: editBookData.publisher || "",
+        submittedAmount: editBookData.samples || "",
+        submittedReleaseDate: editBookData.releaseDate || "",
+      }));
     }
   }, [editBookData, isEditing]);
 
@@ -52,49 +41,21 @@ const NewBookForm = () => {
   const [bookAuthors, setBookAuthors] = useState([]);
   const [bookPublishers, setBookPublishers] = useState([]);
 
-  const changeBookNameHandler = (event) => {
-    setSubmittedName(event.target.value);
-  };
-  const changeBookDescriptionHandler = (value) => {
-    console.log(value);
-    setSubmittedDescription(value);
-  };
-  const changeBookCategoryHandler = (value) => {
-    const categoryIds = value.map((option) => option.id);
-    setSubmittedCategory(categoryIds);
-  };
-  const changeBookGenreHandler = (value) => {
-    const genreIds = value.map((option) => option.id);
-    setSubmittedGenre(genreIds);
-  };
-  const changeBookAuthorHandler = (value) => {
-    const authorIds = value.map((option) => option.id);
-    setSubmittedAuthor(authorIds);
+  const handleInputChange = (name, value) => {
+    let updatedValue = value;
+
+    if (Array.isArray(value)) {
+      updatedValue = value.map((option) => option.id);
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: updatedValue,
+    }));
   };
 
-  const changeBookPublisherHandler = (value) => {
-    setSubmittedPublisher(value);
-  };
-  const changeBookAmountHandler = (event) => {
-    setSubmittedAmount(event.target.value);
-  };
-  const changeBookReleaseDateHandler = (event) => {
-    console.log(event.target.value);
-    setSubmittedReleaseDate(event.target.value);
-  };
-
-  const updateBookData = (event) => {
-    event.preventDefault();
-    updateNewBook({
-      submittedName,
-      submittedDescription,
-      submittedCategory,
-      submittedGenre,
-      submittedAuthor,
-      submittedPublisher,
-      submittedAmount,
-      submittedReleaseDate,
-    });
+  const updateBookData = () => {
+    updateNewBook(formData);
   };
 
   useEffect(() => {
@@ -134,35 +95,26 @@ const NewBookForm = () => {
     fetchCategories();
   }, []);
 
-  const validateForm = () => {
-    if (
-      submittedName === "" ||
-      submittedDescription === "" ||
-      submittedCategory.length === 0 ||
-      submittedGenre.length === 0 ||
-      submittedAuthor.length === 0 ||
-      submittedPublisher === "" ||
-      submittedAmount === "" ||
-      submittedReleaseDate.trim() === ""
-    ) {
-      setHasError(true);
-    } else {
-      setHasError(false);
-    }
-  };
-
   useEffect(() => {
+    const validateForm = () => {
+      if (
+        formData.submittedName === "" ||
+        formData.submittedDescription === "" ||
+        formData.submittedCategory.length === 0 ||
+        formData.submittedGenre.length === 0 ||
+        formData.submittedAuthor.length === 0 ||
+        formData.submittedPublisher === "" ||
+        formData.submittedAmount === "" ||
+        formData.submittedReleaseDate.trim() === ""
+      ) {
+        setHasError(true);
+      } else {
+        setHasError(false);
+      }
+    };
+
     validateForm();
-  }, [
-    submittedName,
-    submittedDescription,
-    submittedCategory,
-    submittedGenre,
-    submittedAuthor,
-    submittedPublisher,
-    submittedAmount,
-    submittedReleaseDate,
-  ]);
+  }, [formData, setHasError]);
 
   return (
     <form
@@ -175,8 +127,10 @@ const NewBookForm = () => {
           labelText="Naziv knjige"
           type="text"
           id="bookName"
-          value={submittedName}
-          onChange={changeBookNameHandler}
+          value={formData.submittedName}
+          onChange={(event) =>
+            handleInputChange("submittedName", event.target.value)
+          }
           required
         />
         <p className={classes.errorText}>{bookErrors.title}</p>
@@ -187,8 +141,10 @@ const NewBookForm = () => {
           <ReactQuill
             theme="snow"
             id="bookDescription"
-            value={submittedDescription}
-            onChange={changeBookDescriptionHandler}
+            value={formData.submittedDescription}
+            onChange={(value) =>
+              handleInputChange("submittedDescription", value)
+            }
             className={classes.reactQuill}
             modules={{
               toolbar: {
@@ -209,8 +165,8 @@ const NewBookForm = () => {
         <InputSelect
           labelText="Kategorija"
           id="bookCategory"
-          value={submittedCategory}
-          onSelect={changeBookCategoryHandler}
+          value={formData.submittedCategory}
+          onSelect={(value) => handleInputChange("submittedCategory", value)}
           required
           multiselect
           options={bookCategories}
@@ -219,8 +175,8 @@ const NewBookForm = () => {
         <InputSelect
           labelText="Žanr"
           id="bookGenre"
-          value={submittedGenre}
-          onSelect={changeBookGenreHandler}
+          value={formData.submittedGenre}
+          onSelect={(value) => handleInputChange("submittedGenre", value)}
           required
           multiselect
           options={bookGenres}
@@ -231,8 +187,8 @@ const NewBookForm = () => {
         <InputSelect
           labelText="Autor"
           id="bookAuthor"
-          value={submittedAuthor}
-          onSelect={changeBookAuthorHandler}
+          value={formData.submittedAuthor}
+          onSelect={(value) => handleInputChange("submittedAuthor", value)}
           required
           multiselect
           options={bookAuthors}
@@ -241,8 +197,8 @@ const NewBookForm = () => {
         <InputSelect
           labelText="Izdavač"
           id="bookPublisher"
-          value={submittedPublisher}
-          onSelect={changeBookPublisherHandler}
+          value={formData.submittedPublisher}
+          onSelect={(value) => handleInputChange("submittedPublisher", value)}
           required
           options={bookPublishers}
         />
@@ -251,17 +207,21 @@ const NewBookForm = () => {
           labelText="Količina"
           type="number"
           id="bookAmonut"
-          value={submittedAmount}
-          onChange={changeBookAmountHandler}
+          value={formData.submittedAmount}
+          onChange={(event) =>
+            handleInputChange("submittedAmount", event.target.value)
+          }
         />
         <p className={classes.errorText}>{bookErrors.samples}</p>
         <InputText
           labelText="Godina izdavanja"
           type="number"
           id="bookReleaseDate"
-          value={submittedReleaseDate}
+          value={formData.submittedReleaseDate}
           required
-          onChange={changeBookReleaseDateHandler}
+          onChange={(event) =>
+            handleInputChange("submittedReleaseDate", event.target.value)
+          }
         />
         <p className={classes.errorText}>{bookErrors.publishDate}</p>
       </section>
